@@ -1,0 +1,8 @@
+<div id='printedcontent'>
+	<!-- <h1><%= @pane.title %></h1> -->
+	<% for content_item in @contents %>
+		<% if content_item.contentpane == @pane.anchor && content_item.contenttype != 'link' %>
+			<%= render(:partial => "content_pane_item", :object => content_item) %>
+		<% end %>
+	<% end %>
+</div>

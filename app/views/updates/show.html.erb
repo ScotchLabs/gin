@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @update.name %>
+</p>
+
+<p>
+  <b>Anchor:</b>
+  <%=h @update.anchor %>
+</p>
+
+<p>
+  <b>Expiredate:</b>
+  <%=h @update.expiredate %>
+</p>
+
+<p>
+  <b>Article:</b>
+  <%=h @update.article %>
+</p>
+
+
+<%= link_to 'Edit', edit_update_path(@update) %> |
+<%= link_to 'Back', updates_path %>

@@ -1,0 +1,23 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  abbrev: MyString
+  loc: MyString
+  imageurl: MyString
+  author: MyString
+  ticketprices: MyString
+  performancetimes: MyString
+  ticketstatus: MyString
+  scheduled: false
+
+two:
+  name: MyString
+  abbrev: MyString
+  loc: MyString
+  imageurl: MyString
+  author: MyString
+  ticketprices: MyString
+  performancetimes: MyString
+  ticketstatus: MyString
+  scheduled: false

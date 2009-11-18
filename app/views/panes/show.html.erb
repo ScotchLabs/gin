@@ -1,0 +1,43 @@
+<p>
+  <b>Title:</b>
+  <%=h @pane.title %>
+</p>
+
+<p>
+  <b>Menutitle:</b>
+  <%=h @pane.menutitle %>
+</p>
+
+<p>
+  <b>Anchor:</b>
+  <%=h @pane.anchor %>
+</p>
+
+<p>
+  <b>Publish:</b>
+  <%=h @pane.publish %>
+</p>
+
+<p>
+  <b>Hidden:</b>
+  <%=h @pane.hidden %>
+</p>
+
+<p>
+  <b>Hasmenu:</b>
+  <%=h @pane.hasmenu %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%=h @pane.order %>
+</p>
+
+<p>
+  <b>Panetype:</b>
+  <%=h @pane.panetype %>
+</p>
+
+
+<%= link_to 'Edit', edit_pane_path(@pane) %> |
+<%= link_to 'Back', panes_path %>

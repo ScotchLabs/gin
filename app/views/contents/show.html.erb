@@ -1,0 +1,48 @@
+<p>
+  <b>Title:</b>
+  <%=h @content.title %>
+</p>
+
+<p>
+  <b>Contentpane:</b>
+  <%=h @content.contentpane %>
+</p>
+
+<p>
+  <b>Menutitle:</b>
+  <%=h @content.menutitle %>
+</p>
+
+<p>
+  <b>Contenttype:</b>
+  <%=h @content.contenttype %>
+</p>
+
+<p>
+  <b>Anchor:</b>
+  <%=h @content.anchor %>
+</p>
+
+<p>
+  <b>Publish:</b>
+  <%=h @content.publish %>
+</p>
+
+<p>
+  <b>Hidden:</b>
+  <%=h @content.hidden %>
+</p>
+
+<p>
+  <b>Order:</b>
+  <%=h @content.order %>
+</p>
+
+<p>
+  <b>Article:</b>
+  <%=h @content.article %>
+</p>
+
+
+<%= link_to 'Edit', edit_content_path(@content) %> |
+<%= link_to 'Back', contents_path %>

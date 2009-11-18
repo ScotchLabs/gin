@@ -1,0 +1,56 @@
+<div id='left'>
+	<div id='carousel'>
+		<div id='content'>
+			<% for show in @shows %>
+				<%= render :partial => "carousel_item", :object => show %>
+			<% end %>
+		</div>
+		<div id='navbar'>
+			<div class='arrowbtn'>
+				<div class='navbutton'>
+					<%= image_tag "carousel/arwbtnuporange.png", :id => "arwbtnuporange", :class => "arwbtnup", :onclick => "navUp();", :style => "display:none;" %>
+					<%= image_tag "carousel/arwbtnupgrey.png", :id => "arwbtnupgrey", :class => "arwbtnup" %>
+				</div>
+			</div>
+			<div id='nav'>
+				<div id='navwindow'>
+					<% for show in @shows %>
+						<%= render :partial => "carousel_link", :object => show %>
+					<% end %>
+				</div>
+				<br clear="all" style='height:0px;' />
+			</div>
+			<div class='arrowbtn'>
+				<div class='navbutton'>
+					<% 
+					style = ""
+					if @shows.length < 6
+						style="display:none;"
+					end
+					%>
+					<%= image_tag "carousel/arwbtndnorange.png", :id => "arwbtndnorange", :class => "arwbtndn", :onclick => "navDn();", :style => style %>
+					<% if @shows.length >= 6 %>
+						<%= image_tag "carousel/arwbtndngrey.png", :id => "arwbtndngrey", :class => "arwbtndn", :style => "display:none;" %>
+					<% else %>
+						<%= image_tag "carousel/arwbtndngrey.png", :id => "arwbtndngrey", :class => "arwbtndn" %>
+					<% end %>
+
+				</div>
+			</div>
+		</div>
+		<br clear="all" style='height:0px;' />
+	</div>
+</div>
+<div id='right'>
+	<div id='newsbox'>
+		<h2>News</h2><br />
+		<% if @news.length == 0 %>
+			No news here, but stay tuned!
+		<% else %>
+			<% for item in @news %>
+				<%= render :partial => "news_item", :object => item %>
+			<% end %>
+		<% end %>
+	</div>
+</div>
+<br clear="all" style='height:0px;' />

@@ -1,0 +1,43 @@
+<%
+stylewelcome = "color:#333333;" if controller_name == "admin" && action_name == "welcome"
+styleshows = "color:#333333;" if controller_name == "shows"
+styleupdates = "color:#333333;" if controller_name == "updates"
+stylepanes = "color:#333333;" if controller_name == "panes"
+stylecontents = "color:#333333;" if controller_name == "contents"
+styleall = "color:#333333;" if controller_name == "admin" && action_name == "index"
+%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>Scotch'n'Soda Theatre</title>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<%= stylesheet_link_tag 'admin' %>
+	<%= stylesheet_link_tag "snstheatre", :media => "all" %>
+	<%= javascript_include_tag :defaults %>
+</head>
+<body>
+	<center>
+		<div id='outside'>
+			<a href="/"><div id='logo'>Scotch'n'Soda Theatre</div></a>
+			<div id='menu'><table><tr>
+				<td class='menutd'><ul><li><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, :style => stylewelcome %></li></ul></td>
+				<td class='menutd'><ul><li><%= link_to "Shows", shows_path, :style => styleshows %></li></ul></td>
+				<td class='menutd'><ul><li><%= link_to "News", updates_path, :style => styleupdates %></li></ul></td>
+				<td class='menutd'><ul><li><%= link_to "Panes", panes_path, :style => stylepanes %></li></ul></td>
+				<td class='menutd'><ul><li><%= link_to "Contents", contents_path, :style => stylecontents %></li></ul></td>
+				<td class='menutd'><ul><li><%= link_to "All", {:controller => "admin"}, :style => styleall %></li></ul></td>
+				<td class='menutd'><ul><li><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li></ul></td>
+			</tr></table></div>
+			<br clear='all' style='height:0px;'>
+			<div id='inside'>
+				<p style="color: green"><%= flash[:notice] %></p>
+				<%= yield :layout %>
+			</div>
+		</div>
+		<div id='foot'>
+			&copy; <%= Time.now.year %> Scotch'n'Soda Theatre at Carnegie Mellon University<br />
+			<a href='mailto:board@snstheatre.org'><b>board@snstheatre.org</b></a> | 5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br />
+		</div>
+	</center>
+</body>
+</html>

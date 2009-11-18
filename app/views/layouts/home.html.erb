@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+	<title>Scotch'n'Soda Theatre</title>
+	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<%= stylesheet_link_tag "snstheatre", :media => "all" %>
+	<%= javascript_include_tag :defaults, "home.js" %>
+</head>
+<body>
+	<center>
+		<div id='outside'>
+			<a href="/"><div id='logo'>Scotch'n'Soda Theatre</div></a>
+			<div id='menu'><table><tr>
+				<% for pane in @panes %>
+					<% if !pane.hidden %>
+						<%= render(:partial => "pane_item", :object => pane) %>
+					<% end %>
+				<% end %>
+				<% if session[:user_id] %>
+					<td class='menutd'><ul><li><%= link_to "Admin", :controller => "admin" %>
+						<ul>
+							<% if !@pane.nil? %>
+								<li><%= link_to 'Edit&nbsp;this&nbsp;pane', edit_pane_path(@pane) %></li>
+							<% end %>
+							<% if !@content.nil? %>
+								<li><%= link_to 'Edit&nbsp;this&nbsp;content', edit_content_path(@content) %></li>
+							<% end %>
+							<li><%= link_to 'Edit Shows', :controller => "shows" %></li>
+							<li><%= link_to 'Edit News', :controller => "updates" %></li>
+							<li><%= link_to 'Edit Panes', :controller => "panes" %></li>
+							<li><%= link_to 'Edit&nbsp;Contents', :controller => "contents" %></li>
+							<li><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li>
+						</ul>
+					</li></ul></td>
+				<% end %>
+			</tr></table></div>
+			<br clear='all' style='height:0px;'>
+			<div id='inside'>
+				<%= yield :layout %>
+			</div>
+		</div>
+		<div id='foot'>
+			&copy; <%= Time.now.year %> Scotch'n'Soda Theatre at Carnegie Mellon University<br />
+			<a href='mailto:board@snstheatre.org'><b>board@snstheatre.org</b></a> | 5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br />
+		</div>
+	</center>
+</body>
+</html>

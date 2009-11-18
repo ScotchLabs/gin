@@ -1,0 +1,56 @@
+<% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
+<h1>New show</h1>
+
+<% form_for(@show) do |f| %>
+  <%= f.error_messages %>
+
+  <p style="color:red;font-variant:italics;">
+	* Required
+  </p>
+
+  <p>
+    <%= f.label :name, "Show name" %><%= ast %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :abbrev, "Abbreviation" %><%= ast %><br />
+    <%= f.text_field :abbrev %> (you will not be able to change this later)
+  </p>
+  <p>
+    <%= f.label :loc, "Location" %><br />
+    <%= f.text_field :loc %>
+  </p>
+  <p>
+    <%= f.label :imageurl, "Image name" %><%= ast %> (use temp.png if you don't have one now)<br />
+    <%= f.text_field :imageurl %>
+  </p>
+  <p>
+    <%= f.label :author %><br />
+    <%= f.text_field :author %>
+  </p>
+  <p>
+    <%= f.label :ticketprices, "Ticket prices" %><br />
+    <%= f.text_field :ticketprices %>
+  </p>
+  <p>
+    <%= f.label :performancetimes, "Performance times" %><%= ast %> (please use pipe-separated timestamps)<br />
+    <%= f.text_field :performancetimes %>
+  </p>
+  <p>
+    <%= f.label :ticketstatus, "Ticket status" %><%= ast %><br />
+	<%= f.select("ticketstatus", {"Open","open","Closed","closed","Completed","completed"}) %>
+  </p>
+  <p>
+    <%= f.label :showtimes, "Show performance times on the homepage?" %><br />
+    <%= f.check_box :showtimes %>
+  </p>
+  <p>
+    <%= f.label :showdates, "Show performance dates on the homepage?" %><br />
+    <%= f.check_box :showdates %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', shows_path %>

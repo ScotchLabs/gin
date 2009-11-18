@@ -1,0 +1,15 @@
+<!-- parse article for boards
+replace #board with
+<div align='left'>
+	board stuff
+</div>
+link_to template:
+[[p+paneanchor]]
+[[p+paneanchor|specialtitle]]
+[[c+contentanchor]]
+[[c+contentanchor|specialtitle]]
+-->
+<a name='<%= content_pane_item.anchor %>'></a>
+<h2><%= content_pane_item.title %></h2>
+<div align='left'><%= content_pane_item.articletext %></div>
+<br />

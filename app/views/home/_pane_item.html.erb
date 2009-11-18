@@ -1,0 +1,20 @@
+<%
+style = ""
+if !@pane.nil? && pane_item.anchor == @pane.anchor
+	style = "color:#333333;"
+end
+
+%>
+<td class='menutd'><ul>
+	<li><%= link_to pane_item.menulabel, pane_item.link, :style => style %></a>
+		<% if pane_item.hasmenu %>
+			<ul>
+				<% for content in @contents %>
+					<% if content.contentpane == pane_item.anchor && !content.hidden %>
+						<%= render(:partial => "content_menu_item", :object => content) %>
+					<% end %>
+				<% end %>
+			</ul>
+		<% end %>
+	</li>
+</ul></td>

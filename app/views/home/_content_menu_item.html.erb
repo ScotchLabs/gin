@@ -1,0 +1,18 @@
+<%
+if content_menu_item.contenttype == "link"
+	link = content_menu_item.anchor
+else
+	link = {:controller => "home", :action => "showcontent", :id => content_menu_item.anchor}
+end
+if !@content.nil? && content_menu_item.anchor == @content.anchor
+	style = "color:#333333;"
+end
+menutitle = content_menu_item.title
+if !content_menu_item.menutitle.nil? && !content_menu_item.menutitle.blank?
+	menutitle = content_menu_item.menutitle
+end
+menutitle = menutitle.split(" ").join("&nbsp;")
+%>
+<li>
+	<%= link_to menutitle, link, :style => style %>
+</li>

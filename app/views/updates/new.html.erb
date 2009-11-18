@@ -1,0 +1,40 @@
+<% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
+<h1>New update</h1>
+
+<% form_for(@update) do |f| %>
+  <%= f.error_messages %>
+
+  <p style="color:red;font-variant:italics;">
+	* Required
+  </p>
+
+<p>
+    <%= f.label :name %><%= ast %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :anchor %><%= ast %><br />
+    <%= f.text_field :anchor %> (you will not be able to change this later)
+  </p>
+  <p>
+    <%= f.label :expiredate, "Expiration date" %><%= ast %><br />
+    <%= f.datetime_select :expiredate %>
+  </p>
+  <p>
+	You can now add link templates to articles! Examples:<br />
+	[[p+about]] =&gt; creates a link to the 'about' pane using default title<br />
+	[[p+about|SpecialTitle]] =&gt; creates a link to the 'about' pane using "SpecialTitle"<br />
+	Use c instead of p to link to a content article.<br />
+	Use a to link outside.<br />
+	Use m to make an email link (will default to the email address, unless it's a user in the db, unless you put a SpecialTitle).
+  </p>
+  <p>
+    <%= f.label :article %><br />
+    <%= f.text_area :article %>
+  </p>
+  <p>
+    <%= f.submit 'Create' %>
+  </p>
+<% end %>
+
+<%= link_to 'Back', updates_path %>

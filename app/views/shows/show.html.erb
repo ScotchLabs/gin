@@ -1,0 +1,54 @@
+<p>
+  <b>Name:</b>
+  <%=h @show.name %>
+</p>
+
+<p>
+  <b>Abbrev:</b>
+  <%=h @show.abbrev %>
+</p>
+
+<p>
+  <b>Loc:</b>
+  <%=h @show.loc %>
+</p>
+
+<p>
+  <b>Imageurl:</b>
+  <%=h @show.imageurl %>
+</p>
+
+<p>
+  <b>Author:</b>
+  <%=h @show.author %>
+</p>
+
+<p>
+  <b>Ticketprices:</b>
+  <%=h @show.ticketprices %>
+</p>
+
+<p>
+  <b>Performancetimes:</b>
+  <%=h @show.performancetimes %>
+</p>
+
+<p>
+  <b>Ticketstatus:</b>
+  <%=h @show.ticketstatus %>
+</p>
+
+<p>
+  <b>Showtimes:</b>
+  <%=h @show.showtimes %>
+</p>
+
+<p>
+  <b>Showdates:</b>
+  <%=h @show.showdates %>
+</p>
+
+
+<%= link_to 'Edit', edit_show_path(@show) %> |
+<%= link_to 'Back', shows_path %> | 
+<%= link_to 'Add Another', new_show_path %>
