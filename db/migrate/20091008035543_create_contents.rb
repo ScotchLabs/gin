@@ -8,6 +8,7 @@ class CreateContents < ActiveRecord::Migration
       t.boolean :hidden
       t.integer :order
       t.text :article
+      t.string :contentpane
 
       t.timestamps
     end
