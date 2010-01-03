@@ -12,7 +12,7 @@
 			<a href="/"><div id='logo'>Scotch'n'Soda Theatre</div></a>
 			<div id='menu'><table><tr>
 				<% for pane in @panes %>
-					<% if !pane.hidden %>
+					<% if pane.publish && !pane.hidden %>
 						<%= render(:partial => "pane_item", :object => pane) %>
 					<% end %>
 				<% end %>
