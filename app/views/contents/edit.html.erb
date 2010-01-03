@@ -14,7 +14,7 @@
   </p>
   <p>
 	<%= f.label :contentpane %><%= ast %><br />
-	<%= f.select("contentpane",Pane.all.collect{|p| [p.title, p.anchor]}) %>
+	<%= f.select :contentpane,Pane.all.collect{|p| [p.title, p.anchor]} %>
   </p>
   <p>
     <%= f.label :menutitle, "Menu title" %><br />
@@ -22,7 +22,7 @@
   </p>
   <p>
 	<%= f.label :contenttype, "Content type" %><%= ast %><br />
-	<%= f.select("contenttype", {"Content","content","Link","link"}) %>
+	<%= f.select :contenttype, {"Content","content","Link","link"} %>
   </p>
   <p>
     <%= f.label :anchor %><%= ast %><br />
@@ -41,16 +41,18 @@
     <%= f.text_field :order %>
   </p>
   <p>
-	You can now add link templates to articles! Examples:<br />
-	[[p+about]] =&gt; creates a link to the 'about' pane using default title<br />
-	[[p+about|SpecialTitle]] =&gt; creates a link to the 'about' pane using "SpecialTitle"<br />
-	Use c instead of p to link to a content article.<br />
-	Use a to link outside.<br />
-	Use m to make an email link (will default to the email address, unless it's a user in the db, unless you put a SpecialTitle).
+	You can now put link templates in news articles and content articles!<br />
+	Rule of Thumb: [[<code>type</code>+<code>anchor</code>|<code>text</code>]]<br />
+	<ul><li><code>type</code> can be either a (for outside links), c (inside link to content), i (image tag), p (inside link to pane), or m (outside link to email)</li>
+	<li><code>anchor</code> should either match the anchor of the content or pane, or it should be a valid email or http address</li>
+	<li>the "|<code>text</code>" is optional, and will override the link text. in the case of image tags, this overrides the image's title and alt-text.</li></ul>
+	Note: <code>anchor</code> may contain any of the following characters: 0-9 a-z A-Z . : / _ - ~ % &amp; # = @<br />
+	<code>text</code> may contain any of the following characters: 0-9 a-z A-Z space ' "<br />
+	<span style='color:red;'>Make sure any images are placed in /public/image/ BEFORE you publish this!</span>
   </p>
   <p>
     <%= f.label :article %><br />
-    <%= f.text_area :article %>
+    <%= f.text_area :article, :cols => 162 %>
   </p>
   <p>
     <%= f.submit 'Update' %>

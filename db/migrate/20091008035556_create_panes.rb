@@ -8,7 +8,7 @@ class CreatePanes < ActiveRecord::Migration
       t.boolean :hidden
       t.boolean :hasmenu
       t.integer :order
-      t.string :type
+      t.string :panetype
 
       t.timestamps
     end

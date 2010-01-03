@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091103170620) do
+ActiveRecord::Schema.define(:version => 20100103053236) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -19,16 +19,10 @@ ActiveRecord::Schema.define(:version => 20091103170620) do
     t.boolean  "hidden"
     t.integer  "order"
     t.text     "article"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "contentpane"
-    t.string   "contenttype"
-  end
-
-  create_table "heytheres", :force => true do |t|
-    t.string   "name"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "contenttype"
   end
 
   create_table "panes", :force => true do |t|
@@ -39,9 +33,9 @@ ActiveRecord::Schema.define(:version => 20091103170620) do
     t.boolean  "hidden"
     t.boolean  "hasmenu"
     t.integer  "order"
+    t.string   "panetype"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "panetype"
   end
 
   create_table "shows", :force => true do |t|
@@ -53,10 +47,9 @@ ActiveRecord::Schema.define(:version => 20091103170620) do
     t.string   "ticketprices"
     t.string   "performancetimes"
     t.string   "ticketstatus"
+    t.string   "homeshow"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.boolean  "showtimes"
-    t.boolean  "showdates"
   end
 
   create_table "updates", :force => true do |t|

@@ -29,9 +29,9 @@ protected
   def anchor_ok
     if panetype != 'link'
       # anchor should be a non-link
-      errors.add(:anchor, "is invalid") unless :anchor =~ /^A[0-9a-zA-Z]+^Z/
+      errors.add(:anchor, "contains an invalid character") unless anchor =~ /^[0-9a-zA-Z]+$/
       # make sure it's unique
-      p = Pane.find_by_anchor(:anchor)
+      p = Pane.find_by_anchor(anchor)
       errors.add(:anchor, "is not unique") unless p.nil?
     else
       begin

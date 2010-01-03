@@ -4,12 +4,11 @@ class Show < ActiveRecord::Base
     ["Open",  "open"],
     ["Completed", "completed"]
   ]
-  validates_presence_of :name, :abbrev, :performancetimes
-  validates_length_of :performancetimes, :minimum => 10, :message => "must be 10 or more characters long"
+  validates_presence_of :name, :abbrev, :imageurl, :ticketstatus
   validates_uniqueness_of :abbrev
   validates_inclusion_of :ticketstatus, :in => TICKETSTATUS.map {|disp, value| value}
   validates_format_of :imageurl, :with => %r{\.(gif|jpg|png)$}i, :message => "must be a URL for GIF, JPG, or PNG image.", :allow_blank => true
-  validates_format_of :performancetimes, :with => /\A[0-9]{10}(\|[0-9]{10})*\Z/
+  validate :performancetimes_parsable
   
   def inseason
     now = Time.new
@@ -24,9 +23,9 @@ class Show < ActiveRecord::Base
   end
 
   def carperformances
-    if !showdates
-      return "Performance dates coming soon!<br />"
-    end
+    showdates = homeshow=="date" || homeshow=="datetime"
+    showtimes = homeshow=="datetime"
+    return "Performance dates coming soon!<br />" if !showdates
     perfarr = performancetimes.split("|")
     out = ""
     if !showtimes
@@ -64,15 +63,11 @@ class Show < ActiveRecord::Base
       # to build the final string, keep track of month and year
       range = dayarr[0]
       day = range[0].strftime("%d")
-      if day[0]==48
-        day = day[1..day.length-1]
-      end
+      day = day[1..day.length-1] if day[0]==48
       bing = range[0].strftime("%b ")+day
       if range[0]!=range[1]
         day = range[1].strftime("%d")
-        if day[0]==48
-          day=day[1..day.length-1]
-        end
+        day=day[1..day.length-1] if day[0]==48
         bing += "-"+day
       end
       prevm = range[0].month
@@ -99,9 +94,7 @@ class Show < ActiveRecord::Base
           bing += ", "
         end
         bing += range[0].day
-        if range[1].day != range[0].day
-          bing += "-"+range[1].day
-        end
+        bing += "-"+range[1].day if range[1].day != range[0].day
       end
       bing += ", "+prevy.to_s+"<br />Performance times coming soon!<br />"
       out = bing
@@ -120,9 +113,7 @@ class Show < ActiveRecord::Base
         day = Time.local(t.year, t.month, t.day)
         insert = timesarr.length
         for i in 0...timesarr.length
-          if timesarr[i][0] == day
-            insert = i
-          end
+          insert = i if timesarr[i][0] == day
         end
         if timesarr[insert].nil?
           timesarr[insert] = Array.new(2)
@@ -178,31 +169,39 @@ class Show < ActiveRecord::Base
   end
   
   def linkperformances
-    if !showdates
-      return
-    end
+    return if !(homeshow=="date" || homeshow=="datetime")
     perfarr = performancetimes.split("|")
-  	perfstart = Time.at(perfarr[0].to_i)
-  	perfend = Time.at(perfarr[perfarr.length-1].to_i)
+  	perfstart = Time.parse(perfarr[0])
+  	perfend = Time.parse(perfarr[perfarr.length-1])
   	performances = perfstart.strftime("%b ") + perfstart.day.to_s
-  	if perfstart.year != perfend.year
-  		performances += ", " + perfstart.year.to_s
-  	end
-  	if perfstart.to_i != perfend.to_i
-  		performances += " - "
-  	end
-  	if perfstart.year != perfend.year || perfstart.month != perfend.month
-  		performances += perfend.strftime("%b ")
-  	end
-  	if perfstart.year != perfend.year || perfstart.month != perfend.month || perfstart.day != perfend.day
-  		performances += perfend.day.to_s
-  	end
+  	performances += ", " + perfstart.year.to_s if perfstart.year != perfend.year
+  	performances += " - " if perfstart.to_i != perfend.to_i
+  	performances += perfend.strftime("%b ")if perfstart.year != perfend.year || perfstart.month != perfend.month
+  	performances += perfend.day.to_s if perfstart.year != perfend.year || perfstart.month != perfend.month || perfstart.day != perfend.day
   	performances += ", " + perfend.year.to_s
-
-  	if performancetimes == ""
-  		performances = ""
-  	end
+  	performances = "" if performancetimes == ""
   	performances
   end
 
+  def upcoming
+    if performancetimes.nil? || performancetimes.blank?
+      return true
+    else
+      return Time.parse(performancetimes.split("|").last)>Time.now
+    end
+    
+  end
+
+private
+  def performancetimes_parsable
+    return if performancetimes.nil? || performancetimes.blank?
+    perfarr = performancetimes.split("|")
+    for perf in perfarr
+      begin
+        DateTime.parse(perf)
+      rescue Exception => e
+        errors.add(:performancetimes, "contains a non-parsable date: "+perf)
+      end
+    end
+  end
 end

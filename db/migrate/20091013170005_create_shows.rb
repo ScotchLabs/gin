@@ -9,7 +9,7 @@ class CreateShows < ActiveRecord::Migration
       t.string :ticketprices
       t.string :performancetimes
       t.string :ticketstatus
-      t.boolean :scheduled
+      t.string :homeshow
 
       t.timestamps
     end

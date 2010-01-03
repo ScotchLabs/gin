@@ -7,13 +7,14 @@ end
 %>
 <td class='menutd'><ul>
 	<li><%= link_to pane_item.menulabel, pane_item.link, :style => style %></a>
-		<% if pane_item.hasmenu %>
+		<% if pane_item.hasmenu || session[:user_id] %>
 			<ul>
 				<% for content in @contents %>
 					<% if content.contentpane == pane_item.anchor && !content.hidden %>
 						<%= render(:partial => "content_menu_item", :object => content) %>
 					<% end %>
 				<% end %>
+				<li><%= link_to "Edit&nbsp;this&nbsp;pane", edit_pane_path(pane_item) %></li>
 			</ul>
 		<% end %>
 	</li>
