@@ -26,7 +26,7 @@
 		>
 	</div>	
 	<div class='navtext' id='navtext_<%= carousel_link.abbrev %>'
-		<% if !carousel_link.showdates %>
+		<% if !(carousel_link.homeshow=="date" || carousel_link.homeshow=="datetime") %>
 			style='margin: 20px 0px 0px 0px;'
 		<% end %>
 	>
