@@ -58,6 +58,11 @@ class Update < ActiveRecord::Base
   	puts "====^^^^===="
     text
   end
+
+  def postdate
+    created_at.strftime("%b %d, %Y")
+  end
+
 protected
   def article_ok
     # make sure they're not using <a> or <img>
