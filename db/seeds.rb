@@ -6,6 +6,11 @@
 #   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
 #   Major.create(:name => 'Daley', :city => cities.first)
 User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
+User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 
 Show.create(:name => "The Visit", :abbrev => "visit", :loc => "McConomy, UC", :imageurl => "tv.png", :author => "Friedrich D&uumlrrenmatt", :ticketprices => "", :performancetimes => "October 24 2008 9 PM|October 25 2008 3 PM|October 25 2008 8 PM", :ticketstatus => "completed", :homeshow => "datetime")
 Show.create(:name => "A Bottle of Scotch", :abbrev => "abos", :loc => "Alumni Hall, CFA", :imageurl => "abos.png", :author => "", :ticketprices => "", :performancetimes => "December 5 2008 9 PM", :ticketstatus => "completed", :homeshow => "datetime")
