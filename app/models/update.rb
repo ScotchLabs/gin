@@ -1,5 +1,5 @@
 class Update < ActiveRecord::Base
-  validates_presence_of :name, :anchor
+  validates_presence_of :name, :anchor, :expiredate
   validates_uniqueness_of :anchor
   # validate expiredate is in the future
   validate :expiredate_in_future
