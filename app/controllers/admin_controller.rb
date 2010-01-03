@@ -22,9 +22,9 @@ class AdminController < ApplicationController
   end
 
   def index
-    @shows = Show.find(:all, :order => "performancetimes DESC")
-    @updates = Update.find(:all, :order => "updated_at DESC")
-    @panes = Pane.find(:all, :order => "'order' ASC")
+    @shows = Show.all(:order => "performancetimes DESC")
+    @updates = Update.all(:order => "updated_at DESC")
+    @panes = Pane.all(:order => "panes.order ASC")
     @contents = Content.all
     @users = User.all
   end
