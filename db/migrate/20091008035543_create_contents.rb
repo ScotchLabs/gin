@@ -9,6 +9,7 @@ class CreateContents < ActiveRecord::Migration
       t.integer :order
       t.text :article
       t.string :contentpane
+      t.string :contenttype
 
       t.timestamps
     end
