@@ -111,7 +111,7 @@ protected
       elsif type == 'a'
         begin
           uri = URI.parse(anchor)
-          if uri.class != URI::HTTP
+          if uri.class != URI::HTTP && uri.class != URI::HTTPS
             errors.add(:article, "contains malformed 'a' template: not a valid http address")
             return
           end
