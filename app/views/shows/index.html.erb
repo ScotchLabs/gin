@@ -10,8 +10,7 @@
     <th>Ticketprices</th>
     <th>Performancetimes</th>
     <th>Ticketstatus</th>
-    <th>Showtimes</th>
-	<th>Showdates</th>
+    <th>Homeshow</th>
   </tr>
 
 <%
@@ -34,8 +33,7 @@ color = true
     <td class='admintd'><%=h !show.ticketprices.blank? %></td>
     <td class='admintd'><%=h !show.performancetimes.blank? %></td>
     <td class='admintd'><%=h show.ticketstatus %></td>
-    <td class='admintd'><%=h show.showtimes %></td>
-	<td class='admintd'><%=h show.showdates %></td>
+    <td class='admintd'><%=h show.homeshow %></td>
     <td class='admintd'><%= link_to 'Show', show %></td>
     <td class='admintd'><%= link_to 'Edit', edit_show_path(show) %></td>
     <td class='admintd'><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td>

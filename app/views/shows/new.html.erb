@@ -41,12 +41,8 @@
 	<%= f.select("ticketstatus", {"Open","open","Closed","closed","Completed","completed"}) %>
   </p>
   <p>
-    <%= f.label :showtimes, "Show performance times on the homepage?" %><br />
-    <%= f.check_box :showtimes %>
-  </p>
-  <p>
-    <%= f.label :showdates, "Show performance dates on the homepage?" %><br />
-    <%= f.check_box :showdates %>
+    <%= f.label :homeshow, "What to show on homepage?" %><br />
+    <%= f.select :homeshow, {"nothing", "none", "dates", "date", "dates & times", "datetime"} %>
   </p>
   <p>
     <%= f.submit 'Create' %>
