@@ -6,10 +6,12 @@ class HomeController < ApplicationController
     @news = Update.find(:all,
                       :conditions => ["expiredate > ?", DateTime.now],
                       :order => "updated_at DESC")
-    @shows = Show.find(:all,:order => "performancetimes DESC")
-    @activeshow = Show.find(:last,
-                            :conditions => ["'performancetimes' > ?", Time.now],
-                            :order => "performancetimes ASC")
+    @shows = Show.all
+    @shows.sort { |x, y| (Time.parse((y.performancetimes.split("|")[0].nil?)? "" : y.performancetimes.split("|")[0])<Time.parse((x.performancetimes.split("|")[0].nil?)? "" : x.performancetimes.split("|")[0]))? -1:1 }
+    @shows=@shows.reverse
+    @shows.each {|show| 
+      @activeshow = show unless !show.upcoming
+    }
     @contents = Content.find(:all, :order => "'order' ASC")
   end
   
