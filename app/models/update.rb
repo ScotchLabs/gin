@@ -125,7 +125,7 @@ protected
           return
         end
       elsif type == 'm'
-        unless anchor =~ /(0-9a-zA-Z\.\_\-)+\@(0-9a-zA-Z\.\_\-)+\.(net|com|org|me)/
+        unless anchor =~ /([0-9a-zA-Z\.\_\-]+)\@([0-9a-zA-Z\.\_\-]+)\.(net|com|org|me|edu){1}/
           errors.add(:article, "contains malformed 'm' template: invalid email address")
           return
         end

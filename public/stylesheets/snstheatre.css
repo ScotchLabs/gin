@@ -222,6 +222,13 @@ h2 { /* the News title on the home page */
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-weight: normal;
 }
+h3 {
+	margin: 0px;
+	text-align: left;
+	font-size: 16pt;
+	font-family: Georgia, "Times New Roman", Times, serif;
+	font-weight: normal;
+}
 .newstitle { /* for each update's title */
 	font-weight: bold;
 }
