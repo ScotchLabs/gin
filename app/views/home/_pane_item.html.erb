@@ -1,12 +1,11 @@
 <%
 style = ""
-if !@pane.nil? && pane_item.anchor == @pane.anchor
-	style = "color:#333333;"
-end
-
+style = "color:#333333;" if !@pane.nil? && pane_item.anchor == @pane.anchor
+target = "_self"
+target = "_blank" if pane_item.panetype=='link'
 %>
 <td class='menutd'><ul>
-	<li><%= link_to pane_item.menulabel, pane_item.link, :style => style %></a>
+	<li><%= link_to pane_item.menulabel, pane_item.link, :style => style, :target => target %></a>
 		<% if pane_item.hasmenu || session[:user_id] %>
 			<ul>
 				<% for content in @contents %>

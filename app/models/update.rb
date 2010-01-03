@@ -38,11 +38,11 @@ class Update < ActiveRecord::Base
     	if type == 'p' || type == 'c'
     	  out = "<a href='/home/#{action}/#{anchor}'>#{html}</a>"
     	elsif type == 'a'
-    	  out = "<a href='#{anchor}'>#{html}</a>"
+    	  out = "<a href='#{anchor}' target='_blank'>#{html}</a>"
     	elsif type == 'm'
-    	  out = "<a href='mailto://#{anchor}'>#{html}</a>"
+    	  out = "<a href='mailto://#{anchor}' target='_blank'>#{html}</a>"
     	elsif type == 'i'
-    	  out = "<img src='/images/#{anchor}' alt='#{html}' />"
+    	  out = "<img src='/images/#{anchor}' title='#{html}' alt='#{html}' />"
     	end
     	# replace text in article with out
     	replace = "\[\["+temp[0]+"\+"+temp[1]
