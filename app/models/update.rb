@@ -1,3 +1,6 @@
+require 'net/http'
+require 'xml/libxml'
+
 class Update < ActiveRecord::Base
   validates_presence_of :name, :anchor, :expiredate
   validates_uniqueness_of :anchor
@@ -69,6 +72,17 @@ protected
     errors.add(:article, "contains <a> tag. Please replace with a template.") if article =~ /\<a\ /
     errors.add(:article, "contains <img> tag. Please replace with a template.") if article =~ /\<img\ /
     # make sure the tags the are using are cool
+    parser = XML::Parser.new
+    parser.string = "<div>#{article}</div>"
+    msgs = []
+    XML::Parser.register_error_handler lambda { |msg| msgs << msg }
+    begin
+	    parser.parse
+	rescue Exception => e
+		nothtml = msgs.join
+		htmlvalidout = nothtml.split(".").join(". ")
+		errors.add(:article, "contains invalid html. #{htmlvalidout}")
+	end
   end
   def templates_ok
     text = article
