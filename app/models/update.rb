@@ -79,8 +79,8 @@ protected
     begin
 	    parser.parse
 	rescue Exception => e
-		nothtml = msgs.join
-		htmlvalidout = nothtml.split(".").join(". ")
+	  htmlvalidout = msgs.join(" ")
+	  htmlvalidout = htmlvalidout.split(" :").join(" line ")
 		errors.add(:article, "contains invalid html. #{htmlvalidout}")
 	end
   end
