@@ -240,3 +240,7 @@ h3 {
 #printedcontent {
 	padding: 6px;
 }
+.hidnopub {
+  opacity: .7 !important;
+  opacity: 1; /* for IE */
+}

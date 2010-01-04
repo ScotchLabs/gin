@@ -3,13 +3,15 @@ style = ""
 style = "color:#333333;" if !@pane.nil? && pane_item.anchor == @pane.anchor
 target = "_self"
 target = "_blank" if pane_item.panetype=='link'
+hidden = ""
+hidden = " hidnopub" if !pane_item.publish || pane_item.hidden
 %>
-<td class='menutd'><ul>
+<td class='menutd<%= hidden %>'><ul>
 	<li><%= link_to pane_item.menulabel, pane_item.link, :style => style, :target => target %></a>
-		<% if pane_item.hasmenu || session[:user_id] %>
+		<% if pane_item.hasmenu || session[:display_mode] == "full" %>
 			<ul>
 				<% for content in @contents %>
-					<% if content.contentpane == pane_item.anchor && !content.hidden %>
+					<% if content.contentpane == pane_item.anchor && (!content.hidden || session[:display_mode] == "full") %>
 						<%= render(:partial => "content_menu_item", :object => content) %>
 					<% end %>
 				<% end %>

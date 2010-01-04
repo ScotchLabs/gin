@@ -28,4 +28,14 @@ class AdminController < ApplicationController
     @contents = Content.all
     @users = User.all
   end
+  
+  def publicview
+    session[:display_mode] = "public"
+    redirect_to params[:id] || root_url
+  end
+  
+  def fullview
+    session[:display_mode] = "full"
+    redirect_to params[:id] || root_url
+  end
 end
