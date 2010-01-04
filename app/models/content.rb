@@ -99,8 +99,8 @@ protected
     begin
 	    parser.parse
 	rescue Exception => e
-		nonhtml = msgs.join
-		htmlvalidout = nonhtml.split("<").join("&lt;")
+		nothtml = msgs.join
+		htmlvalidout = nothtml.split(".Fatal").join(". Fatal")
 		errors.add(:article, "contains invalid html. #{htmlvalidout}")
 	end
   end
