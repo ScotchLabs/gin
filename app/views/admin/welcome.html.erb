@@ -1,37 +1,43 @@
-<h1>Admin CMS</h1>
-Hey there, <%= session[:user_name] %>!<br />
-Welcome to the Admin CMS (Content Management System).
-Here you can manage all the content of snstheatre.org!
-Just click on one of the tabs above to get started.<br />
-A few notes before you go though:<br />
+<h1>Welcome to the Admin CMS, <%= session[:user_id] %>!</h1>
+This is where all the magic happens. By which I mean content management. Here you can manage all the content of snstheatre.org! Just click on one of the tabs above to get started.<br /><br />
+<h3>Purpose of the beta</h3>
 <ul>
+<li>is the cms easy to navigate? can you get where you need to go?</li>
+<li>when creating content, are things self-explanatory? can you create exactly what you wanted? don't be afraid to make feature suggestions</li>
+<li>from the public's view, does everything work the way it should? did the cms let you create content that doesn't function, or throws an error?</li>
+</ul>
+Your help here is greatly appreciated. Feel free to [[m+sewillia@andrew.cmu.edu|contact me]] at any time with questions, or answers to those above.<br />
+<br />
+<i>--Spencer</i><br />
+<br />
+<br />
+<h3>Features Coming Soon!</h3>
+<ul>
+  <li>cms logging. to tell who did what when.</li>
+  <li>some sort of anonymous bug reporting? at least for beta?</li>
+  <li>validation helper for images</li>
+  <li>COMPLETE REDESIGN / RELAYOUT</li>
+  <li>some more cool template stuff</li>
+  <li>advanced routes</li>
+  <li>help center?</li>
+  <li>password changes / resets</li>
+  <li>email notifications</li>
+</ul>
+<h3>Bugs Reported / Laundry List</h3>
+none here! yay!
+<h3>Features Implemented</h3>
+<ul>
+  <li>validation helper for bad html tags. seriously, some of this stuff is deprecated</li>
 	<li>You can now put a template in a content's or news' article!</li>
-	<li>Haven't created a help center yet.</li>
-	<li>Haven't added advanced routes.</li>
-	<li>Haven't dealt with password changes / resets / email notifications</li>
-<!--	<li>If you want to edit the styles of the public site, the stylesheet is /public/stylesheets/snstheatre.css</li>
+</ul>
+<h3>HowTo</h3>
+<ul>
+	<li>If you want to edit the styles of the public site, the stylesheet is /public/stylesheets/snstheatre.css</li>
 	<li>If you want to edit the styles of the admin cms, the stylesheet is /public/stylesheets/admin.css</li>
 	<li>If you want to change the layout of the public site, edit /app/views/layouts/home.html.erb</li>
 	<li>If you want to change the layout of the admin cms, edit /app/views/layouts/admin.html.erb</li>
 	<li>The carousel controller script is in /public/javascripts/home.js/</li>
 	<li>The views for each action (showpane, showcontent, etc) are in /app/views/<i>controller</i>/, where <i>controller</i> is <i>home</i> for the public site, <i>admin</i> for this CMS, and anything else for object controllers</li>
 	<li>Image uploads should be placed in /public/images/</li>
-	<li>Want to do something more advanced and don't know how? <a href='mailto://sewillia@andrew.cmu.edu'>Email me</a> or <a href='http://www.google.com'>google it</a></li> -->
+	<li>Want to do something more advanced and don't know how? <a href='mailto://sewillia@andrew.cmu.edu'>Email me</a> or <a href='http://www.google.com'>google it</a></li>
 </ul>
-Unresolved bugs
-<ul>
-	
-</ul>
-Resolved bugs
-<ul>
-	<li>"Edit contents" in menu bar (r41)</li>
-	<li>anchor validation for panes (r42:44, r46)</li>
-</ul>
-<!--
-TODO
-<ul>
-	<li>templates: a, i, m</li>
-	<li>'loc' dropdowns?</li>
-	<li>board template</li>
-</ul>
--->
