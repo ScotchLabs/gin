@@ -20,13 +20,13 @@ styleall = "color:#333333;" if controller_name == "admin" && action_name == "ind
 		<div id='outside'>
 			<a href="/"><div id='logo'>Scotch'n'Soda Theatre</div></a>
 			<div id='menu'><table><tr>
-				<td class='menutd'><ul><li><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, :style => stylewelcome %></li></ul></td>
-				<td class='menutd'><ul><li><%= link_to "Shows", shows_path, :style => styleshows %></li></ul></td>
-				<td class='menutd'><ul><li><%= link_to "News", updates_path, :style => styleupdates %></li></ul></td>
-				<td class='menutd'><ul><li><%= link_to "Panes", panes_path, :style => stylepanes %></li></ul></td>
-				<td class='menutd'><ul><li><%= link_to "Contents", contents_path, :style => stylecontents %></li></ul></td>
-				<td class='menutd'><ul><li><%= link_to "All", {:controller => "admin"}, :style => styleall %></li></ul></td>
-				<td class='menutd'><ul><li><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li></ul></td>
+				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, :style => stylewelcome %></li></ul></td>
+				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Shows", shows_path, :style => styleshows %></li></ul></td>
+				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "News", updates_path, :style => styleupdates %></li></ul></td>
+				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Panes", panes_path, :style => stylepanes %></li></ul></td>
+				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Contents", contents_path, :style => stylecontents %></li></ul></td>
+				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "All", {:controller => "admin"}, :style => styleall %></li></ul></td>
+				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li></ul></td>
 			</tr></table></div>
 			<br clear='all' style='height:0px;'>
 			<div id='inside'>

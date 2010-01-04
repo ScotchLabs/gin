@@ -34,34 +34,28 @@ body {
 table{
 	border-spacing: 0px;
 }
-.menutd {
+#menu td {
 	padding: 0;
 }
-#menu ul {
-	list-style: none;
-	margin: 0px;
-	padding-left: 0px;
-	float: left;
-	vertical-align: top;
+.menu {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
 }
+.firstmenu { float: left; }
+.item { position: relative; }
+.menu { position: absolute; }
+.firstmenu { position: static; }
+.thirdmenu {
+	top: 0;
+	left: 100%;
+}
+.secondmenu, .thirdmenu, .fourthmenu { display: none; }
+.firstitem:hover .secondmenu, .seconditem:hover .thirdmenu, .thirditem:hover .fourthmenu { display: block; }
 #menu a {
 	text-decoration: none;
 	color: white;
 	background: #d96c00;
-}
-#menu a:hover {
-	color: #333333;
-	background: #d96c00;
-}
-#menu h2 {
-	color: white;
-	background: #d96c00;
-	padding-left: 5px;
-	padding-right: 5px;
-	font-size: 12px;
-	text-align: center;
-}
-#menu a, #menu h2 {
 	font-weight: bold;
 	font-size: 9pt;
 	display: block;
@@ -71,33 +65,9 @@ table{
 	margin-left: 0px;
 	padding: 2px 6px;
 }
-#menu h2:hover {
+#menu a:hover {
 	color: #333333;
-}
-#menu li {
-	position: relative;
-}
-#menu ul ul {
-	position: absolute;
-	z-index: 500;
-}
-#menu ul ul ul {
-	position: absolute;
-	top: 0;
-	left: 100%;
-	margin-left: 0px;
-}
-div#menu ul ul {
-	display: none;
-}
-div#menu ul li:hover ul {
-	display: block;
-}
-div#menu ul ul, div#menu ul li:hover ul ul, div#menu ul ul li:hover ul ul {
-	display: none;
-}
-div#menu ul li:hover ul, div#menu ul ul li:hover ul, div#menu ul ul ul li:hover ul {
-	display: block;
+	background: #d96c00;
 }
 #inside {
 	font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;

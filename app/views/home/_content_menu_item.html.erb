@@ -5,8 +5,8 @@ style = "color:#333333;" if !@content.nil? && content_menu_item.anchor == @conte
 menutitle = content_menu_item.title
 menutitle = content_menu_item.menutitle if !content_menu_item.menutitle.nil? && !content_menu_item.menutitle.blank?
 menutitle = menutitle.split(" ").join("&nbsp;")
-hidden = " class='hidnopub'" if !content_menu_item.publish || content_menu_item.hidden
+hidden = " hidnopub" if !content_menu_item.publish || content_menu_item.hidden
 %>
-<li<%= hidden %>>
+<li class='seconditem item<%= hidden %>'>
 	<%= link_to menutitle, link, :style => style %>
 </li>
