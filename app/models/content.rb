@@ -91,7 +91,6 @@ protected
     errors.add(:article, "contains <a> tag. Please replace with a template.") if article =~ /\<a\ /
     errors.add(:article, "contains <img> tag. Please replace with a template.") if article =~ /\<img\ /
     # make sure the tags the are using are cool
-    end
   end
   def templates_ok
     text = article
