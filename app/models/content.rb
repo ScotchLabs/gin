@@ -97,17 +97,20 @@ protected
     msgs = []
     XML::Parser.register_error_handler lambda { |msg| msgs << msg }
     begin
-	    parser.parse
+	  parser.parse
 	rescue Exception => e
-		nothtml = msgs.join
-		htmlvalidout = nothtml.split(".").join(". ")
-		errors.add(:article, "contains invalid html. #{htmlvalidout}")
+	  nothtml = msgs.join
+	  htmlvalidout = nothtml.split(".").join(". ")
+	  errors.add(:article, "contains invalid html. #{htmlvalidout}")
 	end
   end
   def templates_ok
     text = article
     templates = text.scan(/\[\[(.+)\]\]/)
     for temp in templates
+      # single cases
+      puts "====vvvv====\n"+temp[0]
+      next if temp[0]=="board"
       # check for plus sign
       unless temp[0].index('+') == 1
         errors.add(:article, "contains malformed template: no plus sign")
