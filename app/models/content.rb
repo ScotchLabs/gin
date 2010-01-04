@@ -67,10 +67,6 @@ class Content < ActiveRecord::Base
     text
   end
   
-  def validationoutput
-   validatehtml(articletext) 
-  end
-  
 protected
   def anchor_ok
     if contenttype != 'link'
@@ -95,11 +91,6 @@ protected
     errors.add(:article, "contains <a> tag. Please replace with a template.") if article =~ /\<a\ /
     errors.add(:article, "contains <img> tag. Please replace with a template.") if article =~ /\<img\ /
     # make sure the tags the are using are cool
-    vout = validationoutput
-    if vout =~ /\<valid\>false\<\/valid\>/
-      numerrors = vout.scan(/\<numerrors\>(.+)\<\/numerrors\>/)[0][0]
-      output = vout.scan(/\<errortext\>(.+)\<\/errortext\>/)[0][0]
-      errors.add(:article, "contains invalid markup: #{numerrors}. <a onclick=\"document.getElementById('fullw3cvalidationoutput').style.display = 'block';\">Full output</a>.<br /><div id='fullw3cvalidationoutput' style='display:none;'>#{errortext}<br /><a onclick=\"document.getElementById('fullw3cvalidationoutput').style.display = 'none;\">Hide output</a></div>")
     end
   end
   def templates_ok
