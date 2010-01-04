@@ -91,6 +91,15 @@ protected
     errors.add(:article, "contains <a> tag. Please replace with a template.") if article =~ /\<a\ /
     errors.add(:article, "contains <img> tag. Please replace with a template.") if article =~ /\<img\ /
     # make sure the tags the are using are cool
+    parser = XML::Parser.new
+    parser.string = "<div>#{article}</div>"
+    msgs = []
+    XML::Parser.register_error_handler lambda { |msg| msgs << msg }
+    begin
+	    parser.parse
+	rescue Exception => e
+		htmlvalidout = '<pre>' + msgs.collect{ |c| c.gsub('<', '&lt;') }.join + '</pre>'
+		errors.add(:article, "contains invalid html. <a onclick=\"document.getElementById('htmlvalidout').style.display = 'block'\">Full output</a><div id='htmlvalidout' style='display:none;'>#{htmlvalidout}<br /><a onclick=\"document.getElementById('htmlvalidout').style.display = 'none'\">Hide output</a></div>")
   end
   def templates_ok
     text = article
