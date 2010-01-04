@@ -3,7 +3,7 @@ class PanesController < ApplicationController
   # GET /panes
   # GET /panes.xml
   def index
-    @panes = Pane.all
+    @panes = Pane.all(:order => "panes.order ASC")
 
     respond_to do |format|
       format.html # index.html.erb

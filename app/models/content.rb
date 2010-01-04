@@ -1,4 +1,6 @@
 require 'net/http'
+require 'xml/libxml'
+
 class Content < ActiveRecord::Base
   CONTENT_TYPES = [
     #displayed    #db
@@ -13,12 +15,9 @@ class Content < ActiveRecord::Base
   validate :article_ok
   validate :templates_ok
   def articletext
-    puts "====vvvv===="
     # replace templates
     text = article
     templates = text.scan(/\[\[(a|c|i|m|p){1}\+([0-9a-zA-Z\.\:\/\_\-\~\%\&\#\=\@]+)\|?([0-9a-zA-Z \'\"]*)\]\]/)
-    puts templates
-    puts "no hits on scan" if templates.blank?
     for temp in templates
     	# turn scan result into link_to
     	type = temp[0]
@@ -56,15 +55,13 @@ class Content < ActiveRecord::Base
     	replace += "\|"+temp[2] if !temp[2].nil? && !temp[2].blank?
     	replace += "\]\]"
     	text = "foo"+text+"bar"
-    	puts "replacing \""+replace+"\" with \""+out+"\""
     	text = text.split(replace).join(out)
     	a = text.length-4
     	text = text[3..a]
     end
-    # now do the one-time templates ([[board]] etc)
-  	puts "====^^^^===="
     text
   end
+  
 protected
   def anchor_ok
     if contenttype != 'link'
@@ -89,11 +86,24 @@ protected
     errors.add(:article, "contains <a> tag. Please replace with a template.") if article =~ /\<a\ /
     errors.add(:article, "contains <img> tag. Please replace with a template.") if article =~ /\<img\ /
     # make sure the tags the are using are cool
+    parser = XML::Parser.new
+    parser.string = "<div>#{article}</div>"
+    msgs = []
+    XML::Parser.register_error_handler lambda { |msg| msgs << msg }
+    begin
+	  parser.parse
+	rescue Exception => e
+	  htmlvalidout = msgs.join(" ")
+	  htmlvalidout = htmlvalidout.split(" :").join(" line ")
+	  errors.add(:article, "contains invalid html. #{htmlvalidout}")
+	end
   end
   def templates_ok
     text = article
     templates = text.scan(/\[\[(.+)\]\]/)
     for temp in templates
+      # single cases
+      next if temp[0]=="board"
       # check for plus sign
       unless temp[0].index('+') == 1
         errors.add(:article, "contains malformed template: no plus sign")
@@ -132,7 +142,7 @@ protected
       elsif type == 'a'
         begin
           uri = URI.parse(anchor)
-          if uri.class != URI::HTTP
+          if uri.class != URI::HTTP && uri.class != URI::HTTPS
             errors.add(:article, "contains malformed 'a' template: not a valid http address")
             return
           end
@@ -141,7 +151,7 @@ protected
           return
         end
       elsif type == 'm'
-        unless anchor =~ /(0-9a-zA-Z\.\_\-)+\@(0-9a-zA-Z\.\_\-)+\.(net|com|org|me)/
+        unless anchor =~ /([0-9a-zA-Z\.\_\-]+)\@([0-9a-zA-Z\.\_\-]+)\.(net|com|org|me|edu){1}/
           errors.add(:article, "contains malformed 'm' template: invalid email address")
           return
         end

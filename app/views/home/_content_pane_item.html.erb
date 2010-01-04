@@ -1,5 +1,8 @@
+<%
+hidden = " class='hidnopub'" if !content_pane_item.publish
+%>
 <!-- parse article for boards
-replace #board with
+replace [[board]] with
 <div align='left'>
 	board stuff
 </div>
@@ -9,7 +12,9 @@ link_to template:
 [[c+contentanchor]]
 [[c+contentanchor|specialtitle]]
 -->
-<a name='<%= content_pane_item.anchor %>'></a>
-<h2><%= content_pane_item.title %></h2>
-<div align='left'><%= content_pane_item.articletext %></div>
-<br />
+<div<%= hidden %>>
+  <a name='<%= content_pane_item.anchor %>'></a>
+  <h2><%= content_pane_item.title %></h2>
+  <div align='left'><%= content_pane_item.articletext %></div>
+  <br />
+</div>
