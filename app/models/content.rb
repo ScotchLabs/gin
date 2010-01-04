@@ -100,6 +100,7 @@ protected
 	rescue Exception => e
 		htmlvalidout = '<pre>' + msgs.collect{ |c| c.gsub('<', '&lt;') }.join + '</pre>'
 		errors.add(:article, "contains invalid html. <a onclick=\"document.getElementById('htmlvalidout').style.display = 'block'\">Full output</a><div id='htmlvalidout' style='display:none;'>#{htmlvalidout}<br /><a onclick=\"document.getElementById('htmlvalidout').style.display = 'none'\">Hide output</a></div>")
+	end
   end
   def templates_ok
     text = article
