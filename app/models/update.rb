@@ -92,6 +92,8 @@ protected
     # now validate templates
     templates = text.scan(/\[\[(.+)\]\]/)
     for temp in templates
+      # single cases
+      next if temp[0]=="board"
       # check for plus sign
       unless temp[0].index('+') == 1
         errors.add(:article, "contains malformed template: no plus sign")

@@ -109,7 +109,6 @@ protected
     templates = text.scan(/\[\[(.+)\]\]/)
     for temp in templates
       # single cases
-      puts "====vvvv====\n"+temp[0]
       next if temp[0]=="board"
       # check for plus sign
       unless temp[0].index('+') == 1
