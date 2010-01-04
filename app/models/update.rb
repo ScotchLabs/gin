@@ -9,12 +9,9 @@ class Update < ActiveRecord::Base
   validate :article_ok
   validate :templates_ok
   def articletext
-    puts "====vvvv===="
     # replace templates
     text = article
     templates = text.scan(/\[\[(a|c|i|m|p){1}\+([0-9a-zA-Z\.\:\/\_\-\~\%\&\#\=\@]+)\|?([0-9a-zA-Z \'\"]*)\]\]/)
-    puts templates
-    puts "no hits on scan" if templates.blank?
     for temp in templates
     	# turn scan result into link_to
     	type = temp[0]
@@ -52,13 +49,10 @@ class Update < ActiveRecord::Base
     	replace += "\|"+temp[2] if !temp[2].nil? && !temp[2].blank?
     	replace += "\]\]"
     	text = "foo"+text+"bar"
-    	puts "replacing \""+replace+"\" with \""+out+"\""
     	text = text.split(replace).join(out)
     	a = text.length-4
     	text = text[3..a]
     end
-    # now do the one-time templates ([[board]] etc)
-  	puts "====^^^^===="
     text
   end
 

@@ -12,7 +12,6 @@
 			<a href="/"><div id='logo'>Scotch'n'Soda Theatre</div></a>
 			<div id='menu'><table><tr>
 				<% for pane in @panes %>
-				  <% puts "=====vvvvv=====\nconsidering pane_item "+pane.anchor %>
 					<% if (pane.publish && !pane.hidden) || session[:display_mode] == "full" %>
 						<%= render(:partial => "pane_item", :object => pane) %>
 					<% end %>
