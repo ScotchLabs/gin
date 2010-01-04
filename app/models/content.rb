@@ -1,4 +1,5 @@
 require 'net/http'
+require 'xml/libxml'
 
 class Content < ActiveRecord::Base
   CONTENT_TYPES = [
@@ -98,8 +99,9 @@ protected
     begin
 	    parser.parse
 	rescue Exception => e
-		htmlvalidout = '<pre>' + msgs.collect{ |c| c.gsub('<', '&lt;') }.join + '</pre>'
-		errors.add(:article, "contains invalid html. <a onclick=\"document.getElementById('htmlvalidout').style.display = 'block'\">Full output</a><div id='htmlvalidout' style='display:none;'>#{htmlvalidout}<br /><a onclick=\"document.getElementById('htmlvalidout').style.display = 'none'\">Hide output</a></div>")
+		nonhtml = msgs.join
+		htmlvalidout = nonhtml.split("<").join("&lt;")
+		errors.add(:article, "contains invalid html. #{htmlvalidout}")
 	end
   end
   def templates_ok
