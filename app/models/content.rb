@@ -1,5 +1,5 @@
 require 'net/http'
-require 'libxml'
+require 'xml/libxml'
 
 class Content < ActiveRecord::Base
   CONTENT_TYPES = [
