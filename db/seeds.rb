@@ -73,7 +73,7 @@ Content.create(:title => "Giving to Scotch'n'Soda", :menutitle => "", :anchor =>
 <table cellpadding='10px' border='0px'>
 <tr valign='middle'>
 <td>[[i+mail.png]]</td>
-<td><b>By Mail:</b> Make out your check to "Carnegie Mellon University" with "S'n'S 70th Anniversary Initiative" in the memo field. Mail to: Carnegie Mellon University, PO Box 371525, Pittsburgh Pa 15251-7525.</td>
+<td><b>By Mail:</b> Make out your check to \"Carnegie Mellon University\" with \"S'n'S 70th Anniversary Initiative\" in the memo field. Mail to: Carnegie Mellon University, PO Box 371525, Pittsburgh Pa 15251-7525.</td>
 </tr>
 <tr valign='middle'>
 <td>[[i+online.png]]</td>
