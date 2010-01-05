@@ -1,4 +1,5 @@
 require 'net/http'
+require 'xml/libxml'
 
 class Content < ActiveRecord::Base
   CONTENT_TYPES = [
@@ -47,7 +48,7 @@ class Content < ActiveRecord::Base
     	elsif type == 'm'
     	  out = "<a href='mailto://#{anchor}' target='_blank'>#{html}</a>"
     	elsif type == 'i'
-    	  out = "<img src='/images/#{anchor}' title='#{html}' alt='#{html}' />"
+    	  out = "<img src='http://upload.snstheatre.org/gin/contents/#{anchor}' title='#{html}' alt='#{html}' />"
     	end
     	# replace text in article with out
     	replace = "\[\["+temp[0]+"\+"+temp[1]
@@ -85,6 +86,17 @@ protected
     errors.add(:article, "contains <a> tag. Please replace with a template.") if article =~ /\<a\ /
     errors.add(:article, "contains <img> tag. Please replace with a template.") if article =~ /\<img\ /
     # make sure the tags the are using are cool
+    parser = XML::Parser.new
+    parser.string = "<div>#{article}</div>"
+    msgs = []
+    XML::Parser.register_error_handler lambda { |msg| msgs << msg }
+    begin
+      parser.parse
+    rescue Exception => e
+      htmlvalidout = msgs.join(" ")
+      htmlvalidout = htmlvalidout.split(" :").join(" line ")
+      errors.add(:article, "contains invalid html. #{htmlvalidout}")
+    end
   end
   def templates_ok
     text = article
@@ -145,6 +157,10 @@ protected
         end
       elsif type == 'i'
         # make sure there's an image that matches anchor
+        Net::HTTP.start("upload.snstheatre.org") { |http|
+          resp = http.get("/gin/contents/#{anchor}")
+          errors.add(:article, "contains malformed 'i' template: invalid image") if resp.body.to_s =~ /404\ Not\ Found/
+        }
       end
       # check text
       if !temp[0].index('|').nil?

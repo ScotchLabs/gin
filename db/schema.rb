@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100103053236) do
+ActiveRecord::Schema.define(:version => 20091028180014) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -20,9 +20,9 @@ ActiveRecord::Schema.define(:version => 20100103053236) do
     t.integer  "order"
     t.text     "article"
     t.string   "contentpane"
+    t.string   "contenttype"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "contenttype"
   end
 
   create_table "panes", :force => true do |t|
