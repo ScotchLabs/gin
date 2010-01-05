@@ -1,3 +1,5 @@
+require 'net/http'
+
 class Show < ActiveRecord::Base
   TICKETSTATUS = [
     ["Closed", "closed"],
@@ -8,6 +10,7 @@ class Show < ActiveRecord::Base
   validates_uniqueness_of :abbrev
   validates_inclusion_of :ticketstatus, :in => TICKETSTATUS.map {|disp, value| value}
   validates_format_of :imageurl, :with => %r{\.(gif|jpg|png)$}i, :message => "must be a URL for GIF, JPG, or PNG image.", :allow_blank => true
+  validate :image_exists
   validate :performancetimes_parsable
   
   def inseason
@@ -203,5 +206,11 @@ private
         errors.add(:performancetimes, "contains a non-parsable date: "+perf)
       end
     end
+  end
+  def image_exists
+      Net::HTTP.start("upload.snstheatre.org") { |http|
+        resp = http.get("/gin/shows/#{imageurl}")
+        errors.add(:imageurl, "points to an invalid location") if resp.body.to_s =~ /404\ Not\ Found/
+      }
   end
 end

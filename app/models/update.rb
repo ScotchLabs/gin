@@ -42,7 +42,7 @@ class Update < ActiveRecord::Base
     	elsif type == 'm'
     	  out = "<a href='mailto://#{anchor}' target='_blank'>#{html}</a>"
     	elsif type == 'i'
-    	  out = "<img src='/images/#{anchor}' title='#{html}' alt='#{html}' />"
+    	  out = "<img src='http://upload.snstheatre.org/gin/contents/#{anchor}' title='#{html}' alt='#{html}' />"
     	end
     	# replace text in article with out
     	replace = "\[\["+temp[0]+"\+"+temp[1]
@@ -141,6 +141,10 @@ protected
         end
       elsif type == 'i'
         # make sure there's an image that matches anchor
+        Net::HTTP.start("upload.snstheatre.org") { |http|
+          resp = http.get("/gin/contents/#{anchor}")
+          errors.add(:article, "contains malformed 'i' template: invalid image") if resp.body.to_s =~ /404\ Not\ Found/
+        }
       end
       # check text
       if !temp[0].index('|').nil?
