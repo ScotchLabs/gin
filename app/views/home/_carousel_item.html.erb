@@ -4,9 +4,10 @@
 	<% end %>
 	>
 	<% if carousel_item.imageurl != "" %>
-		<%= image_tag "shows/#{carousel_item.imageurl}", :class => "contentimg" %><br />
+    
+		<%= image_tag "http://upload.snstheatre.org/gin/shows/#{carousel_item.imageurl}", :class => "contentimg" %><br />
 	<% else %>
-		<%= image_tag "shows/temp.png", :class => 'contentimg' %><br />
+		<%= image_tag "http://upload.snstheatre.org/gin/shows/temp.png", :class => 'contentimg' %><br />
 	<% end %>
 	<div class='nonimg'>
 		<%= carousel_item.name %>
