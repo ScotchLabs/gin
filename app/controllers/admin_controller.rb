@@ -31,11 +31,11 @@ class AdminController < ApplicationController
   
   def publicview
     session[:display_mode] = "public"
-    redirect_to params[:id] || root_url
+    redirect_to root_url
   end
   
   def fullview
     session[:display_mode] = "full"
-    redirect_to params[:id] || root_url
+    redirect_to root_url
   end
 end

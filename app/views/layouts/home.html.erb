@@ -20,9 +20,9 @@
 					<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Admin", :controller => "admin" %>
 						<ul class='secondmenu menu'>
 						  <% if session[:display_mode] == "full" %>
-						    <li class='seconditem item'><%= link_to 'Public View', :controller => "admin", :action => "publicview", :id => request.request_uri %></li>
+						    <li class='seconditem item'><%= link_to 'Public View', :controller => "admin", :action => "publicview" %></li>
 						  <% else %>
-						    <li class='seconditem item'><%= link_to 'Full View', :controller => "admin", :action => "fullview", :id => request.request_uri %></li>
+						    <li class='seconditem item'><%= link_to 'Full View', :controller => "admin", :action => "fullview" %></li>
 						  <% end %>
 							<li class='seconditem item'><%= link_to 'Edit Shows', :controller => "shows" %></li>
 							<li class='seconditem item'><%= link_to 'Edit News', :controller => "updates" %></li>
