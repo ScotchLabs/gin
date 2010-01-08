@@ -1,0 +1,42 @@
+<h1>Listing roles</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+    <th>Abbrev</th>
+    <th>Crudcontents</th>
+    <th>Crudshows</th>
+    <th>Crudpanes</th>
+    <th>Crudusers</th>
+    <th>Crudupdates</th>
+    <th>Crudroles</th>
+    <th>Crudroleassoc</th>
+    <th>Crudtopics</th>
+    <th>Crudposts</th>
+    <th>Crudcategories</th>
+  </tr>
+
+<% @roles.each do |role| %>
+  <tr>
+    <td><%=h role.name %></td>
+    <td><%=h role.abbrev %></td>
+    <td><%=h role.crudcontents %></td>
+    <td><%=h role.crudshows %></td>
+    <td><%=h role.crudpanes %></td>
+    <td><%=h role.crudusers %></td>
+    <td><%=h role.crudupdates %></td>
+    <td><%=h role.crudroles %></td>
+    <td><%=h role.crudroleassoc %></td>
+    <td><%=h role.crudtopics %></td>
+    <td><%=h role.crudposts %></td>
+    <td><%=h role.crudcategories %></td>
+    <td><%= link_to 'Show', role %></td>
+    <% if session[:crud]["u"]["roles"] %><td><%= link_to 'Edit', edit_role_path(role) %></td><% end %>
+    <% if session[:crud]["d"]["roles"] %><td><%= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["roles"] %><%= link_to 'New role', new_role_path %><% end %>

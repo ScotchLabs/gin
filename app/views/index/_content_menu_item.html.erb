@@ -1,5 +1,5 @@
 <%
-link = {:controller => "home", :action => "showcontent", :id => content_menu_item.anchor}
+link = {:controller => "index", :action => "showcontent", :id => content_menu_item.anchor}
 link = content_menu_item.anchor if content_menu_item.contenttype == "link"
 style = "color:#333333;" if !@content.nil? && content_menu_item.anchor == @content.anchor
 menutitle = content_menu_item.title

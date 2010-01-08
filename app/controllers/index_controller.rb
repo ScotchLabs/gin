@@ -1,4 +1,4 @@
-class HomeController < ApplicationController
+class IndexController < ApplicationController
   def index
     @panes = Pane.all(:order => "panes.order ASC")
     @news = Update.all(:conditions => ["expiredate > ?", DateTime.now], :order => "updated_at DESC")

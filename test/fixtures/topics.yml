@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  categoryid: 1
+  creatorid: 1
+  sticky: false
+
+two:
+  name: MyString
+  categoryid: 1
+  creatorid: 1
+  sticky: false

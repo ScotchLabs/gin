@@ -1,0 +1,30 @@
+<h1>Listing users</h1>
+
+<table>
+  <tr>
+    <th>Name</th>
+  </tr>
+
+<%
+color = true
+@users.each do |user|
+	if color
+		color = false
+		style = " style=\"background-color:\#bbbbbb;\""
+	else
+		color = true
+		style = " style=\"background-color:\#dddddd;\""
+	end
+%>
+  <tr <%= style %>>
+    <td class='admintd'><%=h user.name %></td>
+    <td class='admintd'><%= link_to 'Show', user %></td>
+    <% if session[:crud]["u"]["users"] %><td class='admintd'><%= link_to 'Edit', edit_user_path(user) %></td><% end %>
+    <% if session[:crud]["d"]["users"] %><td class='admintd'><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["users"] %><%= link_to 'New update', new_user_path %><% end %>

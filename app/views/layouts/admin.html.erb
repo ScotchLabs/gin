@@ -4,7 +4,12 @@ styleshows = "color:#333333;" if controller_name == "shows"
 styleupdates = "color:#333333;" if controller_name == "updates"
 stylepanes = "color:#333333;" if controller_name == "panes"
 stylecontents = "color:#333333;" if controller_name == "contents"
-styleall = "color:#333333;" if controller_name == "admin" && action_name == "index"
+styleusers = "color:#333333;" if controller_name == "users"
+styleroles = "color:#333333;" if controller_name == "roles"
+styleroleassocs = "color:#333333;" if controller_name == "roleassocs"
+stylecategories = "color:#333333;" if controller_name == "categories"
+styletopics = "color:#333333;" if controller_name == "topics"
+styleposts = "color:#333333;" if controller_name == "posts"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir='ltr' class='js'>
@@ -21,11 +26,16 @@ styleall = "color:#333333;" if controller_name == "admin" && action_name == "ind
 			<a href="/"><div id='logo'>Scotch'n'Soda Theatre</div></a>
 			<div id='menu'><table><tr>
 				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, :style => stylewelcome %></li></ul></td>
-				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Shows", shows_path, :style => styleshows %></li></ul></td>
-				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "News", updates_path, :style => styleupdates %></li></ul></td>
-				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Panes", panes_path, :style => stylepanes %></li></ul></td>
-				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Contents", contents_path, :style => stylecontents %></li></ul></td>
-				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "All", {:controller => "admin"}, :style => styleall %></li></ul></td>
+				<% if session[:crud]["r"]["shows"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Shows", shows_path, :style => styleshows %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["updates"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "News", updates_path, :style => styleupdates %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["panes"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Panes", panes_path, :style => stylepanes %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["contents"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Contents", contents_path, :style => stylecontents %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["users"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Users", users_path, :style => styleusers %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["roles"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Roles", roles_path, :style => styleroles %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["roleassocs"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Roleassocs", roleassocs_path, :style => styleroleassocs %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["categories"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Categories", categories_path, :style => stylecategories %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["topics"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Topics", topics_path, :style => styletopics %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["posts"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Posts", posts_path, :style => styleposts %></li></ul></td><% end %>
 				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li></ul></td>
 			</tr></table></div>
 			<br clear='all' style='height:0px;'>

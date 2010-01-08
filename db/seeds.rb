@@ -1,16 +1,25 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#   
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
-User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
-User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873") # id 1
+User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 2
+User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 3
+User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 4
+User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 5
+User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 6
+
+Role.create(:name => "Administrator", :abbrev => "admin", :crudccontents => true, :crudcshows => true, :crudcpanes => true, :crudcusers => true, :crudcupdates => true, :crudcroles => true, :crudcroleassocs => true, :crudctopics => true, :crudcposts => true, :crudccategories => true, :crudrcontents => true, :crudrshows => true, :crudrpanes => true, :crudrusers => true, :crudrupdates => true, :crudrroles => true, :crudrroleassocs => true, :crudrtopics => true, :crudrposts => true, :crudrcategories => true, :cruducontents => true, :crudushows => true, :crudupanes => true, :cruduusers => true, :cruduupdates => true, :cruduroles => true, :cruduroleassocs => true, :crudutopics => true, :cruduposts => true, :cruducategories => true, :cruddcontents => true, :cruddshows => true, :cruddpanes => true, :cruddusers => true, :cruddupdates => true, :cruddroles => true, :cruddroleassocs => true, :cruddtopics => true, :cruddposts => true, :cruddcategories => true) # id 1
+Role.create(:name => "Content writer", :abbrev => "writer", :crudccontents => true, :crudcshows => true, :crudcpanes => true, :crudcusers => false, :crudcupdates => true, :crudcroles => false, :crudcroleassocs => false, :crudctopics => false, :crudcposts => false, :crudccategories => false, :crudrcontents => true, :crudrshows => true, :crudrpanes => true, :crudrusers => false, :crudrupdates => true, :crudrroles => false, :crudrroleassocs => false, :crudrtopics => false, :crudrposts => false, :crudrcategories => false, :cruducontents => true, :crudushows => true, :crudupanes => true, :cruduusers => false, :cruduupdates => true, :cruduroles => false, :cruduroleassocs => false, :crudutopics => false, :cruduposts => false, :cruducategories => false, :cruddcontents => true, :cruddshows => true, :cruddpanes => true, :cruddusers => false, :cruddupdates => true, :cruddroles => false, :cruddroleassocs => false, :cruddtopics => false, :cruddposts => false, :cruddcategories => false) # id 2
+Role.create(:name => "Beta tester", :abbrev => "betar", :crudccontents => true, :crudcshows => true, :crudcpanes => true, :crudcusers => false, :crudcupdates => true, :crudcroles => false, :crudcroleassocs => false, :crudctopics => true, :crudcposts => true, :crudccategories => false, :crudrcontents => true, :crudrshows => true, :crudrpanes => true, :crudrusers => false, :crudrupdates => true, :crudrroles => false, :crudrroleassocs => false, :crudrtopics => true, :crudrposts => true, :crudrcategories => true, :cruducontents => true, :crudushows => true, :crudupanes => true, :cruduusers => false, :cruduupdates => true, :cruduroles => false, :cruduroleassocs => false, :crudutopics => true, :cruduposts => true, :cruducategories => false, :cruddcontents => true, :cruddshows => true, :cruddpanes => true, :cruddusers => false, :cruddupdates => true, :cruddroles => false, :cruddroleassocs => false, :cruddtopics => false, :cruddposts => false, :cruddcategories => false) # id 3
+
+Roleassoc.create(:roleid => "admin", :userid => "sewillia")
+Roleassoc.create(:roleid => "writer", :userid => "jrfriedr")
+Roleassoc.create(:roleid => "betar", :userid => "jrfriedr")
+Roleassoc.create(:roleid => "writer", :userid => "amgross")
+Roleassoc.create(:roleid => "betar", :userid => "amgross")
+Roleassoc.create(:roleid => "writer", :userid => "dfreeman")
+Roleassoc.create(:roleid => "betar", :userid => "dfreeman")
+Roleassoc.create(:roleid => "writer", :userid => "achivett")
+Roleassoc.create(:roleid => "betar", :userid => "achivett")
+Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
+Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
 
 Show.create(:name => "The Visit", :abbrev => "visit", :loc => "McConomy, UC", :imageurl => "tv.png", :author => "Friedrich D&uumlrrenmatt", :ticketprices => "", :performancetimes => "October 24 2008 9 PM|October 25 2008 3 PM|October 25 2008 8 PM", :ticketstatus => "completed", :homeshow => "datetime")
 Show.create(:name => "A Bottle of Scotch", :abbrev => "abos", :loc => "Alumni Hall, CFA", :imageurl => "abos.png", :author => "", :ticketprices => "", :performancetimes => "December 5 2008 9 PM", :ticketstatus => "completed", :homeshow => "datetime")

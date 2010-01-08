@@ -42,7 +42,7 @@ class Content < ActiveRecord::Base
     		html = temp[2]
     	end
     	if type == 'p' || type == 'c'
-    	  out = "<a href='/home/#{action}/#{anchor}'>#{html}</a>"
+    	  out = "<a href='/index/#{action}/#{anchor}'>#{html}</a>"
     	elsif type == 'a'
     	  out = "<a href='#{anchor}' target='_blank'>#{html}</a>"
     	elsif type == 'm'

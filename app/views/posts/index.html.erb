@@ -1,0 +1,26 @@
+<h1>Listing posts</h1>
+
+<table>
+  <tr>
+    <th>Topicid</th>
+    <th>Article</th>
+    <th>Creatorid</th>
+    <th>Replyto</th>
+  </tr>
+
+<% @posts.each do |post| %>
+  <tr>
+    <td><%=h post.topicid %></td>
+    <td><%=h post.article %></td>
+    <td><%=h post.creatorid %></td>
+    <td><%=h post.replyto %></td>
+    <td><%= link_to 'Show', post %></td>
+    <% if session[:crud]["u"]["posts"] %><td><%= link_to 'Edit', edit_post_path(post) %></td><% end %>
+    <% if session[:crud]["d"]["posts"] %><td><%= link_to 'Destroy', post, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["posts"] %><%= link_to 'New post', new_post_path %><% end %>

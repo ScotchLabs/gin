@@ -9,7 +9,14 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091028180014) do
+ActiveRecord::Schema.define(:version => 20100108175129) do
+
+  create_table "categories", :force => true do |t|
+    t.string   "name"
+    t.string   "anchor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -38,6 +45,70 @@ ActiveRecord::Schema.define(:version => 20091028180014) do
     t.datetime "updated_at"
   end
 
+  create_table "posts", :force => true do |t|
+    t.integer  "topicid"
+    t.text     "article"
+    t.integer  "creatorid"
+    t.integer  "replyto"
+    t.boolean  "deleted"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roleassocs", :force => true do |t|
+    t.string   "roleid"
+    t.string   "userid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "abbrev"
+    t.boolean  "crudccontents"
+    t.boolean  "crudcshows"
+    t.boolean  "crudcpanes"
+    t.boolean  "crudcusers"
+    t.boolean  "crudcupdates"
+    t.boolean  "crudcroles"
+    t.boolean  "crudcroleassocs"
+    t.boolean  "crudctopics"
+    t.boolean  "crudcposts"
+    t.boolean  "crudccategories"
+    t.boolean  "cruducontents"
+    t.boolean  "crudushows"
+    t.boolean  "crudupanes"
+    t.boolean  "cruduusers"
+    t.boolean  "cruduupdates"
+    t.boolean  "cruduroles"
+    t.boolean  "cruduroleassocs"
+    t.boolean  "crudutopics"
+    t.boolean  "cruduposts"
+    t.boolean  "cruducategories"
+    t.boolean  "cruddcontents"
+    t.boolean  "cruddshows"
+    t.boolean  "cruddpanes"
+    t.boolean  "cruddusers"
+    t.boolean  "cruddupdates"
+    t.boolean  "cruddroles"
+    t.boolean  "cruddroleassocs"
+    t.boolean  "cruddtopics"
+    t.boolean  "cruddposts"
+    t.boolean  "cruddcategories"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.boolean  "crudrcontents"
+    t.boolean  "crudrpanes"
+    t.boolean  "crudrshows"
+    t.boolean  "crudrupdates"
+    t.boolean  "crudrusers"
+    t.boolean  "crudrroles"
+    t.boolean  "crudrroleassocs"
+    t.boolean  "crudrcategories"
+    t.boolean  "crudrtopics"
+    t.boolean  "crudrposts"
+  end
+
   create_table "shows", :force => true do |t|
     t.string   "name"
     t.string   "abbrev"
@@ -48,6 +119,15 @@ ActiveRecord::Schema.define(:version => 20091028180014) do
     t.string   "performancetimes"
     t.string   "ticketstatus"
     t.string   "homeshow"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "topics", :force => true do |t|
+    t.string   "name"
+    t.integer  "categoryid"
+    t.integer  "creatorid"
+    t.boolean  "sticky"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

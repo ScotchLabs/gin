@@ -35,12 +35,12 @@ color = true
     <td class='admintd'><%=h show.ticketstatus %></td>
     <td class='admintd'><%=h show.homeshow %></td>
     <td class='admintd'><%= link_to 'Show', show %></td>
-    <td class='admintd'><%= link_to 'Edit', edit_show_path(show) %></td>
-    <td class='admintd'><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if session[:crud]["u"]["shows"] %><td class='admintd'><%= link_to 'Edit', edit_show_path(show) %></td><% end %>
+    <% if session[:crud]["d"]["shows"] %><td class='admintd'><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New show', new_show_path %>
+<% if session[:crud]["c"]["shows"] %><%= link_to 'New show', new_show_path %><% end %>

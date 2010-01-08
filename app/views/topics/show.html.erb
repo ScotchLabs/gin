@@ -1,0 +1,23 @@
+<p>
+  <b>Name:</b>
+  <%=h @topic.name %>
+</p>
+
+<p>
+  <b>Categoryid:</b>
+  <%=h @topic.categoryid %>
+</p>
+
+<p>
+  <b>Creatorid:</b>
+  <%=h @topic.creatorid %>
+</p>
+
+<p>
+  <b>Sticky:</b>
+  <%=h @topic.sticky %>
+</p>
+
+
+<%= link_to 'Edit', edit_topic_path(@topic) %> |
+<%= link_to 'Back', topics_path %>

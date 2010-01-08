@@ -22,7 +22,7 @@ class Pane < ActiveRecord::Base
     if panetype == "link"
     	link = ""+anchor
     else
-    	link = {:controller => "home", :action => "showpane", :id => anchor}
+    	link = {:controller => "index", :action => "showpane", :id => anchor}
     end
   end
 protected

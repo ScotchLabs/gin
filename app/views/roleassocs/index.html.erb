@@ -1,0 +1,22 @@
+<h1>Listing roleassocs</h1>
+
+<table>
+  <tr>
+    <th>Roleid</th>
+    <th>Userid</th>
+  </tr>
+
+<% @roleassocs.each do |roleassoc| %>
+  <tr>
+    <td><%=h roleassoc.roleid %></td>
+    <td><%=h roleassoc.userid %></td>
+    <td><%= link_to 'Show', roleassoc %></td>
+    <% if session[:crud]["u"]["roleassocs"] %><td><%= link_to 'Edit', edit_roleassoc_path(roleassoc) %></td><% end %>
+    <% if session[:crud]["d"]["roleassocs"] %><td><%= link_to 'Destroy', roleassoc, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["roleassocs"] %><%= link_to 'New roleassoc', new_roleassoc_path %><% end %>

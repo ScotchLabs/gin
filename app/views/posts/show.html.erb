@@ -1,0 +1,23 @@
+<p>
+  <b>Topicid:</b>
+  <%=h @post.topicid %>
+</p>
+
+<p>
+  <b>Article:</b>
+  <%=h @post.article %>
+</p>
+
+<p>
+  <b>Creatorid:</b>
+  <%=h @post.creatorid %>
+</p>
+
+<p>
+  <b>Replyto:</b>
+  <%=h @post.replyto %>
+</p>
+
+
+<%= link_to 'Edit', edit_post_path(@post) %> |
+<%= link_to 'Back', posts_path %>
