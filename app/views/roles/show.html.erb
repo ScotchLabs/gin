@@ -58,6 +58,11 @@
   <%=h @role.crudcategories %>
 </p>
 
+<p>
+  <b>Crudlogs:</b>
+  <%=h @role.crudlogs %>
+</p>
 
-<%= link_to 'Edit', edit_role_path(@role) %> |
+
+<% if session[:crud]["u"]["roles"] %><%= link_to 'Edit', edit_role_path(@role) %> |<% end %>
 <%= link_to 'Back', roles_path %>

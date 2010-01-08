@@ -1,0 +1,22 @@
+<h1>Listing logs</h1>
+
+<table>
+  <tr>
+    <th>Who</th>
+    <th>What</th>
+  </tr>
+
+<% @logs.each do |log| %>
+  <tr>
+    <td><%=h log.who %></td>
+    <td><%=h log.what %></td>
+    <td><%= link_to 'Show', log %></td>
+    <% if session[:crud]["u"]["logs"] %><td><%= link_to 'Edit', edit_log_path(log) %></td><% end %>
+    <% if session[:crud]["d"]["logs"] %><td><%= link_to 'Destroy', log, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["logs"] %><%= link_to 'New log', new_log_path %><% end %>

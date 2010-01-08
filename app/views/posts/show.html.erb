@@ -19,5 +19,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_post_path(@post) %> |
+<% if session[:crud]["u"]["posts"] %><%= link_to 'Edit', edit_post_path(@post) %> |<% end %>
 <%= link_to 'Back', posts_path %>

@@ -43,6 +43,5 @@
   <%=h @show.homeshow %>
 </p>
 
-<%= link_to 'Edit', edit_show_path(@show) %> |
-<%= link_to 'Back', shows_path %> | 
-<%= link_to 'Add Another', new_show_path %>
+<% if session[:crud]["u"]["shows"] %><%= link_to 'Edit', edit_show_path(@show) %> |<% end %>
+<%= link_to 'Back', shows_path %>

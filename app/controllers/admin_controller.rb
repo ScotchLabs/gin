@@ -1,7 +1,7 @@
 class AdminController < ApplicationController
   def login
     session[:crud] = Hash.new(4)
-    session[:crud]["c"] = Hash.new(10)
+    session[:crud]["c"] = Hash.new(11)
     session[:crud]["c"]["contents"] = false
     session[:crud]["c"]["shows"] = false
     session[:crud]["c"]["panes"] = false
@@ -12,7 +12,8 @@ class AdminController < ApplicationController
     session[:crud]["c"]["topics"] = false
     session[:crud]["c"]["posts"] = false
     session[:crud]["c"]["categories"] = false
-    session[:crud]["r"] = Hash.new(10)
+    session[:crud]["c"]["logs"] = false
+    session[:crud]["r"] = Hash.new(11)
     session[:crud]["r"]["contents"] = false
     session[:crud]["r"]["shows"] = false
     session[:crud]["r"]["panes"] = false
@@ -23,7 +24,8 @@ class AdminController < ApplicationController
     session[:crud]["r"]["topics"] = false
     session[:crud]["r"]["posts"] = false
     session[:crud]["r"]["categories"] = false
-    session[:crud]["u"] = Hash.new(10)
+    session[:crud]["r"]["logs"] = false
+    session[:crud]["u"] = Hash.new(11)
     session[:crud]["u"]["contents"] = false
     session[:crud]["u"]["shows"] = false
     session[:crud]["u"]["panes"] = false
@@ -34,7 +36,8 @@ class AdminController < ApplicationController
     session[:crud]["u"]["topics"] = false
     session[:crud]["u"]["posts"] = false
     session[:crud]["u"]["categories"] = false
-    session[:crud]["d"] = Hash.new(10)
+    session[:crud]["u"]["logs"] = false
+    session[:crud]["d"] = Hash.new(11)
     session[:crud]["d"]["contents"] = false
     session[:crud]["d"]["shows"] = false
     session[:crud]["d"]["panes"] = false
@@ -45,6 +48,7 @@ class AdminController < ApplicationController
     session[:crud]["d"]["topics"] = false
     session[:crud]["d"]["posts"] = false
     session[:crud]["d"]["categories"] = false
+    session[:crud]["d"]["logs"] = false
     puts "DEBUG admin_controller: user logging in..."
     session[:user_id] = nil
     if request.post?
@@ -68,6 +72,7 @@ class AdminController < ApplicationController
           session[:crud]["c"]["topics"] = role.crudctopics || session[:crud]["c"]["topics"]
           session[:crud]["c"]["posts"] = role.crudcposts || session[:crud]["c"]["posts"]
           session[:crud]["c"]["categories"] = role.crudccategories || session[:crud]["c"]["categories"]
+          session[:crud]["c"]["logs"] = role.crudclogs || session[:crud]["c"]["logs"]
           session[:crud]["r"]["contents"] = role.crudrcontents || session["r"]["contents"]
           session[:crud]["r"]["shows"] = role.crudrshows || session[:crud]["r"]["shows"]
           session[:crud]["r"]["panes"] = role.crudrpanes || session[:crud]["r"]["panes"]
@@ -78,6 +83,7 @@ class AdminController < ApplicationController
           session[:crud]["r"]["topics"] = role.crudrtopics || session[:crud]["r"]["topics"]
           session[:crud]["r"]["posts"] = role.crudrposts || session[:crud]["r"]["posts"]
           session[:crud]["r"]["categories"] = role.crudrcategories || session[:crud]["r"]["categories"]
+          session[:crud]["r"]["logs"] = role.crudrlogs || session[:crud]["r"]["logs"]
           session[:crud]["u"]["contents"] = role.cruducontents || session[:crud]["u"]["contents"]
           session[:crud]["u"]["shows"] = role.crudushows || session[:crud]["u"]["shows"]
           session[:crud]["u"]["panes"] = role.crudupanes || session[:crud]["u"]["panes"]
@@ -88,6 +94,7 @@ class AdminController < ApplicationController
           session[:crud]["u"]["topics"] = role.crudutopics || session[:crud]["u"]["topics"]
           session[:crud]["u"]["posts"] = role.cruduposts || session[:crud]["u"]["posts"]
           session[:crud]["u"]["categories"] = role.cruducategories || session[:crud]["u"]["categories"]
+          session[:crud]["u"]["logs"] = role.crudulogs || session[:crud]["u"]["logs"]
           session[:crud]["d"]["contents"] = role.cruddcontents || session[:crud]["d"]["contents"]
           session[:crud]["d"]["shows"] = role.cruddshows || session[:crud]["d"]["shows"]
           session[:crud]["d"]["panes"] = role.cruddpanes || session[:crud]["d"]["panes"]
@@ -98,6 +105,7 @@ class AdminController < ApplicationController
           session[:crud]["d"]["topics"] = role.cruddtopics || session[:crud]["d"]["topics"]
           session[:crud]["d"]["posts"] = role.cruddposts || session[:crud]["d"]["posts"]
           session[:crud]["d"]["categories"] = role.cruddcategories || session[:crud]["d"]["categories"]
+          session[:crud]["d"]["logs"] = role.cruddlogs || session[:crud]["d"]["logs"]
         end
         puts "DEBUG admin_controller: session crud is "+session[:crud].to_s
         uri = session[:original_uri]

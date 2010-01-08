@@ -10,6 +10,7 @@ styleroleassocs = "color:#333333;" if controller_name == "roleassocs"
 stylecategories = "color:#333333;" if controller_name == "categories"
 styletopics = "color:#333333;" if controller_name == "topics"
 styleposts = "color:#333333;" if controller_name == "posts"
+stylelogs = "color:#333333;" if controller_name == "logs"
 %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir='ltr' class='js'>
@@ -36,6 +37,7 @@ styleposts = "color:#333333;" if controller_name == "posts"
 				<% if session[:crud]["r"]["categories"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Categories", categories_path, :style => stylecategories %></li></ul></td><% end %>
 				<% if session[:crud]["r"]["topics"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Topics", topics_path, :style => styletopics %></li></ul></td><% end %>
 				<% if session[:crud]["r"]["posts"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Posts", posts_path, :style => styleposts %></li></ul></td><% end %>
+				<% if session[:crud]["r"]["logs"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Logs", logs_path, :style => stylelogs %></li></ul></td><% end %>
 				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li></ul></td>
 			</tr></table></div>
 			<br clear='all' style='height:0px;'>

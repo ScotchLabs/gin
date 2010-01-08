@@ -39,5 +39,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_pane_path(@pane) %> |
+<% if session[:crud]["u"]["panes"] %><%= link_to 'Edit', edit_pane_path(@pane) %> |<% end %>
 <%= link_to 'Back', panes_path %>
