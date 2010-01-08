@@ -2,7 +2,7 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
-  validates_presence_of   :name, :password, :retype
+  validates_presence_of   :name
   validates_uniqueness_of :name
   
   attr_accessor :password_confirmation
@@ -51,7 +51,9 @@ private
   end
   
   def password_retyped
-    errors.add(:assword, "doesn't match the retyped password") if password != retype
+    if hashed_password.blank? && salt.blank?
+      errors.add(:assword, "doesn't match the retyped password") if password != retype
+    end
   end
   
   def create_new_salt

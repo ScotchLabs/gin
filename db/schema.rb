@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100108175129) do
+ActiveRecord::Schema.define(:version => 20100108191331) do
 
   create_table "categories", :force => true do |t|
     t.string   "name"
@@ -28,6 +28,13 @@ ActiveRecord::Schema.define(:version => 20100108175129) do
     t.text     "article"
     t.string   "contentpane"
     t.string   "contenttype"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "logs", :force => true do |t|
+    t.string   "who"
+    t.string   "what"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -107,6 +114,10 @@ ActiveRecord::Schema.define(:version => 20100108175129) do
     t.boolean  "crudrcategories"
     t.boolean  "crudrtopics"
     t.boolean  "crudrposts"
+    t.boolean  "crudclogs"
+    t.boolean  "crudrlogs"
+    t.boolean  "crudulogs"
+    t.boolean  "cruddlogs"
   end
 
   create_table "shows", :force => true do |t|
