@@ -85,4 +85,5 @@ class Role < ActiveRecord::Base
     out += (crudrlogs?)? "r":""
     out += (crudulogs?)? "u":""
     out += (cruddlogs?)? "d":""
+  end
 end
