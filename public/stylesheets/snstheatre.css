@@ -59,9 +59,7 @@ table{
 	font-weight: bold;
 	font-size: 9pt;
 	display: block;
-	border-width: 1px;
-	border-style: solid;
-	border-color: #d96c00;
+	border-width: 1px solid #d96c00;
 	margin-left: 0px;
 	padding: 2px 6px;
 }
