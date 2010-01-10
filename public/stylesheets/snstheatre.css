@@ -1,27 +1,203 @@
 body {
-	background-color: #8fc2cc;
+  font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
+  font-size: 12pt;
+  /*TODO line-height: 120%; */
+  color: #333333;
+	background: #EEEEBB;
 	overflow-y: scroll;
-	border-color: #333333;
-	color: #333333;
-	font-size: 9pt;
+	margin: 0px;
+	padding: 0px;
+}
+a {
+  text-decoration: none;
+  font-weight: bold;
+  color: #FF9900;
+}
+a:hover {
+  color: #00DDDD;
+}
+
+/* text styles */
+#banner {
+  font-family: "Georgia", "Times", serif;
+  font-size: 36pt;
+  color: white;
+  font-weight: normal;
+}
+#banner a:hover {
+  color: white;
+}
+#subbanner {
+  font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
+  font-size: 18pt;
+  font-weight: bold;
+  letter-spacing: +2pt;
+  color: #333333;
+}
+.header {
+  font-family: "Georgia", "Times", serif;
+  font-size: 24pt;
+  color: #333333;
+}
+.specialheader {
+  font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
+  font-size: 18pt;
+  color: #FF9900;
+}
+.subheader {
+  font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
+  font-size: 12pt;
+  font-weight: bold;
+  letter-spacing: +2pt;
+}
+.body {
+  font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
+  font-size: 10pt;
+  letter-spacing: +2pt;
+}
+.caption {
+  font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
+  font-size: 8pt;
+  color: #333333;
+}
+.allcaps { text-transform: uppercase; }
+/* end text styles */
+
+/* menu styles */
+ul {
+  list-style-type: none;
+  margin: 0px;
+  padding: 0px;
+}
+#menu {
+  margin: 0px auto 0px auto;
+  text-align: center;
+}
+.item { position: relative; }
+.firstitem {
+  float: left;
+  width: 172px;
+}
+.menu { position: absolute; }
+#menu a { color: inherit; }
+/* end menu styles */
+
+/* top banner styles */
+#topbanner {
+  width: 100%;
+  background: url('/images/layout/Banner.gif') repeat-x;
+  border-top: 5px solid #EE6600;
+}
+/* end top banner styles */
+
+/* rounded-border/drop-shadow styles */
+.cornercontainer {
+  margin: 0px auto 0px auto;
+  width: 912px;
+}
+.topmargin {
+  margin: 18px auto 0px auto;
+}
+#view {
+  padding: 20px 14px 14px 14px;
+}
+.hasbottom {
+  padding: 0px 14px 25px 14px;
+}
+.hastop {
+  padding: 8px 14px 8px 14px;
+}
+.w { background: white; }
+.wtl { background: url('/images/layout/W-TL.gif') 0 0 no-repeat; }
+.wtr { background: url('/images/layout/W-TR.gif') 100% 0 no-repeat; }
+.wbl { background: url('/images/layout/W-BL.gif') 0 100% no-repeat; }
+.wbr { background: url('/images/layout/W-BR.gif') 100% 100% no-repeat; }
+.wl { background: url('/images/layout/W-L.gif') 0 0 repeat-y; }
+.wr { background: url('/images/layout/W-R.gif') 100% 0 repeat-y; }
+.wb { background: url('/images/layout/W-B.gif') 0 100% repeat-x; }
+.b { background: #333333; }
+.btl { background: url('/images/layout/B-TL.gif') 0 0 no-repeat; }
+.btr { background: url('/images/layout/B-TR.gif') 100% 0 no-repeat; }
+.bbl { background: url('/images/layout/B-BL.gif') 0 100% no-repeat; }
+.bbr { background: url('/images/layout/B-BR.gif') 100% 100% no-repeat; }
+.bl { background: url('/images/layout/B-L.gif') 0 0 repeat-y; }
+.br { background: url('/images/layout/B-R.gif') 100% 0 repeat-y; }
+.bb { background: url('/images/layout/B-B.gif') 0 100% repeat-x; }
+
+#carouselouter {
+  width: 535px;
+}
+#carouselinner {
+  padding: 8px;
+  color: white;
+  height: 334px;
+}
+/* end rounded-border/drop-shadow styles */
+
+/* bottom banner styles */
+#follow {
+  background-color: #333333;
+  color: white;
+  height: 16px;
+  padding: 5px 0px 4px 0px;
+  position: relative;
+}
+#bird {
+  border: 1px solid red;
+  position: absolute;
+  left: 10px;
+  top: -10px;
+}
+#follow a { color: white; font-weight: bold; }
+#follow a:hover { color: white; }
+#follow span {
+  height: 16px;
+  margin: 0px 1px 0px 0px;
+  padding: 0px 10px 0px 10px;
+}
+.bl { border-width: 0px 0px 0px 1px; border-style: solid; border-color: white; }
+.br { border-width: 0px 1px 0px 0px; border-style: solid; border-color: white; }
+.fleft { float: left; }
+.fright { float: right; }
+/* end bottom banner styles */
+
+/* admin styles */
+#admin {
+  position: fixed;
+  right: 0px;
+  /*TODO center it */
+}
+/* end admin styles */
+
+/*#topbanner {
+  padding: 0px 0px 0px 100px;
+  background-color: #d96c00;
+}
+#title {
+  margin: 20px 0px 0px 0px;
+  display: block;
+	color: white;
+	font-family: "Georgia", "Times", serif;
+	font-size: 36pt;
+	line-height: 30pt;
+}
+#subtitle {
+  margin: 0px 0px 20px 0px;
+  color: #333333;
+  font-family: "Lucida Grande", "Tahoma", "Verdana", Sans-Serif;
+  font-size: 18pt;
+  line-height: 14pt;
+  font-weight: bold;
+  letter-spacing: +2pt;
+  text-transform: uppercase;
 }
 #outside {
+  margin: 0px auto 0px auto;
 	width: 900px;
 	border: solid;
 	border-width: 2px;
 	background-color: white;
 	padding: 3px;
-}
-#logo {
-	border-top: double 4px;
-	border-bottom: double 4px;
-	background-color: #d96c00;
-	color: white;
-	margin-bottom: 3px;
-	font-family: Georgia, "Times New Roman", Times, serif;
-	font-size: 22pt;
-	font-variant: small-caps;
-	letter-spacing: 5px;
 }
 #menu {
 	background-color: #d96c00;
@@ -67,18 +243,15 @@ table{
 	color: #333333;
 	background: #d96c00;
 }
-#inside {
-	font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
-}
 a {
 	color: #4d87ff;
 	text-decoration: none;
 }
 #foot {
 	font-size: 7pt;
-	font-family: "Lucida Grande", Tahoma, Verdana, sans-serif;
+	margin: 0px auto 0px auto;
+	text-align: center;
 }
-/* for index */
 #left {
 	float: left;
 }
@@ -183,7 +356,7 @@ a {
 	overflow: auto;
 	text-align: left;
 }
-h2 { /* the News title on the home page */
+h2 {
 	margin: 0px;
 	text-align: left;
 	font-size: 22pt;
@@ -197,18 +370,17 @@ h3 {
 	font-family: Georgia, "Times New Roman", Times, serif;
 	font-weight: normal;
 }
-.newstitle { /* for each update's title */
+.newstitle {
 	font-weight: bold;
 }
 .newsdate {
 	font-style: italic;
 	color: #aaaaaa;
 }
-/* for showpane, showcontent */
 #printedcontent {
 	padding: 6px;
 }
 .hidnopub {
   opacity: .7 !important;
-  opacity: 1; /* for IE */
-}
+  opacity: 1;
+} */

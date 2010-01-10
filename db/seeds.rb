@@ -53,7 +53,7 @@ Role.create(:name => "Administrator", :abbrev => "admin",
 Role.create(:name => "Content writer", :abbrev => "writer",
   :crudccontents => true,
   :crudcshows => true,
-  :crudcpanes => true,
+  :crudcpanes => false,
   :crudcusers => false,
   :crudcupdates => true,
   :crudcroles => false,
@@ -75,7 +75,7 @@ Role.create(:name => "Content writer", :abbrev => "writer",
   :crudrlogs => false,
   :cruducontents => true,
   :crudushows => true,
-  :crudupanes => true,
+  :crudupanes => false,
   :cruduusers => false,
   :cruduupdates => true,
   :cruduroles => false,
@@ -86,7 +86,7 @@ Role.create(:name => "Content writer", :abbrev => "writer",
   :crudulogs => false,
   :cruddcontents => true,
   :cruddshows => true,
-  :cruddpanes => true,
+  :cruddpanes => false,
   :cruddusers => false,
   :cruddupdates => true,
   :cruddroles => false,
@@ -98,7 +98,7 @@ Role.create(:name => "Content writer", :abbrev => "writer",
 Role.create(:name => "Beta tester", :abbrev => "betar",
   :crudccontents => true,
   :crudcshows => true,
-  :crudcpanes => true,
+  :crudcpanes => false,
   :crudcusers => false,
   :crudcupdates => true,
   :crudcroles => false,
@@ -120,7 +120,7 @@ Role.create(:name => "Beta tester", :abbrev => "betar",
   :crudrlogs => false,
   :cruducontents => true,
   :crudushows => true,
-  :crudupanes => true,
+  :crudupanes => false,
   :cruduusers => false,
   :cruduupdates => true,
   :cruduroles => false,
@@ -131,7 +131,7 @@ Role.create(:name => "Beta tester", :abbrev => "betar",
   :crudulogs => false,
   :cruddcontents => true,
   :cruddshows => true,
-  :cruddpanes => true,
+  :cruddpanes => false,
   :cruddusers => false,
   :cruddupdates => true,
   :cruddroles => false,
@@ -165,12 +165,10 @@ Show.create(:name => "Closer",                  :abbrev => "closer", :loc => "Pe
 Show.create(:name => "Celebrity Autobiography", :abbrev => "cab",    :loc => "Rangos Ballroom, UC",      :imageurl => "temp.png",   :author => "", :ticketprices => "", :performancetimes => "", :ticketstatus => "closed", :homeshow => "none")
 Show.create(:name => "Dirty Rotten Scoundrels", :abbrev => "drs",    :loc => "Rangos Ballroom, UC",      :imageurl => "temp.png",   :author => "", :ticketprices => "", :performancetimes => "", :ticketstatus => "closed", :homeshow => "none")
 
-Pane.create(:title => "Ticket Kiosk", :menutitle => "", :anchor => "http://tickets.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '1', :panetype => "link")
-Pane.create(:title => "About Us", :menutitle => "", :anchor => "about", :publish => true, :hidden => false, :hasmenu => false, :order => '2', :panetype => "pane")
-Pane.create(:title => "70th Anniversary Initiative", :menutitle => "", :anchor => "70ai", :publish => true, :hidden => false, :hasmenu => false, :order => '3', :panetype => "pane")
-Pane.create(:title => "The No Parking Players", :menutitle => "", :anchor => "http://npp.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '4', :panetype => "link")
-Pane.create(:title => "Contact Us", :menutitle => "", :anchor => "contact", :publish => true, :hidden => false, :hasmenu => false, :order => '5', :panetype => "pane")
-Pane.create(:title => "Scotch on the Web", :menutitle => "", :anchor => "http://online.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '6', :panetype => "link")
+Pane.create(:title => "About Us", :menutitle => "", :anchor => "about", :publish => true, :hidden => false, :hasmenu => false, :order => '1', :panetype => "pane")
+Pane.create(:title => "70th Anniversary Initiative", :menutitle => "", :anchor => "70ai", :publish => true, :hidden => false, :hasmenu => false, :order => '2', :panetype => "pane")
+Pane.create(:title => "The No Parking Players", :menutitle => "", :anchor => "http://npp.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '3', :panetype => "link")
+Pane.create(:title => "Scotch on the Web", :menutitle => "", :anchor => "http://online.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '4', :panetype => "link")
 
 Update.create(:name => "The October Update", :anchor => "october", :expiredate => DateTime.parse("July 31 2032"), :article => "For those of you who don't get to keep up with Scotch'n'Soda in Pittsburgh, the Development Committee has published the latest update for our alumni. <b>[[a+http://dev.snstheatre.org/~jrfriedr/October%20Update.pdf|Click here]]</b> to read up on what we've been doing, ways to help us out and just how much Jared Cohon loves us!")
 Update.create(:name => "It's Winter Break!", :anchor => "winterbreak", :expiredate => DateTime.parse("January 11 2010"), :article => "After a demanding and exciting semester of theatre, having presented <b>The Mystery of Edwin Drood</b>, <b> A Bottle of Scotch, part two: Back to the Bottle</b>, and <b>Betty's Summer Vacation</b>, it seems Scotch'n'Soda is due for for a break from the stage! (Not to mention from that pesky schoolwork!)<br />

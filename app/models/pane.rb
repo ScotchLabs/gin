@@ -16,7 +16,7 @@ class Pane < ActiveRecord::Base
     if !menutitle.nil? && !menutitle.blank?
     	menulabel = menutitle
     end
-    menulabel = menulabel.split(" ").join("&nbsp;")
+    menulabel
   end
   def link
     if panetype == "link"
