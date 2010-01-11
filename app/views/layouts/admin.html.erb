@@ -1,55 +1,28 @@
-<%
-stylewelcome = "color:#333333;" if controller_name == "admin" && action_name == "welcome"
-styleshows = "color:#333333;" if controller_name == "shows"
-styleupdates = "color:#333333;" if controller_name == "updates"
-stylepanes = "color:#333333;" if controller_name == "panes"
-stylecontents = "color:#333333;" if controller_name == "contents"
-styleusers = "color:#333333;" if controller_name == "users"
-styleroles = "color:#333333;" if controller_name == "roles"
-styleroleassocs = "color:#333333;" if controller_name == "roleassocs"
-stylecategories = "color:#333333;" if controller_name == "categories"
-styletopics = "color:#333333;" if controller_name == "topics"
-styleposts = "color:#333333;" if controller_name == "posts"
-stylelogs = "color:#333333;" if controller_name == "logs"
-%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir='ltr' class='js'>
 <head>
 	<title>Scotch'n'Soda Theatre</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
-	<%= stylesheet_link_tag 'admin' %>
 	<%= stylesheet_link_tag "snstheatre", :media => "all" %>
-	<%= javascript_include_tag :defaults, 'jquery.js' %>
+	<%= javascript_include_tag :defaults, "jquery.js" %>
+	<script type='text/javascript'>
+    jQuery.noConflict();
+	</script>
 </head>
 <body>
-	<center>
-		<div id='outside'>
-			<a href="/"><div id='logo'>Scotch'n'Soda Theatre</div></a>
-			<div id='menu'><table><tr>
-				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, :style => stylewelcome %></li></ul></td>
-				<% if session[:crud]["r"]["shows"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Shows", shows_path, :style => styleshows %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["updates"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "News", updates_path, :style => styleupdates %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["panes"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Panes", panes_path, :style => stylepanes %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["contents"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Contents", contents_path, :style => stylecontents %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["users"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Users", users_path, :style => styleusers %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["roles"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Roles", roles_path, :style => styleroles %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["roleassocs"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Roleassocs", roleassocs_path, :style => styleroleassocs %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["categories"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Categories", categories_path, :style => stylecategories %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["topics"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Topics", topics_path, :style => styletopics %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["posts"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Posts", posts_path, :style => styleposts %></li></ul></td><% end %>
-				<% if session[:crud]["r"]["logs"] %><td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Logs", logs_path, :style => stylelogs %></li></ul></td><% end %>
-				<td><ul class='firstmenu menu'><li class='firstitem item'><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li></ul></td>
-			</tr></table></div>
-			<br clear='all' style='height:0px;'>
-			<div id='inside'>
-				<p style="color: green"><%= flash[:notice] %></p>
-				<%= yield :layout %>
-			</div>
-		</div>
-		<div id='foot'>
-			&copy; <%= Time.now.year %> Scotch'n'Soda Theatre at Carnegie Mellon University<br />
-			<a href='mailto:board@snstheatre.org'><b>board@snstheatre.org</b></a> | 5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br />
-		</div>
-	</center>
+  <div id='topbanner'>
+    <div id='tbcontainer'>
+      we'll deal with it later
+    </div>
+    <div class='w cornercontainer'><div class='wl'><div class='wr'><div class='wb'><div class='wbl'><div class='wbr hasbottom body allcaps'>
+      <%= render :partial => "menu" %>
+    </div></div></div></div></div></div>
+  </div>
+	<div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wb'><div class='wtl'><div class='wtr'><div class='wbl'><div class='wbr hasbottom'>
+    <div id='view'><%= yield :layout %></div>
+	</div></div></div></div></div></div></div></div>
+  <div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wtl'><div class='wtr hastop caption'>
+    we'll deal with it later
+  </div></div></div></div></div>
 </body>
 </html>

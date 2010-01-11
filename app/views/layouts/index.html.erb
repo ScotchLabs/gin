@@ -4,25 +4,43 @@
 	<title>Scotch'n'Soda Theatre</title>
 	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
 	<%= stylesheet_link_tag "snstheatre", :media => "all" %>
-	<%= javascript_include_tag :defaults, "index.js" %>
+	<%= javascript_include_tag :defaults, "jquery.js" %>
+	<script type='text/javascript'>
+    jQuery.noConflict();
+    jQuery(document).ready(function(){
+      jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 493) + "px";
+    });
+    window.onresize = resized;
+    function resized() {
+      //TODO if window width <912px, change some divs to be static width
+    }
+	</script>
 </head>
 <body>
   <div id='topbanner'>
-    <span style='line-height:75px;'>we'll deal with it later</span>
+    <div id='tbcontainer'>
+      we'll deal with it later
+    </div>
     <div class='w cornercontainer'><div class='wl'><div class='wr'><div class='wb'><div class='wbl'><div class='wbr hasbottom body allcaps'>
       <%= render :partial => "menu" %>
     </div></div></div></div></div></div>
   </div>
 	<div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wb'><div class='wtl'><div class='wtr'><div class='wbl'><div class='wbr hasbottom'>
-    <div id='view'><%= yield :layout %><br clear="all" style='height:0px;' /></div>
+    <div id='view'><%= yield :layout %></div>
 	</div></div></div></div></div></div></div></div>
-  <div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wtl'><div class='wtr hastop caption'>
-    we'll deal with it later
-  </div></div></div></div></div>
-  <div id='admin' class='allcaps'>Admin</div>
+  <div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wtl'><div class='wtr hastop caption'><div id='botbanner'>
+    &copy; 2009 Scotch'n'Soda Theatre at <b>Carnegie Mellon Univeristy</b><br />
+    5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br />
+    <a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a>
+  </div></div></div></div></div></div>
   <div id='follow'>
     <div id='bird'>bird<br /></div>
     <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre'>Twitter</a></span><span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts'>Facebook</a></span><span class='fright'>Send us an <a href='mailto:somebody@snstheatre.org'>Email</a></span><br clear='all' style='height:0px;' />
   </div>
+  <% unless session[:user_id].nil? || session[:user_id].blank? %>
+    <div id='admin'>
+      ADMIN
+    </div>
+  <% end %>
 </body>
 </html>

@@ -1,7 +1,7 @@
 class IndexController < ApplicationController
   def index
     @panes = Pane.all(:order => "panes.order ASC")
-    @news = Update.all(:conditions => ["expiredate > ?", DateTime.now], :order => "updated_at DESC")
+    @updates = Update.all(:conditions => ["expiredate > ?", DateTime.now], :order => "updated_at DESC")
     @shows = Show.all
     @shows.sort { |x, y| (Time.parse((y.performancetimes.split("|")[0].nil?)? "" : y.performancetimes.split("|")[0])<Time.parse((x.performancetimes.split("|")[0].nil?)? "" : x.performancetimes.split("|")[0]))? -1:1 }
     @shows=@shows.reverse

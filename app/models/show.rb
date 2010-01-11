@@ -24,7 +24,7 @@ class Show < ActiveRecord::Base
     end
     return ticketstatus == "closed" || ticketstatus == "open" || (!performancetimes.nil? && !performancetimes.blank? && performancetimes < seasonend && performancetimes > seasonstart)
   end
-
+=begin the old way of doing performancedates. I'm keeping it out of nostalgia/NIH
   def carperformances
     showdates = homeshow=="date" || homeshow=="datetime"
     showtimes = homeshow=="datetime"
@@ -108,7 +108,7 @@ class Show < ActiveRecord::Base
       much like did for dayarr, have timearr, first indexes on day,
       second indexes on time
       foreach in first index, print new line with day, then times
-=end
+ =end
 
       timesarr = Array.new
       for perf in perfarr
@@ -161,16 +161,6 @@ class Show < ActiveRecord::Base
     out
   end
   
-  def tickettext
-    if ticketstatus == "open"
-			"<a href='http://tickets.snstheatre.org/' target='_blank'>#{ticketprices}</a>"
-		elsif ticketstatus == "closed"
-			"Online reservations coming soon!<br />"
-		elsif ticketstatus != "completed"
-			"Ticket prices coming soon!"
-		end
-  end
-  
   def linkperformances
     return if !(homeshow=="date" || homeshow=="datetime")
     perfarr = performancetimes.split("|")
@@ -184,6 +174,17 @@ class Show < ActiveRecord::Base
   	performances += ", " + perfend.year.to_s
   	performances = "" if performancetimes == ""
   	performances
+  end
+=end
+ 
+  def tickettext
+    if ticketstatus == "open"
+			"<a href='http://tickets.snstheatre.org/' target='_blank'>#{ticketprices}</a>"
+		elsif ticketstatus == "closed"
+			"Online reservations coming soon!<br />"
+		elsif ticketstatus != "completed"
+			"Ticket prices coming soon!"
+		end
   end
 
   def upcoming

@@ -1,9 +1,27 @@
-<div class='fleft'>
-  <div id='carouselouter' class='b'><div class='bl'><div class='br'><div class='bb'><div class='btl'><div class='btr'><div class='bbl'><div id='carouselinner' class='bbr'>
-    put a window here containing a shows container containing each show container. overflow hidden. each show gets a partial (duh)
-  </div></div></div></div></div></div></div></div>
-  navigator goes here
-</div>
-<div class='fleft'>
-  news go here
+<div id='indexview'>
+  <div id='indexviewleft' class='fleft'>
+    <div id='carouselouter' class='b'><div class='bl'><div class='br'><div class='bb'><div class='btl'><div class='btr'><div class='bbl'><div id='carouselinner' class='bbr'>
+      <div id='carouselwindow'>
+        <div id='carouselitemscontainer'>
+          <% for show in @shows %>
+            <%= render :partial => "carousel_item", :object => show %>
+          <% end %>
+          <br clear="all" style="height: 0px;" />
+        </div>
+      </div>
+    </div></div></div></div></div></div></div></div>
+    <div id='carouselnavigator'>
+      navigator
+    </div>
+  </div>
+  <div id='indexviewright' class='fleft'>
+    <span class='header'>News</span>
+    <div id='newswindow'>
+      <div id='newscontainer'>
+        <% for update in @updates %>
+          <%= render :partial => "news_item", :object => update %>
+        <% end %>
+      </div>
+    </div>
+  </div>
 </div>

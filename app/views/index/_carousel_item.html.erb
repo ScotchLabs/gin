@@ -1,0 +1,18 @@
+<div id='<%= carousel_item.abbrev %>_carouselitem' class='carouselitem fleft'>
+  <% if !carousel_item.imageurl.blank? %>
+    <%= image_tag "http://upload.snstheatre.org/gin/shows/#{carousel_item.imageurl}", :class => "carouselimage" %>
+  <% else %>
+    <%= image_tag "http://upload.snstheatre.org/gin/shows/temp.png", :class => "carouselimage" %>
+  <% end %>
+  <div class='carouselinfo'>
+    <a onclick="colorbox('<%= carousel_item.abbrev %>');"><%= carousel_item.name %></a><br />
+    <!-- slot -->
+    <!-- director -->
+    <!-- space -->
+    <!-- performancetimes -->
+    <!-- space -->
+    <!-- location -->
+    <!-- space -->
+    <!-- ticket info -->
+  </div>
+</div>
