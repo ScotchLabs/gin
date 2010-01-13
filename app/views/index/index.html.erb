@@ -1,27 +1,32 @@
-<div id='indexview'>
-  <div id='indexviewleft' class='fleft'>
-    <div id='carouselouter' class='b'><div class='bl'><div class='br'><div class='bb'><div class='btl'><div class='btr'><div class='bbl'><div id='carouselinner' class='bbr'>
-      <div id='carouselwindow'>
+<div id='indexleft' class='fleft'>
+ 
+</div>
+<div id='indexright' class='fleft'>
+
+
+</div>
+<!--
+     <div id='carouselwindow'>
         <div id='carouselitemscontainer'>
-          <% for show in @shows %>
-            <%= render :partial => "carousel_item", :object => show %>
-          <% end %>
+          for show in shows render partial carousel_item object show
           <br clear="all" style="height: 0px;" />
         </div>
       </div>
-    </div></div></div></div></div></div></div></div>
+    
     <div id='carouselnavigator'>
-      navigator
+      <div class='arrowbutton arrowbuttonleft fleft'>i</div>
+      <div id='carousellinkswindow' class='fleft'>
+        <div id='carousellinkscontainer'>
+          for show in shows render partial carousel_link object show
+        </div>
+      </div>
+      <div class='arrowbutton arrowbuttonright fleft'>i</div>
     </div>
-  </div>
-  <div id='indexviewright' class='fleft'>
-    <span class='header'>News</span>
+    
+    
+        <span class='header'>News</span>
     <div id='newswindow'>
       <div id='newscontainer'>
-        <% for update in @updates %>
-          <%= render :partial => "news_item", :object => update %>
-        <% end %>
+        for update in updates render partial news_item object update
       </div>
-    </div>
-  </div>
-</div>
+    </div> -->

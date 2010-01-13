@@ -57,7 +57,8 @@ class Update < ActiveRecord::Base
   end
 
   def postdate
-    created_at.strftime("%B %Y")
+    day = created_at.strftime("%d").to_i
+    created_at.strftime("%B #{day}, %Y")
   end
 
 protected

@@ -24,6 +24,19 @@ class Show < ActiveRecord::Base
     end
     return ticketstatus == "closed" || ticketstatus == "open" || (!performancetimes.nil? && !performancetimes.blank? && performancetimes < seasonend && performancetimes > seasonstart)
   end
+  
+  def datenavigator
+    "datenavigator"
+  end
+  
+  def datecarousel
+    "datecarousel"
+  end
+  
+  def perfcarousel
+    "perfcarousel"
+  end
+  
 =begin the old way of doing performancedates. I'm keeping it out of nostalgia/NIH
   def carperformances
     showdates = homeshow=="date" || homeshow=="datetime"

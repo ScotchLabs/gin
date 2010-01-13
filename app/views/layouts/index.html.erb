@@ -1,32 +1,56 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en" dir='ltr' class='js'>
+<!DOCTYPE html>
+<html lang="en">
 <head>
 	<title>Scotch'n'Soda Theatre</title>
-	<meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+	<meta charset='utf-8' />
 	<%= stylesheet_link_tag "snstheatre", :media => "all" %>
+	<!--[if IE]>
+	<style type="text/css">
+    .clearfix { zoom: 1; }
+	</style>
+	<![endif]-->
 	<%= javascript_include_tag :defaults, "jquery.js" %>
 	<script type='text/javascript'>
     jQuery.noConflict();
+    <% if action_name == "index" %>
     jQuery(document).ready(function(){
       jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 493) + "px";
+      jQuery('#carousellinkscontainer')[0].style.width = (jQuery('#carousellinkscontainer > div').size() * 165) + "px";
     });
-    window.onresize = resized;
-    function resized() {
-      //TODO if window width <912px, change some divs to be static width
-    }
+    <% end %>
 	</script>
 </head>
 <body>
+  <div id='container'>
+    <div id='header'>
+      <h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1>
+      <h2>Student theatre at Carnegie Mellon since 1938</h2>
+    </div>
+    <div id='nav' class='botcorner shadow'><%= render :partial => "menu" %></div>
+    <div id='view' class='topcorner botcorner shadow'>
+      <%= yield %>
+    </div>
+    <div id='footer' class='topcorner shadow'>
+      &copy; 2009 Scotch'n'Soda Theatre at <b>Carnegie Mellon Univeristy</b><br />
+    5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br />
+    <a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a>
+    </div>
+  </div>
+  <div id='bodyfooter'>
+    <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre'>Twitter</a></span><span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts'>Facebook</a></span><span class='fright'>Send us an <a href='mailto:somebody@snstheatre.org'>Email</a></span><br clear='all' style='height:0px;' />
+  </div>
+<!--
   <div id='topbanner'>
     <div id='tbcontainer'>
-      we'll deal with it later
+      <span id='banner'>Scotch&#146;n&#146;Soda Theatre</span><br />
+      <span id='subbanner'></span>
     </div>
     <div class='w cornercontainer'><div class='wl'><div class='wr'><div class='wb'><div class='wbl'><div class='wbr hasbottom body allcaps'>
-      <%= render :partial => "menu" %>
+      
     </div></div></div></div></div></div>
   </div>
 	<div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wb'><div class='wtl'><div class='wtr'><div class='wbl'><div class='wbr hasbottom'>
-    <div id='view'><%= yield :layout %></div>
+    <div id='view'>yield layout</div>
 	</div></div></div></div></div></div></div></div>
   <div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wtl'><div class='wtr hastop caption'><div id='botbanner'>
     &copy; 2009 Scotch'n'Soda Theatre at <b>Carnegie Mellon Univeristy</b><br />
@@ -34,7 +58,10 @@
     <a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a>
   </div></div></div></div></div></div>
   <div id='follow'>
-    <div id='bird'>bird<br /></div>
+    <div id='bird'><div class='w cornercontainer'><div class='wl'><div class='wr'><div class='wb'><div class='wbl'><div class='wtl'><div class='wtr'><div class='wbr hadbottom'>
+      the twitter feed goes in here<br />stuffstuffstuff<br />
+    </div></div></div></div></div></div></div></div></div>
+    <div id='birdimg'>bird2<br /></div>
     <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre'>Twitter</a></span><span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts'>Facebook</a></span><span class='fright'>Send us an <a href='mailto:somebody@snstheatre.org'>Email</a></span><br clear='all' style='height:0px;' />
   </div>
   <% unless session[:user_id].nil? || session[:user_id].blank? %>
@@ -42,5 +69,6 @@
       ADMIN
     </div>
   <% end %>
+  -->
 </body>
 </html>
