@@ -1,12 +1,4 @@
 ActionController::Routing::Routes.draw do |map|
-  map.resources :logs
-
-  map.resources :posts
-
-  map.resources :topics
-
-  map.resources :categories
-
   map.resources :roleassocs
 
   map.resources :roles

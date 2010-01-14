@@ -54,36 +54,4 @@ class Role < ActiveRecord::Base
     out += (cruduroleassocs?)? "u":""
     out += (cruddroleassocs?)? "d":""
   end
-  
-  def crudcategories
-    out = ""
-    out += (crudccategories?)? "c":""
-    out += (crudrcategories?)? "r":""
-    out += (cruducategories?)? "u":""
-    out += (cruddcategories?)? "d":""
-  end
-  
-  def crudtopics
-    out = ""
-    out += (crudctopics?)? "c":""
-    out += (crudrtopics?)? "r":""
-    out += (crudutopics?)? "u":""
-    out += (cruddtopics?)? "d":""
-  end
-  
-  def crudposts
-    out = ""
-    out += (crudcposts?)? "c":""
-    out += (crudrposts?)? "r":""
-    out += (cruduposts?)? "u":""
-    out += (cruddposts?)? "d":""
-  end
-  
-  def crudlogs
-    out = ""
-    out += (crudclogs?)? "c":""
-    out += (crudrlogs?)? "r":""
-    out += (crudulogs?)? "u":""
-    out += (cruddlogs?)? "d":""
-  end
 end

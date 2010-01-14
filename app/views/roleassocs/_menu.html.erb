@@ -10,9 +10,5 @@ style = "color:#FF9900;"
 	<% if session[:crud]["r"]["users"] %><li class='firstitem item'><%= link_to "Users", users_path %></li><% end %>
 	<% if session[:crud]["r"]["roles"] %><li class='firstitem item'><%= link_to "Roles", roles_path %></li><% end %>
 	<% if session[:crud]["r"]["roleassocs"] %><li class='firstitem item'><%= link_to "Roleassocs", roleassocs_path, :style => style %></li><% end %>
-	<% if session[:crud]["r"]["categories"] %><li class='firstitem item'><%= link_to "Categories", categories_path %></li><% end %>
-	<% if session[:crud]["r"]["topics"] %><li class='firstitem item'><%= link_to "Topics", topics_path %></li><% end %>
-	<% if session[:crud]["r"]["posts"] %><li class='firstitem item'><%= link_to "Posts", posts_path %></li><% end %>
-	<% if session[:crud]["r"]["logs"] %><li class='firstitem item'><%= link_to "Logs", logs_path %></li><% end %>
 	<li class='firstitem item'><%= link_to 'Log out', :controller => "admin", :action => "logout" %></li>
 </div>

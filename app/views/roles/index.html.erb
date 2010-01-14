@@ -11,10 +11,6 @@
     <th>Crudupdates</th>
     <th>Crudroles</th>
     <th>Crudroleassoc</th>
-    <th>Crudtopics</th>
-    <th>Crudposts</th>
-    <th>Crudcategories</th>
-    <th>Crudlogs</th>
   </tr>
 
 <% @roles.each do |role| %>
@@ -28,10 +24,6 @@
     <td><%=h role.crudupdates %></td>
     <td><%=h role.crudroles %></td>
     <td><%=h role.crudroleassocs %></td>
-    <td><%=h role.crudtopics %></td>
-    <td><%=h role.crudposts %></td>
-    <td><%=h role.crudcategories %></td>
-    <td><%=h role.crudlogs %></td>
     <td><%= link_to 'Show', role %></td>
     <% if session[:crud]["u"]["roles"] %><td><%= link_to 'Edit', edit_role_path(role) %></td><% end %>
     <% if session[:crud]["d"]["roles"] %><td><%= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

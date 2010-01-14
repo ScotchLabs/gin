@@ -10,9 +10,13 @@ class CreateRoles < ActiveRecord::Migration
       t.boolean :crudcupdates
       t.boolean :crudcroles
       t.boolean :crudcroleassocs
-      t.boolean :crudctopics
-      t.boolean :crudcposts
-      t.boolean :crudccategories
+      t.boolean :crudrcontents
+      t.boolean :crudrshows
+      t.boolean :crudrpanes
+      t.boolean :crudrusers
+      t.boolean :crudrupdates
+      t.boolean :crudrroles
+      t.boolean :crudrroleassocs
       t.boolean :cruducontents
       t.boolean :crudushows
       t.boolean :crudupanes
@@ -20,9 +24,6 @@ class CreateRoles < ActiveRecord::Migration
       t.boolean :cruduupdates
       t.boolean :cruduroles
       t.boolean :cruduroleassocs
-      t.boolean :crudutopics
-      t.boolean :cruduposts
-      t.boolean :cruducategories
       t.boolean :cruddcontents
       t.boolean :cruddshows
       t.boolean :cruddpanes
@@ -30,9 +31,6 @@ class CreateRoles < ActiveRecord::Migration
       t.boolean :cruddupdates
       t.boolean :cruddroles
       t.boolean :cruddroleassocs
-      t.boolean :cruddtopics
-      t.boolean :cruddposts
-      t.boolean :cruddcategories
 
       t.timestamps
     end
