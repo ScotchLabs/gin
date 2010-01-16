@@ -9,8 +9,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :shows
 
-  map.resources :panes
-
   map.resources :contents
 
   # The priority is based upon order of creation: first created -> highest priority.

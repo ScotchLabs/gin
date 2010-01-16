@@ -1,9 +1,0 @@
-<%
-style = ""
-style = "color:#333333;" if !@pane.nil? && pane_item.anchor == @pane.anchor
-target = "_self"
-target = "_blank" if pane_item.panetype=='link'
-hidden = ""
-hidden = "  hidnopub" if !pane_item.publish || pane_item.hidden
-%>
-<li class='firstitem item<%= hidden %>'><%= link_to pane_item.menulabel, pane_item.link, :style => style, :target => target %></li>

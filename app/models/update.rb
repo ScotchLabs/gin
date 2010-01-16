@@ -18,8 +18,8 @@ class Update < ActiveRecord::Base
     	anchor = temp[1]
     	if temp[2].nil? || temp[2].blank?
     		if type == 'p'
-    			p = Pane.find_by_anchor(anchor)
-    			html = p.title
+    			html = "About Us" if anchor == "about"
+    		  html = "70th Anniversary Initiative" if anchor == "70ai"
     			action = "showpane"
     		elsif type == 'c'
     			c = Content.find_by_anchor(anchor)
@@ -117,8 +117,7 @@ protected
         return
       end
       if type == 'p'
-        p = Pane.find_by_anchor(anchor)
-        errors.add(:article, "contains malformed 'p' template: invalid anchor") if p.nil?
+        errors.add(:article, "contains malformed 'p' template: invalid anchor") if (anchor != "about" && anchor != "70ai")
         return
       elsif type == 'c'
         c = Content.find_by_anchor(anchor)

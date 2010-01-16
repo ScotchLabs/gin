@@ -14,14 +14,6 @@ class Role < ActiveRecord::Base
     out += (cruduupdates?)? "u":""
     out += (cruddupdates?)? "d":""
   end
-  
-  def crudpanes
-    out = ""
-    out += (crudcpanes?)? "c":""
-    out += (crudrpanes?)? "r":""
-    out += (crudupanes?)? "u":""
-    out += (cruddpanes?)? "d":""
-  end
 
   def crudcontents
     out = ""

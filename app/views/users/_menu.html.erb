@@ -5,7 +5,6 @@ style = "color:#FF9900;"
   <ul class='firstmenu menu'><li class='firstitem item'><%= link_to "Welcome", {:controller => "admin", :action => "welcome"} %></li>
 	<% if session[:crud]["r"]["shows"] %><li class='firstitem item'><%= link_to "Shows", shows_path %></li><% end %>
 	<% if session[:crud]["r"]["updates"] %><li class='firstitem item'><%= link_to "News", updates_path %></li><% end %>
-	<% if session[:crud]["r"]["panes"] %><li class='firstitem item'><%= link_to "Panes", panes_path %></li><% end %>
 	<% if session[:crud]["r"]["contents"] %><li class='firstitem item'><%= link_to "Contents", contents_path %></li><% end %>
 	<% if session[:crud]["r"]["users"] %><li class='firstitem item'><%= link_to "Users", users_path, :style => style %></li><% end %>
 	<% if session[:crud]["r"]["roles"] %><li class='firstitem item'><%= link_to "Roles", roles_path %></li><% end %>

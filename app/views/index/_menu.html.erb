@@ -1,10 +1,9 @@
 <div id='menu'>
   <ul class='firstmenu menu'>
     <li class='firstitem item'><%= link_to "Performances & Ticket Kiosk", root_url %></li>
-  	<% for pane in @panes %>
-  		<% if (pane.publish && !pane.hidden) || session[:display_mode] == "full" %>
-  			<%= render(:partial => "pane_item", :object => pane) %>
-  		<% end %>
-  	<% end %>
+    <li class='firstitem item'><%= link_to "About Us", :action => "showpane", :id => "about" %> </li>
+    <li class='firstitem item'><%= link_to "70th Anniversary Initiative", :action => "showpane", :id => "70ai" %></li>
+    <li class='firstitem item'><%= link_to "The No Parking Players", "http://npp.snstheatre.org" %></li>
+    <li class='firstitem item'><%= link_to "News Archive", :action => "newsarchive" %></li>
   </ul>
 </div>
