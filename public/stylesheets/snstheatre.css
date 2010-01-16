@@ -19,13 +19,6 @@ h1, h2, ul {
   margin: 0px;
   padding: 0px;
 }
-.clearfix:after {
-  content: ".";
-  display: block;
-  height: 0;
-  clear: both;
-  visibility: hidden;
-}
 
 /* index layout styles */
 .shadow {
@@ -80,23 +73,31 @@ h2 {
   /*TODO text styles for nav */
   /*TODO in order to change that shadow edge (tr/tl), change #header.height, #nav.height, #nav.background-image #nav.padding */
 }
-#menu {
-  text-align: center;
-  /*TODO fix height problem */
-}
+.item { display: table-cell; text-align: center; }
 ul { list-style-type: none; min-width: 900px;}
 .item { position: relative; }
-.firstitem {
-  float: left;
+.menu { position: absolute; }
+.firstmenu { position: static; }
+#menu a {
+  color: inherit;
+  display: block;
   width: 172px;
 }
-.menu { position: absolute; }
-#menu a { color: inherit; }
   /* end nav styles */
-#view {
+.article {
   padding: 20px;
   background: white;
   margin: 0px 0px 35px 0px;
+  -webkit-box-shadow: 0px 10px 20px #333333;
+  -moz-box-shadow: 0px 10px 20px #333333;
+  -webkit-border-top-left-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-topright: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-bottomright: 8px;
 }
 #footer {
   background: white;
@@ -122,16 +123,34 @@ ul { list-style-type: none; min-width: 900px;}
 }
 .bl { border-width: 0px 0px 0px 1px; border-style: solid; border-color: white; }
 .br { border-width: 0px 1px 0px 0px; border-style: solid; border-color: white; }
-#bird {
+#tweet {
   color: #333333;
   position: absolute;
-  left: 10px;
-  top: -20px;
+  left: 20px;
+  bottom: 75px;
+  width: 130px;
+  padding: 11px;
+  background: white;
+  -webkit-box-shadow: 0px 10px 20px #333333;
+  -moz-box-shadow: 0px 10px 20px #333333;
+  -webkit-border-top-left-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-topright: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-bottomright: 8px;
+  z-index: -1;
+  /*TODO add stem */
 }
-#birdimg {
+#twitbird {
+  height: 51px;
+  width: 57px;
+  border: 1px solid red;
   position: absolute;
-  left: 10px;
-  top: -10px;
+  bottom: 18px;
+  left: 4px;
 }
 /* end index layout styles */
 
