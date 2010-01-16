@@ -10,19 +10,21 @@
 	</script>
 </head>
 <body>
-  <div id='topbanner'>
-    <div id='tbcontainer'>
-      we'll deal with it later
+  <div id='container'>
+    <div id='header'>
+      <h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1>
+      <h2>Student theatre at Carnegie Mellon since 1938</h2>
     </div>
-    <div class='w cornercontainer'><div class='wl'><div class='wr'><div class='wb'><div class='wbl'><div class='wbr hasbottom body allcaps'>
-      <%= render :partial => "menu" %>
-    </div></div></div></div></div></div>
+    <div id='nav' class='botcorner shadow'><%= render :partial => "menu" %></div>
+    <div id='view'>
+      <div class='article'><%= yield %></div>
+    </div>
+    <div id='footer' class='topcorner shadow'>
+      something witty here
+    </div>
   </div>
-	<div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wb'><div class='wtl'><div class='wtr'><div class='wbl'><div class='wbr hasbottom'>
-    <div id='view'><%= yield :layout %></div>
-	</div></div></div></div></div></div></div></div>
-  <div class='w cornercontainer topmargin'><div class='wl'><div class='wr'><div class='wtl'><div class='wtr hastop caption'>
-    we'll deal with it later
-  </div></div></div></div></div>
+  <div id='bodyfooter'>
+    put some craaazy stuff here.
+  </div>
 </body>
 </html>
