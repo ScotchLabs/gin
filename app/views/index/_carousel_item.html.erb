@@ -1,18 +1,22 @@
-<div id='<%= carousel_item.abbrev %>_carouselitem' class='carouselitem fleft'>
-  <% if !carousel_item.imageurl.blank? %>
-    <%= image_tag "http://upload.snstheatre.org/gin/shows/#{carousel_item.imageurl}", :class => "carouselimage" %>
-  <% else %>
-    <%= image_tag "http://upload.snstheatre.org/gin/shows/temp.png", :class => "carouselimage" %>
-  <% end %>
-  <div class='carouselinfo'>
-    <a onclick="colorbox('<%= carousel_item.abbrev %>');"><%= carousel_item.name %></a><br />
-    <!-- slot -->
-    <!-- director -->
-    <!-- space -->
-    <!-- performancetimes -->
-    <!-- space -->
-    <!-- location -->
-    <!-- space -->
-    <!-- ticket info -->
+<div id='carouselitem_<%= carousel_item.abbrev %>' class='carouselitem fleft'>
+  <%= image_tag "http://upload.snstheatre.org/gin/shows/#{carousel_item.imageurl}", :class => "carouselimg fleft" %>
+  <div class='carouselinfo fleft'>
+    <%= carousel_item.name %><br />
+    <%= carousel_item.datecarousel %><br />
+    <% if !carousel_item.author.nil? && !carousel_item.author.blank? %>
+      By <%= carousel_item.author %><br />
+    <% end %>
+    <!-- director(s)<br /> -->
+    <br /><%= carousel_item.perfcarousel %><br />
+    <br /><%= carousel_item.loc %><br />
+    <br />
+    <% if carousel_item.ticketstatus == "completed" %>
+      <a href='#'>View more about this past Scotch'n'Soda production.</a>
+    <% elsif carousel_item.ticketstatus == "closed" %>
+      Tickets are not yet available for reservation (<a href='#'>sign up for an alert</a>).
+    <% else %>
+      <a href='#'>Reserve my ticket now.</a>
+    <% end %>
+    <br />
   </div>
 </div>

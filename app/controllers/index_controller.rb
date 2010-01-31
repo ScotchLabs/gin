@@ -15,6 +15,7 @@ class IndexController < ApplicationController
   end
   
   def showpane
+    @pane = params[:id]
     @contents = Content.find(:all, :order => "contents.order ASC")
   end
 protected

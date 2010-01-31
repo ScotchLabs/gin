@@ -7,20 +7,32 @@
   <div id='indexleft' class='fleft'>
     <div id='carouselwindow'>
       <div id='carouselitemscontainer'>
-        carousel items go here
+        <% for show in @shows %>
+          <%= render :partial => "carousel_item", :object => show %>
+        <% end %>
+        <br clear='all' style='height: 0px;' />
       </div>
     </div>
     <div id='carouselnavigator'>
-      <div id='carousellinkscontainer'>
-        navigator goes here
-      </div>
+      <div class='carouselnavbutton fleft'>i</div>
+        <div id='carousellinkswindow' class='fleft'>
+          <div id='carousellinkscontainer'>
+            <% for show in @shows %>
+              <%= render :partial => "carousel_link", :object => show %>
+            <% end %>
+            <br clear='all' style='height: 0px;' />
+          </div>
+        </div>
+      <div class='carouselnavbutton fright'>i</div>
     </div>
   </div>
   <div id='indexright' class='fright'>
-    News
+    <div id='newstitle'>News</div>
     <div id='newswindow'>
       <div id='newsitemscontainer'>
-        news items go here
+        <% for update in @updates %>
+          <%= render :partial => "news_item", :object => update %>
+        <% end %>
       </div>
     </div>
   </div>

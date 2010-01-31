@@ -3,13 +3,16 @@
 <head>
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
-	<%= stylesheet_link_tag "snstheatre", :media => "all" %>
+	<%= stylesheet_link_tag "snstheatre", "carousel", :media => "all" %>
 	<%= javascript_include_tag :defaults, "jquery.js" %>
+	<% if action_name == "index" %>
+	 <%= javascript_include_tag "carousel.js" %>
+	<% end %>
 	<script type='text/javascript'>
     jQuery.noConflict();
     <% if action_name == "index" %>
     jQuery(document).ready(function(){
-      jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 493) + "px";
+      jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 515) + "px";
       jQuery('#carousellinkscontainer')[0].style.width = (jQuery('#carousellinkscontainer > div').size() * 165) + "px";
     });
     <% end %>
@@ -32,8 +35,10 @@
     </div>
   </div>
   <div id='bodyfooter'>
-    <div id='tweet'>Happy Holidays to all! Members, recharge yourselves over break...we've got an exciting second semester with Closer, CelebAutoBio, and DRS!! <span id='tweetdate'>23 days ago</span></div>
+    <% if action_name == "index" %>
+    <div id='tweet'>Happy Holidays to all!! Members, recharge yourselves over break...we've got an exciting second semester with Closer, CelebAutoBio, and DRS!! <span id='tweetdate'>23 days ago</span></div>
     <div id='twitbird'>bird</div>
+    <% end %>
     <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre'>Twitter</a></span><span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts'>Facebook</a></span><span class='fright'>Send us an <a href='mailto:somebody@snstheatre.org'>Email</a></span><br clear='all' style='height:0px;' />
   </div>
   <% unless session[:user_id].nil? || session[:user_id].blank? %>

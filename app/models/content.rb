@@ -15,14 +15,14 @@ class Content < ActiveRecord::Base
   validates_presence_of :title, :anchor
   validates_numericality_of :order
   validates_inclusion_of :contenttype, :in => CONTENT_TYPES.map {|disp, value| value}
-  validates_inclusion_of :pane, :in => PANES.map {|disp, val| val}
+  validates_inclusion_of :contentpane, :in => PANES.map {|disp, val| val}
   validate :anchor_ok
   validate :article_ok
   validate :templates_ok
   def articletext
     # replace templates
     text = article
-    templates = text.scan(/\[\[(a|c|i|m|p){1}\+([0-9a-zA-Z\.\:\/\_\-\~\%\&\#\=\@]+)\|?([0-9a-zA-Z \'\"]*)\]\]/)
+    templates = text.scan(/\[\[(a|c|i|m|p){1}\+([0-9a-zA-Z\.\:\/\_\-\~\%\&\#\=\@]+)\|?([0-9a-zA-Z \'\"\.\:\/\_\-\~\%\&\#\=\@]*)\]\]/)
     for temp in templates
     	# turn scan result into link_to
     	type = temp[0]
