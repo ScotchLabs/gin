@@ -14,7 +14,6 @@ function left() {
 
 function right() {
   jQuery('#carousellinkscontainer')[0].style.left = navleft+"px";
-  var navmin = (jQuery('#carousellinkscontainer > div').size()-2) * -165;
   var x = jQuery("#carousellinkscontainer")[0].style.left;
   if (x == "") x = "0px";
   var y = parseInt(x.substring(0,x.indexOf("px")));
@@ -28,10 +27,9 @@ function right() {
 }
 
 function carousel(abbrev) {
-  for (i=0; i<jQuery('#carouselitemscontainer > div').size(); i++) {
+  for (i=0; i<jQuery('#carouselitemscontainer > div').size(); i++)
     if (jQuery('#carouselitemscontainer > div')[i].id == "carouselitem_"+abbrev)
       break;
-  }
   x = i*-511;
   y = x+"px";
   jQuery("#carouselitemscontainer").animate({left: y},"fast");
