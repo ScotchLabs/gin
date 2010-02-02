@@ -36,11 +36,13 @@
 }
 #carouselitemscontainer {
   height: 100%;
+  position: relative;
 }
 .carouselitem {
   margin: 0px 24px 0px 0px;
   width: 487px;
   height: 100%;
+  position: relative;
 }
 .carouselimg {
   border: 1px solid white;
@@ -59,18 +61,19 @@
 }
 .carouselnavbutton {
   width: 8px;
-  background-color:black;
+  background-color: red;
   margin: 21px 0px 0px 0px;
 }
 #carousellinkswindow {
   display: inline;
+  position: relative;
   width: 495px;
   margin: 0px 12px 0px 12px;
   height: 100%;
   overflow: hidden;
 }
 #carousellinkscontainer {
-  float: left;
+  position: relative;
   height: 100%;
 }
 .carousellink {

@@ -12,8 +12,9 @@
     jQuery.noConflict();
     <% if action_name == "index" %>
     jQuery(document).ready(function(){
-      jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 515) + "px";
+      jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 511) + "px";
       jQuery('#carousellinkscontainer')[0].style.width = (jQuery('#carousellinkscontainer > div').size() * 165) + "px";
+      navleft = 0;
     });
     <% end %>
 	</script>
