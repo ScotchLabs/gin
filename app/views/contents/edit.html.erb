@@ -17,10 +17,6 @@
 	<%= f.select :contentpane, {"About Us","about","70th AI", "70ai"} %>
   </p>
   <p>
-    <%= f.label :menutitle, "Menu title" %><br />
-    <%= f.text_field :menutitle %>
-  </p>
-  <p>
 	<%= f.label :contenttype, "Content type" %><%= ast %><br />
 	<%= f.select :contenttype, {"Content","content","Link","link"} %>
   </p>
@@ -31,10 +27,6 @@
   <p>
     <%= f.label :publish, "Publish on site" %><br />
     <%= f.check_box :publish %>
-  </p>
-  <p>
-    <%= f.label :hidden, "Hidden from menu" %><br />
-    <%= f.check_box :hidden %>
   </p>
   <p>
     <%= f.label :order, "Order in menu/page" %><%= ast %><br />

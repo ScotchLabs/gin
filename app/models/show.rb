@@ -6,7 +6,7 @@ class Show < ActiveRecord::Base
     ["Open",  "open"],
     ["Completed", "completed"]
   ]
-  validates_presence_of :name, :abbrev, :imageurl, :author, :ticketstatus, :performancetimes
+  validates_presence_of :name, :abbrev, :imageurl, :timesvisible, :ticketstatus, :performancetimes
   validates_uniqueness_of :abbrev
   validates_inclusion_of :ticketstatus, :in => TICKETSTATUS.map {|disp, value| value}
   validates_format_of :imageurl, :with => %r{\.(gif|jpg|png)$}i, :message => "must be a URL for GIF, JPG, or PNG image.", :allow_blank => true

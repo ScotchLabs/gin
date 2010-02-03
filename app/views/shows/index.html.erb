@@ -11,6 +11,7 @@
     <th>Ticketprices</th>
     <th>Performancetimes</th>
     <th>Ticketstatus</th>
+    <th>Timesvisible</th>
   </tr>
 
 <%
@@ -34,6 +35,7 @@ color = true
     <td class='admintd'><%=h !show.ticketprices.blank? %></td>
     <td class='admintd'><%=h !show.performancetimes.blank? %></td>
     <td class='admintd'><%=h show.ticketstatus %></td>
+    <td class='admintd'><%=h show.timesvisible %></td>
     <td class='admintd'><%= link_to 'Show', show %></td>
     <% if session[:crud]["u"]["shows"] %><td class='admintd'><%= link_to 'Edit', edit_show_path(show) %></td><% end %>
     <% if session[:crud]["d"]["shows"] %><td class='admintd'><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

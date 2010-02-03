@@ -43,5 +43,10 @@
   <%=h @show.ticketstatus %>
 </p>
 
+<p>
+  <b>Timesvisible:</b>
+  <%=h @show.timesvisible %>
+</p>
+
 <% if session[:crud]["u"]["shows"] %><%= link_to 'Edit', edit_show_path(@show) %> |<% end %>
 <%= link_to 'Back', shows_path %>

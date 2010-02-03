@@ -1,7 +1,5 @@
 <% for content in @contents %>
-  <% puts "DEBUG showpane.html.erb: pane is #{@pane}, contentpane is #{content.contentpane}" %>
   <% if content.contentpane == @pane %>
-    <% puts "DEBUG showpane.html.erb: rendering partial" %>
     <%= render :partial => "content_article", :object => content %>
   <% end %>
 <% end %>
