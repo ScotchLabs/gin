@@ -1,0 +1,125 @@
+/*
+#carouselwindow
+  #carouselitemscontainer
+    .carouselitem
+      .carouselimg
+      .carouselinfo
+        .carouselinfo_name
+        .carouselinfo_datecarousel
+        .carouselinfo_author
+        .carouselinfo_director
+        .carouselinfo_perfcarousel
+        .carouselinfo_loc
+        .carouselinfo_ticketstatus
+    ...
+#carouselnavigator
+  .carouselnavbutton
+  #carousellinkswindow
+    #carousellinkscontainer
+      .carousellink
+        .carlinktop
+        .carlinkbot
+      ...
+  .carouselnavbutton
+#searchbar
+*/
+
+#carouselwindow {
+  background: #333333;
+  color: white;
+  padding: 24px;
+  margin: 0px 0px 18px 0px;
+  width: 487px;
+  height: 302px;
+  overflow: hidden;
+  -webkit-border-top-left-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-topright: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-bottomright: 8px;
+}
+#carouselitemscontainer {
+  height: 100%;
+  position: relative;
+}
+.carouselitem {
+  margin: 0px 24px 0px 0px;
+  width: 487px;
+  height: 100%;
+  position: relative;
+}
+.carouselimg {
+  border: 1px solid white;
+  height: 300px;
+  width: 300px;
+}
+.carouselinfo {
+  padding: 0px 0px 0px 22px;
+  height: 100%;
+  width: 163px;
+}
+.carouselinfo_name a {
+  font-size: 12pt;
+  font-weight: normal;
+}
+.carouselinfo_datecarousel {
+  
+}
+.carouselinfo_author {
+  
+}
+.carouselinfo_director {
+  
+}
+.carouselinfo_perfcarousel {
+  
+}
+.carouselinfo_loc {
+  
+}
+.carouselinfo_ticketstatus a {
+  font-weight: normal;
+}
+
+#carouselnavigator {
+  height: 59px;
+  position: relative;
+}
+.carouselnavbutton {
+  width: 8px;
+  background-color: red;
+  margin: 21px 0px 0px 0px;
+}
+#carousellinkswindow {
+  display: inline;
+  position: relative;
+  width: 495px;
+  margin: 0px 12px 0px 12px;
+  height: 100%;
+  overflow: hidden;
+}
+#carousellinkscontainer {
+  position: relative;
+  height: 100%;
+}
+.carousellink {
+  background: white;
+  height: 100%;
+  width: 165px;
+}
+.carlinktop {
+  border-style: solid;
+  border-width: 0px 0px 1px 0px;
+  border-color: #EFEFEF;
+  padding: 0px 10px 4px 5px;
+  height: 32px;
+}
+.carlinkbot {
+  border-style: solid;
+  border-width: 1px 0px 0px 0px;
+  border-color: #EFEFEF;
+  padding: 4px 0px 0px 5px;
+}

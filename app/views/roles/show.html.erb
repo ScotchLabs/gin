@@ -1,0 +1,43 @@
+<p>
+  <b>Name:</b>
+  <%=h @role.name %>
+</p>
+
+<p>
+  <b>Abbrev:</b>
+  <%=h @role.abbrev %>
+</p>
+
+<p>
+  <b>Crudcontents:</b>
+  <%=h @role.crudcontents %>
+</p>
+
+<p>
+  <b>Crudshows:</b>
+  <%=h @role.crudshows %>
+</p>
+
+<p>
+  <b>Crudusers:</b>
+  <%=h @role.crudusers %>
+</p>
+
+<p>
+  <b>Crudupdates:</b>
+  <%=h @role.crudupdates %>
+</p>
+
+<p>
+  <b>Crudroles:</b>
+  <%=h @role.crudroles %>
+</p>
+
+<p>
+  <b>Crudroleassoc:</b>
+  <%=h @role.crudroleassoc %>
+</p>
+
+
+<% if session[:crud]["u"]["roles"] %><%= link_to 'Edit', edit_role_path(@role) %> |<% end %>
+<%= link_to 'Back', roles_path %>

@@ -1,0 +1,29 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  name: MyString
+  abbrev: MyString
+  crudcontents: false
+  crudshows: false
+  crudpanes: false
+  crudusers: false
+  crudupdates: false
+  crudroles: false
+  crudroleassoc: false
+  crudtopics: false
+  crudposts: false
+  crudcategories: false
+
+two:
+  name: MyString
+  abbrev: MyString
+  crudcontents: false
+  crudshows: false
+  crudpanes: false
+  crudusers: false
+  crudupdates: false
+  crudroles: false
+  crudroleassoc: false
+  crudtopics: false
+  crudposts: false
+  crudcategories: false

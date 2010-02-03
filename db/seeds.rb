@@ -1,35 +1,120 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rake db:seed (or created alongside the db with db:setup).
-#
-# Examples:
-#   
-#   cities = City.create([{ :name => 'Chicago' }, { :name => 'Copenhagen' }])
-#   Major.create(:name => 'Daley', :city => cities.first)
-User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
-User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873") # id 1
+User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 2
+User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 3
+User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 4
+User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 5
+User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871") # id 6
 
-Show.create(:name => "The Visit", :abbrev => "visit", :loc => "McConomy, UC", :imageurl => "tv.png", :author => "Friedrich D&uumlrrenmatt", :ticketprices => "", :performancetimes => "October 24 2008 9 PM|October 25 2008 3 PM|October 25 2008 8 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "A Bottle of Scotch", :abbrev => "abos", :loc => "Alumni Hall, CFA", :imageurl => "abos.png", :author => "", :ticketprices => "", :performancetimes => "December 5 2008 9 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "A Few Good Men", :abbrev => "afgm", :loc => "Peter Wright McKenna, UC", :imageurl => "afgm.png", :author => "Aaron Sorkin", :ticketprices => "", :performancetimes => "February 13 2009 8 PM|February 14 2009 2PM|February 14 2009 8 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "Me And My Girl", :abbrev => "mamg", :loc => "Rangos Ballroom, UC", :imageurl => "mamg.png", :author => "L. Arthur Rose, Douglas Furber, and Noel Gay", :ticketprices => "Tickets: $5 with CMU ID, $10 without.", :performancetimes => "April 16 2009 8 PM|April 17 2009 3 PM|April 17 2009 11 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "Chugging Scotch", :abbrev => "chug", :loc => "Conan Room, UC", :imageurl => "chug.png", :author => "", :ticketprices => "Free to the public", :performancetimes => "May 2 2009 8 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "The Mystery of Edwin Drood", :abbrev => "drood", :loc => "McConomy, UC", :imageurl => "drood.png", :author => "Rupert Holmes", :ticketprices => "$8 or $10 depending on section<br>$5 off with Student ID", :performancetimes => "October 30 2009 8 PM|October 31 2009 3 PM|October 31 2009 8 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "Betty's Summer Vacation", :abbrev => "betty", :loc => "McConomy, UC", :imageurl => "betty.png", :author => "Christopher Durang", :ticketprices => "Tickets free to the public", :performancetimes => "December 4 2009 8 PM|December 5 2009 2 PM|December 5 2009 6 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "A Bottle of Scotch part two: Back to the Bottle", :abbrev => "bttb", :loc => "Alumni Hall, CFA", :imageurl => "bttb.png", :author => "", :ticketprices => "$10", :performancetimes => "Nov 22 2009, 8 PM", :ticketstatus => "completed", :homeshow => "datetime")
-Show.create(:name => "Closer",                  :abbrev => "closer", :loc => "Peter Wright McKenna, UC", :imageurl => "closer.png", :author => "", :ticketprices => "", :performancetimes => "", :ticketstatus => "closed", :homeshow => "none")
-Show.create(:name => "Celebrity Autobiography", :abbrev => "cab",    :loc => "Rangos Ballroom, UC",      :imageurl => "temp.png",   :author => "", :ticketprices => "", :performancetimes => "", :ticketstatus => "closed", :homeshow => "none")
-Show.create(:name => "Dirty Rotten Scoundrels", :abbrev => "drs",    :loc => "Rangos Ballroom, UC",      :imageurl => "temp.png",   :author => "", :ticketprices => "", :performancetimes => "", :ticketstatus => "closed", :homeshow => "none")
+Role.create(:name => "Administrator", :abbrev => "admin",
+  :crudccontents => true,
+  :crudcshows => true,
+  :crudcpanes => true,
+  :crudcusers => true,
+  :crudcupdates => true,
+  :crudcroles => true,
+  :crudcroleassocs => true,
+  :crudrcontents => true,
+  :crudrshows => true,
+  :crudrpanes => true,
+  :crudrusers => true,
+  :crudrupdates => true,
+  :crudrroles => true,
+  :crudrroleassocs => true,
+  :cruducontents => true,
+  :crudushows => true,
+  :crudupanes => true,
+  :cruduusers => true,
+  :cruduupdates => true,
+  :cruduroles => true,
+  :cruduroleassocs => true,
+  :cruddcontents => true,
+  :cruddshows => true,
+  :cruddpanes => true,
+  :cruddusers => true,
+  :cruddupdates => true,
+  :cruddroles => true,
+  :cruddroleassocs => true) # id 1
+Role.create(:name => "Content writer", :abbrev => "writer",
+  :crudccontents => true,
+  :crudcshows => true,
+  :crudcpanes => false,
+  :crudcusers => false,
+  :crudcupdates => true,
+  :crudcroles => false,
+  :crudcroleassocs => false,
+  :crudrcontents => true,
+  :crudrshows => true,
+  :crudrpanes => true,
+  :crudrusers => false,
+  :crudrupdates => true,
+  :crudrroles => false,
+  :crudrroleassocs => false,
+  :cruducontents => true,
+  :crudushows => true,
+  :crudupanes => false,
+  :cruduusers => false,
+  :cruduupdates => true,
+  :cruduroles => false,
+  :cruduroleassocs => false,
+  :cruddcontents => true,
+  :cruddshows => true,
+  :cruddpanes => false,
+  :cruddusers => false,
+  :cruddupdates => true,
+  :cruddroles => false,
+  :cruddroleassocs => false) # id 2
+Role.create(:name => "Beta tester", :abbrev => "betar",
+  :crudccontents => true,
+  :crudcshows => true,
+  :crudcpanes => false,
+  :crudcusers => false,
+  :crudcupdates => true,
+  :crudcroles => false,
+  :crudcroleassocs => false,
+  :crudrcontents => true,
+  :crudrshows => true,
+  :crudrpanes => true,
+  :crudrusers => false,
+  :crudrupdates => true,
+  :crudrroles => false,
+  :crudrroleassocs => false,
+  :cruducontents => true,
+  :crudushows => true,
+  :crudupanes => false,
+  :cruduusers => false,
+  :cruduupdates => true,
+  :cruduroles => false,
+  :cruduroleassocs => false,
+  :cruddcontents => true,
+  :cruddshows => true,
+  :cruddpanes => false,
+  :cruddusers => false,
+  :cruddupdates => true,
+  :cruddroles => false,
+  :cruddroleassocs => false) # id 3
 
-Pane.create(:title => "Ticket Kiosk", :menutitle => "", :anchor => "http://tickets.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '1', :panetype => "link")
-Pane.create(:title => "About Us", :menutitle => "", :anchor => "about", :publish => true, :hidden => false, :hasmenu => false, :order => '2', :panetype => "pane")
-Pane.create(:title => "70th Anniversary Initiative", :menutitle => "", :anchor => "70ai", :publish => true, :hidden => false, :hasmenu => false, :order => '3', :panetype => "pane")
-Pane.create(:title => "The No Parking Players", :menutitle => "", :anchor => "http://npp.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '4', :panetype => "link")
-Pane.create(:title => "Contact Us", :menutitle => "", :anchor => "contact", :publish => true, :hidden => false, :hasmenu => false, :order => '5', :panetype => "pane")
-Pane.create(:title => "Scotch on the Web", :menutitle => "", :anchor => "http://online.snstheatre.org/", :publish => true, :hidden => false, :hasmenu => false, :order => '6', :panetype => "link")
+Roleassoc.create(:roleid => "admin", :userid => "sewillia")
+Roleassoc.create(:roleid => "writer", :userid => "jrfriedr")
+Roleassoc.create(:roleid => "betar", :userid => "jrfriedr")
+Roleassoc.create(:roleid => "writer", :userid => "amgross")
+Roleassoc.create(:roleid => "betar", :userid => "amgross")
+Roleassoc.create(:roleid => "writer", :userid => "dfreeman")
+Roleassoc.create(:roleid => "betar", :userid => "dfreeman")
+Roleassoc.create(:roleid => "writer", :userid => "achivett")
+Roleassoc.create(:roleid => "betar", :userid => "achivett")
+Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
+Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
+
+Show.create(:name => "The Visit", :abbrev => "visit", :loc => "McConomy, UC", :imageurl => "tv.png", :author => "Friedrich D&uumlrrenmatt", :ticketprices => "", :performancetimes => "October 24 2008 9 PM|October 25 2008 3 PM|October 25 2008 8 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "A Bottle of Scotch", :abbrev => "abos", :loc => "Alumni Hall, CFA", :imageurl => "abos.png", :author => "", :ticketprices => "", :performancetimes => "December 5 2008 9 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "A Few Good Men", :abbrev => "afgm", :loc => "Peter Wright McKenna, UC", :imageurl => "afgm.png", :author => "Aaron Sorkin", :ticketprices => "", :performancetimes => "February 13 2009 8 PM|February 14 2009 2PM|February 14 2009 8 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "Me And My Girl", :abbrev => "mamg", :loc => "Rangos Ballroom, UC", :imageurl => "mamg.png", :author => "L. Arthur Rose, Douglas Furber, and Noel Gay", :ticketprices => "Tickets: $5 with CMU ID, $10 without.", :performancetimes => "April 16 2009 8 PM|April 17 2009 3 PM|April 17 2009 11 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "Chugging Scotch", :abbrev => "chug", :loc => "Conan Room, UC", :imageurl => "chug.png", :author => "", :ticketprices => "Free to the public", :performancetimes => "May 2 2009 8 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "The Mystery of Edwin Drood", :abbrev => "drood", :loc => "McConomy, UC", :imageurl => "drood.png", :author => "Rupert Holmes", :ticketprices => "$8 or $10 depending on section<br>$5 off with Student ID", :performancetimes => "October 30 2009 8 PM|October 31 2009 3 PM|October 31 2009 8 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "Betty's Summer Vacation", :abbrev => "betty", :loc => "McConomy, UC", :imageurl => "betty.png", :author => "Christopher Durang", :ticketprices => "Tickets free to the public", :performancetimes => "December 4 2009 8 PM|December 5 2009 2 PM|December 5 2009 6 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "A Bottle of Scotch part two: Back to the Bottle", :abbrev => "bttb", :loc => "Alumni Hall, CFA", :imageurl => "bttb.png", :author => "", :ticketprices => "$10", :performancetimes => "Nov 22 2009, 8 PM", :ticketstatus => "completed", :director => "")
+Show.create(:name => "Closer", :abbrev => "closer", :loc => "Peter Wright McKenna, UC", :imageurl => "closer.png", :author => "Patrick Marber", :ticketprices => "", :performancetimes => "", :ticketstatus => "closed", :director => "Caity Pitts and Caitlin Cox")
+Show.create(:name => "Dirty Rotten Scoundrels", :abbrev => "drs",    :loc => "Rangos Ballroom, UC",      :imageurl => "temp.png",   :author => "", :ticketprices => "", :performancetimes => "", :ticketstatus => "closed", :director => "")
 
 Update.create(:name => "The October Update", :anchor => "october", :expiredate => DateTime.parse("July 31 2032"), :article => "For those of you who don't get to keep up with Scotch'n'Soda in Pittsburgh, the Development Committee has published the latest update for our alumni. <b>[[a+http://dev.snstheatre.org/~jrfriedr/October%20Update.pdf|Click here]]</b> to read up on what we've been doing, ways to help us out and just how much Jared Cohon loves us!")
 Update.create(:name => "It's Winter Break!", :anchor => "winterbreak", :expiredate => DateTime.parse("January 11 2010"), :article => "After a demanding and exciting semester of theatre, having presented <b>The Mystery of Edwin Drood</b>, <b> A Bottle of Scotch, part two: Back to the Bottle</b>, and <b>Betty's Summer Vacation</b>, it seems Scotch'n'Soda is due for for a break from the stage! (Not to mention from that pesky schoolwork!)<br />

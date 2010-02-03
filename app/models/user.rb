@@ -8,7 +8,8 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   validates_confirmation_of :password
   
-  validate  :password_not_blank
+  validate :password_not_blank
+  validate :password_retyped
   
   def self.authenticate(name, password)
     user = self.find_by_name(name)
@@ -24,6 +25,10 @@ class User < ActiveRecord::Base
   # 'password' is a virtual attribute
   def password
     @password
+  end
+  
+  def retype
+    @retype
   end
   
   def password=(pwd)
@@ -43,6 +48,12 @@ private
 
   def password_not_blank
     errors.add(:password, "Missing password") if hashed_password.blank?
+  end
+  
+  def password_retyped
+    if hashed_password.blank? && salt.blank?
+      errors.add(:assword, "doesn't match the retyped password") if password != retype
+    end
   end
   
   def create_new_salt

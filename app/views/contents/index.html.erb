@@ -3,9 +3,9 @@
 <table>
   <tr>
     <th>Title</th>
-	<th>Contentpane</th>
+    <th>Contentpane</th>
     <th>Menutitle</th>
-	<th>Contenttype</th>
+    <th>Contenttype</th>
     <th>Anchor</th>
     <th>Publish</th>
     <th>Hidden</th>
@@ -26,21 +26,21 @@ color = true
 %>
   <tr <%= style %>>
     <td class='admintd'><%=h content.title %></td>
-	<td class='admintd'><%=h content.contentpane %></td>
+    <td class='admintd'><%=h content.contentpane %></td>
     <td class='admintd'><%=h content.menutitle %></td>
-	<td class='admintd'><%=h content.contenttype %></td>
+    <td class='admintd'><%=h content.contenttype %></td>
     <td class='admintd'><%=h content.anchor %></td>
     <td class='admintd'><%=h content.publish %></td>
     <td class='admintd'><%=h content.hidden %></td>
     <td class='admintd'><%=h content.order %></td>
     <td class='admintd'><%=h !content.article.blank? %></td>
     <td class='admintd'><%= link_to 'Show', content %></td>
-    <td class='admintd'><%= link_to 'Edit', edit_content_path(content) %></td>
-    <td class='admintd'><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if session[:crud]["u"]["contents"] %><td class='admintd'><%= link_to 'Edit', edit_content_path(content) %></td><% end %>
+    <% if session[:crud]["d"]["contents"] %><td class='admintd'><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New content', new_content_path %>
+<% if session[:crud]["c"]["contents"] %><%= link_to 'New content', new_content_path %><% end %>

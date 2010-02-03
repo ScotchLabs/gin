@@ -1,0 +1,8 @@
+<p>
+  <b>Name:</b>
+  <%=h @user.name %>
+</p>
+
+
+<% if session[:crud]["u"]["users"] %><%= link_to 'Edit', edit_user_path(@user) %> |<% end %>
+<%= link_to 'Back', users_path %>

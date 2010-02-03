@@ -7,25 +7,30 @@ class Content < ActiveRecord::Base
     ["Content", "content"],
     ["Link", "link"]
   ]
-  belongs_to :pane
+  PANES = [
+    #displayed  #db
+    ["About Us", "about"],
+    ["70th Ann. Init.", "70ai"]
+  ]
   validates_presence_of :title, :anchor
   validates_numericality_of :order
   validates_inclusion_of :contenttype, :in => CONTENT_TYPES.map {|disp, value| value}
+  validates_inclusion_of :contentpane, :in => PANES.map {|disp, val| val}
   validate :anchor_ok
   validate :article_ok
   validate :templates_ok
   def articletext
     # replace templates
     text = article
-    templates = text.scan(/\[\[(a|c|i|m|p){1}\+([0-9a-zA-Z\.\:\/\_\-\~\%\&\#\=\@]+)\|?([0-9a-zA-Z \'\"]*)\]\]/)
+    templates = text.scan(/\[\[(a|c|i|m|p){1}\+([0-9a-zA-Z\.\:\/\_\-\~\%\&\#\=\@]+)\|?([0-9a-zA-Z \'\"\.\:\/\_\-\~\%\&\#\=\@]*)\]\]/)
     for temp in templates
     	# turn scan result into link_to
     	type = temp[0]
     	anchor = temp[1]
     	if temp[2].nil? || temp[2].blank?
     		if type == 'p'
-    			p = Pane.find_by_anchor(anchor)
-    			html = p.title
+    		  html = "About Us" if anchor == "about"
+    		  html = "70th Anniversary Initiative" if anchor == "70ai"
     			action = "showpane"
     		elsif type == 'c'
     			c = Content.find_by_anchor(anchor)
@@ -42,7 +47,7 @@ class Content < ActiveRecord::Base
     		html = temp[2]
     	end
     	if type == 'p' || type == 'c'
-    	  out = "<a href='/home/#{action}/#{anchor}'>#{html}</a>"
+    	  out = "<a href='/index/#{action}/#{anchor}'>#{html}</a>"
     	elsif type == 'a'
     	  out = "<a href='#{anchor}' target='_blank'>#{html}</a>"
     	elsif type == 'm'
@@ -132,8 +137,7 @@ protected
         return
       end
       if type == 'p'
-        p = Pane.find_by_anchor(anchor)
-        errors.add(:article, "contains malformed 'p' template: invalid anchor") if p.nil?
+        errors.add(:article, "contains malformed 'p' template: invalid anchor") if (anchor != "about" && anchor != "70ai")
         return
       elsif type == 'c'
         c = Content.find_by_anchor(anchor)

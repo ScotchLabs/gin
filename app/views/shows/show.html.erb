@@ -24,6 +24,11 @@
 </p>
 
 <p>
+  <b>Director:</b>
+  <%=h @show.director %>
+</p>
+
+<p>
   <b>Ticketprices:</b>
   <%=h @show.ticketprices %>
 </p>
@@ -38,11 +43,5 @@
   <%=h @show.ticketstatus %>
 </p>
 
-<p>
-  <b>Homeshow:</b>
-  <%=h @show.homeshow %>
-</p>
-
-<%= link_to 'Edit', edit_show_path(@show) %> |
-<%= link_to 'Back', shows_path %> | 
-<%= link_to 'Add Another', new_show_path %>
+<% if session[:crud]["u"]["shows"] %><%= link_to 'Edit', edit_show_path(@show) %> |<% end %>
+<%= link_to 'Back', shows_path %>

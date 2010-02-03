@@ -14,7 +14,7 @@
   </p>
   <p>
 	<%= f.label :contentpane %><%= ast %><br />
-	<%= f.select :contentpane,Pane.all.collect{|p| [p.title, p.anchor]} %>
+	<%= f.select :contentpane, {"About Us","about","70th AI", "70ai"} %>
   </p>
   <p>
     <%= f.label :menutitle, "Menu title" %><br />
@@ -51,7 +51,7 @@
   </p>
   <p>
     <%= f.label :article %><br />
-    <%= f.text_area :article, :cols => 162 %>
+    <%= f.text_area :article, :cols => 107 %>
   </p>
   <p>
     <%= f.submit 'Update' %>

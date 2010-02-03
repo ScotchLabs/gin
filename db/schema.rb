@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20091028180014) do
+ActiveRecord::Schema.define(:version => 20100203044220) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -38,6 +38,48 @@ ActiveRecord::Schema.define(:version => 20091028180014) do
     t.datetime "updated_at"
   end
 
+  create_table "roleassocs", :force => true do |t|
+    t.string   "roleid"
+    t.string   "userid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "roles", :force => true do |t|
+    t.string   "name"
+    t.string   "abbrev"
+    t.boolean  "crudccontents"
+    t.boolean  "crudcshows"
+    t.boolean  "crudcpanes"
+    t.boolean  "crudcusers"
+    t.boolean  "crudcupdates"
+    t.boolean  "crudcroles"
+    t.boolean  "crudcroleassocs"
+    t.boolean  "crudrcontents"
+    t.boolean  "crudrshows"
+    t.boolean  "crudrpanes"
+    t.boolean  "crudrusers"
+    t.boolean  "crudrupdates"
+    t.boolean  "crudrroles"
+    t.boolean  "crudrroleassocs"
+    t.boolean  "cruducontents"
+    t.boolean  "crudushows"
+    t.boolean  "crudupanes"
+    t.boolean  "cruduusers"
+    t.boolean  "cruduupdates"
+    t.boolean  "cruduroles"
+    t.boolean  "cruduroleassocs"
+    t.boolean  "cruddcontents"
+    t.boolean  "cruddshows"
+    t.boolean  "cruddpanes"
+    t.boolean  "cruddusers"
+    t.boolean  "cruddupdates"
+    t.boolean  "cruddroles"
+    t.boolean  "cruddroleassocs"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "shows", :force => true do |t|
     t.string   "name"
     t.string   "abbrev"
@@ -47,9 +89,9 @@ ActiveRecord::Schema.define(:version => 20091028180014) do
     t.string   "ticketprices"
     t.string   "performancetimes"
     t.string   "ticketstatus"
-    t.string   "homeshow"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "director"
   end
 
   create_table "updates", :force => true do |t|

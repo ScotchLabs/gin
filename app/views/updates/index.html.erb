@@ -25,12 +25,12 @@ color = true
     <td class='admintd'><%=h update.expiredate %></td>
     <td class='admintd'><%=h !update.article.blank? %></td>
     <td class='admintd'><%= link_to 'Show', update %></td>
-    <td class='admintd'><%= link_to 'Edit', edit_update_path(update) %></td>
-    <td class='admintd'><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td>
+    <% if session[:crud]["u"]["updates"] %><td class='admintd'><%= link_to 'Edit', edit_update_path(update) %></td><% end %>
+    <% if session[:crud]["d"]["updates"] %><td class='admintd'><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New update', new_update_path %>
+<% if session[:crud]["c"]["updates"] %><%= link_to 'New update', new_update_path %><% end %>
