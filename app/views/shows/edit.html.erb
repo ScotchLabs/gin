@@ -29,6 +29,10 @@
     <%= f.text_field :author %>
   </p>
   <p>
+    <%= f.label :director, "Director" %><br />
+    <%= f.text_field :director %>
+  </p>
+  <p>
     <%= f.label :ticketprices, "Ticket prices" %><br />
     <%= f.text_field :ticketprices %>
   </p>
@@ -39,10 +43,6 @@
   <p>
     <%= f.label :ticketstatus, "Ticket status" %><%= ast %><br />
 	<%= f.select("ticketstatus", {"Open","open","Closed","closed","Completed","completed"}) %>
-  </p>
-  <p>
-    <%= f.label :homeshow, "What to show on homepage?" %><br />
-    <%= f.select :homeshow, {"nothing", "none", "dates", "date", "dates & times", "datetime"} %>
   </p>
   <p>
     <%= f.submit 'Update' %>

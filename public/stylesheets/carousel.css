@@ -4,6 +4,13 @@
     .carouselitem
       .carouselimg
       .carouselinfo
+        .carouselinfo_name
+        .carouselinfo_datecarousel
+        .carouselinfo_author
+        .carouselinfo_director
+        .carouselinfo_perfcarousel
+        .carouselinfo_loc
+        .carouselinfo_ticketstatus
     ...
 #carouselnavigator
   .carouselnavbutton
@@ -54,6 +61,28 @@
   height: 100%;
   width: 163px;
 }
+.carouselinfo_name a {
+  font-size: 12pt;
+  font-weight: normal;
+}
+.carouselinfo_datecarousel {
+  
+}
+.carouselinfo_author {
+  
+}
+.carouselinfo_director {
+  
+}
+.carouselinfo_perfcarousel {
+  
+}
+.carouselinfo_loc {
+  
+}
+.carouselinfo_ticketstatus a {
+  font-weight: normal;
+}
 
 #carouselnavigator {
   height: 59px;
@@ -87,7 +116,6 @@
   border-color: #EFEFEF;
   padding: 0px 10px 4px 5px;
   height: 32px;
-  vertical-align: bottom;
 }
 .carlinkbot {
   border-style: solid;

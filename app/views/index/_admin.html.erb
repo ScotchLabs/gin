@@ -1,0 +1,11 @@
+<div id='admin'>
+  <a id='adminbutton' href='/admin'>ADMIN</a>
+  <ul style='display:none;'>
+    <% if session[:crud]["r"]["shows"] %><li><a href='/shows'>shows</a></li><% end %>
+    <% if session[:crud]["r"]["updates"] %><li><a href='/news'>news</a></li><% end %>
+    <% if session[:crud]["r"]["contents"] %><li><a href='/contents'>contents</a></li><% end %>
+    <% if session[:crud]["r"]["users"] %><li><a href='/users'>users</a></li><% end %>
+    <% if session[:crud]["r"]["roles"] %><li><a href='/roles'>roles</a></li><% end %>
+    <% if session[:crud]["r"]["roleassocs"] %><li><a href='/roleassocs'>roleassocs</a></li><% end %>
+  </ul>
+</div>

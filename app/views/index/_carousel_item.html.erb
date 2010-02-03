@@ -1,22 +1,14 @@
 <div id='carouselitem_<%= carousel_item.abbrev %>' class='carouselitem fleft'>
   <%= image_tag "http://upload.snstheatre.org/gin/shows/#{carousel_item.imageurl}", :class => "carouselimg fleft" %>
   <div class='carouselinfo fleft'>
-    <%= carousel_item.name %><br />
-    <%= carousel_item.datecarousel %><br />
-    <% if !carousel_item.author.nil? && !carousel_item.author.blank? %>
-      By <%= carousel_item.author %><br />
-    <% end %>
-    <!-- director(s)<br /> -->
-    <br /><%= carousel_item.perfcarousel %><br />
-    <br /><%= carousel_item.loc %><br />
-    <br />
-    <% if carousel_item.ticketstatus == "completed" %>
-      <a href='#'>View more about this past Scotch'n'Soda production.</a>
-    <% elsif carousel_item.ticketstatus == "closed" %>
-      Tickets are not yet available for reservation (<a href='#'>sign up for an alert</a>).
-    <% else %>
-      <a href='#'>Reserve my ticket now.</a>
-    <% end %>
-    <br />
+    <span class='carouselinfo_name'><a href='#'><%= carousel_item.name %></a></span><br />
+    <span class='carouselinfo_datecarousel upper'><%= carousel_item.datecarousel %></span><br />
+    <span class='carouselinfo_author'>By <%= carousel_item.author %>.</span><br />
+    <% if !carousel_item.director.blank? %><span class='carouselinfo_director'>Directed by <%= carousel_item.director %>.</span><br /><% end %>
+    <br /><span class='carouselinfo_perfcarousel'><%= carousel_item.perfcarousel %></span><br />
+    <span class='carouselinfo_loc'><%= carousel_item.loc %></span><br />
+    <br /><span class='carouselinfo_ticketstatus'>
+    <%= carousel_item.tickettext %>
+    </span><br />
   </div>
 </div>

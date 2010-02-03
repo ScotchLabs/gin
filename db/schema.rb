@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100113185500) do
+ActiveRecord::Schema.define(:version => 20100203044220) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -89,9 +89,9 @@ ActiveRecord::Schema.define(:version => 20100113185500) do
     t.string   "ticketprices"
     t.string   "performancetimes"
     t.string   "ticketstatus"
-    t.string   "homeshow"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "director"
   end
 
   create_table "updates", :force => true do |t|

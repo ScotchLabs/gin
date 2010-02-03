@@ -16,6 +16,17 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
+  map.connect 'about/',
+    :controller => "index",
+    :action => "showpane",
+    :id => "about"
+  map.connect '70ai/',
+    :controller => "index",
+    :action => "showpane",
+    :id => "70ai"
+  map.connect 'news/',
+    :controller => "index",
+    :action => "news"
 
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'

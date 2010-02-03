@@ -18,6 +18,9 @@ class IndexController < ApplicationController
     @pane = params[:id]
     @contents = Content.find(:all, :order => "contents.order ASC")
   end
+  
+  def news
+  end
 protected
   def authorize
   end

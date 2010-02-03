@@ -7,10 +7,10 @@
     <th>Loc</th>
     <th>Imageurl</th>
     <th>Author</th>
+    <th>Director</th>
     <th>Ticketprices</th>
     <th>Performancetimes</th>
     <th>Ticketstatus</th>
-    <th>Homeshow</th>
   </tr>
 
 <%
@@ -30,10 +30,10 @@ color = true
     <td class='admintd'><%=h show.loc %></td>
     <td class='admintd'><%=h show.imageurl %></td>
     <td class='admintd'><%=h show.author %></td>
+    <td class='admintd'><%=h show.director %></td>
     <td class='admintd'><%=h !show.ticketprices.blank? %></td>
     <td class='admintd'><%=h !show.performancetimes.blank? %></td>
     <td class='admintd'><%=h show.ticketstatus %></td>
-    <td class='admintd'><%=h show.homeshow %></td>
     <td class='admintd'><%= link_to 'Show', show %></td>
     <% if session[:crud]["u"]["shows"] %><td class='admintd'><%= link_to 'Edit', edit_show_path(show) %></td><% end %>
     <% if session[:crud]["d"]["shows"] %><td class='admintd'><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
