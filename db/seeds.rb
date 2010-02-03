@@ -142,7 +142,7 @@ Show.create(
   :timesvisible => true,
   :ticketstatus => "completed",
   :director => "Scott Wasserman",
-  :loc => "Peter Wright McKenna, UC"
+  :loc => "Peter Wright McKenna, UC",
   :author => "David Auburn"
 )
 Show.create(
