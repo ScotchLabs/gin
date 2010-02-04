@@ -1,3 +1,4 @@
+<%= render :partial => "conditionals" %>
 <% for content in @contents %>
   <% if content.contentpane == @pane %>
     <%= render :partial => "content_article", :object => content %>
