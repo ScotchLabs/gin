@@ -4,11 +4,9 @@
   <tr>
     <th>Title</th>
     <th>Contentpane</th>
-    <th>Menutitle</th>
     <th>Contenttype</th>
     <th>Anchor</th>
     <th>Publish</th>
-    <th>Hidden</th>
     <th>Order</th>
     <th>Article</th>
   </tr>
@@ -27,11 +25,9 @@ color = true
   <tr <%= style %>>
     <td class='admintd'><%=h content.title %></td>
     <td class='admintd'><%=h content.contentpane %></td>
-    <td class='admintd'><%=h content.menutitle %></td>
     <td class='admintd'><%=h content.contenttype %></td>
     <td class='admintd'><%=h content.anchor %></td>
     <td class='admintd'><%=h content.publish %></td>
-    <td class='admintd'><%=h content.hidden %></td>
     <td class='admintd'><%=h content.order %></td>
     <td class='admintd'><%=h !content.article.blank? %></td>
     <td class='admintd'><%= link_to 'Show', content %></td>

@@ -38,10 +38,10 @@
   </div>
   <div id='bodyfooter'>
     <% if action_name == "index" %>
-    <div id='tweet'>Happy Holidays to all!! Members, recharge yourselves over break...we've got an exciting second semester with Closer, CelebAutoBio, and DRS!! <span id='tweetdate'>23 days ago</span></div>
-    <div id='twitbird'>bird</div>
+    <!-- <div id='tweet'>Happy Holidays to all!! Members, recharge yourselves over break...we've got an exciting second semester with Closer, CelebAutoBio, and DRS!! <span id='tweetdate'>23 days ago</span></div>
+    <div id='twitbird'><%= image_tag "layout/birdtop.gif", :id => "birdtop" %><%= image_tag "layout/birdbot.gif", :id => "birdbot" %></div> -->
     <% end %>
-    <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre'>Twitter</a></span><span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts'>Facebook</a></span><span class='fright'>Send us an <a href='mailto:somebody@snstheatre.org'>Email</a></span><br clear='all' style='height:0px;' />
+    <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre' target='_blank'>Twitter</a></span><span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts' target='_blank'>Facebook</a></span><span class='fright'>Send us an <a href='#'>Email</a></span><br clear='all' style='height:0px;' />
   </div>
   <% unless session[:user_id].nil? || session[:user_id].blank? %>
     <%= render :partial => "admin" %>

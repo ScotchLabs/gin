@@ -42,7 +42,11 @@
   </p>
   <p>
     <%= f.label :ticketstatus, "Ticket status" %><%= ast %><br />
-	<%= f.select("ticketstatus", {"Open","open","Closed","closed","Completed","completed"}) %>
+  	<%= f.select("ticketstatus", {"Open","open","Closed","closed","Completed","completed"}) %>
+  </p>
+  <p>
+    <%= f.label :timesvisible, "Performance times visible?" %><%= ast %><br />
+    <%= f.check_box :timesvisible %>
   </p>
   <p>
     <%= f.submit 'Update' %>

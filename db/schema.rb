@@ -9,14 +9,12 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100203044220) do
+ActiveRecord::Schema.define(:version => 20100203073111) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
-    t.string   "menutitle"
     t.string   "anchor"
     t.boolean  "publish"
-    t.boolean  "hidden"
     t.integer  "order"
     t.text     "article"
     t.string   "contentpane"
@@ -92,6 +90,7 @@ ActiveRecord::Schema.define(:version => 20100203044220) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "director"
+    t.boolean  "timesvisible"
   end
 
   create_table "updates", :force => true do |t|

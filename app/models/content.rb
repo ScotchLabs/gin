@@ -12,7 +12,7 @@ class Content < ActiveRecord::Base
     ["About Us", "about"],
     ["70th Ann. Init.", "70ai"]
   ]
-  validates_presence_of :title, :anchor
+  validates_presence_of :title, :anchor, :contenttype, :contentpane, :publish
   validates_numericality_of :order
   validates_inclusion_of :contenttype, :in => CONTENT_TYPES.map {|disp, value| value}
   validates_inclusion_of :contentpane, :in => PANES.map {|disp, val| val}

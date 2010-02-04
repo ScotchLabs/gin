@@ -52,7 +52,7 @@ private
   
   def password_retyped
     if hashed_password.blank? && salt.blank?
-      errors.add(:assword, "doesn't match the retyped password") if password != retype
+      errors.add(:password, "doesn't match the retyped password") if password != retype
     end
   end
   

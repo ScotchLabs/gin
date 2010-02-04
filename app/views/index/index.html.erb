@@ -1,8 +1,4 @@
-<!--[if IE]>
-<div class='article'>
-  It looks like you're viewing this page with Internet Explorer. May I suggest you try <a href='http://www.mozilla.com/en-US/firefox/firefox.html' target='_blank'>Firefox</a> instead?
-</div>
-<![endif]-->
+<%= render :partial => "conditionals" %>
 <div class='article'>
   <div id='indexleft' class='fleft'>
     <div id='carouselwindow'>
@@ -14,7 +10,7 @@
       </div>
     </div>
     <div id='carouselnavigator'>
-      <div class='carouselnavbutton fleft' onclick='left();'>i</div>
+      <div class='carouselnavbutton fleft' onclick='left();'><%= image_tag "layout/larr.gif" %></div>
         <div id='carousellinkswindow' class='fleft'>
           <div id='carousellinkscontainer'>
             <% for show in @shows %>
@@ -23,7 +19,7 @@
             <br clear='all' style='height: 0px;' />
           </div>
         </div>
-      <div class='carouselnavbutton fright' onclick='right();'>i</div>
+      <div class='carouselnavbutton fright' onclick='right();'><%= image_tag "layout/rarr.gif" %></div>
     </div>
   </div>
   <div id='indexright' class='fright'>

@@ -1,49 +1,25 @@
 class Role < ActiveRecord::Base
   def crudshows
-    out = ""
-    out += (crudcshows?)? "c":""
-    out += (crudrshows?)? "r":""
-    out += (crudushows?)? "u":""
-    out += (cruddshows?)? "d":""
+    ((crudcshows?)? "c":"")+((crudrshows?)? "r":"")+((crudushows?)? "u":"")+((cruddshows?)? "d":"")
   end
   
   def crudupdates
-    out = ""
-    out += (crudcupdates?)? "c":""
-    out += (crudrupdates?)? "r":""
-    out += (cruduupdates?)? "u":""
-    out += (cruddupdates?)? "d":""
+    ((crudcupdates?)? "c":"")+((crudrupdates?)? "r":"")+((cruduupdates?)? "u":"")+((cruddupdates?)? "d":"")
   end
 
   def crudcontents
-    out = ""
-    out += (crudccontents?)? "c":""
-    out += (crudrcontents?)? "r":""
-    out += (cruducontents?)? "u":""
-    out += (cruddcontents?)? "d":""
+    ((crudccontents?)? "c":"")+((crudrcontents?)? "r":"")+((cruducontents?)? "u":"")+((cruddcontents?)? "d":"")
   end
   
   def crudroles
-    out = ""
-    out += (crudcroles?)? "c":""
-    out += (crudrroles?)? "r":""
-    out += (cruduroles?)? "u":""
-    out += (cruddroles?)? "d":""
+    ((crudcroles?)? "c":"")+((crudrroles?)? "r":"")+((cruduroles?)? "u":"")+((cruddroles?)? "d":"")
   end
   
   def crudusers
-    out = ""
-    out += (crudcusers?)? "c":""
-    out += (crudrusers?)? "r":""
-    out += (cruduusers?)? "u":""
-    out += (cruddusers?)? "d":""
+    ((crudcusers?)? "c":"")+((crudrusers?)? "r":"")+((cruduusers?)? "u":"")+((cruddusers?)? "d":"")
   end
   
   def crudroleassocs
-    out = ""
-    out += (crudcroleassocs?)? "c":""
-    out += (crudrroleassocs?)? "r":""
-    out += (cruduroleassocs?)? "u":""
-    out += (cruddroleassocs?)? "d":""
+    ((crudcroleassocs?)? "c":"")+((crudrroleassocs?)? "r":"")+((cruduroleassocs?)? "u":"")+((cruddroleassocs?)? "d":"")
   end
 end

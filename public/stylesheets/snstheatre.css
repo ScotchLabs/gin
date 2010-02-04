@@ -167,13 +167,22 @@ ul { list-style-type: none; min-width: 884px;}
   color: #ff9900;
 }
 #twitbird {
-  height: 51px;
-  width: 57px;
-  border: 1px solid red;
+  height: 53px;
+  width: 59px;
   position: absolute;
-  bottom: 18px;
+  bottom: 19px;
   left: 4px;
-  /*TODO put in image */
+}
+#twitbird img {
+  display: inline;
+  position: absolute;
+}
+#birdtop {
+  top: 0;
+  z-index: -2;
+}
+#birdbot {
+  bottom: 0;
 }
 #adminbutton {
   display:block;
