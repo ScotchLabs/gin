@@ -1,9 +1,10 @@
 #menu a {
   width: 110.5px;
 }
-ul {
+.article ul {
   list-style-type: disc;
   padding-left: 20px;
+  min-width: 0;
 }
 
 .article h2 {
