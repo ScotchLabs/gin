@@ -205,6 +205,9 @@ h2 {
   height: 52px;
   top: -46px;
 }
+#twitter_heyclickme {
+  text-align:center;
+}
 .twittercallout {
   display: none;
   color: #333333;

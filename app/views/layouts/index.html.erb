@@ -6,7 +6,7 @@
 	<%= stylesheet_link_tag "snstheatre", "carousel", :media => "all" %>
 	<%= javascript_include_tag :defaults, "jquery-1.4.1.min.js" %>
 	<% if action_name == "index" %>
-	 <%= javascript_include_tag "carousel.js", "twitter.js" %>
+  <%= javascript_include_tag "carousel.js", "twitter.js" %>
 	<% end %>
 	<script type='text/javascript'>
     jQuery.noConflict();
@@ -20,8 +20,8 @@
       jQuery("#twitter_update_list").show('fast');
       jQuery("#twitbird").css('display','block');
       window.onresize = checkWidth;
-      twitbirdstate = "normal";
       checkWidth();
+      loadTweets(1);
     });
     <% end %>
 	</script>
@@ -29,36 +29,20 @@
 <body>
   <div id='banner'></div>
   <div id='container'>
-    <div id='header'>
-      <h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1>
-      <h2>Student theatre at Carnegie Mellon since 1938</h2>
-    </div>
+    <div id='header'><h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1><h2>Student theatre at Carnegie Mellon since 1938</h2></div>
     <div id='nav' class='botcorner shadow'><%= render :partial => "menu" %></div>
     <div id='view'>
-      <!--[if IE]>
-        <div class='article' style='text-align:center;'>
-          It looks like you're viewing this page with Internet Explorer. May I suggest you try <a href='http://www.mozilla.com/en-US/firefox/firefox.html' target='_blank'>Mozilla Firefox</a> instead?
-        </div>
-      <![endif]-->
-      <noscript>
-       <div class='article' style='text-align:center;'>
-          It looks like your browser has Javascript turned off. If you want this page to render properly go to your browser's settings and turn Javascript on.
-       </div>
-      </noscript>
+      <!--[if IE]><div class='article' style='text-align:center;'>It looks like you're viewing this page with Internet Explorer. May I suggest you try <a href='http://www.mozilla.com/en-US/firefox/firefox.html' target='_blank'>Mozilla Firefox</a> instead?</div><![endif]-->
+      <noscript><div class='article' style='text-align:center;'>It looks like your browser has Javascript turned off. If you want this page to render properly go to your browser's settings and turn Javascript on.</div></noscript>
       <%= yield %>
     </div>
-    <div id='footer' class='topcorner shadow'>
-      &copy; 2009 Scotch'n'Soda Theatre at <b>Carnegie Mellon Univeristy</b><br />
-      5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br />
-      <a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a>
-    </div>
+    <div id='footer' class='topcorner shadow'>&copy; 2009 Scotch'n'Soda Theatre at <b>Carnegie Mellon Univeristy</b><br />5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br /><a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a></div>
   </div>
   <div id='bodyfooter'>
     <% if action_name == "index" %>
     <div id='twitter_update_list' class='twittercallout'></div>
-    <div id='twitter_heyclickme' class='twittercallout'>hey click me for twitter!</div>
-    <div id='twitbird' onmouseover='showClickme()' onmouseout='hideClickme()' onclick='showTwitter()' onblur='hideTwitter()'></div>
-    <script type="text/javascript" src="http://twitter.com/statuses/user_timeline/snstheatre.json?callback=twitterCallback&amp;count=1"></script>
+    <div id='twitter_heyclickme' class='twittercallout'>click for tweets!</div>
+    <div id='twitbird' onmouseover='showClickme()' onmouseout='hideClickme()' onclick='showTwitter()'></div>
     <% end %>
     <div id='bodyfootertext'>
       <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre' target='_blank'>Twitter</a></span>

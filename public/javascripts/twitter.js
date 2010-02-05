@@ -1,3 +1,10 @@
+function loadTweets(x) {
+  var url = "http://twitter.com/statuses/user_timeline/snstheatre.json?callback=twitterCallback&count=1";
+  var script = document.createElement('script');
+  script.setAttribute('src',url);
+  document.getElementsByTagName('head')[0].appendChild(script);
+}
+
 function twitterCallback(twitters) {
   var statusHTML = [];
   for (var i=0; i<twitters.length; i++){
@@ -45,13 +52,22 @@ function checkWidth() {
 }
 
 function showClickme() {
+  if (jQuery("#twitter_update_list")[0].style.display == "none")
+    jQuery("#twitter_heyclickme").show("fast");
 }
 
 function hideClickme() {
+  jQuery("#twitter_heyclickme").hide("fast");
+  if (jQuery("#twitter_update_list")[0].style.display != "none")
+    window.onclick=hideTwitter
 }
 
 function showTwitter() {
+  jQuery("#twitter_heyclickme").hide("fast");
+  jQuery("#twitter_update_list").show('fast');
 }
 
 function hideTwitter() {
+  checkWidth();
+  window.onclick=null;
 }
