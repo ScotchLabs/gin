@@ -3,11 +3,11 @@ function twitterCallback(twitters) {
   for (var i=0; i<twitters.length; i++){
     var username = twitters[i].user.screen_name;
     var status = twitters[i].text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url) {
-      return '<a href="'+url+'">'+url+'</a>';
+      return '<a href="'+url+'" target="_blank">'+url+'</a>';
     }).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
-      return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'">'+reply.substring(1)+'</a>';
+      return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'" target="_blank">'+reply.substring(1)+'</a>';
     });
-    statusHTML.push('<span id="tweet">'+status+'</span> <a id="tweetdate" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id+'">'+relative_time(twitters[i].created_at)+'</a>');
+    statusHTML.push('<span id="tweet">'+status+'</span> <a id="tweetdate" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id+'" target="_blank">'+relative_time(twitters[i].created_at)+'</a>');
   }
   document.getElementById('twitter_update_list').innerHTML = statusHTML.join('');
 }
@@ -44,6 +44,14 @@ function checkWidth() {
     jQuery("#twitter_update_list").show('fast');
 }
 
-function dumb() {
-  alert('dumb!');
+function showClickme() {
+}
+
+function hideClickme() {
+}
+
+function showTwitter() {
+}
+
+function hideTwitter() {
 }
