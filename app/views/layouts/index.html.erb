@@ -21,7 +21,7 @@
       jQuery("#twitbird").css('display','block');
       window.onresize = checkWidth;
       checkWidth();
-      loadTweets(1);
+      loadTweets();
     });
     <% end %>
 	</script>
@@ -40,8 +40,8 @@
   </div>
   <div id='bodyfooter'>
     <% if action_name == "index" %>
-    <div id='twitter_update_list' class='twittercallout'></div>
-    <div id='twitter_heyclickme' class='twittercallout'>click for tweets!</div>
+    <div id='twitter_update_list' class='twittercallout'><div id='twittertext'></div><div class='twitterstem'></div></div>
+    <div id='twitter_heyclickme' class='twittercallout'>click for tweets!<div class='twitterstem'></div></div>
     <div id='twitbird' onmouseover='showClickme()' onmouseout='hideClickme()' onclick='showTwitter()'></div>
     <% end %>
     <div id='bodyfootertext'>
