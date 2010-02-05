@@ -80,7 +80,6 @@ h1, h2, ul {
 #container {
   width: 900px;
   margin: 0px auto;
-  z-index: 0;
 }
 #header {
   height: 80px;
@@ -118,30 +117,31 @@ h2 {
 }
 #menu ul {
   list-style-type: none;
-  min-width: 884px;
+  min-width: 900px;
+  
 }
-.item {
+#menu li {
   position: relative;
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  padding: 8px 0px;
+  padding: 0px;
 }
-.menu { position: absolute; }
-.firstmenu { position: static; }
 #menu a {
   color: inherit;
-  display: block;
+  display: table-cell;
+  vertical-align: middle;
   width: 180px;
+  height: 48px;
 }
-#menu li:hover {
+#menu a:hover {
   background-image: -webkit-gradient(
     linear,
     left bottom,
     left top,
     color-stop(0, rgb(207,255,254)),
     color-stop(1, rgb(255,255,255))
-);
+  );
   background-image: -moz-linear-gradient(
     center bottom,
     rgb(207,255,254) 0%,
@@ -185,34 +185,8 @@ h2 {
   position: relative;
   min-width: 900px;
   letter-spacing: 0;
-  /*TODO text styles for bodyfooter */
-}
-#bodyfootercenterbkgdcontainer {
-  position: absolute;
-  z-index: -1;
-  height: 100%;
-  width: 99.5%;
-  top: 0px;
-}
-#bodyfooterbkgd {
-  position: absolute;
-  float: left;
-  z-index: -2;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
   background: #333333;
-  color: #333333;
-}
-#bodyfootercenterbkgd {
-  margin: 0px auto;
-  width: 900px;
-  height: 100%;
-  background-color: #333333;
-  color: #333333;
-}
-#bodyfootertext {
+  /*TODO text styles for bodyfooter */
 }
 #bodyfooter a { color: white; font-weight: bold; }
 #bodyfooter a:hover { color: white; }
@@ -223,7 +197,16 @@ h2 {
 }
 .bl { border-width: 0px 0px 0px 1px; border-style: solid; border-color: white; }
 .br { border-width: 0px 1px 0px 0px; border-style: solid; border-color: white; }
-#twitter_update_list {
+#twitbird {
+  display: none;
+  background: transparent url('/images/layout/bird.png') no-repeat;
+  position: absolute;
+  width: 58px;
+  height: 52px;
+  top: -46px;
+}
+.twittercallout {
+  display: none;
   color: #333333;
   position: absolute;
   left: 20px;
@@ -242,7 +225,6 @@ h2 {
   -webkit-border-bottom-right-radius: 8px;
   -moz-border-radius-bottomleft: 8px;
   -moz-border-radius-bottomright: 8px;
-  z-index: -1;
   /*TODO add stem */
 }
 #twitter_update_list span {
@@ -259,25 +241,6 @@ h2 {
 }
 #tweet {
   /*TODO tweet text styles */
-}
-#twitbird {
-  height: 53px;
-  width: 59px;
-  position: absolute;
-  bottom: 19px;
-  left: 4px;
-}
-#twitbird img {
-  display: inline;
-  position: absolute;
-}
-#birdtop {
-  top: 0;
-  z-index: -2;
-}
-#birdbot {
-  bottom: 0;
-  z-index: -2;
 }
 #adminbutton {
   display:block;

@@ -4,7 +4,6 @@ function left() {
   if (x == "") x = "0px";
   var y = parseInt(x.substring(0,x.indexOf("px")));
   y += 165;
-  //console.log(x,y);
   x = y+"px";
   if (y <= 0) {
     navleft = y;
@@ -18,7 +17,6 @@ function right() {
   if (x == "") x = "0px";
   var y = parseInt(x.substring(0,x.indexOf("px")));
   y -= 165;
-  //console.log(x,y);
   x = y+"px";
   if (y > navmin) {
     navleft = y;
@@ -33,5 +31,4 @@ function carousel(abbrev) {
   x = i*-511;
   y = x+"px";
   jQuery("#carouselitemscontainer").animate({left: y},"fast");
-  //console.log(i);
 }

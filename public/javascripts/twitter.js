@@ -36,3 +36,14 @@ function relative_time(time_value) {
     return (parseInt(delta / 86400)).toString() + ' days ago';
   }
 }
+
+function checkWidth() {
+  if (document.body.offsetWidth < 1260)
+    jQuery("#twitter_update_list").hide('slow');
+  else if (document.body.offsetWidth >= 1260)
+    jQuery("#twitter_update_list").show('fast');
+}
+
+function dumb() {
+  alert('dumb!');
+}
