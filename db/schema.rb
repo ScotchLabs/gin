@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100203073111) do
+ActiveRecord::Schema.define(:version => 20100206222717) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(:version => 20100203073111) do
     t.datetime "updated_at"
     t.string   "director"
     t.boolean  "timesvisible"
+    t.string   "shortdisplayname"
   end
 
   create_table "updates", :force => true do |t|

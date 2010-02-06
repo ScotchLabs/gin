@@ -6,12 +6,21 @@ class Show < ActiveRecord::Base
     ["Open",  "open"],
     ["Completed", "completed"]
   ]
-  validates_presence_of :name, :abbrev, :imageurl, :ticketstatus, :performancetimes
+  validates_presence_of :name, :shortdisplayname, :abbrev, :imageurl, :ticketstatus, :performancetimes
   validates_uniqueness_of :abbrev
+  validates_length_of :shortdisplayname, :maximum => 30
   validates_inclusion_of :ticketstatus, :in => TICKETSTATUS.map {|disp, value| value}
   validates_format_of :imageurl, :with => %r{\.(gif|jpg|png)$}i, :message => "must be a URL for GIF, JPG, or PNG image.", :allow_blank => true
   validate :image_exists
   validate :performancetimes_parsable
+  
+  def displayname
+    if name.length() > 30
+      shortdisplayname
+    else
+      name
+    end
+  end
   
   def inseason
     now = Time.new
@@ -83,8 +92,8 @@ class Show < ActiveRecord::Base
 			"<a href='#'>Reserve my ticket now.</a>"
 		elsif ticketstatus == "closed"
 			"Tickets are not yet available for reservation (<a href='#'>sign up for an alert</a>)."
-		elsif ticketstatus != "completed"
-			"<a href='#'>View more about this past Scotch'n'Soda production.</a>"
+		#elsif ticketstatus == "completed"
+		#	"<a href='#'>View more about this past Scotch'n'Soda production.</a>"
 		end
   end
 

@@ -33,6 +33,7 @@
   width: 487px;
   height: 302px;
   overflow: hidden;
+  position:relative;
   -webkit-border-top-left-radius: 8px;
   -webkit-border-top-right-radius: 8px;
   -moz-border-radius-topleft: 8px;
@@ -44,7 +45,8 @@
 }
 #carouselitemscontainer {
   height: 100%;
-  position: relative;
+  position: absolute;
+  right: 0;
 }
 .carouselitem {
   margin: 0px 24px 24px 0px;
@@ -103,7 +105,8 @@
   overflow: hidden;
 }
 #carousellinkscontainer {
-  position: relative;
+  position: absolute;
+  right: 0;
   height: 100%;
 }
 .carousellink {
@@ -122,6 +125,9 @@
 .carlinktop {
   bottom: 0;
   position: absolute;
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: +1px;
 }
 .carlinkbot {
   border-style: solid;

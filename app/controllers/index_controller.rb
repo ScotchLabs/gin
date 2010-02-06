@@ -5,6 +5,7 @@ class IndexController < ApplicationController
     @shows.sort { |x, y| (Time.parse((y.performancetimes.split("|")[0].nil?)? "" : y.performancetimes.split("|")[0])<Time.parse((x.performancetimes.split("|")[0].nil?)? "" : x.performancetimes.split("|")[0]))? -1:1 }
     @shows=@shows.reverse
     @shows.each { |show| @activeshow = show unless !show.upcoming }
+    @shows=@shows.reverse
     @contents = Content.all(:order => "contents.order ASC")
   end
   

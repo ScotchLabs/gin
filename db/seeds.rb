@@ -97,8 +97,8 @@ Roleassoc.create(:roleid => "betar", :userid => "achivett")
 Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
 Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
 
-# fields: name, abbrev, loc, imageurl, author, ticketprices, performancetimes, ticketstatus, director, timesvisible
-# required: name, abbrev, imageurl, ticketstatus, performancetimes, timesvisible
+# fields: name, shortdisplayname, abbrev, loc, imageurl, author, ticketprices, performancetimes, ticketstatus, director, timesvisible
+# required: name, shortdisplayname, abbrev, imageurl, ticketstatus, performancetimes, timesvisible
 #Show.create(
 # :name => "",
 # :abbrev => "",
@@ -109,6 +109,7 @@ Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
 #)
 Show.create(
   :name => "Scotch On The Rocks (With a Twist)",
+  :shortdisplayname => "Scotch on the Rocks",
   :abbrev => "sotrwat",
   :imageurl => "sotrwat.png",
   :performancetimes => "May 2 2008, 7PM|May 3 2008, 7PM",
@@ -117,6 +118,7 @@ Show.create(
 )
 Show.create(
   :name => "Scotch Straight Up",
+  :shortdisplayname => "Scotch Straight Up",
   :abbrev => "ssu",
   :imageurl => "ssu.png",
   :performancetimes => "Mat 2 2008, 9PM|May 3 2008, 9PM",
@@ -125,6 +127,7 @@ Show.create(
 )
 Show.create(
   :name => "A Funny Thing Happened On The Way To The Forum",
+  :shortdisplayname => "Forum",
   :abbrev => "forum",
   :imageurl => "forum.png",
   :performancetimes => "April 17 2008, 11PM|April 18 2008, 3PM|April 18 2008, 11PM|April 19 2008, 3PM|April 19 2008, 8PM",
@@ -136,6 +139,7 @@ Show.create(
 )
 Show.create(
   :name => "Proof",
+  :shortdisplayname => "Proof",
   :abbrev => "proof",
   :imageurl => "proof.png",
   :performancetimes => "Feb 15 2008, 8PM|Feb 16 2008, 3PM|Feb 16 2008, 8PM",
@@ -147,6 +151,7 @@ Show.create(
 )
 Show.create(
   :name => "The Pillowman",
+  :shortdisplayname => "The Pillowman",
   :abbrev => "pillowman",
   :imageurl => "pillowman.png",
   :performancetimes => "Nov 29 2007, 8PM|Nov 30 2007, 5PM|Nov 30 2007, 10PM",
@@ -158,6 +163,7 @@ Show.create(
 )
 Show.create(
   :name => "The Complete Works of William Shakespeare (Abridged)",
+  :shortdisplayname => "CWoWS(A)",
   :abbrev => "cwowsa",
   :imageurl => "cwowsa.png",
   :performancetimes => "Oct 26 2007, 8PM|Oct 27 2007, 4PM|Oct 27 2007, 8PM",
@@ -169,6 +175,7 @@ Show.create(
 )
 Show.create(
   :name => "The Visit",
+  :shortdisplayname => "The Visit",
   :abbrev => "visit",
   :loc => "McConomy, UC",
   :imageurl => "tv.png",
@@ -180,6 +187,7 @@ Show.create(
 )
 Show.create(
   :name => "A Bottle of Scotch",
+  :shortdisplayname => "A Bottle of Scotch",
   :abbrev => "abos",
   :loc => "Alumni Hall, CFA",
   :imageurl => "abos.png",
@@ -189,6 +197,7 @@ Show.create(
 )
 Show.create(
   :name => "A Few Good Men",
+  :shortdisplayname => "A Few Good Men",
   :abbrev => "afgm",
   :loc => "Peter Wright McKenna, UC",
   :imageurl => "afgm.png",
@@ -200,6 +209,7 @@ Show.create(
 )
 Show.create(
   :name => "Me And My Girl",
+  :shortdisplayname => "Me And My Girl",
   :abbrev => "mamg",
   :loc => "Rangos Ballroom, UC",
   :imageurl => "mamg.png",
@@ -212,6 +222,7 @@ Show.create(
 )
 Show.create(
   :name => "Chugging Scotch",
+  :shortdisplayname => "Chugging Scotch",
   :abbrev => "chug",
   :loc => "Conan Room, UC",
   :imageurl => "chug.png",
@@ -222,6 +233,7 @@ Show.create(
 )
 Show.create(
   :name => "The Mystery of Edwin Drood",
+  :shortdisplayname => "The Mystery of Edwin Drood",
   :abbrev => "drood",
   :loc => "McConomy, UC",
   :imageurl => "drood.png",
@@ -234,6 +246,7 @@ Show.create(
 )
 Show.create(
   :name => "Betty's Summer Vacation",
+  :shortdisplayname => "Betty's Summer Vacation",
   :abbrev => "betty",
   :loc => "McConomy, UC",
   :imageurl => "betty.png",
@@ -246,6 +259,7 @@ Show.create(
 )
 Show.create(
   :name => "A Bottle of Scotch part two: Back to the Bottle",
+  :shortdisplayname => "A Bottle of Scotch, Part Two",
   :abbrev => "bttb",
   :loc => "Alumni Hall, CFA",
   :imageurl => "bttb.png",
@@ -256,6 +270,7 @@ Show.create(
 )
 Show.create(
   :name => "Closer",
+  :shortdisplayname => "Closer",
   :abbrev => "closer",
   :loc => "Peter Wright McKenna, UC",
   :imageurl => "closer.png",
@@ -267,9 +282,10 @@ Show.create(
 )
 Show.create(
   :name => "Dirty Rotten Scoundrels",
+  :shortdisplayname => "Dirty Rotten Scoundrels",
   :abbrev => "drs",
   :loc => "Rangos Ballroom, UC",
-  :imageurl => "temp.png",
+  :imageurl => "drs.png",
   :author => "Jeffrey Lane and David Yazbek",
   :performancetimes => "February 15 2010|February 16 2010|February 17 2010",
   :ticketstatus => "closed",

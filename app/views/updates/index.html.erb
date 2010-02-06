@@ -20,13 +20,13 @@ color = true
 	end
 %>
   <tr <%= style %>>
-    <td class='admintd'><%=h update.name %></td>
-    <td class='admintd'><%=h update.anchor %></td>
-    <td class='admintd'><%=h update.expiredate %></td>
-    <td class='admintd'><%=h !update.article.blank? %></td>
-    <td class='admintd'><%= link_to 'Show', update %></td>
-    <% if session[:crud]["u"]["updates"] %><td class='admintd'><%= link_to 'Edit', edit_update_path(update) %></td><% end %>
-    <% if session[:crud]["d"]["updates"] %><td class='admintd'><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%=h update.name %></td>
+    <td><%=h update.anchor %></td>
+    <td><%=h update.expiredate %></td>
+    <td><%=h !update.article.blank? %></td>
+    <td><%= link_to 'Show', update %></td>
+    <% if session[:crud]["u"]["updates"] %><td><%= link_to 'Edit', edit_update_path(update) %></td><% end %>
+    <% if session[:crud]["d"]["updates"] %><td><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>

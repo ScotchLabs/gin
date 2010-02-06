@@ -17,10 +17,10 @@ color = true
 	end
 %>
   <tr <%= style %>>
-    <td class='admintd'><%=h user.name %></td>
-    <td class='admintd'><%= link_to 'Show', user %></td>
-    <% if session[:crud]["u"]["users"] %><td class='admintd'><%= link_to 'Edit', edit_user_path(user) %></td><% end %>
-    <% if session[:crud]["d"]["users"] %><td class='admintd'><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%=h user.name %></td>
+    <td><%= link_to 'Show', user %></td>
+    <% if session[:crud]["u"]["users"] %><td><%= link_to 'Edit', edit_user_path(user) %></td><% end %>
+    <% if session[:crud]["d"]["users"] %><td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
