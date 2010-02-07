@@ -16,7 +16,7 @@
       jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 511) + "px";
       jQuery('#carousellinkscontainer')[0].style.width = (jQuery('#carousellinkscontainer > div').size() * 165) + "px";
       navright = 0;
-      navmin = (jQuery('#carousellinkscontainer > div').size()-3) * -165;
+      navmin = (jQuery('#carousellinkscontainer > div').size()-2) * -165;
       var i;
       for (i=0; i<jQuery('#carouselitemscontainer > div').size(); i++)
         if (jQuery('#carouselitemscontainer > div')[i].id == "carouselitem_<%= @activeshow.abbrev %>")
@@ -30,9 +30,7 @@
       jQuery("#twitbird").css('display','block');
       
       // twitter UI
-      jQuery("#twitter_update_list").show('fast');
       window.onresize = checkWidth;
-      checkWidth();
       loadTweets();
       
       // colorbox

@@ -4,12 +4,6 @@ function loadTweets() {
   script.setAttribute('src',url);
   document.getElementsByTagName('head')[0].appendChild(script);
 }
-/*function loadTweets2() {
-  var url = "http://twitter.com/statuses/user_timeline/snstheatre.json?callback=twitterCallback2&count=5";
-  var script = document.createElement('script');
-  script.setAttribute('src',url);
-  document.getElementsByTagName('head')[0].appendChild(script);
-}*/
 
 function twitterCallback(twitters) {
   var statusHTML = [];
@@ -22,23 +16,9 @@ function twitterCallback(twitters) {
     });
     statusHTML.push('<span class="tweet" style="display:block;">'+status+' <a class="tweetdate" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id+'" target="_blank">'+relative_time(twitters[i].created_at)+'</a></span>');
   }
-  //statusHTML.push('<span id="moretweets" onclick="loadTweets2()">more</span>');
   document.getElementById('twittertext').innerHTML = statusHTML.join('');
+  checkWidth();
 }
-/*function twitterCallback2(twitters) {
-  var statusHTML = [];
-  for (var i=0; i<twitters.length; i++){
-    var username = twitters[i].user.screen_name;
-    var status = twitters[i].text.replace(/((https?|s?ftp|ssh)\:\/\/[^"\s\<\>]*[^.,;'">\:\s\<\>\)\]\!])/g, function(url) {
-      return '<a href="'+url+'" target="_blank">'+url+'</a>';
-    }).replace(/\B@([_a-z0-9]+)/ig, function(reply) {
-      return  reply.charAt(0)+'<a href="http://twitter.com/'+reply.substring(1)+'" target="_blank">'+reply.substring(1)+'</a>';
-    });
-    statusHTML.push('<span class="tweet" style="display:block">'+status+' <a class="tweetdate" href="http://twitter.com/'+username+'/statuses/'+twitters[i].id+'" target="_blank">'+relative_time(twitters[i].created_at)+'</a></span>');
-  }
-  statusHTML.push('<span class="numtweets" onclick="loadTweets()">fewer</span>');
-  document.getElementById('twittertext').innerHTML = statusHTML.join('');
-}*/
 
 function relative_time(time_value) {
   var values = time_value.split(" ");
