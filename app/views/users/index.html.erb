@@ -4,19 +4,8 @@
   <tr>
     <th>Name</th>
   </tr>
-
-<%
-color = true
-@users.each do |user|
-	if color
-		color = false
-		style = " style=\"background-color:\#bbbbbb;\""
-	else
-		color = true
-		style = " style=\"background-color:\#dddddd;\""
-	end
-%>
-  <tr <%= style %>>
+<% @users.each do |user| %>
+  <tr>
     <td><%=h user.name %></td>
     <td><%= link_to 'Show', user %></td>
     <% if session[:crud]["u"]["users"] %><td><%= link_to 'Edit', edit_user_path(user) %></td><% end %>

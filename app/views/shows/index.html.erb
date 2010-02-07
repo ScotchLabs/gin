@@ -3,41 +3,14 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Short</th>
-    <th>Abbrev</th>
-    <th>Loc</th>
     <th>Imageurl</th>
-    <th>Author</th>
-    <th>Director</th>
-    <th>Ticketprices</th>
-    <th>Performancetimes</th>
     <th>Ticketstatus</th>
-    <th>Timesvisible</th>
   </tr>
-
-<%
-color = true
-@shows.each do |show|
-	if color
-		color = false
-		style = " style=\"background-color:\#bbbbbb;\""
-	else
-		color = true
-		style = " style=\"background-color:\#dddddd;\""
-	end
-%>
-  <tr <%= style %>>
+<% @shows.each do |show| %>
+  <tr>
     <td><%=h show.name %></td>
-    <td><%=h show.shortdisplayname %></td>
-    <td><%=h show.abbrev %></td>
-    <td><%=h show.loc %></td>
     <td><%=h show.imageurl %></td>
-    <td><%=h show.author %></td>
-    <td><%=h show.director %></td>
-    <td><%=h !show.ticketprices.blank? %></td>
-    <td><%=h !show.performancetimes.blank? %></td>
     <td><%=h show.ticketstatus %></td>
-    <td><%=h show.timesvisible %></td>
     <td><%= link_to 'Show', show %></td>
     <% if session[:crud]["u"]["shows"] %><td><%= link_to 'Edit', edit_show_path(show) %></td><% end %>
     <% if session[:crud]["d"]["shows"] %><td><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

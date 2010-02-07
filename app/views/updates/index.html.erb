@@ -7,19 +7,8 @@
     <th>Expiredate</th>
     <th>Article</th>
   </tr>
-
-<%
-color = true
-@updates.each do |update|
-	if color
-		color = false
-		style = " style=\"background-color:\#bbbbbb;\""
-	else
-		color = true
-		style = " style=\"background-color:\#dddddd;\""
-	end
-%>
-  <tr <%= style %>>
+<% @updates.each do |update| %>
+  <tr>
     <td><%=h update.name %></td>
     <td><%=h update.anchor %></td>
     <td><%=h update.expiredate %></td>

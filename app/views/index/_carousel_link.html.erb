@@ -1,6 +1,6 @@
 <div class='carousellink fleft' onclick='carousel("<%= carousel_link.abbrev %>");'>
   <div class='carlinktopcontainer'>
-    <div class='carlinktop'>
+    <div class='carlinktop<%= (carousel_link.upcoming)? " orange":"" %>'>
       <%= carousel_link.displayname %>
     </div>
   </div>

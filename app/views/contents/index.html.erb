@@ -10,19 +10,8 @@
     <th>Order</th>
     <th>Article</th>
   </tr>
-
-<%
-color = true
-@contents.each do |content|
-	if color
-		color = false
-		style = " style=\"background-color:\#bbbbbb;\""
-	else
-		color = true
-		style = " style=\"background-color:\#dddddd;\""
-	end	
-%>
-  <tr <%= style %>>
+<% @contents.each do |content| %>
+  <tr>
     <td><%=h content.title %></td>
     <td><%=h content.contentpane %></td>
     <td><%=h content.contenttype %></td>

@@ -35,21 +35,18 @@ class Show < ActiveRecord::Base
   end
   
   def datenavigator
-    return nil if performancetimes.blank?
     t = performancetimes.split("|")[0]
     t = Time.parse(t)
     t.strftime("%B %Y")
   end
   
   def datecarousel
-    return nil if performancetimes.blank?
     t = performancetimes.split("|")[0]
     t = Time.parse(t)
     t.strftime("%B %Y")
   end
   
   def perfcarousel
-    return nil if performancetimes.nil?
     perfarr = performancetimes.split("|")
     out = ""
     dayarr = Array.new
@@ -98,17 +95,11 @@ class Show < ActiveRecord::Base
   end
 
   def upcoming
-    if performancetimes.nil? || performancetimes.blank?
-      return true
-    else
-      return Time.parse(performancetimes.split("|").last)>Time.now
-    end
-    
+    Time.parse(performancetimes.split("|").last)>Time.now
   end
 
 private
   def performancetimes_parsable
-    return if performancetimes.nil? || performancetimes.blank?
     perfarr = performancetimes.split("|")
     for perf in perfarr
       begin

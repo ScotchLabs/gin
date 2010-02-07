@@ -16,6 +16,7 @@ a {
 a:hover { color: #00DDDD; }
 .fleft { float: left; }
 .fright { float: right; }
+.orange { color: #ff9900; }
 h1, h2, ul {
   margin: 0px;
   padding: 0px;

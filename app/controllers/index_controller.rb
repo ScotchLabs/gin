@@ -2,10 +2,8 @@ class IndexController < ApplicationController
   def index
     @updates = Update.all(:conditions => ["expiredate > ?", DateTime.now], :order => "updated_at DESC")
     @shows = Show.all
-    @shows.sort { |x, y| (Time.parse((y.performancetimes.split("|")[0].nil?)? "" : y.performancetimes.split("|")[0])<Time.parse((x.performancetimes.split("|")[0].nil?)? "" : x.performancetimes.split("|")[0]))? -1:1 }
-    @shows=@shows.reverse
-    @shows.each { |show| @activeshow = show unless !show.upcoming }
-    @shows=@shows.reverse
+    @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
+    @shows.reverse.each { |show| @activeshow = show unless !show.upcoming }
     @contents = Content.all(:order => "contents.order ASC")
   end
   

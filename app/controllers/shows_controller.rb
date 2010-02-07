@@ -4,9 +4,7 @@ class ShowsController < ApplicationController
   # GET /shows.xml
   def index
     @shows = Show.all
-    @shows.sort { |x, y| (Time.parse((y.performancetimes.split("|")[0].nil?)? "" : y.performancetimes.split("|")[0])<Time.parse((x.performancetimes.split("|")[0].nil?)? "" : x.performancetimes.split("|")[0]))? -1:1 }
-    @shows=@shows.reverse
-
+    @shows.sort! { |x, y| Time.parse(y.performancetimes.split("|")[0])<=>Time.parse(x.performancetimes.split("|")[0]) }
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }

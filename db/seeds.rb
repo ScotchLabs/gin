@@ -7,6 +7,7 @@ User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b1
 User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+puts "seeded Users"
 
 # need crud[c|r|u|d][contents|shows|users|updates|roles|roleassocs]
 Role.create(:name => "Administrator", :abbrev => "admin",
@@ -84,6 +85,7 @@ Role.create(:name => "Beta tester", :abbrev => "betar",
   :cruddupdates => true,
   :cruddroles => false,
   :cruddroleassocs => false)
+puts "seeded Roles"
 
 Roleassoc.create(:roleid => "admin", :userid => "sewillia")
 Roleassoc.create(:roleid => "writer", :userid => "jrfriedr")
@@ -96,6 +98,7 @@ Roleassoc.create(:roleid => "writer", :userid => "achivett")
 Roleassoc.create(:roleid => "betar", :userid => "achivett")
 Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
 Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
+puts "seeded Roleassocs"
 
 # fields: name, shortdisplayname, abbrev, loc, imageurl, author, ticketprices, performancetimes, ticketstatus, director, timesvisible
 # required: name, shortdisplayname, abbrev, imageurl, ticketstatus, performancetimes, timesvisible
@@ -121,7 +124,7 @@ Show.create(
   :shortdisplayname => "Scotch Straight Up",
   :abbrev => "ssu",
   :imageurl => "ssu.png",
-  :performancetimes => "Mat 2 2008, 9PM|May 3 2008, 9PM",
+  :performancetimes => "May 2 2008, 9PM|May 3 2008, 9PM",
   :timesvisible => true,
   :ticketstatus => "completed"
 )
@@ -287,11 +290,12 @@ Show.create(
   :loc => "Rangos Ballroom, UC",
   :imageurl => "drs.png",
   :author => "Jeffrey Lane and David Yazbek",
-  :performancetimes => "February 15 2010|February 16 2010|February 17 2010",
+  :performancetimes => "April 15 2010|April 16 2010|April 17 2010",
   :ticketstatus => "closed",
   :director => "Alex DiClaudio and Will Weiner",
   :timesvisible => false
 )
+puts "seeded Shows"
 
 Content.create(
   :title => "Purpose",
@@ -434,3 +438,4 @@ Content.create(
 <td><b>[[a+http://twitter.com/snstheatre|The Scotch'n'Soda Twitter Feed]]</b> - Follow us to keep up to date on our productions and organizational happenings!</td>
 </tr></table>"
 )
+puts "seeded Content"
