@@ -23,23 +23,19 @@
         listylenews = (controller_name == "updates")? gradient:""
         listylecontents = (controller_name == "contents")? gradient:""
         listyleroles = (controller_name == "roles")? gradient:""
-        listyleroleassocs = (controller_name == "roleassocs")? gradient:""
         astylewelcome = (controller_name == "admin")? "color:#FF9900;":""
         astyleshows = (controller_name == "shows")? "color:#FF9900;":""
         astylenews = (controller_name == "updates")? "color:#FF9900;":""
         astylecontents = (controller_name == "contents")? "color:#FF9900;":""
         astyleusers = (controller_name == "users")? "color:#FF9900;":""
         astyleroles = (controller_name == "roles")? "color:#FF9900;":""
-        astyleroleassocs = (controller_name == "roleassocs")? "color:#FF9900;":""
       %>
       <div id='menu'>
         <ul><li <%= listylewelcome %>><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, {:style => astylewelcome, :class => "menua"} %></li>
       	<% if session[:crud]["r"]["shows"] %><li <%= listyleshows %>><%= link_to "Shows", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
       	<% if session[:crud]["r"]["updates"] %><li <%= listylenews %>><%= link_to "News", updates_path, {:style => astylenews, :class => "menua"} %></li><% end %>
       	<% if session[:crud]["r"]["contents"] %><li <%= listylecontents %>><%= link_to "Contents", contents_path, {:style => astylecontents, :class => "menua"} %></li><% end %>
-      	<% if session[:crud]["r"]["users"] %><li <%= listyleusers %>><%= link_to "Users", users_path, {:style => astyleusers, :class => "menua"} %></li><% end %>
-      	<% if session[:crud]["r"]["roles"] %><li <%= listyleroles %>><%= link_to "Roles", roles_path, {:style => astyleroles, :class => "menua"} %></li><% end %>
-      	<% if session[:crud]["r"]["roleassocs"] %><li <%= listyleroleassocs %>><%= link_to "Roleassocs", roleassocs_path, {:style => astyleroleassocs, :class => "menua"} %></li><% end %>
+      	<% if session[:crud]["r"]["users"] || session[:crud]["r"]["roles"] || session[:crud]["r"]["roleassocs"] %><li <%= listyleusers %>><%= link_to "Users & Roles", users_path, {:style => astyleusers, :class => "menua"} %></li><% end %>
       	<li><%= link_to 'Log out', {:controller => "admin", :action => "logout"}, {:class => "menua"} %></li>
       	<script type='text/javascript'>
           jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px");

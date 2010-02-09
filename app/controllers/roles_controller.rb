@@ -1,15 +1,5 @@
 class RolesController < ApplicationController
   layout 'admin'
-  # GET /roles
-  # GET /roles.xml
-  def index
-    @roles = Role.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @roles }
-    end
-  end
 
   # GET /roles/1
   # GET /roles/1.xml
