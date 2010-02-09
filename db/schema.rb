@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100206222717) do
+ActiveRecord::Schema.define(:version => 20100209006000) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -76,6 +76,18 @@ ActiveRecord::Schema.define(:version => 20100206222717) do
     t.boolean  "cruddroleassocs"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "crudcticketalerts"
+    t.boolean  "crudrticketalerts"
+    t.boolean  "cruduticketalerts"
+    t.boolean  "cruddticketalerts"
+    t.boolean  "crudcticketrezs"
+    t.boolean  "crudrticketrezs"
+    t.boolean  "cruduticketrezs"
+    t.boolean  "cruddticketrezs"
+    t.boolean  "crudcticketsections"
+    t.boolean  "crudrticketsections"
+    t.boolean  "cruduticketsections"
+    t.boolean  "cruddticketsections"
   end
 
   create_table "shows", :force => true do |t|
@@ -92,6 +104,32 @@ ActiveRecord::Schema.define(:version => 20100206222717) do
     t.string   "director"
     t.boolean  "timesvisible"
     t.string   "shortdisplayname"
+  end
+
+  create_table "ticketalerts", :force => true do |t|
+    t.string   "showid"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ticketrezs", :force => true do |t|
+    t.string   "showid"
+    t.string   "name"
+    t.integer  "quantity"
+    t.string   "email"
+    t.integer  "sectionid"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ticketsections", :force => true do |t|
+    t.string   "showid"
+    t.string   "name"
+    t.string   "price"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "updates", :force => true do |t|

@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  showid: MyString
+  name: MyString
+  price: MyString
+  size: 1
+
+two:
+  showid: MyString
+  name: MyString
+  price: MyString
+  size: 1

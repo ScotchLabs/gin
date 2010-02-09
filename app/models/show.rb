@@ -1,6 +1,9 @@
 require 'net/http'
 
 class Show < ActiveRecord::Base
+  has_many :ticketsections
+  has_many :ticketrezs
+  has_many :ticketalerts
   TICKETSTATUS = [
     ["Closed", "closed"],
     ["Open",  "open"],

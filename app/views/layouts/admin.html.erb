@@ -18,21 +18,19 @@
       <%
         gradient = 'style="background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(222,222,222)), color-stop(1, rgb(255,255,255))); background-image: -moz-linear-gradient(center bottom, rgb(222,222,222) 0%, rgb(255,255,255) 100%)"'
         listylewelcome = (controller_name == "admin")? gradient:""
-        listyleshows = (controller_name == "shows")? gradient:""
-        listyleusers = (controller_name == "users")? gradient:""
+        listyleshows = (controller_name == "shows" || controller_name == "ticketrezs" || controller_name == "ticketalerts" || controller_name == "ticketsections")? gradient:""
+        listyleusers = (controller_name == "users" || controller_name == "roles" || controller_name == "roleassocs")? gradient:""
         listylenews = (controller_name == "updates")? gradient:""
         listylecontents = (controller_name == "contents")? gradient:""
-        listyleroles = (controller_name == "roles")? gradient:""
         astylewelcome = (controller_name == "admin")? "color:#FF9900;":""
-        astyleshows = (controller_name == "shows")? "color:#FF9900;":""
+        astyleshows = (controller_name == "shows" || controller_name == "ticketrezs" || controller_name == "ticketalerts" || controller_name == "ticketsections")? "color:#FF9900;":""
         astylenews = (controller_name == "updates")? "color:#FF9900;":""
         astylecontents = (controller_name == "contents")? "color:#FF9900;":""
-        astyleusers = (controller_name == "users")? "color:#FF9900;":""
-        astyleroles = (controller_name == "roles")? "color:#FF9900;":""
+        astyleusers = (controller_name == "users" || controller_name == "roles" || controller_name == "roleassocs")? "color:#FF9900;":""
       %>
       <div id='menu'>
         <ul><li <%= listylewelcome %>><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, {:style => astylewelcome, :class => "menua"} %></li>
-      	<% if session[:crud]["r"]["shows"] %><li <%= listyleshows %>><%= link_to "Shows", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
+      	<% if session[:crud]["r"]["shows"] %><li <%= listyleshows %>><%= link_to "Shows & Tickets", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
       	<% if session[:crud]["r"]["updates"] %><li <%= listylenews %>><%= link_to "News", updates_path, {:style => astylenews, :class => "menua"} %></li><% end %>
       	<% if session[:crud]["r"]["contents"] %><li <%= listylecontents %>><%= link_to "Contents", contents_path, {:style => astylecontents, :class => "menua"} %></li><% end %>
       	<% if session[:crud]["r"]["users"] || session[:crud]["r"]["roles"] || session[:crud]["r"]["roleassocs"] %><li <%= listyleusers %>><%= link_to "Users & Roles", users_path, {:style => astyleusers, :class => "menua"} %></li><% end %>

@@ -1,0 +1,28 @@
+<p>
+  <b>Showid:</b>
+  <%=h @ticketrez.showid %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @ticketrez.name %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%=h @ticketrez.quantity %>
+</p>
+
+<p>
+  <b>Email:</b>
+  <%=h @ticketrez.email %>
+</p>
+
+<p>
+  <b>Sectionid:</b>
+  <%=h @ticketrez.sectionid %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticketrez_path(@ticketrez) %> |
+<%= link_to 'Back', shows_path %>

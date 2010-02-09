@@ -5,6 +5,10 @@ class ShowsController < ApplicationController
   def index
     @shows = Show.all
     @shows.sort! { |x, y| Time.parse(y.performancetimes.split("|")[0])<=>Time.parse(x.performancetimes.split("|")[0]) }
+    @ticketalerts = Ticketalert.all
+    @ticketrezs = Ticketrez.all
+    @ticketsections = Ticketsection.all
+    
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @shows }
@@ -15,6 +19,9 @@ class ShowsController < ApplicationController
   # GET /shows/1.xml
   def show
     @show = Show.find(params[:id])
+    @ticketalerts = Ticketalert.all(:conditions => ["showid = ?", @show.abbrev])
+    @ticketrezs = Ticketrez.all(:conditions => ["showid = ?", @show.abbrev])
+    @ticketsections = Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
 
     respond_to do |format|
       format.html # show.html.erb

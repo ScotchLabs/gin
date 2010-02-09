@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :ticketsections
+
+  map.resources :ticketrezs
+
+  map.resources :ticketalerts
+
   map.resources :roleassocs
 
   map.resources :roles

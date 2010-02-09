@@ -1,0 +1,28 @@
+<h1>Editing ticketsection</h1>
+
+<% form_for(@ticketsection) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :showid %><br />
+    <%= f.text_field :showid %>
+  </p>
+  <p>
+    <%= f.label :name %><br />
+    <%= f.text_field :name %>
+  </p>
+  <p>
+    <%= f.label :price %><br />
+    <%= f.text_field :price %>
+  </p>
+  <p>
+    <%= f.label :size %><br />
+    <%= f.text_field :size %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @ticketsection %> |
+<%= link_to 'Back', shows_path %>
