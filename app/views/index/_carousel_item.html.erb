@@ -7,6 +7,14 @@
     <% if !carousel_item.director.blank? %><span class='carouselinfo_director'>Directed by <%= carousel_item.director %>.</span><br /><% end %>
     <% if carousel_item.timesvisible %><br /><span class='carouselinfo_perfcarousel'><%= carousel_item.perfcarousel %></span><br /><% end %>
     <% if !carousel_item.loc.blank? %><span class='carouselinfo_loc'><%= carousel_item.loc %></span><br /><% end %>
-    <br /><span class='carouselinfo_ticketstatus'><%= carousel_item.tickettext %></span><br />
+    <br /><span class='carouselinfo_ticketstatus'>
+      <%=
+      if carousel_item.ticketstatus=="open"
+        render :partial => "rez", :object => carousel_item
+      elsif carousel_item.ticketstatus=="closed"
+        render :partial => "alert", :object => carousel_item
+      end
+      %>
+    </span><br />
   </div>
 </div>

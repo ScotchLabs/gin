@@ -26,7 +26,7 @@
       jQuery("#carouselitemscontainer").css('right',y);
       
       // noscript
-      jQuery("#sendemail").css('display','block');
+      jQuery("#sendemaila").css('display','block');
       jQuery("#twitbird").css('display','block');
       
       // twitter UI
@@ -34,7 +34,7 @@
       loadTweets();
       
       // colorbox
-      jQuery("#sendemaila").colorbox({initialWidth:"50%", transition:"fade", width:"50%", inline:true, href:"#inline_sendemail"});
+      jQuery("#sendemaila").colorbox({initialWidth:"50%", transition:"fade", width:"50%", opacity:0.3, href:'#inline_sendemail', inline:true});
     });
     <% end %>
 	</script>
@@ -68,7 +68,7 @@
     <div id='bodyfootertext'>
       <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre' target='_blank'>Twitter</a></span>
       <span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts' target='_blank'>Facebook</a></span>
-      <span id='sendemail' class='fright' style='display:none;'>Send us an <a id='sendemaila' class='colorbox' href='#'>Email</a></span>
+      <span id='sendemail' class='fright' style='display:none;'>Send us an <a id='sendemaila' href='#'>Email</a></span>
       <div style='display:none;'>
       <div id='inline_sendemail'>
         send us an email!

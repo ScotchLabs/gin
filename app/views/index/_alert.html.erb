@@ -1,0 +1,10 @@
+Tickets are not yet available for reservation. (<a id='aalert_<%= alert.abbrev %>' href='#'>sign up for an alert</a>)
+<div style='display:none;'>
+  <div id='dalert_<%= alert.abbrev %>'>
+    alert for <%= alert.name %>!
+    <!-- put in a form that AJAXs some stuff over to createticketalert, gets the response, displays it -->
+  </div>
+</div>
+<script type='text/javascript'>
+  jQuery("#aalert_<%= alert.abbrev %>").colorbox({inline:true, href:'#dalert_<%= alert.abbrev %>', initialWidth:'50%', transition:'fade', width: '50%', opacity:0.3});
+</script>

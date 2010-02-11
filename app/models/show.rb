@@ -86,16 +86,6 @@ class Show < ActiveRecord::Base
     end
     out
   end
- 
-  def tickettext
-    if ticketstatus == "open"
-			"<a href='#'>Reserve my ticket now.</a>"
-		elsif ticketstatus == "closed"
-			"Tickets are not yet available for reservation (<a href='#'>sign up for an alert</a>)."
-		#elsif ticketstatus == "completed"
-		#	"<a href='#'>View more about this past Scotch'n'Soda production.</a>"
-		end
-  end
 
   def upcoming
     Time.parse(performancetimes.split("|").last)>Time.now
