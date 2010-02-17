@@ -2,12 +2,15 @@ require 'net/http'
 require 'xml/libxml'
 
 class Update < ActiveRecord::Base
+  named_scope :not_expired, :conditions => ['expiredate > ?', DateTime.now], :order => "updated_at DESC"
+
   validates_presence_of :name, :anchor, :expiredate
   validates_uniqueness_of :anchor
   # validate expiredate is in the future
   validate :expiredate_in_future
   validate :article_ok
   validate :templates_ok
+  
   def articletext
     # replace templates
     text = article
