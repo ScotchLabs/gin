@@ -1,16 +1,22 @@
-Tickets are not yet available for reservation. (<a id='a_alert_<%= alert.abbrev %>' href='#'>sign up for an alert</a>)
+Tickets are not yet available for reservation. (<a id='a_<%= alert.abbrev %>' href='#'>sign up for an alert</a>)
 <div style='display:none;'>
-  <div id='d_alert_<%= alert.abbrev %>'>
-    <div id='f_alert_<%= alert.abbrev %>' class='f_alert' style='display:none;'>
-      <div id='f_alert_<%= alert.abbrev %>_valid' style='display:none;'>Your input seems to be invalid. Please make sure all required fields are correctly filled.</div>
-      <div id='f_alert_<%= alert.abbrev %>_form' style='display:none;'>There was an error sending the form data. Try again later, or if you can't wait, <a href='mailto:webmaster@snstheatre.org' target='_blank'>email us</a>.</div>
+  <div id='div_<%= alert.abbrev %>'>
+    <div id='response_<%= alert.abbrev %>'></div>
+    <div id='flash_<%= alert.abbrev %>' class='flash_alert' style='display:none;'>
+      <div id='flash_<%= alert.abbrev %>_valid' style='display:none;'>One or more fields seems to be incorrectly filled.</div>
+      <div id='flash_<%= alert.abbrev %>_form' style='display:none;'>There was an error sending the form data. Try again later, or if you can't wait, <a href='mailto:webmaster@snstheatre.org' target='_blank'>email us</a>.</div>
     </div>
-    Sign up for an email alert for <i><%= alert.name %></i><br />
-    <!-- put in a form that AJAXs some stuff over to createticketalert, gets the response, displays it -->
-    Email address: <input id='e_alert_<%= alert.abbrev %>' type='text'></input>
-    <input type='submit' onclick="ticket('<%= alert.abbrev %>','alert')" value='Sign up'/>
+    <div id='query_<%= alert.abbrev %>'>
+      Sign up for an email alert for <i><%= alert.name %></i><br />
+      <!-- put in a form that AJAXs some stuff over to createticketalert, gets the response, displays it -->
+      <div id='form_<%= alert.abbrev %>'>
+        <input type='hidden' id='type' value='alert' />
+        Email address: <input id='email' type='text'></input>
+        <input type='submit' onclick="ticket('<%= alert.abbrev %>')" value='Sign up'/>
+      </div>
+    </div>
   </div>
 </div>
 <script type='text/javascript'>
-  jQuery("#a_alert_<%= alert.abbrev %>").colorbox({inline:true, href:'#d_alert_<%= alert.abbrev %>', initialWidth:'50%', initialHieght: '200px', transition:'fade', width: '50%', height: '200px', opacity:0.3});
+  jQuery("#a_<%= alert.abbrev %>").colorbox({inline:true, href:'#div_<%= alert.abbrev %>', initialWidth:'50%', initialHieght: '200px', transition:'fade', width: '50%', height: '200px', opacity:0.3});
 </script>

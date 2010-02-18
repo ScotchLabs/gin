@@ -1,21 +1,25 @@
-function ticket(abbrev, type) {
-  jQuery("#f_"+type+"_"+abbrev).hide();
-  jQuery("#f_"+type+"_"+abbrev+"_form").hide();
-  jQuery("#f_"+type+"_"+abbrev+"_valid").hide();
+function ticket(abbrev) {
+  jQuery("#flash_"+abbrev).hide();
+  jQuery("#flash_"+abbrev+"_form").hide();
+  jQuery("#flash_"+abbrev+"_valid").hide();
   // error checking
-  if (type==null || abbrev == null) return;
-  if (invalid(abbrev,type)) {
-    jQuery("#f_"+type+"_"+abbrev).show();
-    jQuery("#f_"+type+"_"+abbrev+"_valid").show();
+  if (abbrev == null) return;
+  type = jQuery("#form_"+abbrev+" > #type")[0].value;
+  if (invalid(abbrev)) {
+    jQuery("#flash_"+abbrev).show();
+    jQuery("#flash_"+abbrev+"_valid").show();
   }
   else {
-    email = jQuery("#e_"+type+"_"+abbrev).attr('value');
+  email = jQuery("#form_"+abbrev+" > #email")[0].value;
     // send request
     if (type == "alert") {
-      jQuery.ajax({type: 'post', url: "/createticketalert/", data: {email: email, showid: abbrev}, success: function(data, textStatus, XMLHttpRequest){ticketSuccess(data);}, error: function(xhr){ticketError(xhr, abbrev, type);}});
+      jQuery.ajax({type: 'post', url: "/createticketalert/", data: {email: email, showid: abbrev}, success: function(data){ticketSuccess(data, abbrev);}, error: function(){ticketError(abbrev);}});
     }
     else if (type == "rez") {
-      
+      name = jQuery("#form_"+abbrev+" > #name")[0].value;
+      phone = jQuery("#form_"+abbrev+" > #phone")[0].value;
+      perf = jQuery("#form_"+abbrev+" > #perf")[0].value;
+      jQuery.ajax({type: 'post', url: "/createticketrez/", data: {name: name, phone: phone, email: email, perf: perf}, success: function(data){ticketSuccess(data, abbrev);}, error: function(){ticketError(abbrev);}});
     }
     // loading gif
     jQuery("#cboxLoadedContent").hide();
@@ -23,23 +27,29 @@ function ticket(abbrev, type) {
   }
 }
 
-function ticketSuccess(data) {
-  data = data.match(/\<div id='ticketAlert'\>([a-zA-Z\ ]+)\<\/div\>/)[1];
+function ticketSuccess(data, abbrev) {
+  data = data.match(/\<div id='ticketResponse'\>([a-zA-Z\ ]+)\<\/div\>/)[1];
   jQuery("#cboxLoadingGraphic").hide();
-  jQuery("#cboxLoadedContent").html(data);
+  jQuery("#response_"+abbrev).html(data);
+  jQuery("#response_"+abbrev).show();
+  jQuery("#query_"+abbrev).hide();
   jQuery("#cboxLoadedContent").show();
 }
 
-function ticketError(xhr, abbrev ,type) {
+function ticketError(xhr, abbrev) {
   jQuery("#cboxLoadingGraphic").hide();
-  jQuery("#f_"+type+"_"+abbrev).show();
-  jQuery("#f_"+type+"_"+abbrev+"_form").show();
+  jQuery("#flash_"+abbrev).show();
+  jQuery("#flash_"+abbrev+"_form").show();
   jQuery("#cboxLoadedContent").show();
 }
 
-function invalid(abbrev, type) {
-  email = jQuery("#e_"+type+"_"+abbrev).attr('value');
+function invalid(abbrev) {
+  type = jQuery("#form_"+abbrev+" > #type")[0].value;
+  email = jQuery("#form_"+abbrev+" > #email")[0].value;
   if (type == "alert" && !email.match(/[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/))
       return true;
+  else if (type == "rez") {
+    
+  }
   return false;
 }

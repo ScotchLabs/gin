@@ -13,7 +13,9 @@ class IndexController < ApplicationController
   end
   
   def createticketalert
-    puts "DEBUG indexcontroller: #{params}"
+  end
+  
+  def createticketrez
   end
 protected
   def authorize

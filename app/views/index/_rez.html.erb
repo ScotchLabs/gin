@@ -1,10 +1,45 @@
-<a id='areserve_<%= rez.abbrev %>' href='#'>Reserve tickets now!</a>
+<a id='a_<%= rez.abbrev %>' href='#'>Reserve tickets now!</a>
 <div style='display:none;'>
-  <div id='dreserve_<%= rez.abbrev %>'>
-    reserve a ticket for <%= rez.name %>!
-    <!-- put in a form that AJAXs some stuff over to createticketrez, gets the response, displays it -->
+  <div id='div_<%= rez.abbrev %>'>
+    <div id='response_<%= rez.abbrev %>'></div>
+    <div id='flash_<%= rez.abbrev %>' class='flash_rez' style='display:none;'>
+      <div id='flash_<%= rez.abbrev %>_valid' style='display:none;'>One or more fields seems to be incorrectly filled.</div>
+      <div id='flash_<%= rez.abbrev %>_form' style='display:none;'>There was an error sending the form data. Try again later, or if you can't wait, <a href='mailto:webmaster@snstheatre.org' target='_blank'>email us</a>.</div>
+    </div>
+    <div id='query_<%= rez.abbrev %>'>
+      <!-- put in a form that AJAXs some stuff over to createticketrez, gets the response, displays it -->
+      Just provide us with the following information and your tickets will be reserved for you! You can pick them up and pay for them starting thirty minutes before showtime at the table in front of the performance space.<br />
+      <br />
+      If tickets to a specific show or section are sold out online, please try at the door starting 45 minutes prior to showtime - additional tickets are available there.<br />
+      <br />
+      <div id='form_<%= rez.abbrev %>'>
+        <input type='hidden' id='type' value='rez' />
+        (<span style='color:red;'>*</span> required)<br />
+        Name<span style='color:red;'>*</span>:<br />
+        <input id='name' type='text' /><br />
+        Phone<span style='color:red;'>*</span>:<br />
+        <input id='phone' type='text' /><br />
+        Email:<br />
+        <input id='email' type='text' /><br />
+        Performance<span style='color:red;'>*</span>:<br />
+        <select id='perf'>
+          <option>(choose...)</option>
+          <% for perf in rez.performances %>
+            <option value='<%= perf %>'><%= perf %></option>
+          <% end %>
+        </select><br />
+        Select Ticket Types and Quantities<span style='color:red;'>*</span>:<br />
+        <% for section in rez.ticketsections %>
+          <%= section.name %>: <input type='text' id='section<%= section.id %>' size='3' /> tickets<br />
+        <% end %>
+        Do you have a Carnegie Mellon Student ID?<span style='color:red;'>*</span><br />
+        <input type='radio' value='yes' id='cmuidY' />Yes
+        <input type='radio' value='no' id='cmuidN' />No<br />
+        <input type='submit' onclick="ticket('<%= rez.abbrev %>')" value='Reserve'/>
+      </div>
+    </div>
   </div>
 </div>
 <script type='text/javascript'>
-  jQuery("#areserve_<%= rez.abbrev %>").colorbox({inline:true, href='#dreserve_<%= rez.abbrev %>', initialWidth:'50%', transition:'fade', width:'50%', opacity:0.3});
+  jQuery("#a_<%= rez.abbrev %>").colorbox({inline:true, href:'#div_<%= rez.abbrev %>', initialWidth:'50%', initialHeight:'500px', transition:'fade', width:'50%', height: '500px', opacity:0.3});
 </script>

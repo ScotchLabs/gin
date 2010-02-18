@@ -90,6 +90,17 @@ class Show < ActiveRecord::Base
   def upcoming
     Time.parse(performancetimes.split("|").last)>Time.now
   end
+  
+  def performances
+    timearr = Array.new
+    perfarr = performancetimes.split("|")
+    perfarr.each { |perf| timearr.push(Time.parse(perf).strftime("%B %d - %I:%M %p")) }
+    timearr
+  end
+
+  def ticketsections
+    Ticketsection.all(:conditions => ["showid = ?",abbrev])
+  end
 
 private
   def performancetimes_parsable
