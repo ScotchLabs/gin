@@ -69,7 +69,7 @@ class RoleassocsController < ApplicationController
     @roleassoc.destroy
 
     respond_to do |format|
-      format.html { redirect_to(roleassocs_url) }
+      format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
   end

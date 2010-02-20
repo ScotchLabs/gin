@@ -9,10 +9,12 @@
     <% if !carousel_item.loc.blank? %><span class='carouselinfo_loc'><%= carousel_item.loc %></span><br /><% end %>
     <br /><span class='carouselinfo_ticketstatus'>
       <%=
-      if carousel_item.ticketstatus=="open" && !carousel_item.ticketsections.blank?
+      if carousel_item.ticketstatus == "open" && !carousel_item.ticketsections.blank?
         render :partial => "rez", :object => carousel_item
-      elsif carousel_item.ticketstatus=="closed"
+      elsif carousel_item.ticketstatus == "closed"
         render :partial => "alert", :object => carousel_item
+      elsif carousel_item.ticketstatus == "completed"
+        # render :partial => "info", :object => carousel_item
       end
       %>
     </span><br />

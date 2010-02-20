@@ -5,15 +5,19 @@
 
   <p>
     <%= f.label :showid %><br />
-    <%= f.text_field :showid %>
+    <%= f.select :showid, Show.all.sort! { |y, x| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }.map {|show| [show.name, show.abbrev]} %>
   </p>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :price %><br />
-    <%= f.text_field :price %>
+    <%= f.label :pricewithid %><br />
+    <%= f.text_field :pricewithid %>
+  </p>
+  <p>
+    <%= f.label :pricewoutid %><br />
+    <%= f.text_field :pricewoutid %>
   </p>
   <p>
     <%= f.label :size %><br />

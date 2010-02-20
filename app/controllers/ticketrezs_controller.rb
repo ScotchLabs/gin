@@ -79,7 +79,7 @@ class TicketrezsController < ApplicationController
     @ticketrez.destroy
 
     respond_to do |format|
-      format.html { redirect_to(ticketrezs_url) }
+      format.html { redirect_to(shows_url) }
       format.xml  { head :ok }
     end
   end

@@ -79,7 +79,7 @@ class TicketsectionsController < ApplicationController
     @ticketsection.destroy
 
     respond_to do |format|
-      format.html { redirect_to(ticketsections_url) }
+      format.html { redirect_to(shows_url) }
       format.xml  { head :ok }
     end
   end
