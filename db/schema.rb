@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100220023900) do
+ActiveRecord::Schema.define(:version => 20100220215113) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -96,7 +96,6 @@ ActiveRecord::Schema.define(:version => 20100220023900) do
     t.string   "loc"
     t.string   "imageurl"
     t.string   "author"
-    t.string   "ticketprices"
     t.string   "performancetimes"
     t.string   "ticketstatus"
     t.datetime "created_at"
@@ -116,11 +115,13 @@ ActiveRecord::Schema.define(:version => 20100220023900) do
   create_table "ticketrezs", :force => true do |t|
     t.string   "showid"
     t.string   "name"
-    t.integer  "quantity"
     t.string   "email"
-    t.integer  "sectionid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "phone"
+    t.string   "performance"
+    t.boolean  "hasid"
+    t.string   "sectioninfo"
   end
 
   create_table "ticketsections", :force => true do |t|
@@ -129,8 +130,8 @@ ActiveRecord::Schema.define(:version => 20100220023900) do
     t.integer  "size"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "pricewithid"
-    t.string   "pricewoutid"
+    t.integer  "pricewithid"
+    t.integer  "pricewoutid"
   end
 
   create_table "updates", :force => true do |t|

@@ -22,6 +22,16 @@ class User < ActiveRecord::Base
     user
   end
   
+  def roleassocs
+    Roleassoc.all(:conditions => ["userid = ?",name])
+  end
+  
+  def roles
+    roles = Array.new
+    roleassocs.each {|r| roles.push Role.find_by_abbrev r.roleid}
+    roles
+  end
+  
   # 'password' is a virtual attribute
   def password
     @password

@@ -18,6 +18,10 @@ class Show < ActiveRecord::Base
   validate :image_exists
   validate :performancetimes_parsable
   
+  def ticketprices
+    #TODO
+  end
+  
   def displayname
     if name.length() > 30
       shortdisplayname

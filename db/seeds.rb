@@ -1,16 +1,23 @@
 # create a user in script/console and copy hashed_password and salt to here,
 # or use :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871"
 # for the password 'bunnies'
-User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
-User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-puts "seeded Users"
+users = true
+users = users && User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
+users = users && User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+if users
+  puts "seeded Users"
+else
+  puts "error seeding Users"
+end
+
 
 # need crud(c|r|u|d)(content|show|user|update|role(assoc)?|ticket(alert|rez|section))s
-Role.create(:name => "Administrator", :abbrev => "admin",
+roles = true
+roles = roles && Role.create(:name => "Administrator", :abbrev => "admin",
   :crudccontents => true,
   :crudrcontents => true,
   :cruducontents => true,
@@ -47,7 +54,7 @@ Role.create(:name => "Administrator", :abbrev => "admin",
   :crudrticketsections => true,
   :cruduticketsections => true,
   :cruddticketsections => true)
-Role.create(:name => "Content writer", :abbrev => "writer",
+roles = roles && Role.create(:name => "Content writer", :abbrev => "writer",
   :crudccontents => true,
   :crudrcontents => true,
   :cruducontents => true,
@@ -84,7 +91,7 @@ Role.create(:name => "Content writer", :abbrev => "writer",
   :crudrticketsections => true,
   :cruduticketsections => true,
   :cruddticketsections => true)
-Role.create(:name => "Beta tester", :abbrev => "betar",
+roles = roles && Role.create(:name => "Beta tester", :abbrev => "betar",
   :crudccontents => true,
   :crudrcontents => true,
   :cruducontents => true,
@@ -121,22 +128,31 @@ Role.create(:name => "Beta tester", :abbrev => "betar",
   :crudrticketsections => true,
   :cruduticketsections => true,
   :cruddticketsections => true)
-puts "seeded Roles"
+if roles
+  puts "seeded Roles"
+else
+  puts "error seeding Roles"
+end
 
-Roleassoc.create(:roleid => "admin", :userid => "sewillia")
-Roleassoc.create(:roleid => "writer", :userid => "jrfriedr")
-Roleassoc.create(:roleid => "betar", :userid => "jrfriedr")
-Roleassoc.create(:roleid => "writer", :userid => "amgross")
-Roleassoc.create(:roleid => "betar", :userid => "amgross")
-Roleassoc.create(:roleid => "writer", :userid => "dfreeman")
-Roleassoc.create(:roleid => "betar", :userid => "dfreeman")
-Roleassoc.create(:roleid => "writer", :userid => "achivett")
-Roleassoc.create(:roleid => "betar", :userid => "achivett")
-Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
-Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
-puts "seeded Roleassocs"
+roleassocs = true
+roleassocs = roleassocs && Roleassoc.create(:roleid => "admin", :userid => "sewillia")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "jrfriedr")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "jrfriedr")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "amgross")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "amgross")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "dfreeman")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "dfreeman")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "achivett")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "achivett")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
+if roleassocs
+  puts "seeded Roleassocs"
+else
+  puts "error seeding Roleassocs"
+end
 
-# fields: name, shortdisplayname, abbrev, loc, imageurl, author, ticketprices, performancetimes, ticketstatus, director, timesvisible
+# fields: name, shortdisplayname, abbrev, loc, imageurl, author, performancetimes, ticketstatus, director, timesvisible
 # required: name, shortdisplayname, abbrev, imageurl, ticketstatus, performancetimes, timesvisible
 #Show.create(
 # :name => "",
@@ -146,7 +162,8 @@ puts "seeded Roleassocs"
 # :performancetimes => "",
 # :timesvisible => 
 #)
-Show.create(
+shows = true
+shows = shows && Show.create(
   :name => "Scotch On The Rocks (With a Twist)",
   :shortdisplayname => "Scotch on the Rocks",
   :abbrev => "sotrwat",
@@ -155,7 +172,7 @@ Show.create(
   :timesvisible => true,
   :ticketstatus => "completed"
 )
-Show.create(
+shows = shows && Show.create(
   :name => "Scotch Straight Up",
   :shortdisplayname => "Scotch Straight Up",
   :abbrev => "ssu",
@@ -164,7 +181,7 @@ Show.create(
   :timesvisible => true,
   :ticketstatus => "completed"
 )
-Show.create(
+shows = shows && Show.create(
   :name => "A Funny Thing Happened On The Way To The Forum",
   :shortdisplayname => "Forum",
   :abbrev => "forum",
@@ -176,7 +193,7 @@ Show.create(
   :loc => "Rangos, UC",
   :author => "Stephen Sondheim, Burt Shevelove and Larry Gelbart"
 )
-Show.create(
+shows = shows && Show.create(
   :name => "Proof",
   :shortdisplayname => "Proof",
   :abbrev => "proof",
@@ -188,7 +205,7 @@ Show.create(
   :loc => "Peter Wright McKenna, UC",
   :author => "David Auburn"
 )
-Show.create(
+shows = shows && Show.create(
   :name => "The Pillowman",
   :shortdisplayname => "The Pillowman",
   :abbrev => "pillowman",
@@ -200,7 +217,7 @@ Show.create(
   :loc => "Rangos, UC",
   :author => "Martin McDonagh"
 )
-Show.create(
+shows = shows && Show.create(
   :name => "The Complete Works of William Shakespeare (Abridged)",
   :shortdisplayname => "CWoWS(A)",
   :abbrev => "cwowsa",
@@ -212,7 +229,7 @@ Show.create(
   :loc => "McConomy, UC",
   :author => "the Reduced Shakespeare Company"
 )
-Show.create(
+shows = shows && Show.create(
   :name => "The Visit",
   :shortdisplayname => "The Visit",
   :abbrev => "visit",
@@ -224,7 +241,7 @@ Show.create(
   :director => "Daniel Dewey and Jackie Bernard",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "A Bottle of Scotch",
   :shortdisplayname => "A Bottle of Scotch",
   :abbrev => "abos",
@@ -234,7 +251,7 @@ Show.create(
   :ticketstatus => "completed",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "A Few Good Men",
   :shortdisplayname => "A Few Good Men",
   :abbrev => "afgm",
@@ -246,68 +263,63 @@ Show.create(
   :director => "Christopher Wheelahan",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "Me And My Girl",
   :shortdisplayname => "Me And My Girl",
   :abbrev => "mamg",
   :loc => "Rangos Ballroom, UC",
   :imageurl => "mamg.png",
   :author => "L. Arthur Rose, Douglas Furber, and Noel Gay",
-  :ticketprices => "Tickets: $5 with CMU ID, $10 without.",
   :performancetimes => "April 16 2009 8 PM|April 17 2009 3 PM|April 17 2009 11 PM",
   :ticketstatus => "completed",
   :director => "Alex DiClaudio and Shannon Deep",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "Chugging Scotch",
   :shortdisplayname => "Chugging Scotch",
   :abbrev => "chug",
   :loc => "Conan Room, UC",
   :imageurl => "chug.png",
-  :ticketprices => "Free to the public",
   :performancetimes => "May 2 2009 8 PM",
   :ticketstatus => "completed",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "The Mystery of Edwin Drood",
   :shortdisplayname => "The Mystery of Edwin Drood",
   :abbrev => "drood",
   :loc => "McConomy, UC",
   :imageurl => "drood.png",
   :author => "Rupert Holmes",
-  :ticketprices => "$8 or $10 depending on section<br>$5 off with Student ID",
   :performancetimes => "October 30 2009 8 PM|October 31 2009 3 PM|October 31 2009 8 PM",
   :ticketstatus => "completed",
   :director => "Scott Wasserman and Tim Sherman",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "Betty's Summer Vacation",
   :shortdisplayname => "Betty's Summer Vacation",
   :abbrev => "betty",
   :loc => "McConomy, UC",
   :imageurl => "betty.png",
   :author => "Christopher Durang",
-  :ticketprices => "Tickets free to the public",
   :performancetimes => "December 4 2009 8 PM|December 5 2009 2 PM|December 5 2009 6 PM",
   :ticketstatus => "completed",
   :director => "Tim Sherman",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "A Bottle of Scotch part two: Back to the Bottle",
   :shortdisplayname => "A Bottle of Scotch, Part Two",
   :abbrev => "bttb",
   :loc => "Alumni Hall, CFA",
   :imageurl => "bttb.png",
-  :ticketprices => "$10",
   :performancetimes => "Nov 22 2009, 8 PM",
   :ticketstatus => "completed",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "Closer",
   :shortdisplayname => "Closer",
   :abbrev => "closer",
@@ -315,11 +327,11 @@ Show.create(
   :imageurl => "closer.png",
   :author => "Patrick Marber",
   :performancetimes => "February 19 2010, 8PM|February 20 2010, 3PM|February 20 2010, 8PM",
-  :ticketstatus => "closed",
+  :ticketstatus => "completed",
   :director => "Caity Pitts and Caitlin Cox",
   :timesvisible => true
 )
-Show.create(
+shows = shows && Show.create(
   :name => "Dirty Rotten Scoundrels",
   :shortdisplayname => "Dirty Rotten Scoundrels",
   :abbrev => "drs",
@@ -331,9 +343,72 @@ Show.create(
   :director => "Alex DiClaudio and Will Weiner",
   :timesvisible => false
 )
-puts "seeded Shows"
+if shows
+  puts "seeded Shows"
+else
+  puts "error seeding Shows"
+end
 
-Content.create(
+#fields: string showid, string name, int size, int pricewithid, int pricewoutid
+#required: all
+tixsections = true
+tixsections = tixsections && Ticketsection.create(
+  :showid => "mamg",
+  :name => "Section A",
+  :size => 200,
+  :pricewithid => 5,
+  :pricewoutid => 10
+)
+tixsections = tixsections && Ticketsection.create(
+  :showid => "chug",
+  :name => "Section A",
+  :size => 75,
+  :pricewithid => 0,
+  :pricewoutid => 0
+)
+tixsections = tixsections && Ticketsection.create(
+  :showid => "drood",
+  :name => "Section A",
+  :size => 100,
+  :pricewithid => 5,
+  :pricewoutid => 10
+)
+tixsections = tixsections && Ticketsection.create(
+  :showid => "drood",
+  :name => "Section B",
+  :size => 200,
+  :pricewithid => 3,
+  :pricewoutid => 8
+)
+tixsections = tixsections && Ticketsection.create(
+  :showid => "betty",
+  :name => "Section A",
+  :size => 300,
+  :pricewithid => 0,
+  :pricewoutid => 0
+)
+tixsections = tixsections && Ticketsection.create(
+  :showid => "bttb",
+  :name => "Section A",
+  :size => 200,
+  :pricewithid => 10,
+  :pricewoutid => 10
+)
+tixsections = tixsections && Ticketsection.create(
+  :showid => "closer",
+  :name => "Section A",
+  :size => 90,
+  :pricewithid => 3,
+  :pricewoutid => 5
+)
+if tixsections
+  puts "seeded Ticketsections"
+else
+  puts "error seeding Ticketsections"
+end
+
+contents = true
+contents = contents && Content.create(
   :title => "Purpose",
   :anchor => "purpose",
   :publish => true,
@@ -344,7 +419,7 @@ Content.create(
 <br />
 Ticket prices are kept low or are free of charge in order to encourage student patronage, and Scotch'n'Soda strives to make its shows accessible to all audience members while simultaneously challenging them to discover exciting new works and revisiting old favorites. Most importantly, from directing to hanging lighting to acting, painting, and even writing, there's a student in every position of every show."
 )
-Content.create(
+contents = contents && Content.create(
   :title => "Getting Involved",
   :anchor => "getinvolved",
   :publish => true,
@@ -368,7 +443,7 @@ Content.create(
 </table>
 In the beginning of the year, you've got tons of options. Meet us at the Activities Fair in September. Come to our Barbecue. Most importantly, come to a general meeting! These are wacky, fun-filled events where the Board fills the rest of the membership in on upcoming auditions, open staff positions, social events, and other juicy tidbits! Later on, watch the website's [[a+http://snstheatre.org/|News]] area, [[m+nqr@andrew.cmu.edu|sign up for the mailing list]], or watch our bboards for the latest information."
 )
-Content.create(
+contents = contents && Content.create(
   :title => "History",
   :anchor => "history",
   :publish => true,
@@ -381,7 +456,7 @@ In the 1960s, Scotch'n'Soda began expanding its season by producing shows for Ho
 <br />
 Today, Scotch'n'Soda proudly produces five to seven shows each diverse season, ranging from full-scale musicals to intimate black box plays, performing in a variety of spaces in the University Center and elsewhere on the Carnegie Mellon campus. With a strongly committed and talented membership spanning all six of Carnegie Mellon's undergraduate colleges and representing over 35 different majors, Scotch'n'Soda is growing still and is well poised to continue providing student-run theater to the Carnegie Mellon campus community for years to come."
 )
-Content.create(
+contents = contents && Content.create(
   :title => "Board of Directors",
   :anchor => "board",
   :publish => false,
@@ -391,7 +466,7 @@ Content.create(
   :article => "Because there is no administrative authority over Scotch'n'Soda, the organization is governed by a board of nine directors, each position elected annually by the general membership. These nine students work to contribute and act as executive producers to each production and hold weekly meetings to discuss all issues related to the organization.<br />
 board template goes here"
 )
-Content.create(
+contents = contents && Content.create(
   :title => "About the Initiative",
   :anchor => "about70ai",
   :publish => true,
@@ -402,7 +477,7 @@ Content.create(
 <br />
 As a response, Scotch'n'Soda has launched its first ever large scale fund-raising initiative. It is expected that by raising $160,000 to purchase essential equipment over the course of the campaign, Scotch'n'Soda will be able to reduce show budgets by at least 40% by greatly reducing rental costs. With financial support from Scotch'n'Soda alumni and the Pittsburgh and Carnegie Mellon communities, it is our greatest hope that we can become nearly self-sufficient in most areas of our annual budget, thereby ensuring that Scotch'n'Soda can continue to grow and fulfill its mission for years to come."
 )
-Content.create(
+contents = contents && Content.create(
   :title => "Giving to Scotch'n'Soda",
   :anchor => "giving",
   :publish => true,
@@ -425,7 +500,7 @@ Content.create(
 </tr>
 </table>"
 )
-Content.create(
+contents = contents && Content.create(
   :title => "Send Us An Email",
   :anchor => "email",
   :publish => false,
@@ -456,7 +531,7 @@ Content.create(
 </table>
 </form>"
 )
-Content.create(
+contents = contents && Content.create(
   :title => "Follow Us!",
   :anchor => "follow",
   :publish => true,
@@ -474,4 +549,8 @@ Content.create(
 <td><b>[[a+http://twitter.com/snstheatre|The Scotch'n'Soda Twitter Feed]]</b> - Follow us to keep up to date on our productions and organizational happenings!</td>
 </tr></table>"
 )
-puts "seeded Content"
+if contents
+  puts "seeded Content"
+else
+  puts "error seeding Contents"
+end

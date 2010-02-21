@@ -5,7 +5,7 @@
 
   <p>
     <%= f.label :showid %><br />
-    <%= f.text_field :showid %>
+    <%= f.select :showid, Show.all.sort! { |y, x| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }.map {|show| [show.name, show.abbrev]} %>
   </p>
   <p>
     <%= f.label :email %><br />

@@ -34,11 +34,6 @@
 </p>
 
 <p>
-  <b>Ticketprices:</b>
-  <%=h @show.ticketprices %>
-</p>
-
-<p>
   <b>Performancetimes:</b>
   <%=h @show.performancetimes %>
 </p>
@@ -62,7 +57,7 @@
   <tr>
     <th>Showid</th>
     <th>Name</th>
-    <th>Price</th>
+    <th>Price (ID/no ID)</th>
     <th>Size</th>
   </tr>
 
@@ -70,7 +65,7 @@
   <tr>
     <td><%=h ticketsection.showid %></td>
     <td><%=h ticketsection.name %></td>
-    <td><%=h ticketsection.price %></td>
+    <td><%=h ticketsection.pricewithid %>/<%=h ticketsection.pricewoutid %></td>
     <td><%=h ticketsection.size %></td>
     <td><%= link_to 'Show', ticketsection %></td>
     <% if session[:crud]["u"]["ticketsections"] %><td><%= link_to 'Edit', edit_ticketsection_path(ticketsection) %></td><% end %>

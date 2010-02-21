@@ -17,8 +17,6 @@ class UsersController < ApplicationController
   # GET /users/1.xml
   def show
     @user = User.find(params[:id])
-    @roleassocs = Roleassoc.find(:conditions => ['userid = ?',params[:id]]);
-    #TODO now get roles from roleassocs
 
     respond_to do |format|
       format.html # show.html.erb

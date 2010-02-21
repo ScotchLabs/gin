@@ -30,7 +30,7 @@
         </select><br />
         Select Ticket Types and Quantities<span style='color:red;'>*</span>:<br />
         <% for section in rez.ticketsections %>
-          <%= section.name %> ($<%= section.pricewoutid %> w ID, $<%= section.pricewithid %> w/out): <input type='text' id='section<%= section.id %>' size='3' /> tickets<br />
+          <%= section.name %> ($<%= section.pricewoutid %> w ID, $<%= section.pricewithid %> w/out): <input type='text' id='section<%= section.id %>' size='3' value='0' /> tickets<br />
         <% end %>
         Do you have a Carnegie Mellon Student ID?<span style='color:red;'>*</span><br />
         <input type='radio' value='yes' id='cmuidY' />Yes

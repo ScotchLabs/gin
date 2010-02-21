@@ -29,7 +29,7 @@
         astyleusers = (controller_name == "users" || controller_name == "roles" || controller_name == "roleassocs")? "color:#FF9900;":""
       %>
       <div id='menu'>
-        <ul><li <%= listylewelcome %>><%= link_to "Welcome", {:controller => "admin", :action => "welcome"}, {:style => astylewelcome, :class => "menua"} %></li>
+        <ul><li <%= listylewelcome %>><%= link_to "Welcome", {:controller => "admin"}, {:style => astylewelcome, :class => "menua"} %></li>
       	<% if session[:crud]["r"]["shows"] %><li <%= listyleshows %>><%= link_to "Shows & Tickets", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
       	<% if session[:crud]["r"]["updates"] %><li <%= listylenews %>><%= link_to "News", updates_path, {:style => astylenews, :class => "menua"} %></li><% end %>
       	<% if session[:crud]["r"]["contents"] %><li <%= listylecontents %>><%= link_to "Contents", contents_path, {:style => astylecontents, :class => "menua"} %></li><% end %>

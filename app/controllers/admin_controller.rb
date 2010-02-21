@@ -109,10 +109,6 @@ class AdminController < ApplicationController
     flash[:notice] = "Logged out"
     redirect_to(:action => "login")
   end
-
-  def index
-    redirect_to :action => "welcome"
-  end
   
   def publicview
     session[:display_mode] = "public"
