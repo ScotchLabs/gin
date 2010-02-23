@@ -4,6 +4,8 @@ class UsersController < ApplicationController
   # GET /users.xml
   def index
     @users = User.find(:all, :order => :name)
+    @roles = Role.all
+    @roleassocs = Roleassoc.all
 
     respond_to do |format|
       format.html # index.html.erb

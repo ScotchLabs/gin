@@ -33,13 +33,7 @@
     <%= f.text_field :order %>
   </p>
   <p>
-	You can now put link templates in news articles and content articles!<br />
-	Rule of Thumb: [[<code>type</code>+<code>anchor</code>|<code>text</code>]]<br />
-	<ul><li><code>type</code> can be either a (for outside links), c (inside link to content), i (image tag), p (inside link to pane), or m (outside link to email)</li>
-	<li><code>anchor</code> should either match the anchor of the content or pane, or it should be a valid email or http address</li>
-	<li>the "|<code>text</code>" is optional, and will override the link text. in the case of image tags, this overrides the image's title and alt-text.</li></ul>
-	Note: <code>anchor</code> may contain any of the following characters: 0-9 a-z A-Z . : / _ - ~ % &amp; # = @<br />
-	<code>text</code> may contain any of the following characters: 0-9 a-z A-Z space ' "<br />
+	You can use <a href='http://redcloth.rubyforge.org/'>RedCloth</a> to mark up your content!
   </p>
   <p>
     <%= f.label :article %><br />

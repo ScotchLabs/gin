@@ -1,4 +1,10 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :ticketsections
+
+  map.resources :ticketrezs
+
+  map.resources :ticketalerts
+
   map.resources :roleassocs
 
   map.resources :roles
@@ -16,17 +22,11 @@ ActionController::Routing::Routes.draw do |map|
   # Sample of regular route:
   #   map.connect 'products/:id', :controller => 'catalog', :action => 'view'
   # Keep in mind you can assign values other than :controller and :action
-  map.connect 'about/',
-    :controller => "index",
-    :action => "showpane",
-    :id => "about"
-  map.connect '70ai/',
-    :controller => "index",
-    :action => "showpane",
-    :id => "70ai"
-  map.connect 'news/',
-    :controller => "index",
-    :action => "news"
+  map.connect 'about/', :controller => "index", :action => "showpane", :id => "about"
+  map.connect '70ai/', :controller => "index", :action => "showpane", :id => "70ai"
+  map.connect 'news/', :controller => "index", :action => "news"
+  map.connect 'createticketalert', :controller => "index", :action => "createticketalert"
+  map.connect 'createticketrez', :controller => "index", :action => "createticketrez"
 
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'

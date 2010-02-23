@@ -4,18 +4,46 @@
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
 	<%= stylesheet_link_tag "snstheatre", "admin", :media => "all" %>
-	<%= javascript_include_tag :defaults, "jquery.js" %>
-	<script type='text/javascript'>
-    jQuery.noConflict();
-	</script>
+	<%= javascript_include_tag :defaults, "jquery-1.4.1.min.js" %>
+	<script type='text/javascript'>jQuery.noConflict();</script>
 </head>
 <body>
+  <div id='banner'></div>
   <div id='container'>
     <div id='header'>
       <h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1>
       <h2>Student theatre at Carnegie Mellon since 1938</h2>
     </div>
-    <div id='nav' class='botcorner shadow'><%= render :partial => "menu" %></div>
+    <div id='nav' class='botcorner shadow'>
+      <%
+        gradient = 'style="background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(222,222,222)), color-stop(1, rgb(255,255,255))); background-image: -moz-linear-gradient(center bottom, rgb(222,222,222) 0%, rgb(255,255,255) 100%)"'
+        listylewelcome = (controller_name == "admin")? gradient:""
+        listyleshows = (controller_name == "shows" || controller_name == "ticketrezs" || controller_name == "ticketalerts" || controller_name == "ticketsections")? gradient:""
+        listyleusers = (controller_name == "users" || controller_name == "roles" || controller_name == "roleassocs")? gradient:""
+        listylenews = (controller_name == "updates")? gradient:""
+        listylecontents = (controller_name == "contents")? gradient:""
+        astylewelcome = (controller_name == "admin")? "color:#FF9900;":""
+        astyleshows = (controller_name == "shows" || controller_name == "ticketrezs" || controller_name == "ticketalerts" || controller_name == "ticketsections")? "color:#FF9900;":""
+        astylenews = (controller_name == "updates")? "color:#FF9900;":""
+        astylecontents = (controller_name == "contents")? "color:#FF9900;":""
+        astyleusers = (controller_name == "users" || controller_name == "roles" || controller_name == "roleassocs")? "color:#FF9900;":""
+      %>
+      <div id='menu'>
+        <ul><li <%= listylewelcome %>><%= link_to "Welcome", {:controller => "admin"}, {:style => astylewelcome, :class => "menua"} %></li>
+      	<% if session[:crud]["r"]["shows"] %><li <%= listyleshows %>><%= link_to "Shows & Tickets", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
+      	<% if session[:crud]["r"]["updates"] %><li <%= listylenews %>><%= link_to "News", updates_path, {:style => astylenews, :class => "menua"} %></li><% end %>
+      	<% if session[:crud]["r"]["contents"] %><li <%= listylecontents %>><%= link_to "Contents", contents_path, {:style => astylecontents, :class => "menua"} %></li><% end %>
+      	<% if session[:crud]["r"]["users"] || session[:crud]["r"]["roles"] || session[:crud]["r"]["roleassocs"] %><li <%= listyleusers %>><%= link_to "Users & Roles", users_path, {:style => astyleusers, :class => "menua"} %></li><% end %>
+      	<li><%= link_to 'Log out', {:controller => "admin", :action => "logout"}, {:class => "menua"} %></li>
+      	<script type='text/javascript'>
+          jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px");
+          jQuery(".menua").first().addClass("bottomleftcorner");
+          jQuery(".menua").last().addClass("bottomrightcorner");
+          jQuery("#menu li").first().addClass("bottomleftcorner");
+          jQuery("#menu li").last().addClass("bottomrightcorner");
+      	</script>
+      </div>
+    </div>
     <div id='view'>
       <div class='article'><%= yield %></div>
     </div>

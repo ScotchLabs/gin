@@ -1,4 +1,5 @@
 class Role < ActiveRecord::Base
+  has_many :roleassocs
   def crudshows
     ((crudcshows?)? "c":"")+((crudrshows?)? "r":"")+((crudushows?)? "u":"")+((cruddshows?)? "d":"")
   end

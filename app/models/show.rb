@@ -1,17 +1,34 @@
 require 'net/http'
 
 class Show < ActiveRecord::Base
+  has_many :ticketsections
+  has_many :ticketrezs
+  has_many :ticketalerts
+  
   TICKETSTATUS = [
     ["Closed", "closed"],
     ["Open",  "open"],
     ["Completed", "completed"]
   ]
-  validates_presence_of :name, :abbrev, :imageurl, :ticketstatus, :performancetimes
+  validates_presence_of :name, :shortdisplayname, :abbrev, :imageurl, :ticketstatus, :performancetimes
   validates_uniqueness_of :abbrev
+  validates_length_of :shortdisplayname, :maximum => 30
   validates_inclusion_of :ticketstatus, :in => TICKETSTATUS.map {|disp, value| value}
   validates_format_of :imageurl, :with => %r{\.(gif|jpg|png)$}i, :message => "must be a URL for GIF, JPG, or PNG image.", :allow_blank => true
   validate :image_exists
   validate :performancetimes_parsable
+  
+  def ticketprices
+    #TODO
+  end
+  
+  def displayname
+    if name.length() > 30
+      shortdisplayname
+    else
+      name
+    end
+  end
   
   def inseason
     now = Time.new
@@ -26,21 +43,18 @@ class Show < ActiveRecord::Base
   end
   
   def datenavigator
-    return nil if performancetimes.blank?
     t = performancetimes.split("|")[0]
     t = Time.parse(t)
     t.strftime("%B %Y")
   end
   
   def datecarousel
-    return nil if performancetimes.blank?
     t = performancetimes.split("|")[0]
     t = Time.parse(t)
     t.strftime("%B %Y")
   end
   
   def perfcarousel
-    return nil if performancetimes.nil?
     perfarr = performancetimes.split("|")
     out = ""
     dayarr = Array.new
@@ -77,29 +91,24 @@ class Show < ActiveRecord::Base
     end
     out
   end
- 
-  def tickettext
-    if ticketstatus == "open"
-			"<a href='#'>Reserve my ticket now.</a>"
-		elsif ticketstatus == "closed"
-			"Tickets are not yet available for reservation (<a href='#'>sign up for an alert</a>)."
-		elsif ticketstatus != "completed"
-			"<a href='#'>View more about this past Scotch'n'Soda production.</a>"
-		end
-  end
 
   def upcoming
-    if performancetimes.nil? || performancetimes.blank?
-      return true
-    else
-      return Time.parse(performancetimes.split("|").last)>Time.now
-    end
-    
+    Time.parse(performancetimes.split("|").last)>Time.now
+  end
+  
+  def performances
+    timearr = Array.new
+    perfarr = performancetimes.split("|")
+    perfarr.each { |perf| timearr.push(Time.parse(perf).strftime("%B %d - %I:%M %p")) }
+    timearr
+  end
+
+  def ticketsections
+    Ticketsection.all(:conditions => ["showid = ?",abbrev])
   end
 
 private
   def performancetimes_parsable
-    return if performancetimes.nil? || performancetimes.blank?
     perfarr = performancetimes.split("|")
     for perf in perfarr
       begin

@@ -1,0 +1,28 @@
+<p>
+  <b>Showid:</b>
+  <%=h @ticketsection.showid %>
+</p>
+
+<p>
+  <b>Name:</b>
+  <%=h @ticketsection.name %>
+</p>
+
+<p>
+  <b>Price with ID:</b>
+  <%=h @ticketsection.pricewithid %>
+</p>
+
+<p>
+  <b>Price without ID:</b>
+  <%=h @ticketsection.pricewoutid %>
+</p>
+
+<p>
+  <b>Size:</b>
+  <%=h @ticketsection.size %>
+</p>
+
+
+<%= link_to 'Edit', edit_ticketsection_path(@ticketsection) %> |
+<%= link_to 'Back', shows_path %>

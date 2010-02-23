@@ -1,0 +1,20 @@
+<h1>Editing ticketalert</h1>
+
+<% form_for(@ticketalert) do |f| %>
+  <%= f.error_messages %>
+
+  <p>
+    <%= f.label :showid %><br />
+    <%= f.select :showid, Show.all.sort! { |y, x| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }.map {|show| [show.name, show.abbrev]} %>
+  </p>
+  <p>
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @ticketalert %> |
+<%= link_to 'Back', shows_path %>

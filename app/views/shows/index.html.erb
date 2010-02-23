@@ -3,42 +3,17 @@
 <table>
   <tr>
     <th>Name</th>
-    <th>Abbrev</th>
-    <th>Loc</th>
     <th>Imageurl</th>
-    <th>Author</th>
-    <th>Director</th>
-    <th>Ticketprices</th>
-    <th>Performancetimes</th>
     <th>Ticketstatus</th>
-    <th>Timesvisible</th>
   </tr>
-
-<%
-color = true
-@shows.each do |show|
-	if color
-		color = false
-		style = " style=\"background-color:\#bbbbbb;\""
-	else
-		color = true
-		style = " style=\"background-color:\#dddddd;\""
-	end
-%>
-  <tr <%= style %>>
-    <td class='admintd'><%=h show.name %></td>
-    <td class='admintd'><%=h show.abbrev %></td>
-    <td class='admintd'><%=h show.loc %></td>
-    <td class='admintd'><%=h show.imageurl %></td>
-    <td class='admintd'><%=h show.author %></td>
-    <td class='admintd'><%=h show.director %></td>
-    <td class='admintd'><%=h !show.ticketprices.blank? %></td>
-    <td class='admintd'><%=h !show.performancetimes.blank? %></td>
-    <td class='admintd'><%=h show.ticketstatus %></td>
-    <td class='admintd'><%=h show.timesvisible %></td>
-    <td class='admintd'><%= link_to 'Show', show %></td>
-    <% if session[:crud]["u"]["shows"] %><td class='admintd'><%= link_to 'Edit', edit_show_path(show) %></td><% end %>
-    <% if session[:crud]["d"]["shows"] %><td class='admintd'><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+<% @shows.each do |show| %>
+  <tr>
+    <td><%=h show.name %></td>
+    <td><%=h show.imageurl %></td>
+    <td><%=h show.ticketstatus %></td>
+    <td><%= link_to 'Show', show %></td>
+    <% if session[:crud]["u"]["shows"] %><td><%= link_to 'Edit', edit_show_path(show) %></td><% end %>
+    <% if session[:crud]["d"]["shows"] %><td><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
@@ -46,3 +21,82 @@ color = true
 <br />
 
 <% if session[:crud]["c"]["shows"] %><%= link_to 'New show', new_show_path %><% end %>
+
+<h1>Listing ticketsections</h1>
+
+<table>
+  <tr>
+    <th>Showid</th>
+    <th>Name</th>
+    <th>Price (ID/no ID)</th>
+    <th>Size</th>
+  </tr>
+
+<% @ticketsections.each do |ticketsection| %>
+  <tr>
+    <td><%=h ticketsection.showid %></td>
+    <td><%=h ticketsection.name %></td>
+    <td><%=h ticketsection.pricewithid %>/<%= ticketsection.pricewoutid %></td>
+    <td><%=h ticketsection.size %></td>
+    <td><%= link_to 'Show', ticketsection %></td>
+    <% if session[:crud]["u"]["ticketsections"] %><td><%= link_to 'Edit', edit_ticketsection_path(ticketsection) %></td><% end %>
+    <% if session[:crud]["d"]["ticketsections"] %><td><%= link_to 'Destroy', ticketsection, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["ticketsections"] %><%= link_to 'New ticketsection', new_ticketsection_path %><% end %>
+
+<h1>Listing ticketrezs</h1>
+
+<table>
+  <tr>
+    <th>Showid</th>
+    <th>Name</th>
+    <th>Quantity</th>
+    <th>Email</th>
+    <th>Sectionid</th>
+  </tr>
+
+<% @ticketrezs.each do |ticketrez| %>
+  <tr>
+    <td><%=h ticketrez.showid %></td>
+    <td><%=h ticketrez.name %></td>
+    <td><%=h ticketrez.quantity %></td>
+    <td><%=h ticketrez.email %></td>
+    <td><%=h ticketrez.sectionid %></td>
+    <td><%= link_to 'Show', ticketrez %></td>
+    <% if session[:crud]["u"]["ticketrezs"] %><td><%= link_to 'Edit', edit_ticketrez_path(ticketrez) %></td><% end %>
+    <% if session[:crud]["d"]["ticketrezs"] %><td><%= link_to 'Destroy', ticketrez, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["ticketrezs"] %><%= link_to 'New ticketrez', new_ticketrez_path %><% end %>
+
+<h1>Listing ticketalerts</h1>
+
+<table>
+  <tr>
+    <th>Showid</th>
+    <th>Email</th>
+  </tr>
+
+<% @ticketalerts.each do |ticketalert| %>
+  <tr>
+    <td><%=h ticketalert.showid %></td>
+    <td><%=h ticketalert.email %></td>
+    <td><%= link_to 'Show', ticketalert %></td>
+    <% if session[:crud]["u"]["ticketalerts"] %><td><%= link_to 'Edit', edit_ticketalert_path(ticketalert) %></td><% end %>
+    <% if session[:crud]["d"]["ticketalerts"] %><td><%= link_to 'Destroy', ticketalert, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if session[:crud]["c"]["ticketalerts"] %><%= link_to 'New ticketalert', new_ticketalert_path %><% end %>

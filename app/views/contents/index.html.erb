@@ -10,29 +10,18 @@
     <th>Order</th>
     <th>Article</th>
   </tr>
-
-<%
-color = true
-@contents.each do |content|
-	if color
-		color = false
-		style = " style=\"background-color:\#bbbbbb;\""
-	else
-		color = true
-		style = " style=\"background-color:\#dddddd;\""
-	end	
-%>
-  <tr <%= style %>>
-    <td class='admintd'><%=h content.title %></td>
-    <td class='admintd'><%=h content.contentpane %></td>
-    <td class='admintd'><%=h content.contenttype %></td>
-    <td class='admintd'><%=h content.anchor %></td>
-    <td class='admintd'><%=h content.publish %></td>
-    <td class='admintd'><%=h content.order %></td>
-    <td class='admintd'><%=h !content.article.blank? %></td>
-    <td class='admintd'><%= link_to 'Show', content %></td>
-    <% if session[:crud]["u"]["contents"] %><td class='admintd'><%= link_to 'Edit', edit_content_path(content) %></td><% end %>
-    <% if session[:crud]["d"]["contents"] %><td class='admintd'><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+<% @contents.each do |content| %>
+  <tr>
+    <td><%=h content.title %></td>
+    <td><%=h content.contentpane %></td>
+    <td><%=h content.contenttype %></td>
+    <td><%=h content.anchor %></td>
+    <td><%=h content.publish %></td>
+    <td><%=h content.order %></td>
+    <td><%=h !content.article.blank? %></td>
+    <td><%= link_to 'Show', content %></td>
+    <% if session[:crud]["u"]["contents"] %><td><%= link_to 'Edit', edit_content_path(content) %></td><% end %>
+    <% if session[:crud]["d"]["contents"] %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>

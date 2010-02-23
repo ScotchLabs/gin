@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100203073111) do
+ActiveRecord::Schema.define(:version => 20100220215113) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -76,6 +76,18 @@ ActiveRecord::Schema.define(:version => 20100203073111) do
     t.boolean  "cruddroleassocs"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "crudcticketalerts"
+    t.boolean  "crudrticketalerts"
+    t.boolean  "cruduticketalerts"
+    t.boolean  "cruddticketalerts"
+    t.boolean  "crudcticketrezs"
+    t.boolean  "crudrticketrezs"
+    t.boolean  "cruduticketrezs"
+    t.boolean  "cruddticketrezs"
+    t.boolean  "crudcticketsections"
+    t.boolean  "crudrticketsections"
+    t.boolean  "cruduticketsections"
+    t.boolean  "cruddticketsections"
   end
 
   create_table "shows", :force => true do |t|
@@ -84,13 +96,42 @@ ActiveRecord::Schema.define(:version => 20100203073111) do
     t.string   "loc"
     t.string   "imageurl"
     t.string   "author"
-    t.string   "ticketprices"
     t.string   "performancetimes"
     t.string   "ticketstatus"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "director"
     t.boolean  "timesvisible"
+    t.string   "shortdisplayname"
+  end
+
+  create_table "ticketalerts", :force => true do |t|
+    t.string   "showid"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "ticketrezs", :force => true do |t|
+    t.string   "showid"
+    t.string   "name"
+    t.string   "email"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.string   "phone"
+    t.string   "performance"
+    t.boolean  "hasid"
+    t.string   "sectioninfo"
+  end
+
+  create_table "ticketsections", :force => true do |t|
+    t.string   "showid"
+    t.string   "name"
+    t.integer  "size"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "pricewithid"
+    t.integer  "pricewoutid"
   end
 
   create_table "updates", :force => true do |t|

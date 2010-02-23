@@ -1,15 +1,5 @@
 class RoleassocsController < ApplicationController
   layout 'admin'
-  # GET /roleassocs
-  # GET /roleassocs.xml
-  def index
-    @roleassocs = Roleassoc.all
-
-    respond_to do |format|
-      format.html # index.html.erb
-      format.xml  { render :xml => @roleassocs }
-    end
-  end
 
   # GET /roleassocs/1
   # GET /roleassocs/1.xml
@@ -79,7 +69,7 @@ class RoleassocsController < ApplicationController
     @roleassoc.destroy
 
     respond_to do |format|
-      format.html { redirect_to(roleassocs_url) }
+      format.html { redirect_to(users_url) }
       format.xml  { head :ok }
     end
   end

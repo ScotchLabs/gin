@@ -3,6 +3,12 @@
   <%=h @user.name %>
 </p>
 
+<p>
+  <b>Roles:</b>
+  <% @user.roles.each {|r| %>
+    <%= link_to r.name, r %><% if @user.roles.index(r) < @user.roles.length-1 %>,<% end %>
+  <% } %>
+</p>
 
 <% if session[:crud]["u"]["users"] %><%= link_to 'Edit', edit_user_path(@user) %> |<% end %>
 <%= link_to 'Back', users_path %>
