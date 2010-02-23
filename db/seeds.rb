@@ -1,7 +1,12 @@
+puts "==  Seeding Database: seeding ================================================="
+timeall = Time.now.to_f
+
 # create a user in script/console and copy hashed_password and salt to here,
 # or use :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871"
 # for the password 'bunnies'
 users = true
+time = Time.now.to_f
+puts "-- seeding Users"
 users = users && User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
 users = users && User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 users = users && User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
@@ -9,14 +14,16 @@ users = users && User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7
 users = users && User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 users = users && User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 if users
-  puts "seeded Users"
+  puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
-  puts "error seeding Users"
+  puts "   error seeding Users"
 end
 
 
 # need crud(c|r|u|d)(content|show|user|update|role(assoc)?|ticket(alert|rez|section))s
 roles = true
+time = Time.now.to_f
+puts "-- seeding Roles"
 roles = roles && Role.create(:name => "Administrator", :abbrev => "admin",
   :crudccontents => true,
   :crudrcontents => true,
@@ -129,11 +136,13 @@ roles = roles && Role.create(:name => "Beta tester", :abbrev => "betar",
   :cruduticketsections => true,
   :cruddticketsections => true)
 if roles
-  puts "seeded Roles"
+  puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
-  puts "error seeding Roles"
+  puts "   error seeding Roles"
 end
 
+time = Time.now.to_f
+puts "-- seeding Roleassocs"
 roleassocs = true
 roleassocs = roleassocs && Roleassoc.create(:roleid => "admin", :userid => "sewillia")
 roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "jrfriedr")
@@ -147,9 +156,9 @@ roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "achi
 roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
 roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
 if roleassocs
-  puts "seeded Roleassocs"
+  puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
-  puts "error seeding Roleassocs"
+  puts "   error seeding Roleassocs"
 end
 
 # fields: name, shortdisplayname, abbrev, loc, imageurl, author, performancetimes, ticketstatus, director, timesvisible
@@ -162,6 +171,8 @@ end
 # :performancetimes => "",
 # :timesvisible => 
 #)
+time = Time.now.to_f
+puts "-- seeding Shows"
 shows = true
 shows = shows && Show.create(
   :name => "Scotch On The Rocks (With a Twist)",
@@ -344,13 +355,15 @@ shows = shows && Show.create(
   :timesvisible => false
 )
 if shows
-  puts "seeded Shows"
+  puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
-  puts "error seeding Shows"
+  puts "   error seeding Shows"
 end
 
 #fields: string showid, string name, int size, int pricewithid, int pricewoutid
 #required: all
+puts "-- seeding Tixsections"
+time = Time.now.to_f
 tixsections = true
 tixsections = tixsections && Ticketsection.create(
   :showid => "mamg",
@@ -402,11 +415,13 @@ tixsections = tixsections && Ticketsection.create(
   :pricewoutid => 5
 )
 if tixsections
-  puts "seeded Ticketsections"
+  puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
-  puts "error seeding Ticketsections"
+  puts "   error seeding Ticketsections"
 end
 
+puts "-- seeding Contents"
+time = Time.now.to_f
 contents = true
 contents = contents && Content.create(
   :title => "Purpose",
@@ -482,7 +497,9 @@ contents = contents && Content.create(
 |{padding:10px;}.!http://upload.snstheatre.org/gin/contents/phone.png!|{padding:10px;}.**By Phone:** Call the Carnegie Mellon University Office Of Annual Giving at 412-268-2021 and indicate that your gift is for Scotch'n'Soda Theatre.|"
 )
 if contents
-  puts "seeded Content"
+  puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
-  puts "error seeding Contents"
+  puts "   error seeding Contents"
 end
+
+puts "==  Seeding Database: seeded (#{(Time.now.to_f-time).to_s[0..5]}s) ========================================"
