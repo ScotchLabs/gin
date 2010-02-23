@@ -94,7 +94,7 @@ class AdminController < ApplicationController
         puts "DEBUG admin_controller: session crud is "+session[:crud].to_s
         uri = session[:original_uri]
         session[:original_uri] = nil
-        redirect_to(uri || { :action => "welcome" })
+        redirect_to(uri || { :action => "index" })
       else
         flash.now[:notice] = "Invalid user/password combination"
       end
