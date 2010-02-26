@@ -23,7 +23,7 @@ function ticket(abbrev) {
     }
     // loading gif
     jQuery("#cboxLoadedContent").hide();
-    jQuery("#cboxLoadingGraphic").show();
+     jQuery("#cboxLoadingGraphic").show();
   }
 }
 
@@ -52,4 +52,42 @@ function invalid(abbrev) {
     
   }
   return false;
+}
+
+function sendEmail() {
+  // hide flash
+  jQuery(".emailFlash").hide();
+  // disable button
+  jQuery("#sendemail_button")[0].disable();
+  // retrieve data
+  email = jQuery("#sendemail_email")[0].value;
+  // error checking
+  if (emailinvalid()) {
+    // display flash
+    jQuery("#emailFlash").show();
+    jQuery("#emailFlash_invalid").show();
+    // enable button
+    jQuery("#sendemail_button")[0].enable();
+  }
+  // ajax
+  jQuery.ajax({type: 'post', url: '/sendemail/', data: {}, success: function(){emailSuccess()}, error: function(){emailFailure();}});
+}
+function emailSuccess() {
+  // display flash
+  jQuery("#emailSuccess").show();
+  jQuery("#emailForm").hide();
+  // enable button
+  jQuery("#sendemail_button")[0].enable();
+  //TODO after a timeout, show form and hide success
+}
+function emailinvalid() {
+  //TODO
+  return false;
+}
+function emailFailure() {
+  // display flash
+  jQuery("#emailFlash").show();
+  jQuery("#emailFlash_failure").show();
+  // enable button
+  jQuery("#sendemail_button")[0].enable();
 }

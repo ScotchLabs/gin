@@ -25,6 +25,10 @@ h1, h2, ul {
   text-transform: uppercase;
   letter-spacing: +2px;
 }
+.header {
+  font-family: "Georgia", "Times", serif;
+  font-size: 17pt;
+}
 
 /* index layout styles */
 .shadow {
@@ -341,15 +345,52 @@ h2 {
   height: 424px;
   overflow-y: auto;
 }
-#newstitle {
-  font-family: "Georgia", "Times", serif;
-  font-size: 17pt;
-}
 .newstitle {
   text-transform: uppercase;
   font-weight: bold;
 }
 .newsdate {
   font-size: 7pt;
+}
+
+#inline_sendemail {
+  margin: 17px 17px 7px 17px;
+  height: 317px;
+}
+#emailForm div {
+  margin-bottom:10px;
+}
+#emailFormHeader {
+  color:white;
+}
+.emailFormAlign {
+  margin: 3.5px 181px 3.5px 0px;
+  float:right;
+}
+#emailForm input[type="text"] {
+  width: 220px;
+  height: 23px;
+}
+input[type="text"], #emailForm textarea {
+  border: none;
+  
+}
+#sendemail_button {
+  background-color: #ff9900;
+  color: white;
+  -webkit-border-radius: 4px 4px 4px 4px;
+  -moz-border-radius: 4px 4px 4px 4px;
+  border: none;
+  width: 116px;
+  height: 30px;
+  line-height: 30px;
+  display: block;
+  cursor: pointer;
+  position: absolute;
+  bottom: 15px;
+  
+}
+#sendemail_button:hover {
+  background-color: #f8aa50;
 }
 /* end index view styles */
