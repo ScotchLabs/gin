@@ -3,8 +3,8 @@
 <head>
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
-	<%= stylesheet_link_tag "snstheatre", "carousel", "colorbox", :media => "all" %>
-	<%= javascript_include_tag :defaults, "jquery-1.4.1.min", "jquery.colorbox-min", "colorbox" %>
+	<%= stylesheet_link_tag "snstheatre", "carousel", :media => "all" %>
+	<%= javascript_include_tag :defaults, "jquery-1.4.1.min" %>
 	<% if action_name == "index" %>
   <%= javascript_include_tag "carousel.js", "twitter.js" %>
 	<% end %>
@@ -32,14 +32,12 @@
       // twitter UI
       window.onresize = checkWidth;
       loadTweets();
-      
-      // colorbox
-      jQuery("#sendemaila").colorbox({initialWidth:"600px", initialHeight:"382px", transition:"fade", width:"600px", height:"382px", opacity:0.5, href:'#inline_sendemail', inline:true});
     });
     <% end %>
 	</script>
 </head>
 <body>
+  <div id='scotchBoxOverlay'></div>
   <div id='bannernocss3'></div>
   <div id='banner'></div>
   <div id='container'>
@@ -68,38 +66,9 @@
     <div id='bodyfootertext'>
       <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre' target='_blank'>Twitter</a></span>
       <span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts' target='_blank'>Facebook</a></span>
-      <span id='sendemail' class='fright' style='display:none;'>Send us an <a id='sendemaila' href='mailto://webmaster@snstheatre.org' target='_blank'>Email</a></span>
-      <div style='display:none;'>
-      <div id='inline_sendemail'>
-        <div style='display:none;'>
-          <div id='emailFlash' class='emailFlash'>
-            <div id='emailFlash_invalid' class='emailFlash'>
-              invalid!
-            </div>
-            <div id='emailFlash_failure' class='emailFlash'>
-              failure!
-            </div>
-          </div>
-          <div id='emailSuccess' class='emailFlash'>
-            success!
-          </div>
-        </div>
-        <div id='emailForm'>
-          <div id='emailFormHeader' class='header'>Send us an Email</div>
-          <div>Please use the form below to send us an email with comments, questions or whatever! We'll do our best to respond quickly.</div>
-          <!-- put a form here, with a click thing to trigger a function that ajaxs, whew! -->
-          <!-- name, email, subject (optional), message. button onclick=sendEmail() -->
-          <span class='emailFormAlign'>NAME <input type='text' id='sendemail_name' /></span><br />
-          <span class='emailFormAlign'>EMAIL ADDRESS <input type='text' id='sendemail_replyto' /></span>
-          <span style='position:absolute;right:110px;'>*required field</span><br />
-          <span class='emailFormAlign'>SUBJECT <input type='text' id='sendemail_subject' /></span><br />
-          <span class='fright' style='margin-top:5px;'><textarea id='sendemail_message' cols='49' rows='6'></textarea></span><span class='fright' style='margin-top:5px;'>MESSAGE&nbsp;</span><br clear='all' />
-          <br />
-          <span class='emailFormAlign'><input type='submit' value='Send!' id='sendemail_button' onclick='sendEmail();' /></span>
-        </div>
-      </div>
-      </div>
-      <br clear='all' style='height:0px;' />
+      
+      
+      <span id='sendemail' class='fright' style='display:none;'>Send us an <a href='mailto:webmaster@snstheatre.org'>Email</span></span>
     </div>
   </div>
   <% unless session[:user_id].nil? || session[:user_id].blank? %>
