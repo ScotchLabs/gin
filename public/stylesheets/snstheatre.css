@@ -25,6 +25,10 @@ h1, h2, ul {
   text-transform: uppercase;
   letter-spacing: +2px;
 }
+.header {
+  font-family: "Georgia", "Times", serif;
+  font-size: 17pt;
+}
 
 /* index layout styles */
 .shadow {
@@ -263,6 +267,9 @@ h2 {
   padding: 0px;
   color: #ff9900;
 }
+#twitter_update_list a:hover {
+  color:#00dddd;
+}
 .tweetdate {
   font-size: 7pt;
 }
@@ -338,12 +345,8 @@ h2 {
 }
 #newswindow {
   margin: 10px 0px 0px 0px;
-  height: 424px;
+  height: 391px;
   overflow-y: auto;
-}
-#newstitle {
-  font-family: "Georgia", "Times", serif;
-  font-size: 17pt;
 }
 .newstitle {
   text-transform: uppercase;

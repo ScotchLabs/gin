@@ -1,12 +1,11 @@
 <%
-classperf = (action_name == "index")? "class='navselected'":""
 classabout = (params[:id] == "about")? "class='navselected'":""
 class70ai = (params[:id] == "70ai")? "class='navselected'":""
 classnews = (action_name == "news")? "class='navselected'":""
 %>
 <div id='menu'>
   <ul>
-    <li <%= classperf %>><%= link_to "Performances<br />& Ticket Kiosk", root_url, {:class => "menua"} %></li>
+    <li><%= link_to "Performances<br />& Ticket Kiosk", "http://tickets.snstheatre.org/", {:class => "menua"} %></li>
     <li <%= classabout %>><%= link_to "About Us", {:action => "showpane", :id => "about"}, { :class => "menua" } %> </li>
     <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:action => "showpane", :id => "70ai"}, { :class => "menua" } %></li>
     <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank", :class => "menua"} %></li>
