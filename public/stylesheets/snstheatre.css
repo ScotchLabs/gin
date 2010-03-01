@@ -267,14 +267,14 @@ h2 {
   padding: 0px;
   color: #ff9900;
 }
+#twitter_update_list a:hover {
+  color:#00dddd;
+}
 .tweetdate {
   font-size: 7pt;
 }
 .tweet {
   /*TODO tweet text styles */
-}
-.tweet a:hover {
-  color: #00DDDD;
 }
 #adminbutton {
   display:block;
