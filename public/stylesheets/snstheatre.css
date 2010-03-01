@@ -273,6 +273,9 @@ h2 {
 .tweet {
   /*TODO tweet text styles */
 }
+.tweet a:hover {
+  color: #00DDDD;
+}
 #adminbutton {
   display:block;
   position: absolute;
