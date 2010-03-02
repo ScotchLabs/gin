@@ -448,7 +448,7 @@ contents = contents && Content.create(
 |{padding:10px;}.!http://upload.snstheatre.org/gin/contents/workshopping.png!|{padding:10px;}.**Workshop!** At the heart of Scotch'n'Soda is an interest in student written pieces, be they musicals, comedies or dramas. The Workshopping Committee meets year-long to help student playwrights refine their scripts for the stage.|
 |{padding:10px;}.!http://upload.snstheatre.org/gin/contents/improvise.png!|{padding:10px;}.**Improvise!** Founded in 1996, the **\"No Parking Players\":http://npp.snstheatre.org** is Scotch'n'Soda Theatre's improv troupe.  NPP practices improvised theatre of all kinds, with a focus on the comedic short form. At the core of the NPP experience are the weekly workshops, open to the entire campus community. People of all experience levels are welcome, including those who have never tried improv before. Most workshops are composed of regulars and newcomers side-by-side. The No Parking Players performance group also has regular bi-weekly shows, featuring a mix of improv games, storytelling, and of course a large dose of audience participation.|
 
-In the beginning of the year, you've got tons of options. Meet us at the Activities Fair in September. Come to our Barbecue. Most importantly, come to a general meeting! These are wacky, fun-filled events where the Board fills the rest of the membership in on upcoming auditions, open staff positions, social events, and other juicy tidbits! Later on, watch the website's \"News\":/ area, "sign up for the mailing list":mailto://nqr@andrew.cmu.edu, or watch our bboards for the latest information."
+In the beginning of the year, you've got tons of options. Meet us at the Activities Fair in September. Come to our Barbecue. Most importantly, come to a general meeting! These are wacky, fun-filled events where the Board fills the rest of the membership in on upcoming auditions, open staff positions, social events, and other juicy tidbits! Later on, watch the website's \"News\":/ area, \"sign up for the mailing list\":mailto://nqr@andrew.cmu.edu, or watch our bboards for the latest information."
 )
 contents = contents && Content.create(
   :title => "History",
@@ -474,7 +474,7 @@ contents = contents && Content.create(
 
 %(upperbold)2009Ð2010 Board of Directors%
 
-|{padding:10px;}.!http://upload.snstheatre.org/gin/contents/board.png!|{padding:10px;}.President: "Aaron Gross":mailto:president@snstheatre.org
+|{padding:10px;}.!http://upload.snstheatre.org/gin/contents/board.png!|{padding:10px;}.President: \"Aaron Gross\":mailto:president@snstheatre.org
 Artistic Director: \"Scott Wasserman\":mailto:ad@snstheatre.org
 Vice President: \"Todd Snider\":mailto:vice@snstheatre.org
 Managing Director: \"Ankur Gupta\":mailto:md@snstheatre.org
