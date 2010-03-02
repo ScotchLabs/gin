@@ -65,7 +65,7 @@
   width: 163px;
 }
 .carouselinfo_name a {
-  font-size: 12pt;
+  font-size: 13pt;
   font-weight: normal;
 }
 .carouselinfo_datecarousel {
@@ -128,7 +128,8 @@
   bottom: 0;
   position: absolute;
   text-transform: uppercase;
-  letter-spacing: +1px;
+  letter-spacing: +2px;
+  font-weight: bold;
 }
 .carlinkbot {
   border-style: solid;

@@ -349,10 +349,10 @@ shows = shows && Show.create(
   :loc => "Rangos Ballroom, UC",
   :imageurl => "drs.png",
   :author => "Jeffrey Lane and David Yazbek",
-  :performancetimes => "April 15 2010|April 16 2010|April 17 2010",
+  :performancetimes => "April 15 2010 8PM|April 16 2010 3PM|April 16 2010 11PM|April 17 2010 3PM|April 17 2010 8PM",
   :ticketstatus => "closed",
   :director => "Alex DiClaudio and Will Weiner",
-  :timesvisible => false
+  :timesvisible => true
 )
 if shows
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
@@ -508,6 +508,27 @@ contents = contents && Content.create(
 |{padding:10px;}.!http://upload.snstheatre.org/gin/contents/phone.png!|{padding:10px;}.**By Phone:** Call the Carnegie Mellon University Office Of Annual Giving at 412-268-2021 and indicate that your gift is for Scotch'n'Soda Theatre.|"
 )
 if contents
+  puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
+else
+  puts "   error seeding Contents"
+end
+
+puts "-- seeding Updates"
+time = Time.now.to_f
+updates = true
+updates = updates && Update.create(
+  :name => "...and we're back!",
+  :anchor => "gen-srping2010",
+  :expiredate => DateTime.parse("April 14 2010, 23:59"),
+  :article => "Back to Pittsburgh and back to business, Scotch'n'Soda Theatre is kicking off the new semester at Carnegie Mellon by jumping straight into rehearsals for **Closer**, \"auditions for Dirty Rotten Scoundrels\":http://online.snstheatre.org and plans for \"Celebrity Autobiography\":http://www.celebrityautobiography.com. It's going to be a busy season and we're incredibly excited. Stay tuned for more news!"
+)
+updates = updates && Update.create(
+  :name => "The October Update",
+  :anchor => "70ai-oct",
+  :expiredate => DateTime.parse("April 14 2010, 20:59"),
+  :article => "For those of you who don't get to keep up with Scotch'n'Soda in Pittsburgh, the Development Committee has published the latest update for our alumni. Click \"here\":http://dev.snstheatre.org/~jrfriedr/October%20Update.pdf to read up on what we've been doing, ways to help us out and just how much Jared Cohon loves us!"
+)
+if updates
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
   puts "   error seeding Contents"

@@ -26,7 +26,6 @@
       jQuery("#carouselitemscontainer").css('right',y);
       
       // noscript
-      jQuery("#sendemail").show();
       jQuery("#twitbird").show();
       
       // twitter UI
@@ -55,20 +54,19 @@
       <noscript><div class='article' style='text-align:center;'>It looks like your browser has Javascript turned off. If you want this page to render properly go to your browser's settings and turn Javascript on.</div></noscript>
       <%= yield %>
     </div>
-    <div id='footer' class='topcorner shadow'>&copy; 2009 Scotch'n'Soda Theatre at <b>Carnegie Mellon Univeristy</b><br />5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br /><a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a></div>
+    <div id='footer' class='topcorner shadow'>&copy; 2010 Scotch'n'Soda Theatre at <b>Carnegie Mellon University</b><br />5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br /><a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a></div>
   </div>
   <div id='bodyfooter'>
     <% if action_name == "index" %>
     <div id='twitter_update_list' class='twittercallout'><div id='twittertext'></div><div class='twitterstem'></div></div>
-    <div id='twitter_heyclickme' class='twittercallout'>click for tweets!<div class='twitterstem'></div></div>
+    <div id='twitter_heyclickme' class='twittercallout'>Click for tweets!<div class='twitterstem'></div></div>
     <div id='twitbird' onmouseover='showClickme()' onmouseout='hideClickme()' onclick='showTwitter()'></div>
     <% end %>
     <div id='bodyfootertext'>
-      <span class='fleft br'>Follow us on <a href='http://twitter.com/snstheatre' target='_blank'>Twitter</a></span>
-      <span class='fleft bl'>Become a fan on <a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts' target='_blank'>Facebook</a></span>
+      <span class='fleft br'><a href='http://twitter.com/snstheatre' target='_blank'><span style='font-weight:normal;padding:0px;margin:0px;'>Follow us on </span>Twitter</a></span>
+      <span class='fleft bl'><a href='http://www.facebook.com/advertising/?pages#/pages/ScotchnSoda-Theatre/27084790350?ref=ts' target='_blank'><span style='font-weight:normal;padding:0px;margin:0px;'>Become a fan on </span>Facebook</a></span>
       
-      
-      <span id='sendemail' class='fright' style='display:none;'><a href='mailto:webmaster@snstheatre.org'><span style='font-weight:normal;padding:0px;margin:0px;'>Send us an </span>Email</span></span>
+      <span id='sendemail' class='fright'><a href='mailto:webmaster@snstheatre.org'><span style='font-weight:normal;padding:0px;margin:0px;'>Send us an </span>Email</a></span>
     </div>
   </div>
   <% unless session[:user_id].nil? || session[:user_id].blank? %>
