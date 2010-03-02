@@ -470,7 +470,18 @@ contents = contents && Content.create(
   :contentpane => "about",
   :contenttype => "content",
   :article => "Because there is no administrative authority over Scotch'n'Soda, the organization is governed by a board of nine directors, each position elected annually by the general membership. These nine students work to contribute and act as executive producers to each production and hold weekly meetings to discuss all issues related to the organization.
-board template goes here"
+
+%(upperbold)2009-2010 Board of Directors%
+
+%(bold)President%: \"Aaron Gross\":mailto:president@snstheatre.org
+%(bold)Artistic Director%: \"Scott Wasserman\":mailto:ad@snstheatre.org
+%(bold)Vice President%: \"Todd Snider\":mailto:vice@snstheatre.org
+%(bold)Managing Director%: \"Ankur Gupta\":mailto:md@snstheatre.org
+%(bold)Technical Coordinator%: \"Daniel Freeman\":mailto:tc@snstheatre.org
+%(bold)Secretary%: \"Nick Ryan\":mailto:secretary@snstheatre.org
+%(bold)Public Relations Coordinator%: \"Jasmine Friedrich\":mailto:prc@snstheatre.org
+%(bold)General Membership Coordinator%: \"Michelle Stewart\":mailto:gmc@snstheatre.org
+%(bold)Rights and Reservations Representative%: \"Timothy Sherman\":mailto:rights@snstheatre.org"
 )
 contents = contents && Content.create(
   :title => "About the Initiative",
