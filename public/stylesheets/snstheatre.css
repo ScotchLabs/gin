@@ -6,6 +6,7 @@ body {
 	overflow-y: scroll;
 	margin: 0px;
 	padding: 0px;
+	letter-spacing: +2px;
 }
 a {
   text-decoration: none;

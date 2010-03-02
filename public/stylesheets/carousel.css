@@ -128,7 +128,8 @@
   bottom: 0;
   position: absolute;
   text-transform: uppercase;
-  letter-spacing: +1px;
+  letter-spacing: +2px;
+  font-weight: bold;
 }
 .carlinkbot {
   border-style: solid;
