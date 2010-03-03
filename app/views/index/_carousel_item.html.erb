@@ -11,12 +11,12 @@
       <%
       if carousel_item.ticketstatus == "open" #&& !carousel_item.ticketsections.blank?
         %><a href='http://tickets.snstheatre.org/' target='_blank'>Reserve tickets now!</a><%
-        #render :partial => "rez", :object => carousel_item
+        # link_to "Reserve tickets now!", "/tickets/show/#{carousel_item.abbrev}"
       elsif carousel_item.ticketstatus == "closed"
         %>Tickets are not yet available for this production.<%
-        #render :partial => "alert", :object => carousel_item
+        # Tickets are not yet available for this production. (link_to "sign up for an alert", "/tickets/show/#{carousel_item.abbrev}")
       elsif carousel_item.ticketstatus == "completed"
-        # render :partial => "info", :object => carousel_item
+        # This production is in the past. View more info
       end
       %>
     </span><br />
