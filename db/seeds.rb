@@ -472,7 +472,7 @@ contents = contents && Content.create(
   :contenttype => "content",
   :article => "Because there is no administrative authority over Scotch'n'Soda, the organization is governed by a board of nine directors, each position elected annually by the general membership. These nine students work to contribute and act as executive producers to each production and hold weekly meetings to discuss all issues related to the organization.
 
-%(upperbold)2009Ð2010 Board of Directors%
+%(upperbold)2009-2010 Board of Directors%
 
 |{padding:10px;}.!http://upload.snstheatre.org/gin/contents/board.png!|{padding:10px;}.President: \"Aaron Gross\":mailto:president@snstheatre.org
 Artistic Director: \"Scott Wasserman\":mailto:ad@snstheatre.org
@@ -484,7 +484,7 @@ Publicist: \"Jasmine Friedrich\":mailto:prc@snstheatre.org
 General Membership Coordinator: \"Michelle Stewart\":mailto:gmc@snstheatre.org
 Rights & Reservations Representative: \"Timothy Sherman\":mailto:rights@snstheatre.org|
 
-%(upperbold)2009Ð2010 Auxiliary Board%
+%(upperbold)2009-2010 Auxiliary Board%
 
 |{padding:10px;}.!http://upload.snstheatre.org/gin/contents/aux.png!|{padding:10px;}.Director of Development: \"Alex DiClaudio\":mailto:development@snstheatre.org
 Workshopping Committee Chair: \"Shannon Deep\":mailto:workshopping@snstheatre.org
