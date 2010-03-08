@@ -12,13 +12,6 @@ class IndexController < ApplicationController
     @contents = Content.all(:conditions => ["contentpane = ?", params[:id]], :order => "contents.order ASC")
   end
   
-  def sendemail
-    if request.post?
-      puts "DEBUG sendemail: post"
-    end
-    puts "DEBUG sendemail: #{params}" 
-  end
-  
   #TODO
   #def createticketalert
   #end
