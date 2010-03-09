@@ -40,7 +40,21 @@
   <div id='banner'></div>
   <div id='container'>
     <div id='header'><h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1><h2>Student theatre at Carnegie Mellon since 1938</h2></div>
-    <div id='nav' class='botcorner shadow'><%= render :partial => "menu" %></div>
+    <div id='nav' class='botcorner shadow'>
+      <%
+      classabout = (params[:id] == "about")? "class='navselected'":""
+      class70ai = (params[:id] == "70ai")? "class='navselected'":""
+      classnews = (action_name == "news")? "class='navselected'":""
+      %>
+      <div id='menu'>
+        <ul>
+          <li><%= link_to "Ticket Reservations", "tickets", {:class => "menua"} %></li>
+          <li <%= classabout %>><%= link_to "About Us", {:action => "showpane", :id => "about"}, { :class => "menua" } %> </li>
+          <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:action => "showpane", :id => "70ai"}, { :class => "menua" } %></li>
+          <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank", :class => "menua"} %></li>
+        </ul>
+      </div>
+    </div>
     <script type='text/javascript'>
       jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px")
       jQuery(".menua").first().addClass("bottomleftcorner");
@@ -68,7 +82,9 @@
     </div>
   </div>
   <% unless session[:user_id].nil? || session[:user_id].blank? %>
-    <%= render :partial => "admin" %>
+    <div id='admin'>
+      <a id='adminbutton' href='/admin'>ADMIN</a>
+    </div>
   <% end %>
   <script type="text/javascript">
 var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

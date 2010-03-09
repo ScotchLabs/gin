@@ -11,13 +11,6 @@ class IndexController < ApplicationController
     @pane = params[:id]
     @contents = Content.all(:conditions => ["contentpane = ?", params[:id]], :order => "contents.order ASC")
   end
-  
-  #TODO
-  #def createticketalert
-  #end
-  
-  #def createticketrez
-  #end
 protected
   def authorize
   end

@@ -25,10 +25,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'about/', :controller => "index", :action => "showpane", :id => "about"
   map.connect '70ai/', :controller => "index", :action => "showpane", :id => "70ai"
   map.connect 'news/', :controller => "index", :action => "news"
-  #TODO
-  #map.connect 'createticketalert', :controller => "index", :action => "createticketalert"
-  #map.connect 'createticketrez', :controller => "index", :action => "createticketrez"
-  map.connect 'sendemail', :controller => "index", :action => "sendemail"
+  map.connect 'tickets/show/:abbrev', :controller => "tickets", :action => "show"
+  map.connect 'tickets/unsubscribe/:hash', :controller => "tickets", :action => "removeticketalert"
+  map.connect 'tickets/editreservation/:hash', :controller => "tickets", :action => "editticketrez"
 
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'
