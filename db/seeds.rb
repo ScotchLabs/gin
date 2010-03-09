@@ -8,11 +8,12 @@ users = true
 time = Time.now.to_f
 puts "-- seeding Users"
 users = users && User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
-users = users && User.create(:name => "jrfriedr", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "jrfriedr", :hashed_password => "95c7eef0800d977b4e7affb9530e9e4c84add60e", :salt => "21730906600.43768004484198")
 users = users && User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 users = users && User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 users = users && User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 users = users && User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "tsnider", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 if users
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
@@ -24,117 +25,9 @@ end
 roles = true
 time = Time.now.to_f
 puts "-- seeding Roles"
-roles = roles && Role.create(:name => "Administrator", :abbrev => "admin",
-  :crudccontents => true,
-  :crudrcontents => true,
-  :cruducontents => true,
-  :cruddcontents => true,
-  :crudcshows => true,
-  :crudrshows => true,
-  :crudushows => true,
-  :cruddshows => true,
-  :crudcusers => true,
-  :crudrusers => true,
-  :cruduusers => true,
-  :cruddusers => true,
-  :crudcupdates => true,
-  :crudrupdates => true,
-  :cruduupdates => true,
-  :cruddupdates => true,
-  :crudcroles => true,
-  :crudrroles => true,
-  :cruduroles => true,
-  :cruddroles => true,
-  :crudcroleassocs => true,
-  :crudrroleassocs => true,
-  :cruduroleassocs => true,
-  :cruddroleassocs => true,
-  :crudcticketalerts => true,
-  :crudrticketalerts => true,
-  :cruduticketalerts => true,
-  :cruddticketalerts => true,
-  :crudcticketrezs => true,
-  :crudrticketrezs => true,
-  :cruduticketrezs => true,
-  :cruddticketrezs => true,
-  :crudcticketsections => true,
-  :crudrticketsections => true,
-  :cruduticketsections => true,
-  :cruddticketsections => true)
-roles = roles && Role.create(:name => "Content writer", :abbrev => "writer",
-  :crudccontents => true,
-  :crudrcontents => true,
-  :cruducontents => true,
-  :cruddcontents => true,
-  :crudcshows => true,
-  :crudrshows => true,
-  :crudushows => true,
-  :cruddshows => true,
-  :crudcusers => false,
-  :crudrusers => false,
-  :cruduusers => false,
-  :cruddusers => false,
-  :crudcupdates => true,
-  :crudrupdates => true,
-  :cruduupdates => true,
-  :cruddupdates => true,
-  :crudcroles => false,
-  :crudrroles => false,
-  :cruduroles => false,
-  :cruddroles => false,
-  :crudcroleassocs => false,
-  :crudrroleassocs => false,
-  :cruduroleassocs => false,
-  :cruddroleassocs => false,
-  :crudcticketalerts => false,
-  :crudrticketalerts => true,
-  :cruduticketalerts => false,
-  :cruddticketalerts => false,
-  :crudcticketrezs => false,
-  :crudrticketrezs => true,
-  :cruduticketrezs => false,
-  :cruddticketrezs => false,
-  :crudcticketsections => true,
-  :crudrticketsections => true,
-  :cruduticketsections => true,
-  :cruddticketsections => true)
-roles = roles && Role.create(:name => "Beta tester", :abbrev => "betar",
-  :crudccontents => true,
-  :crudrcontents => true,
-  :cruducontents => true,
-  :cruddcontents => true,
-  :crudcshows => true,
-  :crudrshows => true,
-  :crudushows => true,
-  :cruddshows => true,
-  :crudcusers => false,
-  :crudrusers => false,
-  :cruduusers => false,
-  :cruddusers => false,
-  :crudcupdates => true,
-  :crudrupdates => true,
-  :cruduupdates => true,
-  :cruddupdates => true,
-  :crudcroles => false,
-  :crudrroles => false,
-  :cruduroles => false,
-  :cruddroles => false,
-  :crudcroleassocs => false,
-  :crudrroleassocs => false,
-  :cruduroleassocs => false,
-  :cruddroleassocs => false,
-  :crudcticketalerts => false,
-  :crudrticketalerts => true,
-  :cruduticketalerts => false,
-  :cruddticketalerts => false,
-  :crudcticketrezs => false,
-  :crudrticketrezs => true,
-  :cruduticketrezs => false,
-  :cruddticketrezs => false,
-  :crudcticketsections => true,
-  :crudrticketsections => true,
-  :cruduticketsections => true,
-  :cruddticketsections => true)
+roles = roles && Role.create(:name => "Administrator", :abbrev => "admin", :crudccontents => true, :crudrcontents => true, :cruducontents => true, :cruddcontents => true, :crudcshows => true, :crudrshows => true, :crudushows => true, :cruddshows => true, :crudcusers => true, :crudrusers => true, :cruduusers => true, :cruddusers => true, :crudcupdates => true, :crudrupdates => true, :cruduupdates => true, :cruddupdates => true, :crudcroles => true, :crudrroles => true, :cruduroles => true, :cruddroles => true, :crudcroleassocs => true, :crudrroleassocs => true, :cruduroleassocs => true, :cruddroleassocs => true, :crudcticketalerts => true, :crudrticketalerts => true, :cruduticketalerts => true, :cruddticketalerts => true, :crudcticketrezs => true, :crudrticketrezs => true, :cruduticketrezs => true, :cruddticketrezs => true, :crudcticketsections => true, :crudrticketsections => true, :cruduticketsections => true, :cruddticketsections => true)
+roles = roles && Role.create(:name => "Content writer", :abbrev => "writer", :crudccontents => true, :crudrcontents => true, :cruducontents => true, :cruddcontents => true, :crudcshows => true, :crudrshows => true, :crudushows => true, :cruddshows => true, :crudcusers => false, :crudrusers => false, :cruduusers => false, :cruddusers => false, :crudcupdates => true, :crudrupdates => true, :cruduupdates => true, :cruddupdates => true, :crudcroles => false, :crudrroles => false, :cruduroles => false, :cruddroles => false, :crudcroleassocs => false, :crudrroleassocs => false, :cruduroleassocs => false, :cruddroleassocs => false, :crudcticketalerts => false, :crudrticketalerts => true, :cruduticketalerts => false, :cruddticketalerts => false, :crudcticketrezs => false, :crudrticketrezs => true, :cruduticketrezs => false, :cruddticketrezs => false, :crudcticketsections => true, :crudrticketsections => true, :cruduticketsections => true, :cruddticketsections => true)
+roles = roles && Role.create(:name => "Beta tester", :abbrev => "betar", :crudccontents => true, :crudrcontents => true, :cruducontents => true, :cruddcontents => true, :crudcshows => true, :crudrshows => true, :crudushows => true, :cruddshows => true, :crudcusers => false, :crudrusers => false, :cruduusers => false, :cruddusers => false, :crudcupdates => true, :crudrupdates => true, :cruduupdates => true, :cruddupdates => true, :crudcroles => false, :crudrroles => false, :cruduroles => false, :cruddroles => false, :crudcroleassocs => false, :crudrroleassocs => false, :cruduroleassocs => false, :cruddroleassocs => false, :crudcticketalerts => false, :crudrticketalerts => true, :cruduticketalerts => false, :cruddticketalerts => false, :crudcticketrezs => false, :crudrticketrezs => true, :cruduticketrezs => false, :cruddticketrezs => false, :crudcticketsections => true, :crudrticketsections => true, :cruduticketsections => true, :cruddticketsections => true)
 if roles
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
@@ -155,6 +48,8 @@ roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "ach
 roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "achivett")
 roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
 roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "tsnider")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "tsnider")
 if roleassocs
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
@@ -174,186 +69,22 @@ end
 time = Time.now.to_f
 puts "-- seeding Shows"
 shows = true
-shows = shows && Show.create(
-  :name => "Scotch On The Rocks (With a Twist)",
-  :shortdisplayname => "Scotch on the Rocks",
-  :abbrev => "sotrwat",
-  :imageurl => "sotrwat.png",
-  :performancetimes => "May 2 2008, 7PM|May 3 2008, 7PM",
-  :timesvisible => true,
-  :ticketstatus => "completed"
-)
-shows = shows && Show.create(
-  :name => "Scotch Straight Up",
-  :shortdisplayname => "Scotch Straight Up",
-  :abbrev => "ssu",
-  :imageurl => "ssu.png",
-  :performancetimes => "May 2 2008, 9PM|May 3 2008, 9PM",
-  :timesvisible => true,
-  :ticketstatus => "completed"
-)
-shows = shows && Show.create(
-  :name => "A Funny Thing Happened On The Way To The Forum",
-  :shortdisplayname => "Forum",
-  :abbrev => "forum",
-  :imageurl => "forum.png",
-  :performancetimes => "April 17 2008, 11PM|April 18 2008, 3PM|April 18 2008, 11PM|April 19 2008, 3PM|April 19 2008, 8PM",
-  :timesvisible => true,
-  :ticketstatus => "completed",
-  :director => "Matt Joachim",
-  :loc => "Rangos Ballroom, UC",
-  :author => "Stephen Sondheim, Burt Shevelove and Larry Gelbart"
-)
-shows = shows && Show.create(
-  :name => "Proof",
-  :shortdisplayname => "Proof",
-  :abbrev => "proof",
-  :imageurl => "proof.png",
-  :performancetimes => "Feb 15 2008, 8PM|Feb 16 2008, 3PM|Feb 16 2008, 8PM",
-  :timesvisible => true,
-  :ticketstatus => "completed",
-  :director => "Scott Wasserman",
-  :loc => "Peter/Wright/McKenna, UC",
-  :author => "David Auburn"
-)
-shows = shows && Show.create(
-  :name => "The Pillowman",
-  :shortdisplayname => "The Pillowman",
-  :abbrev => "pillowman",
-  :imageurl => "pillowman.png",
-  :performancetimes => "Nov 29 2007, 8PM|Nov 30 2007, 5PM|Nov 30 2007, 10PM",
-  :timesvisible => true,
-  :ticketstatus => "completed",
-  :director => "Lillian DeRitter",
-  :loc => "Rangos Ballroom, UC",
-  :author => "Martin McDonagh"
-)
-shows = shows && Show.create(
-  :name => "The Complete Works of William Shakespeare (Abridged)",
-  :shortdisplayname => "CWoWS(A)",
-  :abbrev => "cwowsa",
-  :imageurl => "cwowsa.png",
-  :performancetimes => "Oct 26 2007, 8PM|Oct 27 2007, 4PM|Oct 27 2007, 8PM",
-  :timesvisible => true,
-  :director => "Shaun Swanson and Scott Wasserman",
-  :ticketstatus => "completed",
-  :loc => "McConomy Auditorium, UC",
-  :author => "the Reduced Shakespeare Company"
-)
-shows = shows && Show.create(
-  :name => "The Visit",
-  :shortdisplayname => "The Visit",
-  :abbrev => "visit",
-  :loc => "McConomy Auditorium, UC",
-  :imageurl => "tv.png",
-  :author => "Friedrich DŸrrenmatt",
-  :performancetimes => "October 24 2008 9 PM|October 25 2008 3 PM|October 25 2008 8 PM",
-  :ticketstatus => "completed",
-  :director => "Daniel Dewey and Jackie Bernard",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "A Bottle of Scotch",
-  :shortdisplayname => "A Bottle of Scotch",
-  :abbrev => "abos",
-  :loc => "Alumni Hall, CFA",
-  :imageurl => "abos.png",
-  :performancetimes => "December 5 2008 9 PM",
-  :ticketstatus => "completed",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "A Few Good Men",
-  :shortdisplayname => "A Few Good Men",
-  :abbrev => "afgm",
-  :loc => "Peter/Wright/McKenna, UC",
-  :imageurl => "afgm.png",
-  :author => "Aaron Sorkin",
-  :performancetimes => "February 13 2009 8 PM|February 14 2009 2PM|February 14 2009 8 PM",
-  :ticketstatus => "completed",
-  :director => "Christopher Wheelahan",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "Me And My Girl",
-  :shortdisplayname => "Me And My Girl",
-  :abbrev => "mamg",
-  :loc => "Rangos Ballroom, UC",
-  :imageurl => "mamg.png",
-  :author => "L. Arthur Rose, Douglas Furber, and Noel Gay",
-  :performancetimes => "April 16 2009 8 PM|April 17 2009 3 PM|April 17 2009 11 PM",
-  :ticketstatus => "completed",
-  :director => "Alex DiClaudio and Shannon Deep",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "Chugging Scotch",
-  :shortdisplayname => "Chugging Scotch",
-  :abbrev => "chug",
-  :loc => "Conan Room, UC",
-  :imageurl => "chug.png",
-  :performancetimes => "May 2 2009 8 PM",
-  :ticketstatus => "completed",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "The Mystery of Edwin Drood",
-  :shortdisplayname => "The Mystery of Edwin Drood",
-  :abbrev => "drood",
-  :loc => "McConomy Auditorium, UC",
-  :imageurl => "drood.png",
-  :author => "Rupert Holmes",
-  :performancetimes => "October 30 2009 8 PM|October 31 2009 3 PM|October 31 2009 8 PM",
-  :ticketstatus => "completed",
-  :director => "Scott Wasserman and Tim Sherman",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "Betty's Summer Vacation",
-  :shortdisplayname => "Betty's Summer Vacation",
-  :abbrev => "betty",
-  :loc => "McConomy Auditorium, UC",
-  :imageurl => "betty.png",
-  :author => "Christopher Durang",
-  :performancetimes => "December 4 2009 8 PM|December 5 2009 2 PM|December 5 2009 6 PM",
-  :ticketstatus => "completed",
-  :director => "Tim Sherman",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "A Bottle of Scotch part two: Back to the Bottle",
-  :shortdisplayname => "A Bottle of Scotch, Part Two",
-  :abbrev => "bttb",
-  :loc => "Alumni Hall, CFA",
-  :imageurl => "bttb.png",
-  :performancetimes => "Nov 22 2009, 8 PM",
-  :ticketstatus => "completed",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "Closer",
-  :shortdisplayname => "Closer",
-  :abbrev => "closer",
-  :loc => "Peter/Wright/McKenna, UC",
-  :imageurl => "closer.png",
-  :author => "Patrick Marber",
-  :performancetimes => "February 19 2010, 8PM|February 20 2010, 3PM|February 20 2010, 8PM",
-  :ticketstatus => "completed",
-  :director => "Caity Pitts and Caitlin Cox",
-  :timesvisible => true
-)
-shows = shows && Show.create(
-  :name => "Dirty Rotten Scoundrels",
-  :shortdisplayname => "Dirty Rotten Scoundrels",
-  :abbrev => "drs",
-  :loc => "Rangos Ballroom, UC",
-  :imageurl => "drs.png",
-  :author => "Jeffrey Lane and David Yazbek",
-  :performancetimes => "April 15 2010 8PM|April 16 2010 3PM|April 16 2010 11PM|April 17 2010 3PM|April 17 2010 8PM",
-  :ticketstatus => "closed",
-  :director => "Alex DiClaudio and Will Weiner",
-  :timesvisible => true
-)
+shows = shows && Show.create(:name => "Scotch On The Rocks (With a Twist)", :shortdisplayname => "Scotch on the Rocks", :abbrev => "sotrwat", :imageurl => "sotrwat.png", :performancetimes => "May 2 2008, 7PM|May 3 2008, 7PM", :timesvisible => true, :ticketstatus => "completed")
+shows = shows && Show.create(:name => "Scotch Straight Up", :shortdisplayname => "Scotch Straight Up", :abbrev => "ssu", :imageurl => "ssu.png", :performancetimes => "May 2 2008, 9PM|May 3 2008, 9PM", :timesvisible => true, :ticketstatus => "completed")
+shows = shows && Show.create(:name => "A Funny Thing Happened On The Way To The Forum", :shortdisplayname => "Forum", :abbrev => "forum", :imageurl => "forum.png", :performancetimes => "April 17 2008, 11PM|April 18 2008, 3PM|April 18 2008, 11PM|April 19 2008, 3PM|April 19 2008, 8PM", :timesvisible => true, :ticketstatus => "completed", :director => "Matt Joachim", :loc => "Rangos Ballroom, UC", :author => "Stephen Sondheim, Burt Shevelove and Larry Gelbart")
+shows = shows && Show.create(:name => "Proof", :shortdisplayname => "Proof", :abbrev => "proof", :imageurl => "proof.png", :performancetimes => "Feb 15 2008, 8PM|Feb 16 2008, 3PM|Feb 16 2008, 8PM", :timesvisible => true, :ticketstatus => "completed", :director => "Scott Wasserman", :loc => "Peter/Wright/McKenna, UC", :author => "David Auburn")
+shows = shows && Show.create(:name => "The Pillowman", :shortdisplayname => "The Pillowman", :abbrev => "pillowman", :imageurl => "pillowman.png", :performancetimes => "Nov 29 2007, 8PM|Nov 30 2007, 5PM|Nov 30 2007, 10PM", :timesvisible => true, :ticketstatus => "completed", :director => "Lillian DeRitter", :loc => "Rangos Ballroom, UC", :author => "Martin McDonagh")
+shows = shows && Show.create(:name => "The Complete Works of William Shakespeare (Abridged)", :shortdisplayname => "CWoWS(A)", :abbrev => "cwowsa", :imageurl => "cwowsa.png", :performancetimes => "Oct 26 2007, 8PM|Oct 27 2007, 4PM|Oct 27 2007, 8PM", :timesvisible => true, :director => "Shaun Swanson and Scott Wasserman", :ticketstatus => "completed", :loc => "McConomy Auditorium, UC", :author => "the Reduced Shakespeare Company")
+shows = shows && Show.create(:name => "The Visit", :shortdisplayname => "The Visit", :abbrev => "visit", :loc => "McConomy Auditorium, UC", :imageurl => "tv.png", :author => "Friedrich DŸrrenmatt", :performancetimes => "October 24 2008 9 PM|October 25 2008 3 PM|October 25 2008 8 PM", :ticketstatus => "completed", :director => "Daniel Dewey and Jackie Bernard", :timesvisible => true)
+shows = shows && Show.create(:name => "A Bottle of Scotch", :shortdisplayname => "A Bottle of Scotch", :abbrev => "abos", :loc => "Alumni Hall, CFA", :imageurl => "abos.png", :performancetimes => "December 5 2008 9 PM", :ticketstatus => "completed", :timesvisible => true)
+shows = shows && Show.create(:name => "A Few Good Men", :shortdisplayname => "A Few Good Men", :abbrev => "afgm", :loc => "Peter/Wright/McKenna, UC", :imageurl => "afgm.png", :author => "Aaron Sorkin", :performancetimes => "February 13 2009 8 PM|February 14 2009 2PM|February 14 2009 8 PM", :ticketstatus => "completed", :director => "Christopher Wheelahan", :timesvisible => true)
+shows = shows && Show.create(:name => "Me And My Girl", :shortdisplayname => "Me And My Girl", :abbrev => "mamg", :loc => "Rangos Ballroom, UC", :imageurl => "mamg.png", :author => "L. Arthur Rose, Douglas Furber, and Noel Gay", :performancetimes => "April 16 2009 8 PM|April 17 2009 3 PM|April 17 2009 11 PM", :ticketstatus => "completed", :director => "Alex DiClaudio and Shannon Deep", :timesvisible => true)
+shows = shows && Show.create(:name => "Chugging Scotch", :shortdisplayname => "Chugging Scotch", :abbrev => "chug", :loc => "Conan Room, UC", :imageurl => "chug.png", :performancetimes => "May 2 2009 8 PM", :ticketstatus => "completed", :timesvisible => true)
+shows = shows && Show.create(:name => "The Mystery of Edwin Drood", :shortdisplayname => "The Mystery of Edwin Drood", :abbrev => "drood", :loc => "McConomy Auditorium, UC", :imageurl => "drood.png", :author => "Rupert Holmes", :performancetimes => "October 30 2009 8 PM|October 31 2009 3 PM|October 31 2009 8 PM", :ticketstatus => "completed", :director => "Scott Wasserman and Tim Sherman", :timesvisible => true)
+shows = shows && Show.create(:name => "Betty's Summer Vacation", :shortdisplayname => "Betty's Summer Vacation", :abbrev => "betty", :loc => "McConomy Auditorium, UC", :imageurl => "betty.png", :author => "Christopher Durang", :performancetimes => "December 4 2009 8 PM|December 5 2009 2 PM|December 5 2009 6 PM", :ticketstatus => "completed", :director => "Tim Sherman", :timesvisible => true)
+shows = shows && Show.create(:name => "A Bottle of Scotch part two: Back to the Bottle", :shortdisplayname => "A Bottle of Scotch, Part Two", :abbrev => "bttb", :loc => "Alumni Hall, CFA", :imageurl => "bttb.png", :performancetimes => "Nov 22 2009, 8 PM", :ticketstatus => "completed", :timesvisible => true)
+shows = shows && Show.create(:name => "Closer", :shortdisplayname => "Closer", :abbrev => "closer", :loc => "Peter/Wright/McKenna, UC", :imageurl => "closer.png", :author => "Patrick Marber", :performancetimes => "February 19 2010, 8PM|February 20 2010, 3PM|February 20 2010, 8PM", :ticketstatus => "completed", :director => "Caity Pitts and Caitlin Cox", :timesvisible => true)
+shows = shows && Show.create(:name => "Dirty Rotten Scoundrels", :shortdisplayname => "Dirty Rotten Scoundrels", :abbrev => "drs", :loc => "Rangos Ballroom, UC", :imageurl => "drs.png", :author => "Jeffrey Lane and David Yazbek", :performancetimes => "April 15 2010 8PM|April 16 2010 3PM|April 16 2010 11PM|April 17 2010 3PM|April 17 2010 8PM", :ticketstatus => "closed", :director => "Alex DiClaudio and Will Weiner", :timesvisible => true)
 if shows
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
@@ -365,55 +96,13 @@ end
 puts "-- seeding Tixsections"
 time = Time.now.to_f
 tixsections = true
-tixsections = tixsections && Ticketsection.create(
-  :showid => "mamg",
-  :name => "Section A",
-  :size => 200,
-  :pricewithid => 5,
-  :pricewoutid => 10
-)
-tixsections = tixsections && Ticketsection.create(
-  :showid => "chug",
-  :name => "Section A",
-  :size => 75,
-  :pricewithid => 0,
-  :pricewoutid => 0
-)
-tixsections = tixsections && Ticketsection.create(
-  :showid => "drood",
-  :name => "Section A",
-  :size => 100,
-  :pricewithid => 5,
-  :pricewoutid => 10
-)
-tixsections = tixsections && Ticketsection.create(
-  :showid => "drood",
-  :name => "Section B",
-  :size => 200,
-  :pricewithid => 3,
-  :pricewoutid => 8
-)
-tixsections = tixsections && Ticketsection.create(
-  :showid => "betty",
-  :name => "Section A",
-  :size => 300,
-  :pricewithid => 0,
-  :pricewoutid => 0
-)
-tixsections = tixsections && Ticketsection.create(
-  :showid => "bttb",
-  :name => "Section A",
-  :size => 200,
-  :pricewithid => 10,
-  :pricewoutid => 10
-)
-tixsections = tixsections && Ticketsection.create(
-  :showid => "closer",
-  :name => "Section A",
-  :size => 90,
-  :pricewithid => 3,
-  :pricewoutid => 5
-)
+tixsections = tixsections && Ticketsection.create(:showid => "mamg", :name => "Section A", :size => 200, :pricewithid => 5, :pricewoutid => 10)
+tixsections = tixsections && Ticketsection.create(:showid => "chug", :name => "Section A", :size => 75, :pricewithid => 0, :pricewoutid => 0)
+tixsections = tixsections && Ticketsection.create(:showid => "drood", :name => "Section A", :size => 100, :pricewithid => 5, :pricewoutid => 10)
+tixsections = tixsections && Ticketsection.create(:showid => "drood", :name => "Section B", :size => 200, :pricewithid => 3, :pricewoutid => 8)
+tixsections = tixsections && Ticketsection.create(:showid => "betty", :name => "Section A", :size => 300, :pricewithid => 0, :pricewoutid => 0)
+tixsections = tixsections && Ticketsection.create(:showid => "bttb", :name => "Section A", :size => 200, :pricewithid => 10, :pricewoutid => 10)
+tixsections = tixsections && Ticketsection.create(:showid => "closer", :name => "Section A", :size => 90, :pricewithid => 3, :pricewoutid => 5)
 if tixsections
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
@@ -537,8 +226,8 @@ updates = updates && Update.create(
   :anchor => "70ai-oct",
   :expiredate => DateTime.parse("2010-04-14 12:59:00 -0400"),
   :article => "For those of you who don't get to keep up with Scotch'n'Soda in Pittsburgh, the Development Committee has published the latest update for our alumni. Click \"here\":http://dev.snstheatre.org/~jrfriedr/October%20Update.pdf to read up on what we've been doing, ways to help us out and just how much Jared Cohon loves us!",
-  :created_at => DateTime.parse("October 1 2009, 00:00"),
-  :updated_at => DateTime.parse("October 1 2009, 00:00")
+  :created_at => DateTime.parse("October 1 2009, 00:00 -0400"),
+  :updated_at => DateTime.parse("October 1 2009, 00:00 -0400")
 )
 updates = updates && Update.create(
   :name => "Carnival is in the air",
@@ -552,4 +241,4 @@ else
   puts "   error seeding Contents"
 end
 
-puts "==  Seeding Database: seeded (#{(Time.now.to_f-time).to_s[0..5]}s) ========================================"
+puts "==  Seeding Database: seeded (#{(Time.now.to_f-timeall).to_s[0..5]}s) ========================================"
