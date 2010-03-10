@@ -9,12 +9,11 @@ class TicketsController < ApplicationController
     else
       redirect_to "/tickets/show/#{@activeshow.abbrev}"
     end
-    # Redirect to closest upcoming show, else redirect to tickets/noshows
-    # noshows should have a link to the lightbox
   end
 
   def noshow
-    #@shows = all shows upcoming and not open
+    @shows = Show.find_by_ticketstatus("closed")
+    @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
   end
 
   def show
@@ -25,24 +24,21 @@ class TicketsController < ApplicationController
     elsif @show.ticketstatus != "open" || @show.ticketsections.blank?
       redirect_to "/tickets/showclosed"
     end
+    
+    @ticketrez = Ticketrez.new
   end
-
+  
   def createticketrez
-    # create a reservation based on postdata and redirect to tickets/reznewsucess, else flash[:notice] and redirect back to tickets/params[:abbrev]
-  end
-
-  def createticketalert
-    # create an alert based on postadata and redirect to tickets/alertnewsuccess, else flash[:notice] and redirect back to tickets/params[:abbrev]
-  end
-
-  def editticketrez
-    # find a reservation with params[:hash], else redirect to tickets/rezerror
-    # change reservation based on postdata and redirect to tickets/rezeditsuccess, else flash[:notice] and redirect back to tickets/reservation/params[:hash]
-  end
-
-  def removeticketalert
-    # find an alert with params[:hash], else redirect to tickets/alertdelerror
-    # delete alert, redirect to tickets/alertdelsuccess
+    @ticketrez = Ticketrez.new(params[:ticketrez])
+    #process section/performance info
+    respond_to do |format|
+      if @ticketrez.save
+        flash[:notice] = 'Ticketrez was successfully created.'
+        render :action => "newrezsuccess"
+      else
+        render :action => "show", :abbrev => @ticketrez.showid
+      end
+    end
   end
 protected
   def authorize

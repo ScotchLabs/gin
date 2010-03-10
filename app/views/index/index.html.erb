@@ -1,5 +1,5 @@
 <div class='article'>
-  <div id='indexleft' class='fleft'>
+  <div id='indexleft' class='articleleft fleft'>
     <div id='carouselwindow'>
       <div id='carouselitemscontainer'>
         <% for show in @shows %>
@@ -21,8 +21,8 @@
       <div class='carouselnavbutton fright' onclick='right();'><%= image_tag "layout/rarr.gif" %></div>
     </div>
   </div>
-  <div id='indexright' class='fright'>
-    <div id='newstitle' class='header'>News</div>
+  <div id='indexright' class='articleright fright'>
+    <h1 id='newstitle'>News</h1>
     <div id='newswindow'>
       <div id='newsitemscontainer'>
         <% for update in @updates %>

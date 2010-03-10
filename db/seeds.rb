@@ -96,13 +96,13 @@ end
 puts "-- seeding Tixsections"
 time = Time.now.to_f
 tixsections = true
-tixsections = tixsections && Ticketsection.create(:showid => "mamg", :name => "Section A", :size => 200, :pricewithid => 5, :pricewoutid => 10)
-tixsections = tixsections && Ticketsection.create(:showid => "chug", :name => "Section A", :size => 75, :pricewithid => 0, :pricewoutid => 0)
-tixsections = tixsections && Ticketsection.create(:showid => "drood", :name => "Section A", :size => 100, :pricewithid => 5, :pricewoutid => 10)
-tixsections = tixsections && Ticketsection.create(:showid => "drood", :name => "Section B", :size => 200, :pricewithid => 3, :pricewoutid => 8)
-tixsections = tixsections && Ticketsection.create(:showid => "betty", :name => "Section A", :size => 300, :pricewithid => 0, :pricewoutid => 0)
-tixsections = tixsections && Ticketsection.create(:showid => "bttb", :name => "Section A", :size => 200, :pricewithid => 10, :pricewoutid => 10)
-tixsections = tixsections && Ticketsection.create(:showid => "closer", :name => "Section A", :size => 90, :pricewithid => 3, :pricewoutid => 5)
+tixsections = tixsections && Ticketsection.create(:showid => "mamg", :name => "A", :size => 200, :pricewithid => 5, :pricewoutid => 10)
+tixsections = tixsections && Ticketsection.create(:showid => "chug", :name => "A", :size => 75, :pricewithid => 0, :pricewoutid => 0)
+tixsections = tixsections && Ticketsection.create(:showid => "drood", :name => "A", :size => 100, :pricewithid => 5, :pricewoutid => 10)
+tixsections = tixsections && Ticketsection.create(:showid => "drood", :name => "B", :size => 200, :pricewithid => 3, :pricewoutid => 8)
+tixsections = tixsections && Ticketsection.create(:showid => "betty", :name => "A", :size => 300, :pricewithid => 0, :pricewoutid => 0)
+tixsections = tixsections && Ticketsection.create(:showid => "bttb", :name => "A", :size => 200, :pricewithid => 10, :pricewoutid => 10)
+tixsections = tixsections && Ticketsection.create(:showid => "closer", :name => "A", :size => 90, :pricewithid => 3, :pricewoutid => 5)
 if tixsections
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
@@ -233,7 +233,7 @@ updates = updates && Update.create(
   :name => "Carnival is in the air",
   :anchor => "carnival-spr2010",
   :expiredate => DateTime.parse("2010-04-14 12:59:00 -0400"),
-  :article => "Spring break is almost here, which means that \"Carnival at Carnegie Mellon\":http://www.cmu.edu/alumni/involved/events/carnival/ is approaching with speed! **Dirty Rotten Scoundrels** is cast and staffed and weÕre working hard to bring an even greater production to Carnival than ever before! Excited? Ticket reservations will be up soon, we promise."
+  :article => "Spring break is almost here, which means that \"Carnival at Carnegie Mellon\":http://www.cmu.edu/alumni/involved/events/carnival/ is approaching with speed! **Dirty Rotten Scoundrels** is cast and staffed and we're working hard to bring an even greater production to Carnival than ever before! Excited? Ticket reservations will be up soon, we promise."
 )
 if updates
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
