@@ -39,6 +39,10 @@ class RezlineitemsController < ApplicationController
   # POST /rezlineitems.xml
   def create
     @rezlineitem = Rezlineitem.new(params[:rezlineitem])
+    @ticketrez = Ticketrez.find(@rezlineitem.rezid)
+    @show = Show.find_by_abbrev(@ticketrez.showid)
+    @ticketsections = Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
+    
     puts "DEBUG rezlineitems_controller#create: making a new lineitem for reservation '#{Ticketrez.find(@rezlineitem.rezid)}'"
 
     respond_to do |format|
@@ -79,10 +83,11 @@ class RezlineitemsController < ApplicationController
   # DELETE /rezlineitems/1.xml
   def destroy
     @rezlineitem = Rezlineitem.find(params[:id])
+    rezid = @rezlineitem.rezid
     @rezlineitem.destroy
 
     respond_to do |format|
-      format.html { redirect_to(rezlineitems_url) }
+      format.html { redirect_to(ticketrez_path(Ticketrez.find(rezid))) }
       format.xml  { head :ok }
     end
   end

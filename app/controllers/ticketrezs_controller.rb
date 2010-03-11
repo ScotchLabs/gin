@@ -80,10 +80,12 @@ class TicketrezsController < ApplicationController
   # DELETE /ticketrezs/1.xml
   def destroy
     @ticketrez = Ticketrez.find(params[:id])
+    showid = @ticketrez.showid
+    Rezlineitem.all(:conditions => ["rezid = ?", @ticketrez.id]).each {|i| i.destroy}
     @ticketrez.destroy
 
     respond_to do |format|
-      format.html { redirect_to(shows_url) }
+      format.html { redirect_to(show_path(Show.find_by_abbrev(showid))) }
       format.xml  { head :ok }
     end
   end

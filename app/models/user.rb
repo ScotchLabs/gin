@@ -30,6 +30,7 @@ class User < ActiveRecord::Base
       puts "DEBUG user hasaccess: role '#{role}', controller '#{controller}', crud '#{crud}'"
       access = access || (!role.send("r"+controller).nil? && role.send("r"+controller).include?(crud))
       puts "DEBUG user hasaccess: access after role #{access}"
+      return true if access
     end
     access
   end

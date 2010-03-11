@@ -24,7 +24,7 @@ class TicketsController < ApplicationController
     elsif @show.ticketstatus != "open" || @show.ticketsections.blank?
       redirect_to "/tickets/showclosed"
     end
-    
+    @ticketsections = Ticketsection.all(:conditions => ["showid = ?",@show.abbrev])
     @ticketrez = Ticketrez.new
   end
   

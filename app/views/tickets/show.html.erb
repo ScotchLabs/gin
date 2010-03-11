@@ -3,6 +3,7 @@ Where do error messages go?
 What about multiple sections?
 Can I AJAX it? If so, where would the page redirect?
 How does it know the show is for Carnival? Homecoming? Festival?
+How does it count tckets left for shows with multiple sections?
 -->
 
 <div class='article'>
@@ -43,11 +44,28 @@ How does it know the show is for Carnival? Homecoming? Festival?
       Notes: <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %> <% end %><%= @show.sectioninfo %><br />
       <br />
       <h2>Select Dates, Sections, and Quantities</h2>
-      for each performance<br />
-      &nbsp;&nbsp;put a box for quantity<br />
-      &nbsp;&nbsp;if there's more than one section put a dropdown<br />
-      &nbsp;&nbsp;put performance info<br />
-      &nbsp;&nbsp;if the performance is sold out disable the inputs and grey out the text<br />
+      <% i=0
+      for perf in @show.performancetimes.split("|")
+        soldout = @show.soldout(perf)
+        quantity = text_field(nil, "performance[#{i}]")
+        quantity = text_field(nil, "performance[#{i}]", :disabled => true) if soldout
+        if @ticketsections.count > 1
+          #only put sections that are available
+          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]})
+          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, :html_options => {:disabled => "true"}) if soldout
+        end
+        time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
+        time += DateTime.parse(perf).strftime("%I").to_i.to_s
+        time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
+        num = @show.ticketsavailable(perf).to_s+" left"
+        num = "Sold out" if soldout
+        time = "<b>#{time}</b> (#{num})"
+        time = "<span style='color:#999999;'>#{time}</span>" if soldout
+        %><%= quantity %><%= sections %> <%= time %><%
+        ++i
+      end %>
+      <%= hidden_field nil, "numperformances", :value => i %>
+      <br />
       &nbsp;&nbsp;load all this into js for updateprice and ajaxhandler<br />
     </div>
   <% end %>

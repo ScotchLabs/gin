@@ -14,6 +14,25 @@ class Show < ActiveRecord::Base
   validate :image_exists
   validate :performancetimes_parsable
   
+  def ticketsavailable(performance)
+    puts "DEBUG show_model#ticketsavailable: checking how many tickets are available for the show '#{abbrev}' for the performance '#{performance}'"
+    sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
+    total = 0
+    for section in sections
+      total += section.numavailable(performance)
+    end
+    total
+  end
+  
+  def soldout(performance)
+    puts "DEBUG show_model#soldout: checking if performance '#{performance}' of show '#{abbrev}' is sold out"
+    sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
+    for section in sections
+      return false unless section.soldout(performance)
+    end
+    return true
+  end
+  
   def sectioninfo
     ticketsections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     if ticketsections.size == 0

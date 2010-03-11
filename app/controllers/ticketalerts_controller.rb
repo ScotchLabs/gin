@@ -80,10 +80,11 @@ class TicketalertsController < ApplicationController
   # DELETE /ticketalerts/1.xml
   def destroy
     @ticketalert = Ticketalert.find(params[:id])
+    showid = @ticketalert.showid
     @ticketalert.destroy
 
     respond_to do |format|
-      format.html { redirect_to(shows_url) }
+      format.html { redirect_to(show_path(Show.find_by_abbrev(showid))) }
       format.xml  { head :ok }
     end
   end
