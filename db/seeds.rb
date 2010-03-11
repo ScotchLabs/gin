@@ -20,7 +20,7 @@ else
   puts "   error seeding Users"
 end
 
-
+Role.destroy_all
 # need crud(c|r|u|d)(content|show|user|update|role(assoc)?|ticket(alert|rez|section))s
 roles = true
 time = Time.now.to_f
@@ -36,6 +36,7 @@ else
   puts "   error seeding Roles"
 end
 
+Roleassoc.destroy_all
 time = Time.now.to_f
 puts "-- seeding Roleassocs"
 roleassocs = true
