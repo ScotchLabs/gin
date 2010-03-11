@@ -64,24 +64,8 @@ h1, h2, ul {
   left: 0;
   z-index: -2;
   min-width: 900px;
-  background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, rgb(238,238,187)),
-    color-stop(0.41, rgb(255,255,255)),
-    color-stop(0.42, rgb(255,102,0)),
-    color-stop(0.95, rgb(255,153,0)),
-    color-stop(0.96, rgb(255,102,0))
-  );
-  background-image: -moz-linear-gradient(
-    center bottom,
-    rgb(238,238,187) 0px,
-    rgb(255,255,255) 57px,
-    rgb(255,102,0) 58px,
-    rgb(255,153,0) 132px,
-    rgb(255,102,0) 137px
-  );
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(238,238,187)), color-stop(0.41, rgb(255,255,255)), color-stop(0.42, rgb(255,102,0)), color-stop(0.95, rgb(255,153,0)), color-stop(0.96, rgb(255,102,0)));
+  background-image: -moz-linear-gradient(center bottom, rgb(238,238,187) 0px, rgb(255,255,255) 57px, rgb(255,102,0) 58px, rgb(255,153,0) 132px, rgb(255,102,0) 137px);
 }
 #bannernocss3 {
   position:absolute;
@@ -176,18 +160,8 @@ h2 {
   height: 48px;
 }
 #menu a:hover {
-  background-image: -webkit-gradient(
-    linear,
-    left bottom,
-    left top,
-    color-stop(0, rgb(207,255,254)),
-    color-stop(1, rgb(255,255,255))
-  );
-  background-image: -moz-linear-gradient(
-    center bottom,
-    rgb(207,255,254) 0%,
-    rgb(255,255,255) 100%
-  );
+  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(207,255,254)), color-stop(1, rgb(255,255,255)));
+  background-image: -moz-linear-gradient(center bottom, rgb(207,255,254) 0%, rgb(255,255,255) 100%);
 }
   /* end nav styles */
   
@@ -198,14 +172,8 @@ h2 {
   letter-spacing: 0;
   -webkit-box-shadow: 0px 5px 20px #333333;
   -moz-box-shadow: 0px 5px 20px #333333;
-  -webkit-border-top-left-radius: 8px;
-  -webkit-border-top-right-radius: 8px;
-  -moz-border-radius-topleft: 8px;
-  -moz-border-radius-topright: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -moz-border-radius-bottomleft: 8px;
-  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
 }
 .articletitle {
   font-family: "Georgia", "Times", serif;
@@ -264,14 +232,8 @@ h2 {
   background: white;
   -webkit-box-shadow: 0px 5px 20px #333333;
   -moz-box-shadow: 0px 5px 20px #333333;
-  -webkit-border-top-left-radius: 8px;
-  -webkit-border-top-right-radius: 8px;
-  -moz-border-radius-topleft: 8px;
-  -moz-border-radius-topright: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -moz-border-radius-bottomleft: 8px;
-  -moz-border-radius-bottomright: 8px;
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
 }
 .twitterstem {
   width: 10px;
@@ -324,27 +286,6 @@ h2 {
 }
 #admin a { color: white }
 #admin a:hover { color: #FF9900 }
-#admin ul {
-  position: absolute;
-  right: 30px;
-  vertical-align: middle;
-  text-align: right;
-}
-#admin li a {
-  margin: 8px;
-  padding: 6px;
-  line-height: 30px;
-  display: inline;
-  background: #333333;
-  -webkit-border-top-left-radius: 8px;
-  -webkit-border-top-right-radius: 8px;
-  -webkit-border-bottom-left-radius: 8px;
-  -webkit-border-bottom-right-radius: 8px;
-  -moz-border-radius-topleft: 8px;
-  -moz-border-radius-topright: 8px;
-  -moz-border-radius-bottomleft: 8px;
-  -moz-border-radius-bottomright: 8px;
-}
 .articleleft {
   padding: 0px 20px 0px 0px;
   border-width: 0px 2px 0px 0px;
@@ -396,5 +337,18 @@ input[type="text"] {
   font-size: 18px;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(255,255,255)), color-stop(1, rgb(228,228,228)));
   background-image: -moz-linear-gradient(center bottom, rgb(255,255,255) 0%, rgb(228,228,228) 100%);
+}
+input[type="submit"] {
+  -moz-border-radius: 8px;
+  -webkit-border-radius: 8px;
+  background: #ff9900;
+  color: white;
+  border: 0px;
+  width: 116px;
+  font-weight: bold;
+  height: 30px;
+}
+input[type="submit"]:hover {
+  background: #00dddd;
 }
 /* end ticket styles */
