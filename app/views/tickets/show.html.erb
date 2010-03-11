@@ -37,6 +37,7 @@ How does it count tckets left for shows with multiple sections?
     <div id='ticketsright' class='articleright fleft'>
       <h1>Ticket Reservations</h1>
       <% unless @show.housemanname.blank? %>Questions? Contact House Manager <%= link_to @show.housemanname, "mailto:#{@show.housemanemail}" %>.<br /><% end %>
+      <br />
       Use this form to reserve your tickets for Scotch'n'Soda's production of <b><%= @show.name %></b>, showing <%= @show.datetickets %> in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
       <br />
       If tickets to your preffered show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there<br />
@@ -47,12 +48,13 @@ How does it count tckets left for shows with multiple sections?
       <% i=0
       for perf in @show.performancetimes.split("|")
         soldout = @show.soldout(perf)
-        quantity = text_field(nil, "performance[#{i}]")
-        quantity = text_field(nil, "performance[#{i}]", :disabled => true) if soldout
+        quantity = text_field(nil, "performance[#{i}]", {:onchange => "updateprice()"}) unless soldout
+        quantity = text_field(nil, "performance[#{i}]", {:onchange => "updateprice()", :disabled => true}) if soldout
         if @ticketsections.count > 1
           #only put sections that are available
-          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]})
-          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, :html_options => {:disabled => "true"}) if soldout
+          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {:onchange => "updateprice()"}) unless soldout
+          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {:onchange => "updateprice()", :disabled => "disabled"}) if soldout
+          puts "DEBUG tickets_view#show: sections '#{sections}'"
         end
         time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
         time += DateTime.parse(perf).strftime("%I").to_i.to_s
@@ -61,12 +63,20 @@ How does it count tckets left for shows with multiple sections?
         num = "Sold out" if soldout
         time = "<b>#{time}</b> (#{num})"
         time = "<span style='color:#999999;'>#{time}</span>" if soldout
-        %><%= quantity %><%= sections %> <%= time %><%
-        ++i
+        %>
+        <%= quantity %>
+        <%= sections %>
+        <%= time %>
+        <% for section in Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
+          #put price info for updateprice
+          #onchange updateprice for select
+        end %>
+        <%
+        i=i+1
       end %>
       <%= hidden_field nil, "numperformances", :value => i %>
       <br />
-      &nbsp;&nbsp;load all this into js for updateprice and ajaxhandler<br />
+      load all this into js for updateprice and ajaxhandler
     </div>
   <% end %>
   <br clear='all' />
