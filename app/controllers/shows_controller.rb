@@ -5,9 +5,6 @@ class ShowsController < ApplicationController
   def index
     @shows = Show.all
     @shows.sort! { |x, y| Time.parse(y.performancetimes.split("|")[0])<=>Time.parse(x.performancetimes.split("|")[0]) }
-    @ticketalerts = Ticketalert.all
-    @ticketrezs = Ticketrez.all
-    @ticketsections = Ticketsection.all
     
     respond_to do |format|
       format.html # index.html.erb

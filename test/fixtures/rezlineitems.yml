@@ -1,0 +1,13 @@
+# Read about fixtures at http://ar.rubyonrails.org/classes/Fixtures.html
+
+one:
+  rezid: 1
+  performance: MyString
+  sectionid: MyString
+  quantity: 1
+
+two:
+  rezid: 1
+  performance: MyString
+  sectionid: MyString
+  quantity: 1

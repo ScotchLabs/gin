@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :rezlineitems
+
   map.resources :ticketsections
 
   map.resources :ticketrezs
@@ -28,6 +30,12 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'tickets/show/:abbrev', :controller => "tickets", :action => "show"
   map.connect 'tickets/unsubscribe/:hash', :controller => "tickets", :action => "removeticketalert"
   map.connect 'tickets/editreservation/:hash', :controller => "tickets", :action => "editticketrez"
+  
+  map.connect 'ticketsections/new/:abbrev', :controller => "ticketsections", :action => "new"
+  map.connect 'ticketalerts/new/:abbrev', :controller => "ticketalerts", :action => "new"
+  map.connect 'ticketrezs/new/:abbrev', :controller => "ticketrezs", :action => "new"
+  
+  map.connect 'rezlineitems/new/:ticketrezid', :controller => "rezlineitems", :action => "new"
 
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'

@@ -3,10 +3,7 @@
 <% form_for(@ticketsection) do |f| %>
   <%= f.error_messages %>
 
-  <p>
-    <%= f.label :showid %><br />
-    <%= f.select :showid, Show.all.sort! { |y, x| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }.map {|show| [show.name, show.abbrev]} %>
-  </p>
+  <%= f.hidden_field :showid, :value => @ticketsection.showid %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -29,4 +26,5 @@
 <% end %>
 
 <%= link_to 'Show', @ticketsection %> |
-<%= link_to 'Back', shows_path %>
+<% puts "DEBUG view/ticketsections/edit: show '#{@show}'" %>
+<%= link_to 'Back', show_path(@show) %>

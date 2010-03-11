@@ -9,5 +9,5 @@
 </p>
 
 
-<% if session[:crud]["u"]["roleassocs"] %><%= link_to 'Edit', edit_roleassoc_path(@roleassoc) %> |<% end %>
+<% if User.find(session[:user_id]).hasaccess("roleassocs", "update") %><%= link_to 'Edit', edit_roleassoc_path(@roleassoc) %> |<% end %>
 <%= link_to 'Back', users_path %>

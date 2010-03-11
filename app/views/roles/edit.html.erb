@@ -12,60 +12,45 @@
     <%= f.text_field :abbrev %>
   </p>
   <p>
-    <%= f.label :crudcontents %><br />
-    <%= f.check_box :crudcontents %>
+	<%= f.label :rcontents %><br />
+	<%= f.text_field :rcontents %>
   </p>
-  <table>
-    <tr>
-      <th>Type</th>
-      <th>Create</th>
-      <th>Read</th>
-      <th>Update</th>
-      <th>Destroy</th>
-    </tr>
-    <tr>
-      <td>Shows</td>
-      <td><%= f.check_box :crudcshows %></td>
-      <td><%= f.check_box :crudrshows %></td>
-      <td><%= f.check_box :crudushows %></td>
-      <td><%= f.check_box :cruddshows %></td>
-    </tr>
-    <tr>
-      <td>Updates</td>
-      <td><%= f.check_box :crudcupdates %></td>
-      <td><%= f.check_box :crudrupdates %></td>
-      <td><%= f.check_box :cruduupdates %></td>
-      <td><%= f.check_box :cruddupdates %></td>
-    </tr>
-    <tr>
-      <td>Contents</td>
-      <td><%= f.check_box :crudccontents %></td>
-      <td><%= f.check_box :crudrcontents %></td>
-      <td><%= f.check_box :cruducontents %></td>
-      <td><%= f.check_box :cruddcontents %></td>
-    </tr>
-    <tr>
-      <td>Roles</td>
-      <td><%= f.check_box :crudcroles %></td>
-      <td><%= f.check_box :crudrroles %></td>
-      <td><%= f.check_box :cruduroles %></td>
-      <td><%= f.check_box :cruddroles %></td>
-    </tr>
-    <tr>
-      <td>Users</td>
-      <td><%= f.check_box :crudcusers %></td>
-      <td><%= f.check_box :crudrusers %></td>
-      <td><%= f.check_box :cruduusers %></td>
-      <td><%= f.check_box :cruddusers %></td>
-    </tr>
-    <tr>
-      <td>Roleassocs</td>
-      <td><%= f.check_box :crudcroleassocs %></td>
-      <td><%= f.check_box :crudrroleassocs %></td>
-      <td><%= f.check_box :cruduroleassocs %></td>
-      <td><%= f.check_box :cruddroleassocs %></td>
-    </tr>
-  </table>
+  <p>
+	<%= f.label :rupdates %><br />
+	<%= f.text_field :rupdates %>
+  </p>
+  <p>
+	<%= f.label :rusers %><br />
+	<%= f.text_field :rusers %>
+  </p>
+  <p>
+	<%= f.label :rroleassocs %><br />
+	<%= f.text_field :rroleassocs %>
+  </p>
+  <p>
+	<%= f.label :rroles %><br />
+	<%= f.text_field :rroles %>
+  </p>
+  <p>
+	<%= f.label :rshows %><br />
+	<%= f.text_field :rshows %>
+  </p>
+  <p>
+	<%= f.label :rticketalerts %><br />
+	<%= f.text_field :rticketalerts %>
+  </p>
+  <p>
+	<%= f.label :rticketrezs %><br />
+	<%= f.text_field :rticketrezs %>
+  </p>
+  <p>
+	<%= f.label :rticketsections %><br />
+	<%= f.text_field :rticketsections %>
+  </p>
+  <p>
+	<%= f.label :rrezlineitems %><br />
+	<%= f.text_field :rrezlineitems %>
+  </p>
   <p>
     <%= f.submit 'Update' %>
   </p>

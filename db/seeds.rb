@@ -25,9 +25,11 @@ end
 roles = true
 time = Time.now.to_f
 puts "-- seeding Roles"
-roles = roles && Role.create(:name => "Administrator", :abbrev => "admin", :crudccontents => true, :crudrcontents => true, :cruducontents => true, :cruddcontents => true, :crudcshows => true, :crudrshows => true, :crudushows => true, :cruddshows => true, :crudcusers => true, :crudrusers => true, :cruduusers => true, :cruddusers => true, :crudcupdates => true, :crudrupdates => true, :cruduupdates => true, :cruddupdates => true, :crudcroles => true, :crudrroles => true, :cruduroles => true, :cruddroles => true, :crudcroleassocs => true, :crudrroleassocs => true, :cruduroleassocs => true, :cruddroleassocs => true, :crudcticketalerts => true, :crudrticketalerts => true, :cruduticketalerts => true, :cruddticketalerts => true, :crudcticketrezs => true, :crudrticketrezs => true, :cruduticketrezs => true, :cruddticketrezs => true, :crudcticketsections => true, :crudrticketsections => true, :cruduticketsections => true, :cruddticketsections => true)
-roles = roles && Role.create(:name => "Content writer", :abbrev => "writer", :crudccontents => true, :crudrcontents => true, :cruducontents => true, :cruddcontents => true, :crudcshows => true, :crudrshows => true, :crudushows => true, :cruddshows => true, :crudcusers => false, :crudrusers => false, :cruduusers => false, :cruddusers => false, :crudcupdates => true, :crudrupdates => true, :cruduupdates => true, :cruddupdates => true, :crudcroles => false, :crudrroles => false, :cruduroles => false, :cruddroles => false, :crudcroleassocs => false, :crudrroleassocs => false, :cruduroleassocs => false, :cruddroleassocs => false, :crudcticketalerts => false, :crudrticketalerts => true, :cruduticketalerts => false, :cruddticketalerts => false, :crudcticketrezs => false, :crudrticketrezs => true, :cruduticketrezs => false, :cruddticketrezs => false, :crudcticketsections => true, :crudrticketsections => true, :cruduticketsections => true, :cruddticketsections => true)
-roles = roles && Role.create(:name => "Beta tester", :abbrev => "betar", :crudccontents => true, :crudrcontents => true, :cruducontents => true, :cruddcontents => true, :crudcshows => true, :crudrshows => true, :crudushows => true, :cruddshows => true, :crudcusers => false, :crudrusers => false, :cruduusers => false, :cruddusers => false, :crudcupdates => true, :crudrupdates => true, :cruduupdates => true, :cruddupdates => true, :crudcroles => false, :crudrroles => false, :cruduroles => false, :cruddroles => false, :crudcroleassocs => false, :crudrroleassocs => false, :cruduroleassocs => false, :cruddroleassocs => false, :crudcticketalerts => false, :crudrticketalerts => true, :cruduticketalerts => false, :cruddticketalerts => false, :crudcticketrezs => false, :crudrticketrezs => true, :cruduticketrezs => false, :cruddticketrezs => false, :crudcticketsections => true, :crudrticketsections => true, :cruduticketsections => true, :cruddticketsections => true)
+# contents, shows, users, updates, roles, roleassocs, ticketalerts, ticketrezs, ticketsections, rezlineitems
+roles = roles && Role.create(:rname => "Administrator", :rabbrev => "admin", :rcontents => "crud", :rshows => "crud", :rusers => "crud", :rupdates => "crud", :rroles => "crud", :rroleassocs => "crud", :rticketalerts => "crud", :rticketrezs => "crud", :rticketsections => "crud", :rrezlineitems => "crud")
+roles = roles && Role.create(:rname => "Developer", :rabbrev => "dev", :rshows => "crud", :rupdates => "crud", :rroles => "crud", :rroleassocs => "crud", :rticketalerts => "crud", :rticketrezs => "crud", :rticketsections => "crud", :rrezlineitems => "crud")
+roles = roles && Role.create(:rname => "Content writer", :rabbrev => "writer", :rcontents => "crud", :rshows => "crud", :rupdates => "crud", :rticketsections => "crud")
+roles = roles && Role.create(:rname => "Ticketmaster", :rabbrev => "tixer", :rshows => "crud", :rticketalerts => "crud", :rticketrezs => "crud", :rticketsections => "crud", :rrezlineitems => "crud")
 if roles
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else
@@ -38,18 +40,19 @@ time = Time.now.to_f
 puts "-- seeding Roleassocs"
 roleassocs = true
 roleassocs = roleassocs && Roleassoc.create(:roleid => "admin", :userid => "sewillia")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "dev", :userid => "sewillia")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "dev", :userid => "amgross")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "dev", :userid => "dfreeman")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "dev", :userid => "achivett")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "dev", :userid => "mdickoff")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "sewillia")
 roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "jrfriedr")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "jrfriedr")
 roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "amgross")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "amgross")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "dfreeman")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "dfreeman")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "achivett")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "achivett")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "mdickoff")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "mdickoff")
 roleassocs = roleassocs && Roleassoc.create(:roleid => "writer", :userid => "tsnider")
-roleassocs = roleassocs && Roleassoc.create(:roleid => "betar", :userid => "tsnider")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "tixer", :userid => "sewillia")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "tixer", :userid => "jrfriedr")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "tixer", :userid => "amgross")
+roleassocs = roleassocs && Roleassoc.create(:roleid => "tixer", :userid => "tsnider")
 if roleassocs
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else

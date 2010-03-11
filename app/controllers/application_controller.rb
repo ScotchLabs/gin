@@ -18,17 +18,7 @@ protected
     end
     if controller_name != "admin"
       puts "DEBUG application_controller: checking if user '#{session[:user_name]}' has access to controller '#{controller_name}', action '#{action_name}'"
-      if action_name == "index" || action_name == "show"
-        crud = "r"
-      elsif action_name == "edit" || action_name == "update"
-        crud = "u"
-      elsif action_name == "new" || action_name == "create"
-        crud = "c"
-      elsif action_name == "destroy"
-        crud = "d"
-      end
-      puts "DEBUG application_controller: crud is '#{crud}', session[:crud] "+((session[:crud].has_key?(crud))? "does":"does not" )+" contain '#{crud}'"
-      okcontinue = session[:crud].fetch(crud).fetch(controller_name)
+      okcontinue = User.find(session[:user_id]).hasaccess(controller_name, action_name)
       puts "DEBUG application_controller: okcontinue is '#{okcontinue.to_s}'"
       unless okcontinue
         flash[:notice] = "You don't have access to that."

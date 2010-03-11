@@ -1,0 +1,25 @@
+<h1>Editing rezlineitem</h1>
+
+<% form_for(@rezlineitem) do |f| %>
+  <%= f.error_messages %>
+
+  <%= f.hidden_field :rezid, :value => @rezlineitem.rezid %>
+  <p>
+    <%= f.label :performance %><br />
+    <%= f.select :performance, @show.performancetimes.split("|").map{|p| [p, DateTime.parse(p)]} %>
+  </p>
+  <p>
+    <%= f.label :sectionid %><br />
+    <%= f.select :sectionid, @ticketsections.map{|s| [s.name,s.id]} %>
+  </p>
+  <p>
+    <%= f.label :quantity %><br />
+    <%= f.text_field :quantity %>
+  </p>
+  <p>
+    <%= f.submit 'Update' %>
+  </p>
+<% end %>
+
+<%= link_to 'Show', @rezlineitem %> |
+<%= link_to 'Back', ticketrez_path(@ticketrez) %>

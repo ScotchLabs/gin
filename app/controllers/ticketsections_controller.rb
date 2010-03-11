@@ -15,6 +15,7 @@ class TicketsectionsController < ApplicationController
   # GET /ticketsections/1.xml
   def show
     @ticketsection = Ticketsection.find(params[:id])
+    @show = Show.find_by_abbrev(@ticketsection.showid)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +27,7 @@ class TicketsectionsController < ApplicationController
   # GET /ticketsections/new.xml
   def new
     @ticketsection = Ticketsection.new
+    @show = Show.find_by_abbrev(params[:abbrev])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +38,9 @@ class TicketsectionsController < ApplicationController
   # GET /ticketsections/1/edit
   def edit
     @ticketsection = Ticketsection.find(params[:id])
+    puts "DEBUG ticketsections_controller#edit: looking for show '#{@ticketsection.showid}'"
+    @show = Show.find_by_abbrev(@ticketsection.showid)
+    puts "DEBUG ticketsections_controller#edit: show '#{@show}'"
   end
 
   # POST /ticketsections
@@ -59,6 +64,7 @@ class TicketsectionsController < ApplicationController
   # PUT /ticketsections/1.xml
   def update
     @ticketsection = Ticketsection.find(params[:id])
+    @show = Show.find_by_abbrev(@ticketsection.showid)
 
     respond_to do |format|
       if @ticketsection.update_attributes(params[:ticketsection])

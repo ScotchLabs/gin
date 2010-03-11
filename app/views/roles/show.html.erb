@@ -9,35 +9,53 @@
 </p>
 
 <p>
-  <b>Crudcontents:</b>
-  <%=h @role.crudcontents %>
+  <b>Contents:</b>
+  <%=h @role.rcontents %>
 </p>
 
 <p>
-  <b>Crudshows:</b>
-  <%=h @role.crudshows %>
+  <b>Updates:</b>
+  <%=h @role.rupdates %>
 </p>
 
 <p>
-  <b>Crudusers:</b>
-  <%=h @role.crudusers %>
+  <b>Users:</b>
+  <%=h @role.rusers %>
 </p>
 
 <p>
-  <b>Crudupdates:</b>
-  <%=h @role.crudupdates %>
+  <b>Roles:</b>
+  <%=h @role.rroles %>
 </p>
 
 <p>
-  <b>Crudroles:</b>
-  <%=h @role.crudroles %>
+  <b>Roleassocs:</b>
+  <%=h @role.rroleassocs %>
 </p>
 
 <p>
-  <b>Crudroleassoc:</b>
-  <%=h @role.crudroleassocs %>
+  <b>Shows:</b>
+  <%=h @role.rshows %>
 </p>
 
+<p>
+  <b>Ticketalerts:</b>
+  <%=h @role.rticketalerts %>
+</p>
 
-<% if session[:crud]["u"]["roles"] %><%= link_to 'Edit', edit_role_path(@role) %> |<% end %>
+<p>
+  <b>Ticketrezs:</b>
+  <%=h @role.rticketrezs %>
+</p>
+
+<p>
+  <b>Ticketsections:</b>
+  <%=h @role.rticketsections %>
+</p>
+<p>
+  <b>Rezlineitems:</b>
+  <%=h @role.rrezlineitems %>
+</p>
+
+<% if User.find(session[:user_id]).hasaccess("roles", "update") %><%= link_to 'Edit', edit_role_path(@role) %> |<% end %>
 <%= link_to 'Back', users_path %>

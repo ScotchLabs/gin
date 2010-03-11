@@ -14,12 +14,12 @@
     <td><%=h update.expiredate %></td>
     <td><%=h !update.article.blank? %></td>
     <td><%= link_to 'Show', update %></td>
-    <% if session[:crud]["u"]["updates"] %><td><%= link_to 'Edit', edit_update_path(update) %></td><% end %>
-    <% if session[:crud]["d"]["updates"] %><td><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if User.find(session[:user_id]).hasaccess("updates", "update") %><td><%= link_to 'Edit', edit_update_path(update) %></td><% end %>
+    <% if User.find(session[:user_id]).hasaccess("updates", "destroy") %><td><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if session[:crud]["c"]["updates"] %><%= link_to 'New update', new_update_path %><% end %>
+<% if User.find(session[:user_id]).hasaccess("updates", "create") %><%= link_to 'New update', new_update_path %><% end %>

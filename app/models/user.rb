@@ -11,6 +11,29 @@ class User < ActiveRecord::Base
   validate :password_not_blank
   validate :password_retyped
   
+  def hasaccess(controller, action)
+    puts "DEBUG user hasaccess: controller '#{controller}', action '#{action}'"
+    if action == "index" || action == "show"
+      crud = "r"
+    elsif action == "edit" || action == "update"
+      crud = "u"
+    elsif action == "new" || action == "create"
+      crud = "c"
+    elsif action == "destroy"
+      crud = "d"
+    end
+    access = false
+    roleassocs = Roleassoc.all(:conditions => ["userid = ?",name])
+    for roleassoc in roleassocs
+      role = Role.find_by_rabbrev(roleassoc.roleid)
+      #somehow get the controller crud out of role
+      puts "DEBUG user hasaccess: role '#{role}', controller '#{controller}', crud '#{crud}'"
+      access = access || (!role.send("r"+controller).nil? && role.send("r"+controller).include?(crud))
+      puts "DEBUG user hasaccess: access after role #{access}"
+    end
+    access
+  end
+  
   def self.authenticate(name, password)
     user = self.find_by_name(name)
     if user

@@ -9,5 +9,5 @@
 </p>
 
 
-<%= link_to 'Edit', edit_ticketalert_path(@ticketalert) %> |
-<%= link_to 'Back', shows_path %>
+<% if User.find(session[:user_id]).hasaccess("ticketalerts", "update") %><%= link_to 'Edit', edit_ticketalert_path(@ticketalert) %> |<% end %>
+<%= link_to 'Back', show_path(@show) %>

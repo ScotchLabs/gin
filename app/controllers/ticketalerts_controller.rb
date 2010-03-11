@@ -15,6 +15,7 @@ class TicketalertsController < ApplicationController
   # GET /ticketalerts/1.xml
   def show
     @ticketalert = Ticketalert.find(params[:id])
+    @show = Show.find_by_abbrev(@ticketalert.showid)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +27,7 @@ class TicketalertsController < ApplicationController
   # GET /ticketalerts/new.xml
   def new
     @ticketalert = Ticketalert.new
+    @show = Show.find_by_abbrev(params[:abbrev])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +38,7 @@ class TicketalertsController < ApplicationController
   # GET /ticketalerts/1/edit
   def edit
     @ticketalert = Ticketalert.find(params[:id])
+    @show = Show.find_by_abbrev(@ticketalert.showid)
   end
 
   # POST /ticketalerts
