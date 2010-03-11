@@ -47,6 +47,7 @@ class TicketsectionsController < ApplicationController
   # POST /ticketsections.xml
   def create
     @ticketsection = Ticketsection.new(params[:ticketsection])
+    @show = Show.find_by_abbrev(@ticketsection.showid)
 
     respond_to do |format|
       if @ticketsection.save

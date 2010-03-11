@@ -45,6 +45,7 @@ class TicketalertsController < ApplicationController
   # POST /ticketalerts.xml
   def create
     @ticketalert = Ticketalert.new(params[:ticketalert])
+    @show = Show.find_by_abbrev(@ticketalert.showid)
 
     respond_to do |format|
       if @ticketalert.save

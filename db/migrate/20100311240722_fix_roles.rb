@@ -1,4 +1,4 @@
-class FixThings < ActiveRecord::Migration
+class FixRoles < ActiveRecord::Migration
   def self.up
     Role.destroy_all
     Role.create(:rname => "Administrator", :rabbrev => "admin", :rcontents => "crud", :rshows => "crud", :rusers => "crud", :rupdates => "crud", :rroles => "crud", :rroleassocs => "crud", :rticketalerts => "crud", :rticketrezs => "crud", :rticketsections => "crud", :rrezlineitems => "crud")
