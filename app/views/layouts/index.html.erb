@@ -6,7 +6,10 @@
 	<%= stylesheet_link_tag "snstheatre", "carousel", :media => "all" %>
 	<%= javascript_include_tag :defaults, "jquery-1.4.1.min" %>
 	<% if action_name == "index" %>
-  <%= javascript_include_tag "carousel.js", "twitter.js" %>
+    <%= javascript_include_tag "carousel", "twitter" %>
+	<% end %>
+	<% if controller_name == "tickets" %>
+	 <%= javascript_include_tag "tickets" %>
 	<% end %>
 	<script type='text/javascript'>
     jQuery.noConflict();
@@ -48,7 +51,7 @@
       %>
       <div id='menu'>
         <ul>
-          <li><%= link_to "Ticket Reservations", "tickets", {:class => "menua"} %></li>
+          <li><%= link_to "Ticket Reservations", "/tickets", {:class => "menua"} %></li>
           <li <%= classabout %>><%= link_to "About Us", {:action => "showpane", :id => "about"}, { :class => "menua" } %> </li>
           <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:action => "showpane", :id => "70ai"}, { :class => "menua" } %></li>
           <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank", :class => "menua"} %></li>

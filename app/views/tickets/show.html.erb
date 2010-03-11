@@ -7,32 +7,14 @@ How does it count tckets left for shows with multiple sections?
 -->
 
 <div class='article'>
-  <% form_for(@ticketrez, :url => "/tickets/createticketrez") do |f| %>
     <div id='ticketsleft' class='articleleft fleft'>
       <h1>Your Information</h1>
-      <%= f.error_messages %>
-      <p>
-        <%= f.hidden_field :showid, :value => @show.abbrev %>
-      </p>
-      <p>
-        <%= f.label :name %><br />
-        <%= f.text_field :name %>
-      </p>
-      <p>
-        <%= f.label :email %><br />
-        <%= f.text_field :email %>
-      </p>
-      <p>
-        <%= f.label :phone %><br />
-        <%= f.text_field :phone %>
-      </p>
-      <p>
-        <%= f.label :hasid %><br />
-        <%= f.check_box :hasid %>
-      </p>
-      <p>
-        <%= f.submit 'Create' %>
-      </p>
+      <input type='hidden' id='form_showid' value='<%= @show.abbrev %>' />
+      
+      Name<br /><input type='text' id='form_name' /><br />
+      Email<br /><input type='text' id='form_email' /><br />
+      Phone<br /><input type='text' id='form_phone' /><br />
+      ID<br /><input type='radio' id='form_id_yes' name='form_id' />Yes <input type='radio' id='form_id_no' name='form_id' />No<br />
     </div>
     <div id='ticketsright' class='articleright fleft'>
       <h1>Ticket Reservations</h1>
@@ -48,12 +30,12 @@ How does it count tckets left for shows with multiple sections?
       <% i=0
       for perf in @show.performancetimes.split("|")
         soldout = @show.soldout(perf)
-        quantity = text_field(nil, "performance[#{i}]", {:onchange => "updateprice()"}) unless soldout
-        quantity = text_field(nil, "performance[#{i}]", {:onchange => "updateprice()", :disabled => true}) if soldout
+        quantity = text_field(:form, "performance[#{i}]", {:onchange => "updateprice()"}) unless soldout
+        quantity = text_field(:form, "performance[#{i}]", {:onchange => "updateprice()", :disabled => true}) if soldout
         if @ticketsections.count > 1
           #only put sections that are available
-          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {:onchange => "updateprice()"}) unless soldout
-          sections = select(nil, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {:onchange => "updateprice()", :disabled => "disabled"}) if soldout
+          sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()"}) unless soldout
+          sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()", :disabled => true}) if soldout
           puts "DEBUG tickets_view#show: sections '#{sections}'"
         end
         time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
@@ -67,17 +49,28 @@ How does it count tckets left for shows with multiple sections?
         <%= quantity %>
         <%= sections %>
         <%= time %>
-        <% for section in Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
-          #put price info for updateprice
-          #onchange updateprice for select
-        end %>
         <%
         i=i+1
       end %>
-      <%= hidden_field nil, "numperformances", :value => i %>
+      <script type='text/javascript'>
+        numperformances = <%= i %>;
+        sections = new Array(<%= @ticketsections.size %>);
+      <%
+      i=0
+      for section in @ticketsections %>
+        sections[<%=i%>] = new Array(4);
+        sections[<%=i%>]["id"] = "<%= section.id %>";
+        sections[<%=i%>]["name"] = "<%= section.name %>";
+        sections[<%=i%>]["pricewithid"] = <%= section.pricewithid %>;
+        sections[<%=i%>]["pricewoutid"] = <%= section.pricewoutid %>;
+        <%
+        i=i+1
+      end %>
+      </script>
+      
       <br />
-      load all this into js for updateprice and ajaxhandler
+      You've selected <b><span id='numtickets'>0</span></b> tickets, for a total of <b>$<span id='pricetickets'>0</span></b>, to be paid for at the door. If this is correct, click the button below to confirm your reservation.<br />
+      <center><input type='submit' value='Reserve' onclick='reservetickets()' /></center>
     </div>
-  <% end %>
   <br clear='all' />
 </div>
