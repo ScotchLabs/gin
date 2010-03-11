@@ -3,9 +3,9 @@ function updateprice() {
   var pricesum = 0;
   var qtysum = 0;
   for (var i=0; i<numperformances; i++) {
-    var tix = document.getElementById("form_performance["+i+"]").value;
-    if (tix == "") tix = 0;
-    else tix = parseInt(tix);
+    var tix = parseInt(document.getElementById("form_performance["+i+"]").value);
+    if (isNaN(tix)) tix = 0;
+    
     qtysum=qtysum+tix;
     var sectionid = parseInt(document.getElementById("form_section["+i+"]").value);
     var sectionprice;
@@ -29,7 +29,9 @@ function reservetickets() {
   // for each performance
     // get qty and sectionid
   // for rezlineitem object
-  // send postdata
+  // validate
+    // if valid send postdata
+    // else enable reserve button, hide loading symbol, put response in lightbox, highlight certain boxes
 }
 
 function reservecomplete() {

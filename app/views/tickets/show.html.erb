@@ -5,16 +5,27 @@ Can I AJAX it? If so, where would the page redirect?
 How does it know the show is for Carnival? Homecoming? Festival?
 How does it count tckets left for shows with multiple sections?
 -->
-
+<% ast = "<span style='color:#ff9900'>*</span>" %>
 <div class='article'>
     <div id='ticketsleft' class='articleleft fleft'>
       <h1>Your Information</h1>
       <input type='hidden' id='form_showid' value='<%= @show.abbrev %>' />
-      
-      Name<br /><input type='text' id='form_name' /><br />
-      Email<br /><input type='text' id='form_email' /><br />
-      Phone<br /><input type='text' id='form_phone' /><br />
-      ID<br /><input type='radio' id='form_id_yes' name='form_id' />Yes <input type='radio' id='form_id_no' name='form_id' />No<br />
+      <br />
+      <b>Name</b><br />
+      <input type='text' id='form_name' /><br />
+      <%= ast %>Required field.<br />
+      <br />
+      <b>Phone Number</b><br />
+      <input type='text' id='form_phone' /><br />
+      <%= ast %>Required field.<br />
+      <br />
+      <b>Email Address</b> (for receipt of reservation)<br />
+      <input type='text' id='form_email' /><br />
+      <br />
+      Do you have a <b>Carnegie Mellon Student ID</b>?<br />
+      <input type='radio' id='form_id_yes' name='form_id' onchange='updateprice()' />Yes<br />
+      <input type='radio' id='form_id_no' name='form_id' onchange='updateprice()' />No<br />
+      <%= ast %>Required field.
     </div>
     <div id='ticketsright' class='articleright fleft'>
       <h1>Ticket Reservations</h1>
@@ -30,8 +41,8 @@ How does it count tckets left for shows with multiple sections?
       <% i=0
       for perf in @show.performancetimes.split("|")
         soldout = @show.soldout(perf)
-        quantity = text_field(:form, "performance[#{i}]", {:onchange => "updateprice()"}) unless soldout
-        quantity = text_field(:form, "performance[#{i}]", {:onchange => "updateprice()", :disabled => true}) if soldout
+        quantity = text_field(:form, "performance[#{i}]", {:onchange => "updateprice()", :size => "3"}) unless soldout
+        quantity = text_field(:form, "performance[#{i}]", {:onchange => "updateprice()", :size => "3", :disabled => true}) if soldout
         if @ticketsections.count > 1
           #only put sections that are available
           sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()"}) unless soldout
@@ -48,7 +59,7 @@ How does it count tckets left for shows with multiple sections?
         %>
         <%= quantity %>
         <%= sections %>
-        <%= time %>
+        <%= time %><br />
         <%
         i=i+1
       end %>
@@ -66,6 +77,12 @@ How does it count tckets left for shows with multiple sections?
         <%
         i=i+1
       end %>
+      jQuery(document).ready(function(){
+        if (jQuery("#ticketsleft").height() > jQuery("#ticketsright").height())
+          jQuery("#ticketsright").height(jQuery("#ticketsleft").height());
+        else
+          jQuery("#ticketsleft").height(jQuery("#ticketsright").height());
+      })
       </script>
       
       <br />
