@@ -16,7 +16,6 @@ class Show < ActiveRecord::Base
   validate :performancetimes_parsable
   
   def ticketsavailable(performance)
-    puts "DEBUG show_model#ticketsavailable: checking how many tickets are available for the show '#{abbrev}' for the performance '#{performance}'"
     sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     total = 0
     for section in sections
@@ -26,7 +25,6 @@ class Show < ActiveRecord::Base
   end
   
   def soldout(performance)
-    puts "DEBUG show_model#soldout: checking if performance '#{performance}' of show '#{abbrev}' is sold out"
     sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     for section in sections
       return false unless section.soldout(performance)

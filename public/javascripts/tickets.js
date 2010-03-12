@@ -3,7 +3,7 @@ function updateprice() {
   var pricesum = 0;
   var qtysum = 0;
   for (var i=0; i<numperformances; i++) {
-    var tix = parseInt(document.getElementById("form_performance["+i+"]").value);
+    var tix = parseInt(document.getElementById("form_quantity["+i+"]").value);
     if (isNaN(tix)) tix = 0;
     
     qtysum=qtysum+tix;
@@ -24,15 +24,48 @@ function updateprice() {
 }
 
 function reservetickets() {
-  // disable reserve button, show lightbox with loading symbol
+  jQuery("#form_submit").attr("disabled","true");
+  //TODO show lightbox with loading symbol
   // get name, email, phone, hasid for the ticketrez object
-  // for each performance
-    // get qty and sectionid
-  // for rezlineitem object
-  if (validateReservation())
-    ;// send postdata
-    // jQuery.ajax({type: 'post', url: '/createticketrez/', data: {name: name, email: email, phone: phone, hasid: hasid}, success: function(){reserveSuccess()}, error: function(){reserveError()}, comlete: function(){reserveComplete()} })
-  // else enable reserve button, hide loading symbol, put response in lightbox, highlight certain boxes
+  var ticketrez = new Array(5);
+  ticketrez[0] = jQuery("#form_showid").attr("value");
+  ticketrez[1] = jQuery("#form_name").attr("value");
+  ticketrez[2] = jQuery("#form_email").attr("value");
+  ticketrez[3] = jQuery("#form_phone").attr("value");
+  ticketrez[4] = jQuery("#form_id_yes").attr("checked");
+  var rezlineitems = new Array();
+  var j=0;
+  for (var i=0; i<numperformances; i++) {
+    // get qty and sectionid for rezlineitem
+    if (document.getElementById("form_quantity["+i+"]").value) {
+      // rezlineitem = performance|sectionid|quantity
+      rezlineitems[j] = document.getElementById("form_performance["+i+"]").value+"|"+
+        document.getElementById("form_section["+i+"]").value+"|"+
+        document.getElementById("form_quantity["+i+"]").value;
+      j++;
+    }
+  }
+  if (validateReservation()) {
+    alert('starting ajax.');
+    jQuery.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError()}})
+  }
+  else {
+    jQuery("#form_submit").attr("disabled",null);
+    //TODO hide loading symbol, put response in lightbox
+  }
+}
+
+function reserveSuccess(data) {
+  jQuery("#form_submit").attr("disabled",null);
+  var pattern = /<div id='response'>(.*)<\/div>/
+  data = pattern.exec(data)[1];
+  alert("ajax success. '"+data+"'");
+}
+
+function reserveError(xhr) {
+  jQuery("#form_submit").attr("disabled",null);
+  alert("ajax failure");
+  // highlight certain boxes
 }
 
 function validateReservation() {
@@ -56,11 +89,12 @@ function validateReservation() {
     
   // check phone
   if (!jQuery("#form_phone")[0].value) {
-    alert("phone doesn't exist");//TODO phone doesn't exist
+    alert("phone doesn't exist");
+    //TODO phone doesn't exist
     r = false;
   }
   else {
-    var phoneformat = /^(1\s*[-\/\.]?)?(\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(([xX]|[eE][xX][tT])\.?\s*(\d+))*$/;
+    var phoneformat = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/;
     if (phoneformat.exec(jQuery("#form_phone")[0].value) == null) {
       //TODO phone format invalid
       alert("phone format invalid");
@@ -70,34 +104,26 @@ function validateReservation() {
   
   // check hasid
   if (!jQuery("#form_id_yes")[0].checked && !jQuery("#form_id_no")[0].checked) {
-    alert("hasid doesn't exist")//TODO hasid doesn't exist
+    alert("hasid doesn't exist");
+    //TODO hasid doesn't exist
     r = false;
   }
   
   qty=0;
   for (var i=0; i<numperformances; i++) {
-    var val = document.getElementById("form_performance["+i+"]").value;
+    var val = document.getElementById("form_quantity["+i+"]").value;
     if (val != "" && isNaN(parseInt(val))) {
-      alert("performance "+i+" is invalid");//TODO performance is invalid
+      alert("quantity "+i+" is invalid");
+      //TODO quantity is invalid
       r = false;
     }
     else if (val != "")
       qty += parseInt(val);
   }
   if (qty == 0) {
-    alert("performance doesn't exist");//TODO performance doesn't exist
+    alert("quantity doesn't exist");
+    //TODO quantity doesn't exist
     r = false;
   }
-}
-
-function reserveComplete() {
-  // enable reserve button, hide loading symbol, put response in lightbox
-}
-
-function reserveSuccess() {
-  
-}
-
-function reserveError() {
-  // highlight certain boxes
+  return r;
 }

@@ -28,15 +28,31 @@ class TicketsController < ApplicationController
     @ticketrez = Ticketrez.new
   end
   
-  def createticketrez
-    @ticketrez = Ticketrez.new(params[:ticketrez])
-    #process section/performance info
-    respond_to do |format|
-      if @ticketrez.save
-        flash[:notice] = 'Ticketrez was successfully created.'
-        render :action => "newrezsuccess"
+  def create
+    if request.post?
+      ticketrez = Ticketrez.new
+      ticketrez.showid = params[:ticketrez][0]
+      ticketrez.name = params[:ticketrez][1]
+      ticketrez.email = params[:ticketrez][2]
+      ticketrez.phone = params[:ticketrez][3]
+      ticketrez.hasid = params[:ticketrez][4]
+      if ticketrez.save
+        puts "DEBUG tickets_controller#create: ticketrez saved"
       else
-        render :action => "show", :abbrev => @ticketrez.showid
+        puts "DEBUG tickets_controller#create: ticketrez did not save"
+      end
+      for r in params[:rezlineitems]
+        r = r.split("|")
+        rezlineitem = Rezlineitem.new
+        rezlineitem.rezid = ticketrez.id
+        rezlineitem.performance = r[0]
+        rezlineitem.sectionid = r[1]
+        rezlineitem.quantity = r[2]
+        if rezlineitem.save
+          puts "DEBUG tickets_controller#create: rezlineitem saved"
+        else
+          puts "DEBUG tickets_controller#create: rezlineitem did not save"
+        end
       end
     end
   end
