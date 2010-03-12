@@ -32,6 +32,32 @@
       <br />
       <h2>Select Dates, Sections and Quantities</h2><br />
       <div id='form_quantities'>
+      <script type='text/javascript'>
+        numperformances = <%= @show.performancetimes.split("|").count %>
+        tickets = new Array(<%= @ticketsections.size %>);
+        sections = new Array(<%= @ticketsections.size %>);
+        <% i=0
+        for section in @ticketsections %>
+          tickets[<%= i %>] = new Array(numperformances);
+          <% k=0
+          for performance in @show.performancetimes.split("|")
+            %>tickets[<%= i %>][<%= k %>] = <%= section.numavailable(performance) %>;
+            <% k=k+1
+          end %>
+          sections[<%=i%>] = new Array(4);
+          sections[<%=i%>]["id"] = "<%= section.id %>";
+          sections[<%=i%>]["name"] = "<%= section.name %>";
+          sections[<%=i%>]["pricewithid"] = <%= section.pricewithid %>;
+          sections[<%=i%>]["pricewoutid"] = <%= section.pricewoutid %>;
+          <% i=i+1
+        end %>
+        jQuery(document).ready(function(){
+          if (jQuery("#ticketsleft").height() > jQuery("#ticketsright").height())
+            jQuery("#ticketsright").height(jQuery("#ticketsleft").height());
+          else
+            jQuery("#ticketsleft").height(jQuery("#ticketsright").height());
+        })
+      </script>
       <% i=0
       for perf in @show.performancetimes.split("|")
         soldout = @show.soldout(perf)
@@ -48,7 +74,7 @@
         time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
         time += DateTime.parse(perf).strftime("%I").to_i.to_s
         time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
-        num = @show.ticketsavailable(perf).to_s+" left"
+        num = @show.ticketsavailable(perf).to_s
         num = "Sold out" if soldout
         time = "<b>#{time}</b> (#{num})"
         time = "<span style='color:#999999;'>#{time}</span>" if soldout
@@ -61,27 +87,6 @@
         i=i+1
       end %>
       </div>
-      <script type='text/javascript'>
-        numperformances = <%= i %>;
-        sections = new Array(<%= @ticketsections.size %>);
-      <%
-      i=0
-      for section in @ticketsections %>
-        sections[<%=i%>] = new Array(4);
-        sections[<%=i%>]["id"] = "<%= section.id %>";
-        sections[<%=i%>]["name"] = "<%= section.name %>";
-        sections[<%=i%>]["pricewithid"] = <%= section.pricewithid %>;
-        sections[<%=i%>]["pricewoutid"] = <%= section.pricewoutid %>;
-        <%
-        i=i+1
-      end %>
-      jQuery(document).ready(function(){
-        if (jQuery("#ticketsleft").height() > jQuery("#ticketsright").height())
-          jQuery("#ticketsright").height(jQuery("#ticketsleft").height());
-        else
-          jQuery("#ticketsleft").height(jQuery("#ticketsright").height());
-      })
-      </script>
       
       <br />
       You've selected <b><span id='numtickets'>0</span></b> tickets, for a total of <b>$<span id='pricetickets'>0</span></b>, to be paid for at the door. If this is correct, click the button below to confirm your reservation.<br />

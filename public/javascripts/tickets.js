@@ -24,6 +24,7 @@ function updateprice() {
 }
 
 function reservetickets() {
+  // set the form
   jQuery("#form_submit").attr("disabled","true");
   jQuery("#form_name").css("border","1px solid black");
   jQuery("#form_email").css("border","1px solid black");
@@ -32,7 +33,9 @@ function reservetickets() {
     document.getElementById("form_quantity["+i+"]").style.border = "1px solid black";
   jQuery("#form_id").css("border",null);
   jQuery("#form_quantities").css("border",null);
+  
   //TODO show LIGHTBOX with loading symbol
+  
   // get name, email, phone, hasid for the ticketrez object
   var ticketrez = new Array(5);
   ticketrez[0] = jQuery("#form_showid").attr("value");
@@ -52,6 +55,8 @@ function reservetickets() {
       j++;
     }
   }
+  
+  // if reservation is valid, send it out! otherwise set the form
   if (validateReservation()) {
     alert('starting ajax.');
     jQuery.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError()}})
@@ -62,15 +67,21 @@ function reservetickets() {
 }
 
 function reserveSuccess(data) {
+  // set the form
   jQuery("#form_submit").attr("disabled",null);
+  
+  // munge data
   var pattern = /<div id='response'>(.*)<\/div>/
   data = pattern.exec(data)[1];
   //TODO if saved update ticket counts, else highlight certain fields LIGHTBOX
+  
   alert("ajax success. '"+data+"'");
 }
 
 function reserveError(xhr) {
+  // set the form
   jQuery("#form_submit").attr("disabled",null);
+  
   alert("ajax failure");
   //TODO error message LIGHTBOX
 }
@@ -79,6 +90,7 @@ function validateReservation() {
   var errorborder = "1px solid #f90";
   r = true;
   message = "";
+  
   // check name
   if (!jQuery("#form_name")[0].value) {
     message += "name doesn't exist";
@@ -126,17 +138,21 @@ function validateReservation() {
       document.getElementById("form_quantity["+i+"]").style.border = errorborder;
       r = false;
     }
-    else if (val != "")
+    else if (val != "") {
       qty += parseInt(val);
+      sectionid = document.getElementById("form_section["+i+"]").value
+      for (var j=0; j<sections.length; j++)
+        if (sections[j]["id"] == sectionid && val > tickets[j][i]) {
+          message += ((message == null)? "":"\n")+"quantity "+(i+1)+" is over the maximum"
+          document.getElementById("form_quantity["+i+"]").style.border = errorborder;
+        }
+    }
   }
   if (qty == 0) {
     message += ((message == null)? "":"\n")+"quantity doesn't exist";
     jQuery("#form_quantities").css("border",errorborder)
     r = false;
   }
-  
-  // check not over maxtickets
-  //TODO
   
   //TODO hide loading symbol, put error message in LIGHTBOX
   
