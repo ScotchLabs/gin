@@ -25,8 +25,14 @@ function updateprice() {
 
 function reservetickets() {
   jQuery("#form_submit").attr("disabled","true");
-  //TODO reset all error highlights
-  //TODO show lightbox with loading symbol
+  jQuery("#form_name").css("border","1px solid black");
+  jQuery("#form_email").css("border","1px solid black");
+  jQuery("#form_phone").css("border","1px solid black");
+  for (var i=0; i<numperformances; i++)
+    document.getElementById("form_quantity["+i+"]").style.border = "1px solid black";
+  jQuery("#form_id").css("border",null);
+  jQuery("#form_quantities").css("border",null);
+  //TODO show LIGHTBOX with loading symbol
   // get name, email, phone, hasid for the ticketrez object
   var ticketrez = new Array(5);
   ticketrez[0] = jQuery("#form_showid").attr("value");
@@ -52,31 +58,31 @@ function reservetickets() {
   }
   else {
     jQuery("#form_submit").attr("disabled",null);
-    //TODO hide loading symbol, put response in lightbox
   }
 }
 
 function reserveSuccess(data) {
   jQuery("#form_submit").attr("disabled",null);
-  //TODO update ticket counts
   var pattern = /<div id='response'>(.*)<\/div>/
   data = pattern.exec(data)[1];
+  //TODO if saved update ticket counts, else highlight certain fields LIGHTBOX
   alert("ajax success. '"+data+"'");
 }
 
 function reserveError(xhr) {
   jQuery("#form_submit").attr("disabled",null);
   alert("ajax failure");
-  //TODO highlight certain boxes
+  //TODO error message LIGHTBOX
 }
 
 function validateReservation() {
+  var errorborder = "1px solid #f90";
   r = true;
   message = "";
   // check name
   if (!jQuery("#form_name")[0].value) {
     message += "name doesn't exist";
-    //TODO name doesn't exist
+    jQuery("#form_name").css("border",errorborder)
     r = false;
   }
   
@@ -84,31 +90,31 @@ function validateReservation() {
   if (jQuery("#form_email")[0].value) {
     var emailformat = /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     if (emailformat.exec(jQuery("#form_email")[0].value) == null) {
-      message += ((message == null)? "\n":"")+"email format invalid";
-      //TODO email format invalid
+      message += ((message == null)? "":"\n")+"email format invalid";
+      jQuery("#form_email").css("border",errorborder)
       r = false;
     }
   }
     
   // check phone
   if (!jQuery("#form_phone")[0].value) {
-    message += ((message == null)? "\n":"")+"phone doesn't exist";
-    //TODO phone doesn't exist
+    message += ((message == null)? "":"\n")+"phone doesn't exist";
+    jQuery("#form_phone").css("border",errorborder)
     r = false;
   }
   else {
     var phoneformat = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/;
     if (phoneformat.exec(jQuery("#form_phone")[0].value) == null) {
-      //TODO phone format invalid
-      message += ((message == null)? "\n":"")+"phone format invalid";
+      jQuery("#form_phone").css("border",errorborder)
+      message += ((message == null)? "":"\n")+"phone format invalid";
       r = false;
     }
   }
   
   // check hasid
   if (!jQuery("#form_id_yes")[0].checked && !jQuery("#form_id_no")[0].checked) {
-    message += ((message == null)? "\n":"")+"hasid doesn't exist";
-    //TODO hasid doesn't exist
+    message += ((message == null)? "":"\n")+"hasid doesn't exist";
+    jQuery("#form_id").css("border",errorborder)
     r = false;
   }
   
@@ -116,21 +122,23 @@ function validateReservation() {
   for (var i=0; i<numperformances; i++) {
     var val = document.getElementById("form_quantity["+i+"]").value;
     if (val != "" && isNaN(parseInt(val))) {
-      message += ((message == null)? "\n":"")+"quantity "+i+" is invalid";
-      //TODO quantity is invalid
+      message += ((message == null)? "":"\n")+"quantity "+(i+1)+" is invalid";
+      document.getElementById("form_quantity["+i+"]").style.border = errorborder;
       r = false;
     }
     else if (val != "")
       qty += parseInt(val);
   }
   if (qty == 0) {
-    message += ((message == null)? "\n":"")+"quantity doesn't exist";
-    //TODO quantity doesn't exist
+    message += ((message == null)? "":"\n")+"quantity doesn't exist";
+    jQuery("#form_quantities").css("border",errorborder)
     r = false;
   }
   
   // check not over maxtickets
   //TODO
+  
+  //TODO hide loading symbol, put error message in LIGHTBOX
   
   if (message) alert(message);
   return r;

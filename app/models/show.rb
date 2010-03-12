@@ -37,9 +37,10 @@ class Show < ActiveRecord::Base
     if ticketsections.size == 0
       "This ticket sections for this show have not been set up yet."
     elsif ticketsections.size == 1
-      "This show has one general admission section &#8212; $#{ticketsections[0].pricewithid} with a Carnegie Mellon student ID, $#{ticketsections[0].pricewoutid} without."
+      "This show has one general admission section: $#{ticketsections[0].pricewithid} with a Carnegie Mellon student ID, $#{ticketsections[0].pricewoutid} without."
     else
-      r="This show has multiple seating sections:<br />"
+      #TODO LIGHTBOX
+      r="This show has multiple seating sections: (view seating map)<br />"
       full=true
       for section in ticketsections
         r+="Section "+section.name+" &#8212 $#{section.pricewithid} with "
@@ -47,6 +48,7 @@ class Show < ActiveRecord::Base
         r+="ID, $#{section.pricewoutid} without"
         r+="<br />"
       end
+      
       r[0..r.length-7]
     end
   end

@@ -36,24 +36,32 @@ class TicketsController < ApplicationController
       @ticketrez.email = params[:ticketrez][2]
       @ticketrez.phone = params[:ticketrez][3]
       @ticketrez.hasid = params[:ticketrez][4]
+      makerez=true
       if @ticketrez.save
         puts "DEBUG tickets_controller#create: ticketrez saved"
       else
         puts "DEBUG tickets_controller#create: ticketrez did not save"
+        @message = "Your ticket reservation information was invalid. Please make sure you have the name, email, phone, and ID fields properly filled."
+        makerez=false
       end
-      @rezlineitems = Array.new
-      for r in params[:rezlineitems]
-        r = r.split("|")
-        rezlineitem = Rezlineitem.new
-        rezlineitem.rezid = @ticketrez.id
-        rezlineitem.performance = r[0]
-        rezlineitem.sectionid = r[1]
-        rezlineitem.quantity = r[2]
-        if rezlineitem.save
-          puts "DEBUG tickets_controller#create: rezlineitem saved"
-          @rezlineitems.push(rezlineitem)
-        else
-          puts "DEBUG tickets_controller#create: rezlineitem did not save"
+      if makerez
+        @rezlineitems = Array.new
+        for r in params[:rezlineitems]
+          r = r.split("|")
+          rezlineitem = Rezlineitem.new
+          rezlineitem.rezid = @ticketrez.id
+          rezlineitem.performance = r[0]
+          rezlineitem.sectionid = r[1]
+          rezlineitem.quantity = r[2]
+          if rezlineitem.save
+            puts "DEBUG tickets_controller#create: rezlineitem saved"
+            @rezlineitems.push(rezlineitem)
+          else
+            puts "DEBUG tickets_controller#create: rezlineitem did not save"
+            @message = "One or more of your ticket quantities was invalid."
+            @ticketrez.destroy
+            @rezlineitems.each {|r| r.destroy}
+          end
         end
       end
     end

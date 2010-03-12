@@ -23,8 +23,8 @@ How does it count tckets left for shows with multiple sections?
       <input type='text' id='form_email' /><br />
       <br />
       Do you have a <b>Carnegie Mellon Student ID</b>?<br />
-      <input type='radio' id='form_id_yes' name='form_id' onchange='updateprice()' />Yes<br />
-      <input type='radio' id='form_id_no' name='form_id' onchange='updateprice()' />No<br />
+      <div id='form_id'><input type='radio' id='form_id_yes' name='form_id' onchange='updateprice()' />Yes<br />
+      <input type='radio' id='form_id_no' name='form_id' onchange='updateprice()' />No</div>
       <%= ast %>Required field.
     </div>
     <div id='ticketsright' class='articleright fleft'>
@@ -38,6 +38,7 @@ How does it count tckets left for shows with multiple sections?
       <h2>Notes</h2>: <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %> <% end %><%= @show.sectioninfo %><br />
       <br />
       <h2>Select Dates, Sections and Quantities</h2><br />
+      <div id='form_quantities'>
       <% i=0
       for perf in @show.performancetimes.split("|")
         soldout = @show.soldout(perf)
@@ -49,7 +50,7 @@ How does it count tckets left for shows with multiple sections?
           sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()"}) unless soldout
           sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()", :disabled => true}) if soldout
         else
-          sections = hidden_field(:form, "section[0]", :value => @ticketsections[0].id)
+          sections = hidden_field(:form, "section[#{i}]", :value => @ticketsections[0].id)
         end
         time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
         time += DateTime.parse(perf).strftime("%I").to_i.to_s
@@ -66,6 +67,7 @@ How does it count tckets left for shows with multiple sections?
         <%
         i=i+1
       end %>
+      </div>
       <script type='text/javascript'>
         numperformances = <%= i %>;
         sections = new Array(<%= @ticketsections.size %>);
