@@ -12,8 +12,10 @@ class Show < ActiveRecord::Base
   validates_inclusion_of :ticketstatus, :in => TICKETSTATUS.map {|disp, value| value}
   validates_inclusion_of :slot, :in => ["Other","Homecoming","Carnival","Festival"]
   validates_format_of :imageurl, :with => %r{\.(gif|jpg|png)$}i, :message => "must be a URL for GIF, JPG, or PNG image.", :allow_blank => true
+  validates_format_of :seatingmap, :with => %r{\.(gif|jpg|png)$}i, :message => "must be a URL for GIF, JPG, or PNG image.", :allow_blank => true
   validates_format_of :housemanemail, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/, :allow_nil => true, :allow_blank => true
   validate :image_exists
+  validate :seatingmap_exists
   validate :performancetimes_parsable
   
   def ticketsavailable(performance)
@@ -161,5 +163,13 @@ private
         resp = http.get("/gin/shows/#{imageurl}")
         errors.add(:imageurl, "points to an invalid location") if resp.body.to_s =~ /404\ Not\ Found/
       }
+  end
+  def seatingmap_exists
+    if !seatingmap.blank? && !seatingmap.nil?
+      Net::HTTP.start("upload.snstheatre.org") { |http|
+        resp = http.get("/gin/shows/seatingmaps/#{seatingmap}")
+        errors.add(:imageurl, "points to an invalid location") if resp.body.to_s =~ /404\ Not\ Found/
+      }
+    end
   end
 end

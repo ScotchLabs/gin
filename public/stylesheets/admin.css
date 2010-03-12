@@ -33,6 +33,7 @@
 #errorExplanation h2 {
   text-align: left;
   font-weight: bold;
+  display: block;
   padding: 5px 5px 5px 15px;
   font-size: 12px;
   margin: -7px;
