@@ -51,9 +51,9 @@
       %>
       <div id='menu'>
         <ul>
-          <li><%= link_to "Ticket Reservations", "/tickets", {:class => "menua"} %></li>
-          <li <%= classabout %>><%= link_to "About Us", {:action => "showpane", :id => "about"}, { :class => "menua" } %> </li>
-          <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:action => "showpane", :id => "70ai"}, { :class => "menua" } %></li>
+          <li><%= link_to "Ticket<br />Reservations", "/tickets", {:class => "menua"} %></li>
+          <li <%= classabout %>><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"}, { :class => "menua" } %> </li>
+          <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"}, { :class => "menua" } %></li>
           <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank", :class => "menua"} %></li>
         </ul>
       </div>

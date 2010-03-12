@@ -12,11 +12,15 @@ class Ticketsection < ActiveRecord::Base
       r = Rezlineitem.all(:conditions => ["sectionid = ?",id])
     else
       perf = DateTime.parse(performance).to_s
-      r = Rezlineitem.all(:conditions => ["sectionid = ? AND performance = ?",id, perf])
+      r = Rezlineitem.all(:conditions => ["sectionid = ?",id])
     end
     total = 0
     for i in r
-      total += i.quantity
+      if performance.nil? 
+        total += i.quantity
+      elsif DateTime.parse(i.performance)==perf
+        total += i.quantity
+      end
     end
     total
   end

@@ -33,11 +33,11 @@ How does it count tckets left for shows with multiple sections?
       <br />
       Use this form to reserve your tickets for Scotch'n'Soda's production of <b><%= @show.name %></b>, showing <%= @show.datetickets %> in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
       <br />
-      If tickets to your preffered show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there<br />
+      If tickets to your preferred show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there.<br />
       <br />
-      Notes: <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %> <% end %><%= @show.sectioninfo %><br />
+      <h2>Notes</h2>: <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %> <% end %><%= @show.sectioninfo %><br />
       <br />
-      <h2>Select Dates, Sections, and Quantities</h2>
+      <h2>Select Dates, Sections and Quantities</h2><br />
       <% i=0
       for perf in @show.performancetimes.split("|")
         soldout = @show.soldout(perf)
@@ -48,6 +48,8 @@ How does it count tckets left for shows with multiple sections?
           #only put sections that are available
           sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()"}) unless soldout
           sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()", :disabled => true}) if soldout
+        else
+          sections = hidden_field(:form, "section[0]", :value => @ticketsections[0].id)
         end
         time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
         time += DateTime.parse(perf).strftime("%I").to_i.to_s

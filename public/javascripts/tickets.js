@@ -25,6 +25,7 @@ function updateprice() {
 
 function reservetickets() {
   jQuery("#form_submit").attr("disabled","true");
+  //TODO reset all error highlights
   //TODO show lightbox with loading symbol
   // get name, email, phone, hasid for the ticketrez object
   var ticketrez = new Array(5);
@@ -57,6 +58,7 @@ function reservetickets() {
 
 function reserveSuccess(data) {
   jQuery("#form_submit").attr("disabled",null);
+  //TODO update ticket counts
   var pattern = /<div id='response'>(.*)<\/div>/
   data = pattern.exec(data)[1];
   alert("ajax success. '"+data+"'");
@@ -65,14 +67,15 @@ function reserveSuccess(data) {
 function reserveError(xhr) {
   jQuery("#form_submit").attr("disabled",null);
   alert("ajax failure");
-  // highlight certain boxes
+  //TODO highlight certain boxes
 }
 
 function validateReservation() {
   r = true;
+  message = "";
   // check name
   if (!jQuery("#form_name")[0].value) {
-    alert("name doesn't exist");
+    message += "name doesn't exist";
     //TODO name doesn't exist
     r = false;
   }
@@ -81,7 +84,7 @@ function validateReservation() {
   if (jQuery("#form_email")[0].value) {
     var emailformat = /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     if (emailformat.exec(jQuery("#form_email")[0].value) == null) {
-      alert("email format invalid");
+      message += ((message == null)? "\n":"")+"email format invalid";
       //TODO email format invalid
       r = false;
     }
@@ -89,7 +92,7 @@ function validateReservation() {
     
   // check phone
   if (!jQuery("#form_phone")[0].value) {
-    alert("phone doesn't exist");
+    message += ((message == null)? "\n":"")+"phone doesn't exist";
     //TODO phone doesn't exist
     r = false;
   }
@@ -97,14 +100,14 @@ function validateReservation() {
     var phoneformat = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/;
     if (phoneformat.exec(jQuery("#form_phone")[0].value) == null) {
       //TODO phone format invalid
-      alert("phone format invalid");
+      message += ((message == null)? "\n":"")+"phone format invalid";
       r = false;
     }
   }
   
   // check hasid
   if (!jQuery("#form_id_yes")[0].checked && !jQuery("#form_id_no")[0].checked) {
-    alert("hasid doesn't exist");
+    message += ((message == null)? "\n":"")+"hasid doesn't exist";
     //TODO hasid doesn't exist
     r = false;
   }
@@ -113,7 +116,7 @@ function validateReservation() {
   for (var i=0; i<numperformances; i++) {
     var val = document.getElementById("form_quantity["+i+"]").value;
     if (val != "" && isNaN(parseInt(val))) {
-      alert("quantity "+i+" is invalid");
+      message += ((message == null)? "\n":"")+"quantity "+i+" is invalid";
       //TODO quantity is invalid
       r = false;
     }
@@ -121,9 +124,14 @@ function validateReservation() {
       qty += parseInt(val);
   }
   if (qty == 0) {
-    alert("quantity doesn't exist");
+    message += ((message == null)? "\n":"")+"quantity doesn't exist";
     //TODO quantity doesn't exist
     r = false;
   }
+  
+  // check not over maxtickets
+  //TODO
+  
+  if (message) alert(message);
   return r;
 }

@@ -126,6 +126,7 @@ h2 {
   text-transform: uppercase;
   color: #333333;
   margin-top: 0px;
+  display: inline;
   /*TODO text style for "STUDENT THEATRE AT..." */
 }
   /* nav styles */
