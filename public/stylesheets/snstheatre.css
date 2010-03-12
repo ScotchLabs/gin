@@ -358,4 +358,10 @@ input[type="submit"]:hover {
 input[type="submit"][disabled] {
   background: #c4c4c4;
 }
+select {
+  font-size: 14px;
+  height: 28px;
+  position:relative;
+  bottom:4px;
+}
 /* end ticket styles */
