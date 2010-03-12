@@ -21,6 +21,10 @@
     <%= f.text_field :abbrev, {:disabled => true} %>
   </p>
   <p>
+    <%= f.label :slot %><br />
+    <%= f.select(:slot, {"Other","Other","Homecoming","Homecoming","Carnival","Carnival","Festival","Festival"}) %>
+  </p>
+  <p>
     <%= f.label :loc, "Location" %><br />
     <%= f.text_field :loc %>
   </p>

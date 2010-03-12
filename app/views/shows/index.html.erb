@@ -3,12 +3,16 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Abbrev</th>
+    <th>Slot</th>
     <th>Imageurl</th>
     <th>Ticketstatus</th>
   </tr>
 <% @shows.each do |show| %>
   <tr>
     <td><%=h show.name %></td>
+    <td><%=h show.abbrev %></td>
+    <td><%=h show.slot %></td>
     <td><%=h show.imageurl %></td>
     <td><%=h show.ticketstatus %></td>
     <td><%= link_to 'Show', show %></td>
