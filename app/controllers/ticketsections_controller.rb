@@ -83,8 +83,11 @@ class TicketsectionsController < ApplicationController
   # DELETE /ticketsections/1.xml
   def destroy
     @ticketsection = Ticketsection.find(params[:id])
+    sctionid = params[:id]
     showid = @ticketsection.showid
     @ticketsection.destroy
+    Rezlineitem.all(:conditions => ["sectionid = ?",sectionid]).each {|r| r.destroy}
+    
 
     respond_to do |format|
       format.html { redirect_to(show_path(Show.find_by_abbrev(showid))) }

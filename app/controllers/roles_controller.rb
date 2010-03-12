@@ -67,6 +67,7 @@ class RolesController < ApplicationController
   def destroy
     @role = Role.find(params[:id])
     @role.destroy
+    Roleassoc.all(:conditionc => ["roleid = ?",@role.rabbrev]).each {|r| r.destroy}
 
     respond_to do |format|
       format.html { redirect_to(users_url) }

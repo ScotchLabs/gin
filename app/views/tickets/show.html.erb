@@ -31,7 +31,7 @@ How does it count tckets left for shows with multiple sections?
       <h1>Ticket Reservations</h1>
       <% unless @show.housemanname.blank? %><span style='font-size:8pt;'>Questions? Contact House Manager <%= link_to @show.housemanname, "mailto:#{@show.housemanemail}" %>.</span><br /><% end %>
       <br />
-      Use this form to reserve your tickets for Scotch'n'Soda's production of <b><%= @show.name %></b>, showing <%= @show.datetickets %> in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
+      Use this form to reserve your tickets for Scotch'n'Soda's <%= @show.slot %> <%= Time.now.year %> production of <b><%= @show.name %></b>, showing <%= @show.datetickets %> in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
       <br />
       If tickets to your preferred show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there.<br />
       <br />
