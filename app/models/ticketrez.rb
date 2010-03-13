@@ -17,7 +17,7 @@ class Ticketrez < ActiveRecord::Base
   def unformattedphone
     regex = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/
     md = regex.match(phone)
-    @unformattedphone = ((md[1].nil?)? "":md[1])+((md[2].nil?)? "":md[2])+((md[3].nil?)? "":md[3])+((md[4].nil?)? "":md[4])+((md[5].nil?)? "":md[5])+((md[6].nil?)? "":md[6])
+    @unformattedphone = ((md[1].nil?)? "":md[1])+((md[2].nil?)? "":md[2])+((md[3].nil?)? "":md[3])+((md[4].nil?)? "":md[4])+((md[5].nil?)? "":md[5])+((md[6].nil?)? "":md[6]) unless md.nil?
   end
   
   def name=(n)

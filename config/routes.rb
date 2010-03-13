@@ -28,8 +28,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect '70ai/', :controller => "index", :action => "showpane", :id => "70ai"
   map.connect 'news/', :controller => "index", :action => "news"
   map.connect 'tickets/show/:abbrev', :controller => "tickets", :action => "show"
-  map.connect 'tickets/unsubscribe/:hash', :controller => "tickets", :action => "removeticketalert"
-  map.connect 'tickets/editreservation/:hash', :controller => "tickets", :action => "editticketrez"
+  map.connect 'tickets/unsubscribe/:hashid', :controller => "tickets", :action => "removeticketalert"
+  map.connect 'tickets/editreservation/:hashid', :controller => "tickets", :action => "editticketrez"
   
   map.connect 'ticketsections/new/:abbrev', :controller => "ticketsections", :action => "new"
   map.connect 'ticketalerts/new/:abbrev', :controller => "ticketalerts", :action => "new"
