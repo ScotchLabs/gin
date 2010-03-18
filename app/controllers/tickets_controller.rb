@@ -112,7 +112,7 @@ class TicketsController < ApplicationController
             r.sectionid = rli[1]
             r.quantity = rli[2]
             qty+=r.quantity
-            if rezlineitem.save
+            if r.save
               @rezlineitems.push(r)
             else
               sendemail=false
@@ -152,7 +152,7 @@ class TicketsController < ApplicationController
         unless r.quantity.nil? or r.quantity.blank?
           if r.quantity==0
             #nuthin
-          elsif r.quantity.nan?
+          elsif r.quantity.to_f.nan?
             @message += "<br />Quantity is not a number."
           end
           section=Ticketsection.find(r.sectionid)
