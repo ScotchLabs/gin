@@ -9,10 +9,7 @@ class Ticketrez < ActiveRecord::Base
   validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/, :allow_nil => true, :allow_blank => true
   validates_format_of :phone, :with => /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/
   validate :unique_unformattedphone
-  
-  def name
-    @name
-  end
+  validate :salted
   
   def unformattedphone
     regex = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/
@@ -20,12 +17,11 @@ class Ticketrez < ActiveRecord::Base
     @unformattedphone = ((md[1].nil?)? "":md[1])+((md[2].nil?)? "":md[2])+((md[3].nil?)? "":md[3])+((md[4].nil?)? "":md[4])+((md[5].nil?)? "":md[5])+((md[6].nil?)? "":md[6]) unless md.nil?
   end
   
-  def name=(n)
-    @name=n
-    create_new_salt
+private
+  def salted
+    create_new_salt if self.salt.nil? and !self.name.nil?
   end
   
-private
   def unique_unformattedphone
     puts "checking if unformattedphone is unique"
     ta=Ticketrez.all(:conditions => ["showid = ?", showid])
