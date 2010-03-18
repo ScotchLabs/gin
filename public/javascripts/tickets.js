@@ -34,11 +34,10 @@ function reservetickets() {
   jQuery("#form_id").css("border",null);
   jQuery("#form_quantities").css("border",null);
   
-  //TODO show LIGHTBOX with loading symbol
-  
   // get name, email, phone, hasid for the ticketrez object
   var ticketrez = new Array(5);
-  ticketrez[0] = jQuery("#ticketrez_showid").attr("value");
+  var showid = jQuery("#ticketrez_showid").attr("value");
+  ticketrez[0] = showid;
   ticketrez[1] = jQuery("#ticketrez_name").attr("value");
   ticketrez[2] = jQuery("#ticketrez_email").attr("value");
   ticketrez[3] = jQuery("#ticketrez_phone").attr("value");
@@ -58,7 +57,7 @@ function reservetickets() {
   
   // if reservation is valid, send it out! otherwise set the form
   if (validateReservation()) {
-    jQuery.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError()}})
+    jQuery.ajax({type: 'post', url: '/tickets/create', data: {backto: showid, ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError()}})
   }
   else {
     jQuery("#ticketrez_submit").attr("disabled",null);
@@ -73,27 +72,27 @@ function reserveSuccess(data) {
   // munge data
   var pattern = /<div id='response' class='article'>(.*)<\/div>/
   data = pattern.exec(data)[1];
-  //TODO if saved update ticket counts, else highlight certain fields LIGHTBOX
+  //TODO if saved update ticket counts, else highlight certain fields
   
-  alert("ajax success. '"+data+"'");
+  colorbox(data);
 }
 
 function reserveError(xhr) {
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null);
   
-  alert("ajax failure");
-  //TODO error message LIGHTBOX
+  
+  colorbox("There was an error contacting the server. Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.");
 }
 
 function validateReservation() {
   var errorborder = "1px solid #f90";
   r = true;
-  message = "";
+  message = "There was an error with your input";
   
   // check name
   if (!jQuery("#ticketrez_name")[0].value) {
-    message += "name doesn't exist";
+    message += "<br />name doesn't exist";
     jQuery("#ticketrez_name").css("border",errorborder)
     r = false;
   }
@@ -102,7 +101,7 @@ function validateReservation() {
   if (jQuery("#ticketrez_email")[0].value) {
     var emailformat = /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     if (emailformat.exec(jQuery("#ticketrez_email")[0].value) == null) {
-      message += ((message == null)? "":"\n")+"email format invalid";
+      message += "<br />email format invalid";
       jQuery("#ticketrez_email").css("border",errorborder)
       r = false;
     }
@@ -110,7 +109,7 @@ function validateReservation() {
     
   // check phone
   if (!jQuery("#ticketrez_phone")[0].value) {
-    message += ((message == null)? "":"\n")+"phone doesn't exist";
+    message += "<br />phone doesn't exist";
     jQuery("#ticketrez_phone").css("border",errorborder)
     r = false;
   }
@@ -118,14 +117,14 @@ function validateReservation() {
     var phoneformat = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/;
     if (phoneformat.exec(jQuery("#ticketrez_phone")[0].value) == null) {
       jQuery("#ticketrez_phone").css("border",errorborder)
-      message += ((message == null)? "":"\n")+"phone format invalid";
+      message += "<br />phone format invalid";
       r = false;
     }
   }
   
   // check hasid
   if (!jQuery("#ticketrez_hasid_true")[0].checked && !jQuery("#ticketrez_hasid_false")[0].checked) {
-    message += ((message == null)? "":"\n")+"hasid doesn't exist";
+    message += "<br />hasid doesn't exist";
     jQuery("#form_id").css("border",errorborder)
     r = false;
   }
@@ -134,7 +133,7 @@ function validateReservation() {
   for (var i=0; i<numperformances; i++) {
     var val = document.getElementById("form_quantity["+i+"]").value;
     if (val != "" && isNaN(parseInt(val))) {
-      message += ((message == null)? "":"\n")+"quantity "+(i+1)+" is invalid";
+      message += "<br />quantity "+(i+1)+" is invalid";
       document.getElementById("form_quantity["+i+"]").style.border = errorborder;
       r = false;
     }
@@ -143,20 +142,27 @@ function validateReservation() {
       sectionid = document.getElementById("form_section["+i+"]").value
       for (var j=0; j<sections.length; j++)
         if (sections[j]["id"] == sectionid && val > tickets[j][i]) {
-          message += ((message == null)? "":"\n")+"quantity "+(i+1)+" is over the maximum";
+          message += "<br />quantity "+(i+1)+" is over the maximum";
           document.getElementById("form_quantity["+i+"]").style.border = errorborder;
           r=false;
         }
     }
   }
   if (qty == 0) {
-    message += ((message == null)? "":"\n")+"quantity doesn't exist";
+    message += "<br />quantity doesn't exist";
     jQuery("#form_quantities").css("border",errorborder)
     r = false;
   }
   
   //TODO hide loading symbol, put error message in LIGHTBOX
   
-  if (message) alert(message);
+  if (message) {
+    colorbox(message);
+  }
   return r;
+}
+
+function colorbox(t) {
+  jQuery("#ajaxresp")[0].innerHTML=t;
+  jQuery.fn.colorbox({inline:true,href:"#ajaxresp",initialWidth:"50%",initialHeight:"50%",width:"50%",height:"50%",transition:"none",opacity:"0.3"});
 }

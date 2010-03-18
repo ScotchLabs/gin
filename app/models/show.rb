@@ -21,7 +21,7 @@ class Show < ActiveRecord::Base
   def ticketsavailable(performance)
     sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     r=""
-    sections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((sections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable} left"}
+    sections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((sections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable(performance)} left"}
     r
   end
   

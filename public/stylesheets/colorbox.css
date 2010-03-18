@@ -30,10 +30,17 @@
     #cboxTopCenter{}
     #cboxBottomCenter{}
     #cboxContent{margin-top:32px;}
-        #cboxLoadedContent{background:#000; padding:1px;}
+        #cboxLoadedContent{
+          background: #333;
+          padding: 20px;
+          color: #FFF;
+          -moz-border-radius: 8px;
+          -webkit-border-radius: 8px;
+          letter-spacing:0;
+        }
         #cboxLoadingGraphic{background:url(../images/colorbox/loading.gif) center center no-repeat;}
-        #cboxLoadingOverlay{background:#000;}
-        #cboxTitle{position:absolute; top:-22px; left:0; color:#000;}
+        #cboxLoadingOverlay{background:#333;}
+        #cboxTitle{position:absolute; top:-22px; left:0; color:#FFF;}
         #cboxCurrent{position:absolute; top:-22px; right:205px; text-indent:-9999px;}
         #cboxSlideshow, #cboxPrevious, #cboxNext, #cboxClose{text-indent:-9999px; width:20px; height:20px; position:absolute; top:-20px; background:url(../images/colorbox/controls.png) 0 0 no-repeat;}
         #cboxPrevious{background-position:0px 0px; right:44px;}

@@ -1,8 +1,12 @@
 <% ast = "<span style='color:#ff9900'>*</span>" %>
+<div style='display:none;'><div id='ajaxresp'></div></div>
+<script type='text/javascript'>
+</script>
 <% form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
   <div class='article'>
       <div id='ticketsleft' class='articleleft fleft'>
         <h1>Your Information</h1>
+        <%= hidden_field :form, :backto, :value => @show.abbrev %>
         <%= f.hidden_field :showid, :value => @show.abbrev %>
         <br />
         <b><%= f.label :name %></b><br />
@@ -17,10 +21,11 @@
         <%= f.text_field :email, :size => 20 %><br />
         <br />
         Do you have a <b>Carnegie Mellon Student ID</b>?<br />
-        <div id='form_id'>
+        <div id='form_id' class='fleft'>
         <%= f.radio_button :hasid, "true", {:onchange => "updateprice()"} %>Yes<br />
         <%= f.radio_button :hasid, "false", {:onchange => "updateprice()"} %>No
         </div>
+        <br clear="all" />
         <%= ast %>Required field.
       </div>
       <div id='ticketsright' class='articleright fleft'>
@@ -77,7 +82,7 @@
           time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
           time += DateTime.parse(perf).strftime("%I").to_i.to_s
           time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
-          num = @show.ticketsavailable(perf).to_s
+          num = @show.ticketsavailable(perf)
           num = "Sold out" if soldout
           time = "<b>#{time}</b> (#{num})"
           time = "<span style='color:#999999;'>#{time}</span>" if soldout
