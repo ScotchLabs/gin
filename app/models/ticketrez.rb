@@ -20,6 +20,8 @@ class Ticketrez < ActiveRecord::Base
 private
   def salted
     create_new_salt if self.salt.nil? and !self.name.nil?
+    others = Ticketrez.all
+    #TODO while others contains a ticketrez with the same hash create a new hash
   end
   
   def unique_unformattedphone

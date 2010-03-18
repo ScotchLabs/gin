@@ -237,7 +237,7 @@ class TicketsController < ApplicationController
   end
   
   def edit
-    #TODO
+    @ticketrez=Ticketrez.find_by_hashid(params[:hashid])
   end
 protected
   def authorize

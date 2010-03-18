@@ -1,1 +1,7 @@
-TODO
+<div class='article'>
+<% if @ticketrez.nil? %>
+  Oops! We couldn't find a ticket reservation with that ID. Please check to make sure the url is typed properly. If you're still having trouble, contact the <a href='mailto:webmaster@snstheatre.org'>systems administrator</a>.
+<% else %>
+  We found it! Now, what to do with it...
+<% end %>
+</div>
