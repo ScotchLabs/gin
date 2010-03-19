@@ -34,7 +34,8 @@
         <br />
         If tickets to your preferred show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there.<br />
         <br />
-        <h2>Notes</h2>: <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %> <% end %><%= @show.sectioninfo %><br />
+        <h2>Notes</h2>
+        <br /><% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %> <% end %><%= @show.sectioninfo %><br />
         <br />
         <h2>Select Dates, Sections and Quantities</h2><br />
         <div id='form_quantities'>
