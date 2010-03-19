@@ -72,7 +72,6 @@ function reserveSuccess(data) {
   // munge data
   var pattern = /<div id='response' class='article'>(.*)<\/div>/
   data = pattern.exec(data)[1];
-  //TODO if saved update ticket counts, else highlight certain fields
   
   colorbox(data);
 }
@@ -153,12 +152,7 @@ function validateReservation() {
     jQuery("#form_quantities").css("border",errorborder)
     r = false;
   }
-  
-  //TODO hide loading symbol, put error message in LIGHTBOX
-  
-  if (message) {
-    colorbox(message);
-  }
+  if (message) colorbox(message);
   return r;
 }
 

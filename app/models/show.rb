@@ -40,7 +40,6 @@ class Show < ActiveRecord::Base
     elsif ticketsections.size == 1
       "This show has one general admission section: $#{ticketsections[0].pricewithid} with a Carnegie Mellon student ID, $#{ticketsections[0].pricewoutid} without."
     else
-      #TODO LIGHTBOX
       r="This show has multiple seating sections: (view seating map)<br />"
       full=true
       for section in ticketsections
