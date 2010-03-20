@@ -68,11 +68,11 @@ function reservetickets() {
 function reserveSuccess(data) {
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null);
-  
+  lastData = data
   // munge data
   var pattern = /<div id='response' class='article'>(.*)<\/div>/
   data = pattern.exec(data)[1];
-  
+
   colorbox(data);
 }
 
@@ -80,18 +80,17 @@ function reserveError(xhr) {
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null);
   
-  
-  colorbox("There was an error contacting the server. Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.");
+  colorbox("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.");
 }
 
 function validateReservation() {
   var errorborder = "1px solid #f90";
   r = true;
-  message = "There was an error with your input";
+  message = "<h1>Something's gone wrong!</h1>";
   
   // check name
   if (!jQuery("#ticketrez_name")[0].value) {
-    message += "<br />name doesn't exist";
+    message += "<br />Please enter a name.";
     jQuery("#ticketrez_name").css("border",errorborder)
     r = false;
   }
@@ -100,30 +99,30 @@ function validateReservation() {
   if (jQuery("#ticketrez_email")[0].value) {
     var emailformat = /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     if (emailformat.exec(jQuery("#ticketrez_email")[0].value) == null) {
-      message += "<br />email format invalid";
+      message += "<br />Please enter a valid email address.";
       jQuery("#ticketrez_email").css("border",errorborder)
       r = false;
     }
   }
-    
-  // check phone
-  if (!jQuery("#ticketrez_phone")[0].value) {
-    message += "<br />phone doesn't exist";
-    jQuery("#ticketrez_phone").css("border",errorborder)
+  else {
+    message += "<br />Please enter a valid email address.";
+    jQuery("#ticketrez_email").css("border",errorborder)
     r = false;
   }
-  else {
+    
+  // check phone
+  if (jQuery("#ticketrez_phone")[0].value) {
     var phoneformat = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/;
     if (phoneformat.exec(jQuery("#ticketrez_phone")[0].value) == null) {
       jQuery("#ticketrez_phone").css("border",errorborder)
-      message += "<br />phone format invalid";
+      message += "<br />Please enter a valid phone number.";
       r = false;
     }
   }
   
   // check hasid
   if (!jQuery("#ticketrez_hasid_true")[0].checked && !jQuery("#ticketrez_hasid_false")[0].checked) {
-    message += "<br />hasid doesn't exist";
+    message += "<br />Please indicate whether you have a CMU ID.";
     jQuery("#form_id").css("border",errorborder)
     r = false;
   }
@@ -132,7 +131,7 @@ function validateReservation() {
   for (var i=0; i<numperformances; i++) {
     var val = document.getElementById("form_quantity["+i+"]").value;
     if (val != "" && isNaN(parseInt(val))) {
-      message += "<br />quantity "+(i+1)+" is invalid";
+      message += "<br />Please enter a valid ticket quantity.";
       document.getElementById("form_quantity["+i+"]").style.border = errorborder;
       r = false;
     }
@@ -141,22 +140,22 @@ function validateReservation() {
       sectionid = document.getElementById("form_section["+i+"]").value
       for (var j=0; j<sections.length; j++)
         if (sections[j]["id"] == sectionid && val > tickets[j][i]) {
-          message += "<br />quantity "+(i+1)+" is over the maximum";
+          message += "<br />There aren't that many tickets available.";
           document.getElementById("form_quantity["+i+"]").style.border = errorborder;
           r=false;
         }
     }
   }
   if (qty == 0) {
-    message += "<br />quantity doesn't exist";
+    message += "<br />Please select your tickets.";
     jQuery("#form_quantities").css("border",errorborder)
     r = false;
   }
-  if (message) colorbox(message);
+  if (!r) colorbox(message);
   return r;
 }
 
 function colorbox(t) {
   jQuery("#ajaxresp")[0].innerHTML=t;
-  jQuery.fn.colorbox({inline:true,href:"#ajaxresp",initialWidth:"50%",initialHeight:"50%",width:"50%",height:"50%",transition:"none",opacity:"0.3"});
+  jQuery.fn.colorbox({inline:true,href:"#ajaxresp",width:"50%",height:"35%",transition:"none",opacity:"0.3"});
 }

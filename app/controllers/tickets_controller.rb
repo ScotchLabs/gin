@@ -31,18 +31,16 @@ class TicketsController < ApplicationController
   
   def create
     if request.post?
-      puts "=============================================================================================================================================="
-      puts "DEBUG tickets_controller#create: begin post"
+      @ticketrezdidntsave = false
+      @rezlineitemdidntsave = false
       ###############
       ## TICKETREZ ##
       ###############
-      puts "processing ticketrez"
       @ticketrez = Ticketrez.new
       @makerez=true
       @sendemail=true
       @ajax=false
       if !params[:ticketrez][0].nil?
-        puts "ajax true"
         ##########
         ## AJAX ##
         ##########
@@ -52,46 +50,34 @@ class TicketsController < ApplicationController
         @ticketrez.email = params[:ticketrez][2]
         @ticketrez.phone = params[:ticketrez][3]
         @ticketrez.hasid = params[:ticketrez][4]
-        puts "ticketrez info: showid:'#{@ticketrez.showid}', name:'#{@ticketrez.name}', email:'#{@ticketrez.email}', phone:'#{@ticketrez.phone}', hasid:'#{@ticketrez.hasid}'"
-        if @ticketrez.save
-          puts "ticketrez saved"
-          @message = "Your tickets have been reserved. Taking you back to the homepage now...<script type='text/javascript'>function go(){window.location='/'}setTimeout('go()',5000);</script>"
-        else
-          puts "ticketrez not saved"
+        unless @ticketrez.save
+          @ticketrezdidntsave = true
           @makerez=false
           @sendemail=false
-          @message = "Your ticket reservation information was invalid:"
         end
       else
         #############
         ## NONAJAX ##
         #############
-        puts "ajax false"
         @ticketrez = Ticketrez.new(params[:ticketrez])
-        puts "ticketrez info: showid:'#{@ticketrez.showid}', name:'#{@ticketrez.name}', email:'#{@ticketrez.email}', phone:'#{@ticketrez.phone}', hasid:'#{@ticketrez.hasid}'"
-        if @ticketrez.save
-          puts "ticketrez saved"
-          @message = "Your tickets have been reserved."
-        else
-          puts "ticketrez not saved"
+        unless @ticketrez.save
+          @ticketrezdidntsave = true
           @makerez=false
           @sendemail=false
-          @message = "Your ticket reservation information was invalid:"
         end
       end # non-ajax ticketrez
+      @show = Show.find_by_abbrev(@ticketrez.showid)
       if @makerez
-        puts "processing rezlineitems"
         ##################
         ## REZLINEITEMS ##
         ##################
         @rezlineitems = Array.new
-        qty=0
+        @qty=0
         if !params[:rezlineitems].nil?
-          puts "ajax true"
-          @ajax=true
           ##########
           ## AJAX ##
           ##########
+          @ajax=true
           for rli in params[:rezlineitems]
             rli = rli.split("|")
             @r = Rezlineitem.new
@@ -99,23 +85,21 @@ class TicketsController < ApplicationController
             @r.performance = rli[0]
             @r.sectionid = rli[1]
             @r.quantity = rli[2]
-            qty+=@r.quantity
-            puts "rezlineitem info: rezid:'#{@r.rezid}', performance:'#{@r.performance}', sectionid:'#{@r.sectionid}', quantity:'#{@r.quantity}'"
+            @qty+=@r.quantity
             if @r.save
-              puts "rezlineitem saved"
               @rezlineitems.push(@r)
             else
-              puts "rezlineitem not saved"
-              sendemail=false
+              @rezlineitemsdidntsave = true
+              @sendemail=false
               @ticketrez.destroy
               @rezlineitems.each {|rez| rez.destroy}
+              break
             end
           end
         else
           #############
           ## NONAJAX ##
           #############
-          puts "ajax false"
           @ajax=false
           i=0
           while i<params[:form][:section].length
@@ -123,16 +107,13 @@ class TicketsController < ApplicationController
               @r = Rezlinitem.new
               @r.sectionid = params[:form][:section][i]
               @r.quantity = params[:form][:quantity][i]
-              qty+=@r.quantity
+              @qty+=@r.quantity
               @r.performance = params[:form][:performance][i]
               @r.showid = params[:ticketrez][:showid]
-              puts "rezlineitem info: rezid:'#{@r.rezid}', performance:'#{@r.performance}', sectionid:'#{@r.sectionid}', quantity:'#{@r.quantity}'"
               if @r.save
-                puts "rezlineitem saved"
                 @rezlineitems.push(@r)
               else
-                puts "rezlineitem not saved"
-                sendemail=false
+                @sendemail=false
                 @ticketrez.destroy
                 @rezlineitems.each {|rez| rez.destroy}
               end
@@ -142,34 +123,15 @@ class TicketsController < ApplicationController
         end #non-ajax makerez
       end # makerez
       if @sendemail
-        puts "sending email"
         unless @ticketrez.email.nil? or @ticketrez.email.blank?
           #TODO actually send an email
         end
       end
     end # request.post?
-    puts "DEBUG tickets_controller#create: end post"
-    puts "=============================================================================================================================================="
   end
   
-  def edit
-    @ticketrez=Ticketrez.find_by_hashid(params[:hashid])
-    @show = Show.find_by_abbrev(@ticketrez.showid) unless @ticketrez.nil?
-    @ticketsections = @ticketsections = Ticketsection.all(:conditions => ["showid = ?",@show.abbrev])
-    if @show.nil?
-      redirect_to "/tickets/showerror"
-    elsif @show.ticketstatus != "open" || @show.ticketsections.blank?
-      redirect_to "/tickets/showclosed"
-    end
-    if request.post?
-      puts "=============================================================================================================================================="
-      puts "DEBUG tickets_controller#edit: begin post"
-      #ajax
-      #non-ajax
-      #message
-      puts "DEBUG tickets_controller#edit: end post"
-      puts "=============================================================================================================================================="
-    end
+  def cancel
+    
   end
 protected
   def authorize

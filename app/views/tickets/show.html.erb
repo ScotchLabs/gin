@@ -13,10 +13,10 @@
         <br />
         <b><%= f.label :phone, "Phone Number" %></b><br />
         <%= f.text_field :phone, :size => 20 %><br />
-        <%= ast %>Required field.<br />
         <br />
         <b><%= f.label :email, "Email Address" %></b> (for receipt of reservation)<br />
         <%= f.text_field :email, :size => 20 %><br />
+        <%= ast %>Required field.<br />
         <br />
         Do you have a <b>Carnegie Mellon Student ID</b>?<br />
         <div id='form_id' class='fleft'>
@@ -35,11 +35,12 @@
         If tickets to your preferred show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there.<br />
         <br />
         <h2>Notes</h2>
-        <br /><% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %> <% end %><%= @show.sectioninfo %><br />
+        <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %><br /><% end %><%= @show.sectioninfo %><br />
         <br />
         <h2>Select Dates, Sections and Quantities</h2><br />
         <div id='form_quantities'>
         <script type='text/javascript'>
+          action="create";
           numperformances = <%= @show.performancetimes.split("|").count %>
           tickets = new Array(<%= @ticketsections.size %>);
           sections = new Array(<%= @ticketsections.size %>);

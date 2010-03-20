@@ -35,11 +35,13 @@ class Ticketsection < ActiveRecord::Base
   end
   
 private
+
   def name_ok
     errors.add(:name, "not unique for this show") if Ticketsection.all(:conditions => ["showid = ? AND name != ?",showid, name]).include?(name) 
   end
+  
   def seatingmap_ok
-    t=Ticketsection.all(:conditions => ["showid = ?",showid])
+    t=Ticketsection.all(:conditions => ["showid = ? AND id != ?",showid,id])
     s=Show.find_by_abbrev(showid).seatingmap
     puts "DEBUG ticketsection_model#seatingmap_ok: numticketsections = '#{t.count}', seatingmap = '#{s}'"
     # if this is the second section for this show, make sure the show has a seatingmap

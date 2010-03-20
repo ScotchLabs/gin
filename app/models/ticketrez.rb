@@ -4,34 +4,25 @@ class Ticketrez < ActiveRecord::Base
   belongs_to :show
   has_many :rezlineitems
   
-  validates_presence_of :showid, :name, :phone
+  validates_presence_of :showid, :name, :email
   validates_inclusion_of :showid, :in => Show.all.map {|show| show.abbrev }
-  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/, :allow_nil => true, :allow_blank => true
-  validates_format_of :phone, :with => /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/
-  validate :unique_unformattedphone
+  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+  validates_format_of :phone, :with => /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/, :allow_nil => true, :allow_blank => true
   validate :salted
-  
-  def unformattedphone
-    regex = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/
-    md = regex.match(phone)
-    @unformattedphone = ((md[1].nil?)? "":md[1])+((md[2].nil?)? "":md[2])+((md[3].nil?)? "":md[3])+((md[4].nil?)? "":md[4])+((md[5].nil?)? "":md[5])+((md[6].nil?)? "":md[6]) unless md.nil?
-  end
   
 private
   def salted
     create_new_salt if self.salt.nil? and !self.name.nil?
     others = Ticketrez.all
-    #TODO while others contains a ticketrez with the same hash create a new hash
-  end
-  
-  def unique_unformattedphone
-    puts "checking if unformattedphone is unique"
-    ta=Ticketrez.all(:conditions => ["showid = ?", showid])
-    puts "found #{ta.length} ticketrezs to compare to"
-    for other in ta
-      puts "comparing this '#{self.unformattedphone}' with other '#{other.unformattedphone}'"
-      if other.unformattedphone == self.unformattedphone
-        errors.add(:reservation, "for this show has already been made") 
+    check=true
+    while check
+      check=false
+      for other in others
+        if other.hashid==self.hashid
+          create_new_salt
+          check=true
+          break
+        end
       end
     end
   end
