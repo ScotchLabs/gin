@@ -33,6 +33,7 @@ class TicketsController < ApplicationController
     if request.post?
       @ticketrezdidntsave = false
       @rezlineitemdidntsave = false
+      @emailsent = false
       ###############
       ## TICKETREZ ##
       ###############
@@ -48,8 +49,7 @@ class TicketsController < ApplicationController
         @ticketrez.showid = params[:ticketrez][0]
         @ticketrez.name = params[:ticketrez][1]
         @ticketrez.email = params[:ticketrez][2]
-        @ticketrez.phone = params[:ticketrez][3]
-        @ticketrez.hasid = params[:ticketrez][4]
+        @ticketrez.hasid = params[:ticketrez][3]
         unless @ticketrez.save
           @ticketrezdidntsave = true
           @makerez=false
@@ -125,6 +125,7 @@ class TicketsController < ApplicationController
       if @sendemail
         unless @ticketrez.email.nil? or @ticketrez.email.blank?
           #TODO actually send an email
+          @emailsent = true
         end
       end
     end # request.post?

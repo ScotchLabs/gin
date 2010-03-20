@@ -328,6 +328,9 @@ h2 {
 #ticketsleft {
   width: 280px;
 }
+#form_id {
+  width: 45px;
+}
 #ticketsright {
   width: 534px;
 }

@@ -6,17 +6,13 @@
         <h1>Your Information</h1>
         <%= hidden_field :form, :backto, :value => @show.abbrev %>
         <%= f.hidden_field :showid, :value => @show.abbrev %>
+        <%= ast %>All fields required.<br />
         <br />
         <b><%= f.label :name %></b><br />
         <%= f.text_field :name, :size => 20 %><br />
-        <%= ast %>Required field.<br />
-        <br />
-        <b><%= f.label :phone, "Phone Number" %></b><br />
-        <%= f.text_field :phone, :size => 20 %><br />
         <br />
         <b><%= f.label :email, "Email Address" %></b> (for receipt of reservation)<br />
         <%= f.text_field :email, :size => 20 %><br />
-        <%= ast %>Required field.<br />
         <br />
         Do you have a <b>Carnegie Mellon Student ID</b>?<br />
         <div id='form_id' class='fleft'>
@@ -24,7 +20,6 @@
         <%= f.radio_button :hasid, "false", {:onchange => "updateprice()"} %>No
         </div>
         <br clear="all" />
-        <%= ast %>Required field.
       </div>
       <div id='ticketsright' class='articleright fleft'>
         <h1>Ticket Reservations</h1>

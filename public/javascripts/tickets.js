@@ -28,20 +28,18 @@ function reservetickets() {
   jQuery("#ticketrez_submit").attr("disabled","true");
   jQuery("#ticketrez_name").css("border","1px solid black");
   jQuery("#ticketrez_email").css("border","1px solid black");
-  jQuery("#ticketrez_phone").css("border","1px solid black");
   for (var i=0; i<numperformances; i++)
     document.getElementById("form_quantity["+i+"]").style.border = "1px solid black";
   jQuery("#form_id").css("border",null);
   jQuery("#form_quantities").css("border",null);
   
-  // get name, email, phone, hasid for the ticketrez object
+  // get name, email, hasid for the ticketrez object
   var ticketrez = new Array(5);
   var showid = jQuery("#ticketrez_showid").attr("value");
   ticketrez[0] = showid;
   ticketrez[1] = jQuery("#ticketrez_name").attr("value");
   ticketrez[2] = jQuery("#ticketrez_email").attr("value");
-  ticketrez[3] = jQuery("#ticketrez_phone").attr("value");
-  ticketrez[4] = jQuery("#ticketrez_hasid_true").attr("checked");
+  ticketrez[3] = jQuery("#ticketrez_hasid_true").attr("checked");
   var rezlineitems = new Array();
   var j=0;
   for (var i=0; i<numperformances; i++) {
@@ -108,16 +106,6 @@ function validateReservation() {
     message += "<br />Please enter a valid email address.";
     jQuery("#ticketrez_email").css("border",errorborder)
     r = false;
-  }
-    
-  // check phone
-  if (jQuery("#ticketrez_phone")[0].value) {
-    var phoneformat = /^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/;
-    if (phoneformat.exec(jQuery("#ticketrez_phone")[0].value) == null) {
-      jQuery("#ticketrez_phone").css("border",errorborder)
-      message += "<br />Please enter a valid phone number.";
-      r = false;
-    }
   }
   
   // check hasid

@@ -4,8 +4,6 @@ message = ""
 if @ticketrezdidntsave
   message += "<br />Please enter a name." if @ticketrez.name.nil? or @ticketrez.name.blank?
   
-  message += "<br />Please enter a valid phone number." if !@ticketrez.phone.nil? and !@ticketrez.phone.blank? and (@ticketrez.phone=~/^(?:(1)?\s*[-\/\.]?)?(?:\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(?:(?:[xX]|[eE][xX][tT])\.?\s*(\d+))*$/).nil?
-  
   if @ticketrez.email.nil? or @ticketrez.email.blank?
     message += "<br />Please enter a valid email address."
   elsif (@ticketrez.email=~/[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/).nil?
@@ -48,8 +46,8 @@ elsif !@sendemail
   message = "<h1>There was an error saving your input.</h1>We're working on fixing the problem now."
 else
   # no errors
-  message = "<h1>Thank you!</h1><br />Your tickets have been succesfully reserved and we look forward to seeing you at the show!<br /><br />Please visit at the door of #{@show.loc} 30 minutes before the performance to pay for and pick up your tickets.<br /><br />If for any reason you need to change or cancel your reservation, please visit:TODO"
+  message = "<h1>Thank you!</h1><br />Your tickets have been succesfully reserved and we look forward to seeing you at the show!<br /><br />Please visit at the door of #{@show.loc} 30 minutes before the performance to pay for and pick up your tickets."
+  message += "<br /><br />An email has been sent to your address regarding the details of your reservation." if @emailsent
 end
-puts "DEBUG message: \"#{message}\""
 %>
 <div id='response' class='article'><%= message %></div>
