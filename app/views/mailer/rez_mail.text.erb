@@ -3,7 +3,7 @@ Thank you for your reservation with Scotch'n'Soda Theatre!
 Here are the details of your ticket reservation:
 <% totalcost = 0
 for item in @items
-  section = Section.find(item.sectionid)
+  section = Ticketsection.find(item.sectionid)
   totalcost += item.quantity * section.pricewithid if @rez.hasid
   totalcost += item.quantity * section.pricewoutid unless @rez.hasid
   %>
