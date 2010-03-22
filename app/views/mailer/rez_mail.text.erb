@@ -1,0 +1,15 @@
+Your tickets have been reserved!<br />
+Show: <%= @show.name %><br />
+Performance: <%= @rez.performance %>
+Tickets:<br />
+<% totalcost=0 %>
+<% for item in @items %>
+  <% section = Ticketsection.find(item.sectionid) %>
+  &nbsp;&nbsp;Section <%= section.name %>: <%= item.quantity %><br />
+  <% 
+  cost = section.pricewithid*item.quantity if @rez.hasid
+  cost = section.pricewoutid*item.quantity unless @rez.hasid
+  totalcost+=cost
+  %>
+<% end %>
+Total cost: <%= totalcost %>

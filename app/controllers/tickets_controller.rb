@@ -124,7 +124,7 @@ class TicketsController < ApplicationController
       end # makerez
       if @sendemail
         unless @ticketrez.email.nil? or @ticketrez.email.blank?
-          #TODO actually send an email
+          Mailer::deliver_rez_mail(@ticketrez)
           @emailsent = true
         end
       end
