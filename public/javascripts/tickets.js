@@ -76,8 +76,7 @@ function reserveSuccess(data) {
   ticketrezid = pattern.exec(data)[1];
   jQuery.ajax({type: 'post', url: '/tickets/sendemail', data: {ticketrezid: ticketrezid}});
   ajaxresp(data);
-  // update ticket counts
-  
+  //TODO update ticket counts
 }
 
 function reserveError(xhr) {

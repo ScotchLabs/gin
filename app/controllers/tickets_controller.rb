@@ -120,7 +120,7 @@ class TicketsController < ApplicationController
             end
             i=i+1
           end
-          Mailer::deliver_rez_mail(@ticketrezid)
+          Mailer::deliver_rez_mail(@ticketrez.id)
         end #non-ajax makerez
       end # makerez
       #if @sendemail
