@@ -41,13 +41,10 @@ end
 if !message.blank?
   # a validation error happened.
   message = "<h1>Something's gone wrong!</h1>#{message}"
-elsif !@sendemail
-  # a save error happened.
-  message = "<h1>There was an error saving your input.</h1>We're working on fixing the problem now."
 else
   # no errors
-  message = "<h1>Thank you!</h1><br />Your tickets have been succesfully reserved and we look forward to seeing you at the show!<br /><br />Please visit at the door of #{@show.loc} 30 minutes before the performance to pay for and pick up your tickets."
-  message += "<br /><br />An email has been sent to your address regarding the details of your reservation." if @emailsent
+  message = "<h1>Thank you!</h1><br />Your tickets have been successfully reserved and we look forward to seeing you at the show!<br /><br />Please visit at the door of #{@show.loc} 30 minutes before the performance to pay for and pick up your tickets."
+  message += "<br /><br />An email will be sent to your address regarding the details of your reservation."
 end
 %>
-<div id='response' class='article'><%= message %></div>
+<div id='response' class='article'><%= message %><div id='ticketrezid' style='display:none;'><%= @ticketrez.id %></div></div>

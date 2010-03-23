@@ -9,6 +9,10 @@ class Ticketrez < ActiveRecord::Base
   validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   validate :salted
   
+  def emailconfirm
+    @emailconfirm
+  end
+  
 private
   def salted
     create_new_salt if self.salt.nil? and !self.name.nil?

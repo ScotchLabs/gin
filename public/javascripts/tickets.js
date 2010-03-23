@@ -24,10 +24,12 @@ function updateprice() {
 }
 
 function reservetickets() {
+  showLoading();
   // set the form
   jQuery("#ticketrez_submit").attr("disabled","true");
   jQuery("#ticketrez_name").css("border","1px solid black");
   jQuery("#ticketrez_email").css("border","1px solid black");
+  jQuery("#ticketrez_emailconfirm").css("border","1px solid black");
   for (var i=0; i<numperformances; i++)
     document.getElementById("form_quantity["+i+"]").style.border = "1px solid black";
   jQuery("#form_id").css("border",null);
@@ -70,15 +72,19 @@ function reserveSuccess(data) {
   // munge data
   var pattern = /<div id='response' class='article'>(.*)<\/div>/
   data = pattern.exec(data)[1];
-
-  colorbox(data);
+  pattern = /<div id='ticketrezid' style='display:none;'>(.*)<\/div>/
+  ticketrezid = pattern.exec(data)[1];
+  jQuery.ajax({type: 'post', url: '/tickets/sendemail', data: {ticketrezid: ticketrezid}});
+  ajaxresp(data);
+  // update ticket counts
+  
 }
 
 function reserveError(xhr) {
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null);
   
-  colorbox("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.");
+  ajaxresp("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.");
 }
 
 function validateReservation() {
@@ -93,12 +99,18 @@ function validateReservation() {
     r = false;
   }
   
-  // if email, check format
+  // if email, check format and confirm
   if (jQuery("#ticketrez_email")[0].value) {
     var emailformat = /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
     if (emailformat.exec(jQuery("#ticketrez_email")[0].value) == null) {
       message += "<br />Please enter a valid email address.";
       jQuery("#ticketrez_email").css("border",errorborder)
+      r = false;
+    }
+    if (jQuery("#ticketrez_email")[0].value!=jQuery("#ticketrez_emailconfirm")[0].value) {
+      message += "<br />The retyped email does not match the email address."
+      jQuery("#ticketrez_email").css("border",errorborder)
+      jQuery("#ticketrez_emailconfirm").css("border",errorborder)
       r = false;
     }
   }
@@ -139,11 +151,19 @@ function validateReservation() {
     jQuery("#form_quantities").css("border",errorborder)
     r = false;
   }
-  if (!r) colorbox(message);
+  if (!r) {
+    ajaxresp(message);
+  }
   return r;
 }
 
-function colorbox(t) {
+function showLoading() {
+  jQuery.fn.colorbox({inline:true,href:"#ajaxloading",width:"650px",height:"100px",transition:"none",opacity:"0.3"});
+}
+function ajaxresp(t) {
   jQuery("#ajaxresp")[0].innerHTML=t;
-  jQuery.fn.colorbox({inline:true,href:"#ajaxresp",width:"50%",height:"35%",transition:"none",opacity:"0.3"});
+  colorbox("ajaxresp");
+}
+function colorbox(t) {
+  jQuery.fn.colorbox({inline:true,href:"#"+t,width:"650px",height:"220px",transition:"none",opacity:"0.3"});
 }

@@ -39,7 +39,7 @@ class TicketsController < ApplicationController
       ###############
       @ticketrez = Ticketrez.new
       @makerez=true
-      @sendemail=true
+      #@sendemail=true
       @ajax=false
       if !params[:ticketrez][0].nil?
         ##########
@@ -53,7 +53,7 @@ class TicketsController < ApplicationController
         unless @ticketrez.save
           @ticketrezdidntsave = true
           @makerez=false
-          @sendemail=false
+          #@sendemail=false
         end
       else
         #############
@@ -63,7 +63,7 @@ class TicketsController < ApplicationController
         unless @ticketrez.save
           @ticketrezdidntsave = true
           @makerez=false
-          @sendemail=false
+          #@sendemail=false
         end
       end # non-ajax ticketrez
       @show = Show.find_by_abbrev(@ticketrez.showid)
@@ -90,7 +90,7 @@ class TicketsController < ApplicationController
               @rezlineitems.push(@r)
             else
               @rezlineitemsdidntsave = true
-              @sendemail=false
+              #@sendemail=false
               @ticketrez.destroy
               @rezlineitems.each {|rez| rez.destroy}
               break
@@ -113,22 +113,27 @@ class TicketsController < ApplicationController
               if @r.save
                 @rezlineitems.push(@r)
               else
-                @sendemail=false
+                #@sendemail=false
                 @ticketrez.destroy
                 @rezlineitems.each {|rez| rez.destroy}
               end
             end
             i=i+1
           end
+          Mailer::deliver_rez_mail(@ticketrezid)
         end #non-ajax makerez
       end # makerez
-      if @sendemail
-        unless @ticketrez.email.nil? or @ticketrez.email.blank?
-          Mailer::deliver_rez_mail(@ticketrez)
-          @emailsent = true
-        end
-      end
+      #if @sendemail
+      #  unless @ticketrez.email.nil? or @ticketrez.email.blank?
+      #    Mailer::deliver_rez_mail(@ticketrez)
+      #    @emailsent = true
+      #  end
+      #end
     end # request.post?
+  end
+  
+  def sendemail
+    Mailer::deliver_rez_mail(params[:ticketrezid])
   end
   
   def cancel
