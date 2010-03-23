@@ -39,7 +39,7 @@ class TicketsController < ApplicationController
       ###############
       @ticketrez = Ticketrez.new
       @makerez=true
-      #@sendemail=true
+      @sendemail=true
       @ajax=false
       if !params[:ticketrez][0].nil?
         ##########
@@ -51,6 +51,7 @@ class TicketsController < ApplicationController
         @ticketrez.email = params[:ticketrez][2]
         @ticketrez.hasid = params[:ticketrez][3]
         unless @ticketrez.save
+          puts "DEBUG tickets_controller#create: saved ticketrez with ajax"
           @ticketrezdidntsave = true
           @makerez=false
           #@sendemail=false
@@ -61,13 +62,15 @@ class TicketsController < ApplicationController
         #############
         @ticketrez = Ticketrez.new(params[:ticketrez])
         unless @ticketrez.save
+          puts "DEBUG tickets_controller#create: saved ticketrez with nonajax"
           @ticketrezdidntsave = true
           @makerez=false
-          #@sendemail=false
+          @sendemail=false
         end
       end # non-ajax ticketrez
       @show = Show.find_by_abbrev(@ticketrez.showid)
       if @makerez
+        puts "DEBUG tickets_controller#create: made it to makerez"
         ##################
         ## REZLINEITEMS ##
         ##################
@@ -100,27 +103,31 @@ class TicketsController < ApplicationController
           #############
           ## NONAJAX ##
           #############
+          puts "DEBUG tickets_controller#create: makerez nonajax"
           @ajax=false
           i=0
+          puts "DEBUG tickets_controller#create: while i<params form section length '#{params[:form][:section].length}'"
           while i<params[:form][:section].length
-            unless params[:form][:quantity][i].blank?
-              @r = Rezlinitem.new
-              @r.sectionid = params[:form][:section][i]
-              @r.quantity = params[:form][:quantity][i]
+            puts "DEBUG tickets_controller#create: params form quantity #{i.to_s} blank? '#{params[:form][:quantity][i].blank?}'"
+            unless params[:form][:quantity][i.to_s].blank?
+              @r = Rezlineitem.new
+              @r.sectionid = params[:form][:section][i.to_s]
+              @r.quantity = params[:form][:quantity][i.to_s]
               @qty+=@r.quantity
-              @r.performance = params[:form][:performance][i]
-              @r.showid = params[:ticketrez][:showid]
+              @r.performance = params[:form][:performance][i.to_s]
+              @r.rezid = @ticketrez.id
+              puts "DEBUG tickets_controller#create nonajax rezlineitems: sectionid '#{@r.sectionid}', quantity '#{@r.quantity}', performance '#{@r.performance}', rezid '#{@r.rezid}'"
               if @r.save
                 @rezlineitems.push(@r)
               else
-                #@sendemail=false
+                @sendemail=false
                 @ticketrez.destroy
                 @rezlineitems.each {|rez| rez.destroy}
               end
             end
             i=i+1
           end
-          Mailer::deliver_rez_mail(@ticketrez.id)
+          Mailer::deliver_rez_mail(@ticketrez.id) if @sendemail
         end #non-ajax makerez
       end # makerez
       #if @sendemail
