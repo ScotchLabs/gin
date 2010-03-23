@@ -10,12 +10,19 @@ class Ticketrez < ActiveRecord::Base
   validates_inclusion_of :showid, :in => Show.all.map {|show| show.abbrev }
   validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   validate :salted
+  validate :email_retyped
   
   def emailconfirm
     @emailconfirm
   end
   
 private
+  def email_retyped
+    unless email.nil? or email.blank? or emailconfirm.nil? or emailconfirm.blank?
+      errors.add(:emailconfirm, "does not match email address") if emailconfirm!=email
+    end
+  end
+
   def salted
     create_new_salt if self.salt.nil? and !self.name.nil?
     others = Ticketrez.all
