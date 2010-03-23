@@ -6,7 +6,7 @@ class Show < ActiveRecord::Base
   has_many :ticketalerts
   
   TICKETSTATUS = [["Closed", "closed"],["Open",  "open"],["Completed", "completed"]]
-  validates_presence_of :name, :shortdisplayname, :abbrev, :imageurl, :ticketstatus, :performancetimes
+  validates_presence_of :name, :shortdisplayname, :abbrev, :imageurl, :ticketstatus, :performancetimes, :slot
   validates_uniqueness_of :abbrev
   validates_length_of :shortdisplayname, :maximum => 30
   validates_inclusion_of :ticketstatus, :in => TICKETSTATUS.map {|disp, value| value}
