@@ -37,6 +37,18 @@
     <%= f.text_field :director %>
   </p>
   <p>
+    <%= f.label :housemanname %><br />
+    <%= f.text_field :housemanname %>
+  </p>
+  <p>
+    <%= f.label :housemanemail %><br />
+    <%= f.text_field :housemanemail %>
+  </p>
+  <p>
+    <%= f.label :ticketnotes %><br />
+    <%= f.text_area :ticketnotes, :rows => 2 %>
+  </p>
+  <p>
     <%= f.label :performancetimes, "Performance times" %><%= ast %> (please use pipe-separated timestamps)<br />
     <%= f.text_field :performancetimes %>
   </p>
