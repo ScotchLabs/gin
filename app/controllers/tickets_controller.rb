@@ -136,8 +136,16 @@ class TicketsController < ApplicationController
     Mailer::deliver_rez_mail(params[:ticketrezid])
   end
   
-  def cancel
-    
+  def cancelrez
+    @ticketrez = Ticketrez.find_by_hashid(params[:hashid])
+    redirect_to :action => "cancelerror" if @ticketrez.nil?
+  end
+  
+  def destroyrez
+    @ticketrez = Ticketrez.find(params[:ticketrez][:id])
+    @items = Rezlineitem.all(:conditions => ["rezid = ?", @ticketrez.id])
+    @ticketrez.destroy
+    @items.each {|i| i.destroy}
   end
 protected
   def authorize

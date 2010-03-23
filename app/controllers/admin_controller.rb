@@ -1,6 +1,6 @@
 class AdminController < ApplicationController
   def login
-    puts "DEBUG admin_controller: user logging in..."
+    puts "DEBUG admin_controller: user '#{params[:name]}' logging in..."
     session[:user_id] = nil
     if request.post?
       user = User.authenticate(params[:name], params[:password])
@@ -20,18 +20,7 @@ class AdminController < ApplicationController
   def logout
     session[:user_id] = nil
     session[:user_name] = nil
-    session[:display_mode] = nil
     flash[:notice] = "Logged out"
     redirect_to(:action => "login")
-  end
-  
-  def publicview
-    session[:display_mode] = "public"
-    redirect_to root_url
-  end
-  
-  def fullview
-    session[:display_mode] = "full"
-    redirect_to root_url
   end
 end
