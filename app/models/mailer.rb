@@ -7,6 +7,7 @@ class Mailer < ActionMailer::Base
     @from = "tickets@snstheatre.org"
     @recipients = @rez.email
     @subject = "Thank you for your reservation with Scotch'n'Soda Theatre!"
+    @content_type = "text/html"
   end
 
 end
