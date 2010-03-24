@@ -40,10 +40,12 @@ class Show < ActiveRecord::Base
     elsif ticketsections.size == 1
       "This show has one general admission section: $#{ticketsections[0].pricewithid} with a Carnegie Mellon student ID, $#{ticketsections[0].pricewoutid} without."
     else
-      r="This show has multiple seating sections: (view seating map)<br />"
+      r="This show has multiple seating sections:"
+      r+=" (<a href='http://upload.snstheatre.org/gin/shows/seatingmaps/#{seatingmap}' rel='seatingmap' title='Seating Map for #{name}' class='cboxElement'>view seating map</a>)" if !seatingmap.nil? and !seatingmap.blank?
+      r+="<br />"
       full=true
       for section in ticketsections
-        r+="Section "+section.name+" &#8212 $#{section.pricewithid} with "
+        r+="Section "+section.name+" &#8212; $#{section.pricewithid} with "
         r+="a Carnegie Mellon student " and full=false if full
         r+="ID, $#{section.pricewoutid} without"
         r+="<br />"

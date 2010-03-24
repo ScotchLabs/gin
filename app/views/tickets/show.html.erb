@@ -1,3 +1,8 @@
+<script type='text/javascript'>
+  jQuery(document).ready(function(){
+    jQuery("a[rel='seatingmap']").colorbox({transition:"none"})
+  })
+</script>
 <% ast = "<span style='color:#ff9900'>*</span>" %>
 <div style='display:none;'><div id='ajaxresp'></div><div id='ajaxloading'><h1>Just a moment...</h1></div></div>
 <% form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
