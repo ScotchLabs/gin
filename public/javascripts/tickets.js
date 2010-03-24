@@ -26,11 +26,19 @@ function updateprice() {
 function updatecounts() {
   for (var i=0; i<numperformances; i++) {
     // get the section and quantity
-    var selectedsection = document.getElementById("form_section["+i+"]").value
+    var selectedsectionid = document.getElementById("form_section["+i+"]").value
+    //TODO get section number from sectionid
+    var selectedsectionnum
+    for (var j=0; j<sections.length; j++) {
+      if (sections[j]["id"]==selectedsectionid) {
+        selectedsectionnum = j
+        break
+      }
+    }
     var selectedquantity = parseInt(document.getElementById("form_quantity["+i+"]").value)
     if (!isNaN(selectedquantity)) {
       // update section
-      tickets[selectedsection][i] = tickets[selectedsection][i]-selectedquantity
+      tickets[selectedsectionnum][i] = tickets[selectedsectionnum][i]-selectedquantity
       // update view
       var updateinfo = ""
       for (var j=0; j<sections.length; j++) {

@@ -37,51 +37,50 @@
         <h2>Select Dates, Sections and Quantities</h2><br />
         <div id='form_quantities'>
         <script type='text/javascript'>
-          action="create";
           numperformances = <%= @show.performancetimes.split("|").count %>
-          tickets = new Array(<%= @ticketsections.size %>);
-          sections = new Array(<%= @ticketsections.size %>);
-          <% i=0
+          tickets = new Array(<%= @ticketsections.size %>)
+          sections = new Array(<%= @ticketsections.size %>)
+          <% sectionNum=0
           for section in @ticketsections %>
-            tickets[<%= i %>] = new Array(numperformances);
-            <% k=0
+            tickets[<%= sectionNum %>] = new Array(numperformances)
+            <% perfNum=0
             for performance in @show.performancetimes.split("|")
-              %>tickets[<%= i %>][<%= k %>] = <%= section.numavailable(performance) %>;
-              <% k=k+1
+              %>tickets[<%= sectionNum %>][<%= perfNum %>] = <%= section.numavailable(performance) %>
+              <% perfNum=perfNum+1
             end %>
-            sections[<%=i%>] = new Array(4);
-            sections[<%=i%>]["id"] = "<%= section.id %>";
-            sections[<%=i%>]["name"] = "<%= section.name %>";
-            sections[<%=i%>]["pricewithid"] = <%= section.pricewithid %>;
-            sections[<%=i%>]["pricewoutid"] = <%= section.pricewoutid %>;
-            <% i=i+1
+            sections[<%= sectionNum %>] = new Array(4)
+            sections[<%= sectionNum %>]["id"] = "<%= section.id %>"
+            sections[<%= sectionNum %>]["name"] = "<%= section.name %>"
+            sections[<%= sectionNum %>]["pricewithid"] = <%= section.pricewithid %>
+            sections[<%= sectionNum %>]["pricewoutid"] = <%= section.pricewoutid %>
+            <% sectionNum=sectionNum+1
           end %>
           jQuery(document).ready(function(){
             if (jQuery("#ticketsleft").height() > jQuery("#ticketsright").height())
-              jQuery("#ticketsright").height(jQuery("#ticketsleft").height());
+              jQuery("#ticketsright").height(jQuery("#ticketsleft").height())
             else
-              jQuery("#ticketsleft").height(jQuery("#ticketsright").height());
+              jQuery("#ticketsleft").height(jQuery("#ticketsright").height())
           })
         </script>
-        <% i=0
+        <% perfNum=0
         for perf in @show.performancetimes.split("|")
           soldout = @show.soldout(perf)
-          performance = hidden_field(:form, "performance[#{i}]", :value => perf)
-          quantity = text_field(:form, "quantity[#{i}]", {:onchange => "updateprice()", :size => "3"}) unless soldout
-          quantity = text_field(:form, "quantity[#{i}]", {:onchange => "updateprice()", :size => "3", :disabled => true}) if soldout
+          performance = hidden_field(:form, "performance[#{perfNum}]", :value => perf)
+          quantity = text_field(:form, "quantity[#{perfNum}]", {:onchange => "updateprice()", :size => "3"}) unless soldout
+          quantity = text_field(:form, "quantity[#{perfNum}]", {:onchange => "updateprice()", :size => "3", :disabled => true}) if soldout
           if @ticketsections.count > 1
             #only put sections that are available
-            sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()"}) unless soldout
-            sections = select(:form, "section[#{i}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()", :disabled => true}) if soldout
+            sections = select(:form, "section[#{perfNum}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()"}) unless soldout
+            sections = select(:form, "section[#{perfNum}]", @ticketsections.map {|t| [t.name, t.id]}, {}, {:onchange => "updateprice()", :disabled => true}) if soldout
           else
-            sections = hidden_field(:form, "section[#{i}]", :value => @ticketsections[0].id)
+            sections = hidden_field(:form, "section[#{perfNum}]", :value => @ticketsections[0].id)
           end
           time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
           time += DateTime.parse(perf).strftime("%I").to_i.to_s
           time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
           num = @show.ticketsavailable(perf)
           num = "Sold out" if soldout
-          time = "<b>#{time}</b> (<span id='form_availableinfo[#{i}]'>#{num}</span>)"
+          time = "<b>#{time}</b> (<span id='form_availableinfo[#{perfNum}]'>#{num}</span>)"
           time = "<span style='color:#999999;'>#{time}</span>" if soldout
           %>
           <%= performance %>
@@ -89,7 +88,7 @@
           <%= sections %>
           <%= time %><br />
           <%
-          i=i+1
+          perfNum=perfNum+1
         end %>
         </div>
         
