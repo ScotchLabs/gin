@@ -11,6 +11,9 @@
       width: 900px;
     }
 	</style>
+	<script type='text/javascript'>
+    jQuery.noConflict();
+	</script>
 </head>
 <body>
   <div id='bannernocss3'></div>
@@ -31,6 +34,13 @@
         </ul>
       </div>
     </div>
+    <script type='text/javascript'>
+      jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px")
+      jQuery(".menua").first().addClass("bottomleftcorner");
+      jQuery(".menua").last().addClass("bottomrightcorner");
+      jQuery("#menu li").first().addClass("bottomleftcorner");
+      jQuery("#menu li").last().addClass("bottomrightcorner");
+    </script>
     <div id='view'>
       <!-- This file lives in public/500.html -->
       <div class="article">
