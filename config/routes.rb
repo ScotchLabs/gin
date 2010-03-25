@@ -27,9 +27,9 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'about/', :controller => "index", :action => "showpane", :id => "about"
   map.connect '70ai/', :controller => "index", :action => "showpane", :id => "70ai"
   map.connect 'news/', :controller => "index", :action => "news"
-  map.connect 'tickets/show/:abbrev', :controller => "tickets", :action => "show"
-  map.connect 'tickets/unsubscribe/:hashid', :controller => "tickets", :action => "removeticketalert"
-  map.connect 'tickets/cancel/:hashid',:controller => "tickets", :action => "cancelrez"
+  #map.connect 'tickets/show/:abbrev', :controller => "tickets", :action => "show"
+  #map.connect 'tickets/unsubscribe/:hashid', :controller => "tickets", :action => "removeticketalert"
+  #map.connect 'tickets/cancel/:hashid',:controller => "tickets", :action => "cancelrez"
   
   map.connect 'ticketsections/new/:abbrev', :controller => "ticketsections", :action => "new"
   map.connect 'ticketalerts/new/:abbrev', :controller => "ticketalerts", :action => "new"
