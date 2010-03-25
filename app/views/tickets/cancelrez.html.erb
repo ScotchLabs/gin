@@ -2,6 +2,6 @@
 <br />
 <% form_for(@ticketrez, :url => {:action => "destroyrez"}) do |f| %>
   <%= f.hidden_field :id, :value => @ticketrez.id %>
-  <%= f.submit "Yes, I want to cancel", :style => "width:200px;" %> <%= link_to "No, take me home", root_url %>
+  <%= f.submit "Yes, cancel", :style => "width:200px;" %> <%= link_to "No, take me home", root_url %>
 <% end %>
 </div>
