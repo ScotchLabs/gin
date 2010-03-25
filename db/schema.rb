@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100220215113) do
+ActiveRecord::Schema.define(:version => 20100320052331) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -36,6 +36,15 @@ ActiveRecord::Schema.define(:version => 20100220215113) do
     t.datetime "updated_at"
   end
 
+  create_table "rezlineitems", :force => true do |t|
+    t.integer  "rezid"
+    t.string   "performance"
+    t.string   "sectionid"
+    t.integer  "quantity"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "roleassocs", :force => true do |t|
     t.string   "roleid"
     t.string   "userid"
@@ -44,50 +53,18 @@ ActiveRecord::Schema.define(:version => 20100220215113) do
   end
 
   create_table "roles", :force => true do |t|
-    t.string   "name"
-    t.string   "abbrev"
-    t.boolean  "crudccontents"
-    t.boolean  "crudcshows"
-    t.boolean  "crudcpanes"
-    t.boolean  "crudcusers"
-    t.boolean  "crudcupdates"
-    t.boolean  "crudcroles"
-    t.boolean  "crudcroleassocs"
-    t.boolean  "crudrcontents"
-    t.boolean  "crudrshows"
-    t.boolean  "crudrpanes"
-    t.boolean  "crudrusers"
-    t.boolean  "crudrupdates"
-    t.boolean  "crudrroles"
-    t.boolean  "crudrroleassocs"
-    t.boolean  "cruducontents"
-    t.boolean  "crudushows"
-    t.boolean  "crudupanes"
-    t.boolean  "cruduusers"
-    t.boolean  "cruduupdates"
-    t.boolean  "cruduroles"
-    t.boolean  "cruduroleassocs"
-    t.boolean  "cruddcontents"
-    t.boolean  "cruddshows"
-    t.boolean  "cruddpanes"
-    t.boolean  "cruddusers"
-    t.boolean  "cruddupdates"
-    t.boolean  "cruddroles"
-    t.boolean  "cruddroleassocs"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-    t.boolean  "crudcticketalerts"
-    t.boolean  "crudrticketalerts"
-    t.boolean  "cruduticketalerts"
-    t.boolean  "cruddticketalerts"
-    t.boolean  "crudcticketrezs"
-    t.boolean  "crudrticketrezs"
-    t.boolean  "cruduticketrezs"
-    t.boolean  "cruddticketrezs"
-    t.boolean  "crudcticketsections"
-    t.boolean  "crudrticketsections"
-    t.boolean  "cruduticketsections"
-    t.boolean  "cruddticketsections"
+    t.string "rname"
+    t.string "rabbrev"
+    t.string "rcontents"
+    t.string "rrezlineitems"
+    t.string "rroleassocs"
+    t.string "rroles"
+    t.string "rshows"
+    t.string "rticketalerts"
+    t.string "rticketrezs"
+    t.string "rticketsections"
+    t.string "rupdates"
+    t.string "rusers"
   end
 
   create_table "shows", :force => true do |t|
@@ -103,6 +80,11 @@ ActiveRecord::Schema.define(:version => 20100220215113) do
     t.string   "director"
     t.boolean  "timesvisible"
     t.string   "shortdisplayname"
+    t.string   "housemanname"
+    t.string   "housemanemail"
+    t.text     "ticketnotes"
+    t.string   "seatingmap"
+    t.string   "slot"
   end
 
   create_table "ticketalerts", :force => true do |t|
@@ -118,10 +100,9 @@ ActiveRecord::Schema.define(:version => 20100220215113) do
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "phone"
-    t.string   "performance"
     t.boolean  "hasid"
-    t.string   "sectioninfo"
+    t.string   "salt"
+    t.string   "hashid"
   end
 
   create_table "ticketsections", :force => true do |t|

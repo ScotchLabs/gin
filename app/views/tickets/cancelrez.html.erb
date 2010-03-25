@@ -1,0 +1,7 @@
+<div class='article' style='text-align:center;'><h1>Are you sure you want to cancel your reservation?</h1>
+<br />
+<% form_for(@ticketrez, :url => {:action => "destroyrez"}) do |f| %>
+  <%= f.hidden_field :id, :value => @ticketrez.id %>
+  <%= f.submit "Yes, cancel", :style => "width:200px;" %> <%= link_to "No, take me home", root_url %>
+<% end %>
+</div>

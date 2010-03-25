@@ -1,0 +1,9 @@
+<div class='article' style='text-align:center'>
+<h1>Your reservation has been canceled.</h1>
+<br />
+We're sorry to see you go!<br />
+<br />
+Do you need to make a new reservation?<br />
+
+<%= link_to "Yes, reserve again", {:controller => "tickets", :action => "show", :abbrev => @show.abbrev} %> | <%= link_to "No, take me home", root_url %>
+</div>

@@ -15,6 +15,7 @@ class TicketsectionsController < ApplicationController
   # GET /ticketsections/1.xml
   def show
     @ticketsection = Ticketsection.find(params[:id])
+    @show = Show.find_by_abbrev(@ticketsection.showid)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +27,7 @@ class TicketsectionsController < ApplicationController
   # GET /ticketsections/new.xml
   def new
     @ticketsection = Ticketsection.new
+    @show = Show.find_by_abbrev(params[:abbrev])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,12 +38,16 @@ class TicketsectionsController < ApplicationController
   # GET /ticketsections/1/edit
   def edit
     @ticketsection = Ticketsection.find(params[:id])
+    puts "DEBUG ticketsections_controller#edit: looking for show '#{@ticketsection.showid}'"
+    @show = Show.find_by_abbrev(@ticketsection.showid)
+    puts "DEBUG ticketsections_controller#edit: show '#{@show}'"
   end
 
   # POST /ticketsections
   # POST /ticketsections.xml
   def create
     @ticketsection = Ticketsection.new(params[:ticketsection])
+    @show = Show.find_by_abbrev(@ticketsection.showid)
 
     respond_to do |format|
       if @ticketsection.save
@@ -59,6 +65,7 @@ class TicketsectionsController < ApplicationController
   # PUT /ticketsections/1.xml
   def update
     @ticketsection = Ticketsection.find(params[:id])
+    @show = Show.find_by_abbrev(@ticketsection.showid)
 
     respond_to do |format|
       if @ticketsection.update_attributes(params[:ticketsection])
@@ -76,10 +83,14 @@ class TicketsectionsController < ApplicationController
   # DELETE /ticketsections/1.xml
   def destroy
     @ticketsection = Ticketsection.find(params[:id])
+    sectionid = params[:id]
+    showid = @ticketsection.showid
     @ticketsection.destroy
+    Rezlineitem.all(:conditions => ["sectionid = ?",sectionid]).each {|r| r.destroy}
+    
 
     respond_to do |format|
-      format.html { redirect_to(shows_url) }
+      format.html { redirect_to(show_path(Show.find_by_abbrev(showid))) }
       format.xml  { head :ok }
     end
   end

@@ -1,4 +1,6 @@
 ActionController::Routing::Routes.draw do |map|
+  map.resources :rezlineitems
+
   map.resources :ticketsections
 
   map.resources :ticketrezs
@@ -25,10 +27,15 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'about/', :controller => "index", :action => "showpane", :id => "about"
   map.connect '70ai/', :controller => "index", :action => "showpane", :id => "70ai"
   map.connect 'news/', :controller => "index", :action => "news"
-  #TODO
-  #map.connect 'createticketalert', :controller => "index", :action => "createticketalert"
-  #map.connect 'createticketrez', :controller => "index", :action => "createticketrez"
-  map.connect 'sendemail', :controller => "index", :action => "sendemail"
+  map.connect 'tickets/show/:abbrev', :controller => "tickets", :action => "show"
+  map.connect 'tickets/unsubscribe/:hashid', :controller => "tickets", :action => "removeticketalert"
+  map.connect 'tickets/cancel/:hashid',:controller => "tickets", :action => "cancelrez"
+  
+  map.connect 'ticketsections/new/:abbrev', :controller => "ticketsections", :action => "new"
+  map.connect 'ticketalerts/new/:abbrev', :controller => "ticketalerts", :action => "new"
+  map.connect 'ticketrezs/new/:abbrev', :controller => "ticketrezs", :action => "new"
+  
+  map.connect 'rezlineitems/new/:ticketrezid', :controller => "rezlineitems", :action => "new"
 
   # Sample of named route:
   #   map.purchase 'products/:id/purchase', :controller => 'catalog', :action => 'purchase'

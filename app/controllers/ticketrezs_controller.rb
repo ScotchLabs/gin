@@ -15,6 +15,8 @@ class TicketrezsController < ApplicationController
   # GET /ticketrezs/1.xml
   def show
     @ticketrez = Ticketrez.find(params[:id])
+    @rezlineitems = Rezlineitem.all(:conditions => ["rezid = ?",params[:id]])
+    @show = Show.find_by_abbrev(@ticketrez.showid)
 
     respond_to do |format|
       format.html # show.html.erb
@@ -26,6 +28,7 @@ class TicketrezsController < ApplicationController
   # GET /ticketrezs/new.xml
   def new
     @ticketrez = Ticketrez.new
+    @show = Show.find_by_abbrev(params[:abbrev])
 
     respond_to do |format|
       format.html # new.html.erb
@@ -36,6 +39,7 @@ class TicketrezsController < ApplicationController
   # GET /ticketrezs/1/edit
   def edit
     @ticketrez = Ticketrez.find(params[:id])
+    @show = Show.find_by_abbrev(@ticketrez.showid)
   end
 
   # POST /ticketrezs
@@ -76,10 +80,12 @@ class TicketrezsController < ApplicationController
   # DELETE /ticketrezs/1.xml
   def destroy
     @ticketrez = Ticketrez.find(params[:id])
+    showid = @ticketrez.showid
+    Rezlineitem.all(:conditions => ["rezid = ?", @ticketrez.id]).each {|i| i.destroy}
     @ticketrez.destroy
 
     respond_to do |format|
-      format.html { redirect_to(shows_url) }
+      format.html { redirect_to(show_path(Show.find_by_abbrev(showid))) }
       format.xml  { head :ok }
     end
   end

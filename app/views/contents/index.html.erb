@@ -20,12 +20,12 @@
     <td><%=h content.order %></td>
     <td><%=h !content.article.blank? %></td>
     <td><%= link_to 'Show', content %></td>
-    <% if session[:crud]["u"]["contents"] %><td><%= link_to 'Edit', edit_content_path(content) %></td><% end %>
-    <% if session[:crud]["d"]["contents"] %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if User.find(session[:user_id]).hasaccess("contents", "edit") %><td><%= link_to 'Edit', edit_content_path(content) %></td><% end %>
+    <% if User.find(session[:user_id]).hasaccess("contents", "destroy") %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if session[:crud]["c"]["contents"] %><%= link_to 'New content', new_content_path %><% end %>
+<% if User.find(session[:user_id]).hasaccess("contents", "create") %><%= link_to 'New content', new_content_path %><% end %>

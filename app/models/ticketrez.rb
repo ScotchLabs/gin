@@ -1,36 +1,46 @@
+require 'digest/sha1'
+
 class Ticketrez < ActiveRecord::Base
   belongs_to :show
+  has_many :rezlineitems
   
-  validates_presence_of :showid, :name, :phone, :sectioninfo, :performance
+  attr_accessor :emailconfirm
+  
+  validates_presence_of :showid, :name, :email
   validates_inclusion_of :showid, :in => Show.all.map {|show| show.abbrev }
-  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/, :allow_nil => true, :allow_blank => true
-  validates_format_of :phone, :with => /^(1\s*[-\/\.]?)?(\((\d{3})\)|(\d{3}))\s*[-\/\.]?\s*(\d{3})\s*[-\/\.]?\s*(\d{4})\s*(([xX]|[eE][xX][tT])\.?\s*(\d+))*$/
-  validate :sectioninfo_ok
-  validate :performance_ok
+  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+  validate :salted
+  validate :email_retyped
+  
+  def emailconfirm
+    @emailconfirm
+  end
   
 private
-  def sectioninfo_ok
-    # errors.add(:sectioninfo, "message")
-    sections = sectioninfo.split("|")
-    for section in sections
-      sectionname = section.split(":")[0]
-      sectionqty = section.split(":")[1]
-      puts "DEBUG looking for a ticketsection showid=#{showid}, name=#{sectionname}"
-      s = Ticketsection.first(:conditions => ["showid = ? AND name = ?", showid, sectionname])
-      errors.add(:sectioninfo, "invalid: section '#{sectionname}' doesn't exist") if s.nil?
-      errors.add(:sectioninfo, "invalid: section '#{sectionname}' is full") if !s.nil? && sectionqty.to_i+s.numreserved>s.size
+  def email_retyped
+    unless email.nil? or email.blank? or emailconfirm.nil? or emailconfirm.blank?
+      errors.add(:emailconfirm, "does not match email address") if emailconfirm!=email
+    end
+  end
+
+  def salted
+    create_new_salt if self.salt.nil? and !self.name.nil?
+    others = Ticketrez.all
+    check=true
+    while check
+      check=false
+      for other in others
+        if other.hashid==self.hashid
+          create_new_salt
+          check=true
+          break
+        end
+      end
     end
   end
   
-  def performance_ok
-    s = Show.find_by_abbrev showid
-    p=s.performancetimes.split("|").map {|t| Time.parse(t)}
-    begin
-      DateTime.parse(performance)
-    rescue Exception => e
-      errors.add(:performance, "can't be parsed")
-      return
-    end
-    errors.add(:performance, "doesn't exist for the show '#{showid}'") if p.index(DateTime.parse(performance)).nil?
+  def create_new_salt
+    self.salt = self.object_id.to_s + rand.to_s
+    self.hashid = Digest::SHA1.hexdigest(self.name+"wibble"+self.salt)
   end
 end

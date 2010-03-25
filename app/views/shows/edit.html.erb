@@ -21,12 +21,20 @@
     <%= f.text_field :abbrev, {:disabled => true} %>
   </p>
   <p>
+    <%= f.label :slot %><br />
+    <%= f.select(:slot, {"Other","Other","Homecoming","Homecoming","Carnival","Carnival","Festival","Festival"}) %>
+  </p>
+  <p>
     <%= f.label :loc, "Location" %><br />
     <%= f.text_field :loc %>
   </p>
   <p>
-    <%= f.label :imageurl, "Image name" %><%= ast %> (use temp.png if you don't have one now)<br />
+    <%= f.label :imageurl, "Image name" %><%= ast %> (use temp.png if you don't have one now. make sure the image is in /data/uploads/gin/shows/)<br />
     <%= f.text_field :imageurl %>
+  </p>
+  <p>
+    <%= f.label :seatingmap, "Seating Map" %> (make sure the image is in /data/uploads/gin/shows/seatingmaps/)<br />
+    <%= f.text_field :seatingmap %>
   </p>
   <p>
     <%= f.label :author %><br />

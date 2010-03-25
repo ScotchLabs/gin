@@ -14,25 +14,37 @@
 </p>
 
 <p>
-  <b>Phone:</b>
-  <%=h @ticketrez.phone %>
-</p>
-
-<p>
-  <b>Sectioninfo</b>
-  <%=h @ticketrez.sectionid %>
-</p>
-
-<p>
-  <b>Performance:</b>
-  <%=h @ticketrez.performance %>
-</p>
-
-<p>
   <b>Hasid:</b>
   <%=h @ticketrez.hasid %>
 </p>
 
 
-<%= link_to 'Edit', edit_ticketrez_path(@ticketrez) %> |
-<%= link_to 'Back', shows_path %>
+<% if User.find(session[:user_id]).hasaccess("ticketrezs", "update") %><%= link_to 'Edit', edit_ticketrez_path(@ticketrez) %> |<% end %>
+<%= link_to 'Back', show_path(@show) %>
+<br />
+<br />
+
+<h1>Listing rezlineitems</h1>
+
+<table>
+  <tr>
+    <th>Performance</th>
+    <th>Sectionid</th>
+    <th>Quantity</th>
+  </tr>
+
+<% @rezlineitems.each do |rezlineitem| %>
+  <tr>
+    <td><%=h rezlineitem.performance %></td>
+    <td><%=h rezlineitem.sectionid %></td>
+    <td><%=h rezlineitem.quantity %></td>
+    <td><%= link_to 'Show', rezlineitem %></td>
+    <% if User.find(session[:user_id]).hasaccess("rezlineitems", "update") %><td><%= link_to 'Edit', edit_rezlineitem_path(rezlineitem) %></td><% end %>
+    <% if User.find(session[:user_id]).hasaccess("rezlineitems", "destroy") %><td><%= link_to 'Destroy', rezlineitem, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+  </tr>
+<% end %>
+</table>
+
+<br />
+
+<% if User.find(session[:user_id]).hasaccess("rezlineitems", "create") %><%= link_to 'New rezlineitem', new_rezlineitem_path+"/"+@ticketrez.id.to_s %><% end %>

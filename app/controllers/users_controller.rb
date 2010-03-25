@@ -81,6 +81,7 @@ class UsersController < ApplicationController
     begin
       flash[:notice] = "User #{@user.name} deleted"
       @user.destroy
+      Roleassoc.all(:conditionc => ["userid = ?",@user.name]).each {|r| r.destroy}
     rescue Exception => e
       flash[:notice] = e.message
     end

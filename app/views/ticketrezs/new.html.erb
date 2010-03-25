@@ -2,11 +2,8 @@
 
 <% form_for(@ticketrez) do |f| %>
   <%= f.error_messages %>
-
-  <p>
-    <%= f.label :showid %><br />
-    <%= f.select :showid, Show.all.sort! { |y, x| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }.map {|show| [show.name, show.abbrev]} %>
-  </p>
+  
+  <%= f.hidden_field :showid, :value => @show.abbrev %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>
@@ -16,24 +13,12 @@
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :phone %><br />
-    <%= f.text_field :phone %>
-  </p>
-  <p>
-    <%= f.label :performance %><br />
-    <%= f.text_field :performance %>
-  </p>
-  <p>
     <%= f.label :hasid %><br />
     <%= f.check_box :hasid %>
-  </p>
-  <p>
-    <%= f.label :sectioninfo %><br />
-    <%= f.text_field :sectioninfo %>
   </p>
   <p>
     <%= f.submit 'Create' %>
   </p>
 <% end %>
 
-<%= link_to 'Back', shows_path %>
+<%= link_to 'Back', show_path(@show) %>

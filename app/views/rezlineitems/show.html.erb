@@ -1,0 +1,23 @@
+<p>
+  <b>Rezid:</b>
+  <%=h @rezlineitem.rezid %>
+</p>
+
+<p>
+  <b>Performance:</b>
+  <%=h @rezlineitem.performance %>
+</p>
+
+<p>
+  <b>Sectionid:</b>
+  <%=h @rezlineitem.sectionid %>
+</p>
+
+<p>
+  <b>Quantity:</b>
+  <%=h @rezlineitem.quantity %>
+</p>
+
+
+<% if User.find(session[:user_id]).hasaccess("rezlineitems", "edit") %><%= link_to 'Edit', edit_rezlineitem_path(@rezlineitem) %> |<% end %>
+<%= link_to 'Back', ticketrez_path(@ticketrez) %>

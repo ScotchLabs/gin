@@ -126,7 +126,6 @@ h2 {
   text-transform: uppercase;
   color: #333333;
   margin-top: 0px;
-  display: inline;
   /*TODO text style for "STUDENT THEATRE AT..." */
 }
   /* nav styles */
@@ -329,6 +328,9 @@ h2 {
 #ticketsleft {
   width: 280px;
 }
+#form_id {
+  width: 45px;
+}
 #ticketsright {
   width: 534px;
 }
@@ -357,11 +359,5 @@ input[type="submit"]:hover {
 }
 input[type="submit"][disabled] {
   background: #c4c4c4;
-}
-select {
-  font-size: 14px;
-  height: 28px;
-  position:relative;
-  bottom:4px;
 }
 /* end ticket styles */

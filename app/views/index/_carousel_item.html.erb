@@ -8,15 +8,13 @@
     <% if carousel_item.timesvisible %><br /><span class='carouselinfo_perfcarousel'><%= carousel_item.perfcarousel %></span><br /><% end %>
     <% if !carousel_item.loc.blank? %><span class='carouselinfo_loc'><%= carousel_item.loc %>.</span><br /><% end %>
     <br /><span class='carouselinfo_ticketstatus'>
-      <%
-      if carousel_item.ticketstatus == "open" #&& !carousel_item.ticketsections.blank?
-        %><a href='http://tickets.snstheatre.org/' target='_blank'>Reserve tickets now!</a><%
-        # link_to "Reserve tickets now!", "/tickets/show/#{carousel_item.abbrev}"
+      <%=
+      if carousel_item.ticketstatus == "open" && !carousel_item.ticketsections.blank?
+        link_to "Reserve tickets now!", "http://tickets.snstheatre.org/"
       elsif carousel_item.ticketstatus == "closed"
-        %>Tickets are not yet available for this production.<%
-        # Tickets are not yet available for this production. (link_to "sign up for an alert", "/tickets/show/#{carousel_item.abbrev}")
+        "Tickets are not yet available for this production. (sign up for an alert fancybox)"
       elsif carousel_item.ticketstatus == "completed"
-        # This production is in the past. View more info
+        "This production is in the past. View more info"
       end
       %>
     </span><br />
