@@ -5,7 +5,7 @@
         <% for show in @shows %>
           <%= render :partial => "carousel_item", :object => show %>
         <% end %>
-        <br clear='all' style='height: 0px;' />
+        <br style="clear:both;" />
       </div>
     </div>
     <div id='carouselnavigator'>
@@ -15,7 +15,7 @@
             <% for show in @shows %>
               <%= render :partial => "carousel_link", :object => show %>
             <% end %>
-            <br clear='all' style='height: 0px;' />
+            <br style="clear:both;" />
           </div>
         </div>
       <div class='carouselnavbutton fright' onclick='right();'><%= image_tag "layout/rarr.gif" %></div>
@@ -31,5 +31,5 @@
       </div>
     </div>
   </div>
-  <br clear='all' />
+  <br style="clear:both;" />
 </div>
