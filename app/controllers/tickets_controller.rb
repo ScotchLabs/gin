@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   layout 'index'
   def index
+    redirect_to "http://tickets.snstheatre.org/"
     @shows = Show.all
     @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
     @shows.reverse.each { |show| @activeshow = show if show.upcoming && show.ticketstatus=="open" }
