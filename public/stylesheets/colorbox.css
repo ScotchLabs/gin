@@ -29,7 +29,7 @@
     #cboxMiddleRight{}
     #cboxTopCenter{}
     #cboxBottomCenter{}
-    #cboxContent{margin-top:32px;}
+    #cboxContent{}
         #cboxLoadedContent{
           background: #333;
           padding: 20px;
