@@ -150,6 +150,7 @@ class TicketsController < ApplicationController
   
   def destroyrez
     @ticketrez = Ticketrez.find(params[:ticketrez][:id])
+    @show = Show.find_by_abbrev(@ticketrez.showid)
     @items = Rezlineitem.all(:conditions => ["rezid = ?", @ticketrez.id])
     @ticketrez.destroy
     @items.each {|i| i.destroy}

@@ -2,7 +2,7 @@ class Rezlineitem < ActiveRecord::Base
   belongs_to :ticketrez
   
   validates_presence_of :rezid, :performance, :sectionid, :quantity
-  validates_numericality_of :quantity
+  validates_numericality_of :quantity, :greater_than => 0
   validates_inclusion_of :rezid, :in => Ticketrez.all.map{|t| t.id }
   validate :sectionid_ok
   validate :performance_ok

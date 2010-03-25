@@ -165,6 +165,11 @@ function validateReservation() {
       r = false
     }
     else if (val != "") {
+      if (val < 0) {
+        message += "<br />Please enter a positive number of tickets."
+        document.getElementById("form_quantity["+i+"]").style.border = errorborder
+        r=false
+      }
       qty += parseInt(val)
       sectionid = document.getElementById("form_section["+i+"]").value
       for (var j=0; j<sections.length; j++)

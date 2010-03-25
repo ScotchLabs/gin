@@ -5,5 +5,5 @@ We're sorry to see you go!<br />
 <br />
 Do you need to make a new reservation?<br />
 
-BUTTONS!: Yes, reserve again | No, take me home
+<%= link_to "Yes, reserve again", {:controller => "tickets", :action => "show", :abbrev => @show.abbrev} %> | <%= link_to "No, take me home", root_url %>
 </div>
