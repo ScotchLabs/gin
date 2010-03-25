@@ -41,7 +41,7 @@ class Show < ActiveRecord::Base
       "This show has one general admission section: $#{ticketsections[0].pricewithid} with a Carnegie Mellon student ID, $#{ticketsections[0].pricewoutid} without."
     else
       r="This show has multiple seating sections:"
-      r+=" (<a href='http://upload.snstheatre.org/gin/shows/seatingmaps/#{seatingmap}' rel='seatingmap' title='Seating Map for #{name}' class='cboxElement'>view seating map</a>)" if !seatingmap.nil? and !seatingmap.blank?
+      r+=" (<a href='http://upload.snstheatre.org/gin/shows/seatingmaps/#{seatingmap}' rel='seatingmap' class='cboxElement'>view seating map</a>)" if !seatingmap.nil? and !seatingmap.blank?
       r+="<br />"
       full=true
       for section in ticketsections
