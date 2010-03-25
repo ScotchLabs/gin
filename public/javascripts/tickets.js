@@ -27,7 +27,6 @@ function updatecounts() {
   for (var i=0; i<numperformances; i++) {
     // get the section and quantity
     var selectedsectionid = document.getElementById("form_section["+i+"]").value
-    //TODO get section number from sectionid
     var selectedsectionnum
     for (var j=0; j<sections.length; j++) {
       if (sections[j]["id"]==selectedsectionid) {

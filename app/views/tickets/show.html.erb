@@ -26,7 +26,7 @@
         <%= f.radio_button :hasid, "true", {:onchange => "updateprice()"} %>Yes<br />
         <%= f.radio_button :hasid, "false", {:onchange => "updateprice()"} %>No
         </div>
-        <br clear="all" />
+        <br style="clear:both;" />
       </div>
       <div id='ticketsright' class='articleright fleft'>
         <h1>Ticket Reservations</h1>
@@ -100,8 +100,8 @@
         <br />
         You've selected <b><span id='numtickets'>0</span></b> tickets, for a total of <b>$<span id='pricetickets'>0</span></b>, to be paid for at the door. If this is correct, click the button below to confirm your reservation.<br />
         <br />
-        <center><%= f.submit "Reserve!", :onclick=>"return reservetickets()" %></center>
+        <div style='text-align:center;'><%= f.submit "Reserve!", :onclick=>"return reservetickets()" %></div>
       </div>
-    <br clear='all' />
+    <br style="clear:both;" />
   </div>
 <% end %>
