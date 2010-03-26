@@ -1,6 +1,4 @@
-class RoleassocsController < ApplicationController
-  layout 'admin'
-
+class RoleassocsController < AdminController
   # GET /roleassocs/1
   # GET /roleassocs/1.xml
   def show

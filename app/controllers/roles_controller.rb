@@ -1,6 +1,4 @@
-class RolesController < ApplicationController
-  layout 'admin'
-
+class RolesController < AdminController
   # GET /roles/1
   # GET /roles/1.xml
   def show

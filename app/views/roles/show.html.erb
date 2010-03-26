@@ -1,11 +1,11 @@
 <p>
   <b>Name:</b>
-  <%=h @role.name %>
+  <%=h @role.rname %>
 </p>
 
 <p>
   <b>Abbrev:</b>
-  <%=h @role.abbrev %>
+  <%=h @role.rabbrev %>
 </p>
 
 <p>
@@ -52,9 +52,15 @@
   <b>Ticketsections:</b>
   <%=h @role.rticketsections %>
 </p>
+
 <p>
   <b>Rezlineitems:</b>
   <%=h @role.rrezlineitems %>
+</p>
+
+<p>
+  <b>Boxoffice:</b>
+  <%=h @role.rboxoffice %>
 </p>
 
 <% if User.find(session[:user_id]).hasaccess("roles", "update") %><%= link_to 'Edit', edit_role_path(@role) %> |<% end %>

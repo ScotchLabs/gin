@@ -1,5 +1,4 @@
-class TicketalertsController < ApplicationController
-  layout 'admin'
+class TicketalertsController < AdminController
   # GET /ticketalerts
   # GET /ticketalerts.xml
   def index

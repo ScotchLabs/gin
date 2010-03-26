@@ -24,32 +24,12 @@
   <tr>
     <th>Name</th>
     <th>Abbrev</th>
-    <th>Contents</th>
-    <th>Updates</th>
-    <th>Users</th>
-    <th>Roles</th>
-    <th>Roleassocs</th>
-    <th>Shows</th>
-    <th>Ticketalerts</th>
-    <th>Ticketrezs</th>
-    <th>Ticketsections</th>
-    <th>Rezlineitems</th>
   </tr>
 
 <% @roles.each do |role| %>
   <tr>
     <td><%=h role.rname %></td>
     <td><%=h role.rabbrev %></td>
-    <td><%=h role.rcontents %></td>
-    <td><%=h role.rupdates %></td>
-    <td><%=h role.rroles %></td>
-    <td><%=h role.rroleassocs %></td>
-    <td><%=h role.rshows %></td>
-    <td><%=h role.rticketalerts %></td>
-    <td><%=h role.rticketrezs %></td>
-    <td><%=h role.rticketsections %></td>
-    <td><%=h role.rusers %></td>
-    <td><%=h role.rrezlineitems %></td>
     <td><%= link_to 'Show', role %></td>
     <% if User.find(session[:user_id]).hasaccess("roles", "update") %><td><%= link_to 'Edit', edit_role_path(role) %></td><% end %>
     <% if User.find(session[:user_id]).hasaccess("roles", "destroy") %><td><%= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

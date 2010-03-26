@@ -1,5 +1,4 @@
-class ShowsController < ApplicationController
-  layout 'admin'
+class ShowsController < AdminController
   # GET /shows
   # GET /shows.xml
   def index

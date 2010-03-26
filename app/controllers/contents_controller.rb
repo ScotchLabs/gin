@@ -1,5 +1,4 @@
-class ContentsController < ApplicationController
-  layout 'admin'
+class ContentsController < AdminController
   # GET /contents
   # GET /contents.xml
   def index

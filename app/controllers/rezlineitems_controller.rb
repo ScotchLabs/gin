@@ -1,5 +1,4 @@
-class RezlineitemsController < ApplicationController
-  layout 'admin'
+class RezlineitemsController < AdminController
   # GET /rezlineitems/1
   # GET /rezlineitems/1.xml
   def show

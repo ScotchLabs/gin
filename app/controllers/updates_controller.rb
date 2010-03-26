@@ -1,5 +1,4 @@
-class UpdatesController < ApplicationController
-  layout 'admin'
+class UpdatesController < AdminController
   # GET /updates
   # GET /updates.xml
   def index

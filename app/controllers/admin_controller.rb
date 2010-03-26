@@ -1,4 +1,5 @@
 class AdminController < ApplicationController
+
   def login
     puts "DEBUG admin_controller: user '#{params[:name]}' logging in..."
     session[:user_id] = nil

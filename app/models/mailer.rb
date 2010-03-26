@@ -7,6 +7,7 @@ class Mailer < ActionMailer::Base
     recipients    @rez.email
     subject       "Thank you for your reservation with Scotch'n'Soda Theatre!"
     from          "tickets@snstheatre.org"
+    headers       'return-path' => "webmaster@snstheatre.org"
     content_type  "multipart/alternative"
     
     part :content_type => "text/plain",
