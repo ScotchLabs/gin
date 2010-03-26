@@ -9,12 +9,10 @@ class Mailer < ActionMailer::Base
     from          "tickets@snstheatre.org"
     content_type  "multipart/alternative"
     
+    part :content_type => "text/plain",
+      :body => render_message("rez.plain", :rez => @rez)
     part :content_type => "text/html",
       :body => render_message("rez.html", :rez => @rez)
-    part "text/plain" do |p|
-      p.body = render_message("rez.plain", :rez => @rez)
-      p.transfer_encoding = "base64"
-    end
   end
 
 end
