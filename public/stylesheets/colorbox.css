@@ -39,7 +39,7 @@
           letter-spacing:0;
         }
         #cboxLoadingGraphic{background:url(../images/colorbox/loading.gif) center center no-repeat;}
-        #cboxLoadingOverlay{background:#333;}
+        #cboxLoadingOverlay{background:#333;-moz-border-radius: 8px;-webkit-border-radius: 8px;}
         #cboxTitle{position:absolute; bottom:3px; left:0; text-align:center; width:100%; color:#FFF; letter-spacing:0;}
         #cboxCurrent{position:absolute; top:-22px; right:205px; text-indent:-9999px;}
         #cboxSlideshow, #cboxPrevious, #cboxNext, #cboxClose{text-indent:-9999px; width:20px; height:20px; position:absolute; top:-20px; background:url(../images/colorbox/controls.png) 0 0 no-repeat;}
