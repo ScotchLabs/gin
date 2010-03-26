@@ -191,12 +191,12 @@ function validateReservation() {
 }
 
 function showLoading() {
-  jQuery.fn.colorbox({inline:true,href:"#ajaxloading",width:"650px",height:"100px",transition:"none",opacity:"0.3"})
+  jQuery.fn.colorbox({inline:true,href:"#ajaxloading",width:"650px",transition:"none",opacity:"0.3"})
 }
 function ajaxresp(t) {
   jQuery("#ajaxresp")[0].innerHTML=t
   colorbox("ajaxresp")
 }
 function colorbox(t) {
-  jQuery.fn.colorbox({inline:true,href:"#"+t,width:"650px",height:"220px",transition:"none",opacity:"0.3"})
+  jQuery.fn.colorbox({inline:true,href:"#"+t,width:"650px",transition:"none",opacity:"0.3"})
 }
