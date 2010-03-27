@@ -2,10 +2,13 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
-  validates_presence_of   :name
-  validates_uniqueness_of :name
+  validates_presence_of   :name, :email
+  validates_uniqueness_of :name, :email
   
   attr_accessor :password_confirmation
+  attr_accessor :emailConfirmation
+  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+  validate :email_retyped
   validates_confirmation_of :password
   
   validate :password_not_blank
@@ -65,6 +68,10 @@ class User < ActiveRecord::Base
     @retype
   end
   
+  def emailConfirmation
+    @emailConfirmation
+  end
+  
   def password=(pwd)
     @password = pwd
     return if pwd.blank?
@@ -82,6 +89,10 @@ private
 
   def password_not_blank
     errors.add(:password, "Missing password") if hashed_password.blank?
+  end
+  
+  def email_retyped
+    errors.add(:email, "doesn't match retyped email address") if email != emailConfirmation
   end
   
   def password_retyped

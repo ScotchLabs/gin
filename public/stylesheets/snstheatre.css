@@ -325,14 +325,14 @@ h2 {
 #ticketsright {
   width: 534px;
 }
-input[type="text"] {
+input[type="text"], input[type="password"] {
   border: 1px solid black;
   margin: 2px;
   font-size: 18px;
   background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(255,255,255)), color-stop(1, rgb(228,228,228)));
   background-image: -moz-linear-gradient(center bottom, rgb(255,255,255) 0%, rgb(228,228,228) 100%);
 }
-input[type="text"][disabled] {
+input[type="text"][disabled], input[type="password"][disabled] {
   border: 1px solid #c4c4c4;
 }
 input[type="submit"] {
@@ -341,9 +341,8 @@ input[type="submit"] {
   background: #ff9900;
   color: white;
   border: 0px;
-  width: 116px;
+  padding: 10px 50px;
   font-weight: bold;
-  height: 30px;
 }
 input[type="submit"]:hover {
   background: #00dddd;

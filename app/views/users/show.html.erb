@@ -4,6 +4,11 @@
 </p>
 
 <p>
+  <b>Email:</b>
+  <%=h @user.email %>
+</p>
+
+<p>
   <b>Roles:</b>
   <% @user.roles.each {|r| %>
     <%= link_to r.name, r %><% if @user.roles.index(r) < @user.roles.length-1 %>,<% end %>

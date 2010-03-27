@@ -31,6 +31,8 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'boxoffice/', :controller => "boxoffice"
   map.connect 'boxoffice/:abbrev', :controller => "boxoffice", :action => "show"
   
+  map.connect 'admin/forgot/:hashed_password', :controller => "admin", :action => "forgot"
+  
   map.connect 'tickets/show/:abbrev', :controller => "tickets", :action => "show"
   map.connect 'tickets/unsubscribe/:hashid', :controller => "tickets", :action => "removeticketalert"
   map.connect 'tickets/cancel/:hashid',:controller => "tickets", :action => "cancelrez"

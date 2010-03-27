@@ -5,11 +5,11 @@
 
   <p>
     <%= f.label :roleid %><br />
-    <%= f.text_field :roleid %>
+    <%= f.select(:roleid, Role.all.map{|r| [r.rname, r.rabbrev]}) %>
   </p>
   <p>
     <%= f.label :userid %><br />
-    <%= f.text_field :userid %>
+    <%= f.select(:userid, User.all.map{|u| [u.name, u.name]}) %>
   </p>
   <p>
     <%= f.submit 'Create' %>

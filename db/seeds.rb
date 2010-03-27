@@ -7,13 +7,13 @@ timeall = Time.now.to_f
 users = true
 time = Time.now.to_f
 puts "-- seeding Users"
-users = users && User.create(:name => "sewillia", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
-users = users && User.create(:name => "jrfriedr", :hashed_password => "95c7eef0800d977b4e7affb9530e9e4c84add60e", :salt => "21730906600.43768004484198")
-users = users && User.create(:name => "amgross", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-users = users && User.create(:name => "dfreeman", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-users = users && User.create(:name => "achivett", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-users = users && User.create(:name => "mdickoff", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
-users = users && User.create(:name => "tsnider", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "sewillia", :email => "s@spencerenglish.com", :emailConfirmation => "s@spencerenglish.com", :hashed_password => "f14ca870cf00d6ba27a2f9effbb035b69b642bae", :salt => "21743334400.149901635588873")
+users = users && User.create(:name => "jrfriedr", :email => "jasmine.friedrich@gmail.com", :emailConfirmation => "jasmine.friedrich@gmail.com", :hashed_password => "95c7eef0800d977b4e7affb9530e9e4c84add60e", :salt => "21730906600.43768004484198")
+users = users && User.create(:name => "amgross", :email => "amgross@andrew.cmu.edu", :emailConfirmation => "amgross@andrew.cmu.edu", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "dfreeman", :email => "dfreeman@andrew.cmu.edu", :emailConfirmation => "dfreeman@andrew.cmu.edu", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "achivett", :email => "achivett@andrew.cmu.edu", :emailConfirmation => "achivett@andrew.cmu.edu", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "mdickoff", :email => "mdickoff@andrew.cmu.edu", :emailConfirmation => "mdickoff@andrew.cmu.edu", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
+users = users && User.create(:name => "tsnider", :email => "tsnider@andrew.cmu.edu", :emailConfirmation => "tsnider@andrew.cmu.edu", :hashed_password => "2f01e0ea7fc7421e669e946d6b16c13e20d32204", :salt => "21743332000.388658344764871")
 if users
   puts "   -> #{(Time.now.to_f-time).to_s[0..5]}s"
 else

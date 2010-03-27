@@ -1,21 +1,79 @@
-<div>
+<% if flash[:notice] %>
+<%= flash[:notice] %>
+</div>
+<div class='article'>
+<% end %>
+<div class='fleft' style="display:inline;width:50%;">
 	<% form_tag do %>
+	 <%= hidden_field_tag :type, "login" %>
 		<fieldset>
 			<legend>Please Log In</legend>
 			
 			<div>
 				<label for="name">Name:</label>
-				<%= text_field_tag :name, params[:name] %>
+				<%= text_field_tag :lname, params[:lname] %>
 			</div>
 			
 			<div>
 				<label for="password">Password:</label>
-				<%= password_field_tag :password, params[:password] %>
+				<%= password_field_tag :lpassword, params[:lpassword] %>
 			</div>
 			
-			<div>
+			<div style='text-align:center;'>
 				<%= submit_tag "Login" %>
 			</div>
 		</fieldset>
 	<% end %>
+  <% form_tag do %>
+    <%= hidden_field_tag :type, "forgot" %>
+    <fieldset>
+      <legend>Forgot Password</legend>
+      
+      <div>
+        <label for="email">Email:</label>
+        <%= text_field_tag :femail, params[:femail] %><br />
+      </div>
+      <div style='text-align:center;'>
+        <%= submit_tag "Send me a new one!" %>
+      </div>
+    </fieldset>
+  <% end %>
 </div>
+<div class='fleft' style="display:inline;width:50%">
+  <% form_tag do %>
+    <%= hidden_field_tag :type, "create" %>
+    <fieldset>
+      <legend>Create an Account</legend>
+      
+      <div>
+        <label for="name">Name:</label>
+        <%= text_field_tag :cname, params[:cname] %>
+      </div>
+      <br />
+      <div>
+        <label for="email">Email:</label>
+        <%= text_field_tag :cemail, params[:cemail] %>
+      </div>
+      
+      <div>
+        <label for="emailConfirmation">Retype Email:</label>
+        <%= text_field_tag :cemailConfirmation, params[:cemailConfirmation] %>
+      </div>
+      <br />
+      <div>
+        <label for="password">Password:</label>
+        <%= password_field_tag :cpassword, params[:cpassword] %>
+      </div>
+      
+      <div>
+        <label for="retype">Retype Password:</label>
+        <%= password_field_tag :cretype, params[:cretype] %>
+      </div>
+      
+      <div style='text-align:center;'>
+        <%= submit_tag "Create" %>
+      </div>
+    </fieldset>
+  <% end %>
+</div>
+<br style='clear:both;' />

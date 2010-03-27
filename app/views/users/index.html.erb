@@ -3,10 +3,12 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Email</th>
   </tr>
 <% @users.each do |user| %>
   <tr>
     <td><%=h user.name %></td>
+    <td><%=h user.email %></td>
     <td><%= link_to 'Show', user %></td>
     <% if User.find(session[:user_id]).hasaccess("users", "update") %><td><%= link_to 'Edit', edit_user_path(user) %></td><% end %>
     <% if User.find(session[:user_id]).hasaccess("users", "destroy") %><td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
