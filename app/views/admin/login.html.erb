@@ -1,3 +1,9 @@
+<script type='text/javascript'>
+jQuery(document).ready(function(){
+jQuery("#displayTerms").colorbox({inline:true,href:"#termsofuse",initialWidth:650,width:650,transition:"none"})
+})
+</script>
+
 <% if flash[:notice] %>
 <%= flash[:notice] %>
 </div>
@@ -18,7 +24,7 @@
 				<label for="password">Password:</label>
 				<%= password_field_tag :lpassword, params[:lpassword] %>
 			</div>
-			
+			<br />
 			<div style='text-align:center;'>
 				<%= submit_tag "Login" %>
 			</div>
@@ -33,6 +39,7 @@
         <label for="email">Email:</label>
         <%= text_field_tag :femail, params[:femail] %><br />
       </div>
+      <br />
       <div style='text-align:center;'>
         <%= submit_tag "Send me a new one!" %>
       </div>
@@ -40,6 +47,15 @@
   <% end %>
 </div>
 <div class='fleft' style="display:inline;width:50%">
+  <div style='display:none;'>
+    <div id='termsofuse'>
+      <h1>Terms of Use</h1>
+      <br />
+      You don't disseminate false, misleading, or uncouth information and we won't give your email address to every spam list ever.<br />
+      Deal?<br />
+      <a onclick='jQuery.fn.colorbox.close()'>yeah, whatever</a>
+    </div>
+  </div>
   <% form_tag do %>
     <%= hidden_field_tag :type, "create" %>
     <fieldset>
@@ -70,8 +86,10 @@
         <%= password_field_tag :cretype, params[:cretype] %>
       </div>
       
+      <a id='displayTerms' href='#'>Terms of Use</a>
+      
       <div style='text-align:center;'>
-        <%= submit_tag "Create" %>
+        <%= submit_tag "Create", {:onclick => "return terms();"} %>
       </div>
     </fieldset>
   <% end %>
