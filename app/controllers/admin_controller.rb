@@ -31,6 +31,8 @@ class AdminController < ApplicationController
           session[:user_permissions]["rezlineitems"]["d"] = user.hasaccess("rezlineitems","destroy")
           session[:user_permissions]["roles"] = Hash.new
           session[:user_permissions]["roles"]["d"] = user.hasaccess("roles","destroy")
+          session[:user_permissions]["roleassocs"] = Hash.new
+          session[:user_permissions]["roleassocs"]["d"] = user.hasaccess("roleassocs","destroy")
           session[:user_permissions]["ticketalerts"] = Hash.new
           session[:user_permissions]["ticketalerts"]["d"] = user.hasaccess("ticketalerts","destroy")
           session[:user_permissions]["ticketrezs"] = Hash.new
