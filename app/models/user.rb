@@ -55,7 +55,7 @@ class User < ActiveRecord::Base
   
   def roles
     roles = Array.new
-    roleassocs.each {|r| roles.push Role.find_by_abbrev r.roleid}
+    roleassocs.each {|r| roles.push Role.find_by_rabbrev(r.roleid)}
     roles
   end
   

@@ -80,8 +80,8 @@ class ShowsController < AdminController
   def destroy
     @show = Show.find(params[:id])
     Ticketsection.all(:conditions => ["showid = ?",@show.abbrev]).each {|s| s.destroy}
-    Ticketalert.all(:conditionc => ["showid = ?",@show.abbrev]).each {|a| a.destroy}
-    Ticketrez.all(:conditionc => ["showid = ?",@show.abbrev]).each {|r| r.destroy}
+    Ticketalert.all(:conditions => ["showid = ?",@show.abbrev]).each {|a| a.destroy}
+    Ticketrez.all(:conditions => ["showid = ?",@show.abbrev]).each {|r| r.destroy}
     @show.destroy
 
     respond_to do |format|

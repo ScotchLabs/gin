@@ -24,13 +24,12 @@ trclass = "class='zebra'"
     <td><%=h show.imageurl %></td>
     <td><%=h show.ticketstatus %></td>
     <td><%= link_to 'Show', show %></td>
-    <% if User.find(session[:user_id]).hasaccess("shows", "update") %><td><%= link_to 'Edit', edit_show_path(show) %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("shows", "destroy") %><td><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("boxoffice","show") %><td><%= link_to 'Box Office', "/boxoffice/show/#{show.abbrev}" %></td><% end %>
+    <td><%= link_to 'Edit', edit_show_path(show) %></td>
+    <% if session[:user_permissions]["shows"]["d"] %><td><%= link_to 'Destroy', show, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if User.find(session[:user_id]).hasaccess("shows", "create") %><%= link_to 'New show', new_show_path %><% end %>
+<%= link_to 'New show', new_show_path %>

@@ -33,11 +33,11 @@
       %>
       <div id='menu'>
         <ul><li class='bottomleftcorner' <%= listylewelcome %>><%= link_to "Welcome", {:controller => "admin"}, {:style => astylewelcome, :class => "menua bottomleftcorner"} %></li>
-      	<% if session[:user_id] && User.find(session[:user_id]).hasaccess("shows", "show") %><li <%= listyleshows %>><%= link_to "Shows & Tickets", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
-      	<% if session[:user_id] && User.find(session[:user_id]).hasaccess("boxoffice","show") %><li <%= listyleboxoffice %>><%= link_to "Box Office", {:controller => "boxoffice"}, {:style => astyleboxoffice, :class => "menua"} %></li><% end %>
-      	<% if session[:user_id] && User.find(session[:user_id]).hasaccess("updates", "show") %><li <%= listylenews %>><%= link_to "News", updates_path, {:style => astylenews, :class => "menua"} %></li><% end %>
-      	<% if session[:user_id] && User.find(session[:user_id]).hasaccess("contents", "show") %><li <%= listylecontents %>><%= link_to "Contents", contents_path, {:style => astylecontents, :class => "menua"} %></li><% end %>
-      	<% if session[:user_id] && User.find(session[:user_id]).hasaccess("users", "show") %><li <%= listyleusers %>><%= link_to "Users & Roles", users_path, {:style => astyleusers, :class => "menua"} %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["shows"]["r"] %><li <%= listyleshows %>><%= link_to "Shows & Tickets", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["boxoffice"]["r"] %><li <%= listyleboxoffice %>><%= link_to "Box Office", {:controller => "boxoffice"}, {:style => astyleboxoffice, :class => "menua"} %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["updates"]["r"] %><li <%= listylenews %>><%= link_to "News", updates_path, {:style => astylenews, :class => "menua"} %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["contents"]["r"] %><li <%= listylecontents %>><%= link_to "Contents", contents_path, {:style => astylecontents, :class => "menua"} %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["users"]["r"] %><li <%= listyleusers %>><%= link_to "Users & Roles", users_path, {:style => astyleusers, :class => "menua"} %></li><% end %>
       	<li class='bottomrightcorner'><%= link_to 'Log out', {:controller => "admin", :action => "logout"}, {:class => "menua bottomrightcorner"} %></li>
       	<script type='text/javascript'>
           jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px");

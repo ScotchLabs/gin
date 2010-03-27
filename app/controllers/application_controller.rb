@@ -23,20 +23,23 @@ protected
       else
         redirect_to :controller => "admin", :action => "login"
       end
-    elsif controller_name != "admin"
-      puts "DEBUG application_controller: checking if user '#{session[:user_name]}' has access to controller '#{controller_name}', action '#{action_name}'"
-      okcontinue = hasaccess?(user,controller_name, action_name)
-      puts "DEBUG application_controller: okcontinue is '#{okcontinue.to_s}'"
-      unless okcontinue
-        flash[:notice] = "You don't have access to that."
-        puts "DEBUG application_controller: user #{session[:user_name]} doesn't have access to controller #{controller_name}. Redirecting to admin"
-        redirect_to :controller => "admin"
+    else
+      if controller_name != "admin"
+        puts "DEBUG application_controller: checking if user '#{session[:user_name]}' has access to controller '#{controller_name}', action '#{action_name}'"
+        okcontinue = hasaccess?(session[:user_id],controller_name, action_name)
+        puts "DEBUG application_controller: okcontinue is '#{okcontinue.to_s}'"
+        unless okcontinue
+          flash[:notice] = "You don't have access to that."
+          puts "DEBUG application_controller: user #{session[:user_name]} doesn't have access to controller #{controller_name}. Redirecting to admin"
+          redirect_to :controller => "admin"
+        end
       end
     end
   end
 private
 
-  def hasaccess?(user,controller,action)
+  def hasaccess?(u,controller,action)
+    user = User.find(u)
     if action == "index" || action == "show"
       crud = "r"
     elsif action == "edit" || action == "update"
@@ -67,12 +70,8 @@ private
       puts "DEBUG application_controller#hasaccess: access after role #{access}"
       break if access
     end
-    if session[:user_permissions].nil?
-      session[:user_permissions] = Hash.new
-    elsif session[:user_permissions]["#{controller}"].nil?
-      puts "DEBUG application_controller#hasaccess: session[:user_permissions] not nil, but ...[#{controller}] is"
-      session[:user_permissions]["#{controller}"] = Hash.new
-    end
+    session[:user_permissions] = Hash.new if session[:user_permissions].nil?
+    session[:user_permissions]["#{controller}"] = Hash.new if session[:user_permissions]["#{controller}"].nil?
     puts "DEBUG application_controller#hasaccess: putting #{access} in session[:user_permissions][#{controller}][#{crud}]"
     session[:user_permissions]["#{controller}"]["#{crud}"] = access
     puts "DEBUG application_controller#hasaccess: session[:user_permissions][#{controller}][#{crud}] now holds "+session[:user_permissions]["#{controller}"]["#{crud}"].to_s

@@ -9,6 +9,32 @@ class AdminController < ApplicationController
         if !user.nil?
           session[:user_id] = user.id
           session[:user_name] = user.name
+          # I know this is a terrible place to put this, but I'm tired of thinking about user permissions and I want it to just work
+          # loading base permissions
+          
+          session[:user_permissions] = Hash.new
+          session[:user_permissions]["shows"] = Hash.new
+          session[:user_permissions]["shows"]["r"] = user.hasaccess("shows","show")
+          session[:user_permissions]["shows"]["d"] = user.hasaccess("shows","destroy")
+          session[:user_permissions]["boxoffice"] = Hash.new
+          session[:user_permissions]["boxoffice"]["r"] = user.hasaccess("boxoffice","show")
+          session[:user_permissions]["updates"] = Hash.new
+          session[:user_permissions]["updates"]["r"] = user.hasaccess("updates","show")
+          session[:user_permissions]["updates"]["d"] = user.hasaccess("updates","destroy")
+          session[:user_permissions]["contents"] = Hash.new
+          session[:user_permissions]["contents"]["r"] = user.hasaccess("contents","show")
+          session[:user_permissions]["contents"]["d"] = user.hasaccess("contents","destroy")
+          session[:user_permissions]["users"] = Hash.new
+          session[:user_permissions]["users"]["r"] = user.hasaccess("users","show")
+          session[:user_permissions]["users"]["d"] = user.hasaccess("users","destroy")
+          session[:user_permissions]["rezlineitems"] = Hash.new
+          session[:user_permissions]["rezlineitems"]["d"] = user.hasaccess("rezlineitems","destroy")
+          session[:user_permissions]["roles"] = Hash.new
+          session[:user_permissions]["roles"]["d"] = user.hasaccess("roles","destroy")
+          session[:user_permissions]["ticketalerts"] = Hash.new
+          session[:user_permissions]["ticketalerts"]["d"] = user.hasaccess("ticketalerts","destroy")
+          session[:user_permissions]["ticketrezs"] = Hash.new
+          session[:user_permissions]["ticketrezs"]["d"] = user.hasaccess("ticketrezs","destroy")
           
           puts "DEBUG admin_controller: user '#{session[:user_name]}' exists"
           uri = session[:original_uri]
