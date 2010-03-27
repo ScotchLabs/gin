@@ -14,22 +14,4 @@ class BoxofficeController < AdminController
     @perfs = @show.performancetimes.split("|")
     @sections = Ticketsection.all(:conditions => ["showid = ?",@show.abbrev])
   end
-protected
-  def authorize
-    user = User.find_by_id(session[:user_id])
-    if user.nil?
-      session[:original_uri] = request.request_uri
-      redirect_to :controller => "boxoffice", :action => "login"
-    end
-    if controller_name != "admin" and !user.nil?
-      puts "DEBUG application_controller: checking if user '#{session[:user_name]}' has access to controller '#{controller_name}', action '#{action_name}'"
-      okcontinue = user.hasaccess(controller_name, action_name)
-      puts "DEBUG application_controller: okcontinue is '#{okcontinue.to_s}'"
-      unless okcontinue
-        flash[:notice] = "You don't have access to that."
-        puts "DEBUG application_controller: user #{session[:user_name]} doesn't have access to controller #{controller_name}. Redirecting to admin"
-        redirect_to :controller => "admin"
-      end
-    end
-  end
 end

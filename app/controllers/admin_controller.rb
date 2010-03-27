@@ -51,6 +51,7 @@ class AdminController < ApplicationController
   def logout
     session[:user_id] = nil
     session[:user_name] = nil
+    session[:user_permissions] = nil
     flash[:notice] = "Logged out"
     redirect_to(:action => "login")
   end
@@ -72,11 +73,4 @@ class AdminController < ApplicationController
       end
     end
   end
-  
-private
-
-  def hasaccess?(u,c,a)
-    # returns true/false
-  end
-
 end

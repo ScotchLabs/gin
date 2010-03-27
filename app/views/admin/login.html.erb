@@ -4,11 +4,6 @@ jQuery("#displayTerms").colorbox({inline:true,href:"#termsofuse",initialWidth:65
 })
 </script>
 
-<% if flash[:notice] %>
-<%= flash[:notice] %>
-</div>
-<div class='article'>
-<% end %>
 <div class='fleft' style="display:inline;width:50%;">
 	<% form_tag do %>
 	 <%= hidden_field_tag :type, "login" %>

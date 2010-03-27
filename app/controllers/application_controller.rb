@@ -13,14 +13,19 @@ protected
   # override this in specific controllers to get past authorization
   def authorize
     puts "DEBUG application_controller: authorizing"
-    if session[:user_id].nil? or User.find_by_id(session[:user_id]).nil?
+    user = User.find_by_id(session[:user_id])
+    if user.nil?
       puts "DEBUG application_controller: redirecting"
       session[:original_uri] = request.request_uri
       flash[:notice] = "please log in"
-      redirect_to :controller => "admin", :action => "login"
+      if controller_name == "boxoffice"
+        redirect_to :controller => "boxoffice", :action => "login"
+      else
+        redirect_to :controller => "admin", :action => "login"
+      end
     elsif controller_name != "admin"
       puts "DEBUG application_controller: checking if user '#{session[:user_name]}' has access to controller '#{controller_name}', action '#{action_name}'"
-      okcontinue = User.find_by_id(session[:user_id]).hasaccess(controller_name, action_name)
+      okcontinue = hasaccess?(user,controller_name, action_name)
       puts "DEBUG application_controller: okcontinue is '#{okcontinue.to_s}'"
       unless okcontinue
         flash[:notice] = "You don't have access to that."
@@ -29,4 +34,49 @@ protected
       end
     end
   end
+private
+
+  def hasaccess?(user,controller,action)
+    if action == "index" || action == "show"
+      crud = "r"
+    elsif action == "edit" || action == "update"
+      crud = "u"
+    elsif action == "new" || action == "create"
+      crud = "c"
+    elsif action == "destroy"
+      crud = "d"
+    end
+    puts "DEBUG application_controller#hasaccess: user '#{user}' controller '#{controller}', crud '#{crud}'"
+    if (user.nil? or controller.nil? or controller.blank? or crud.nil?)
+      puts "DEBUG application_controller#hasaccess: returning false"
+      return false
+    end
+    if !session[:user_permissions].nil? and !session[:user_permissions]["#{controller}"].nil? and !session[:user_permissions]["#{controller}"]["#{crud}"].nil?
+      access = session[:user_permissions]["#{controller}"]["#{crud}"]
+      puts "DEBUG application_controller#hasaccess: already loaded in session, returning #{access}"
+      return access
+    end
+    puts "DEBUG application_controller#hasaccess: not loaded in session, checking roles"
+    access = false
+    roleassocs = Roleassoc.all(:conditions => ["userid = ?",user.name])
+    for roleassoc in roleassocs
+      role = Role.find_by_rabbrev(roleassoc.roleid)
+      #somehow get the controller crud out of role
+      puts "DEBUG application_controller#hasaccess: role '#{role}', controller '#{controller}', crud '#{crud}'"
+      access = access || (!role.send("r"+controller).nil? && role.send("r"+controller).include?(crud))
+      puts "DEBUG application_controller#hasaccess: access after role #{access}"
+      break if access
+    end
+    if session[:user_permissions].nil?
+      session[:user_permissions] = Hash.new
+    elsif session[:user_permissions]["#{controller}"].nil?
+      puts "DEBUG application_controller#hasaccess: session[:user_permissions] not nil, but ...[#{controller}] is"
+      session[:user_permissions]["#{controller}"] = Hash.new
+    end
+    puts "DEBUG application_controller#hasaccess: putting #{access} in session[:user_permissions][#{controller}][#{crud}]"
+    session[:user_permissions]["#{controller}"]["#{crud}"] = access
+    puts "DEBUG application_controller#hasaccess: session[:user_permissions][#{controller}][#{crud}] now holds "+session[:user_permissions]["#{controller}"]["#{crud}"].to_s
+    access
+  end
+
 end

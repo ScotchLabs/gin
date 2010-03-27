@@ -45,6 +45,9 @@
       </div>
     </div>
     <div id='view'>
+      <% if flash[:notice] %>
+      <div class='article'><%= flash[:notice] %></div>
+      <% end %>
       <div class='article'><%= yield %></div>
     </div>
     <div id='footer' class='topcorner shadow'>
