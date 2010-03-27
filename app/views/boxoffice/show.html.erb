@@ -9,6 +9,9 @@ function Pshow(i) {
   jQuery("#perf"+i).show("fast")
   jQuery("#hideperf"+i).show() 
 }
+jQuery(document).ready(function(){
+  jQuery("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
+})
 </script>
 <h1>Box Office for <%= @show.name %></h1>
 <h2>(<%= link_to "Edit this show",edit_show_path(@show) %>)</h2>
@@ -17,6 +20,7 @@ This show has <span class='bold'><%= @sections.length %></span> sections.<br />
 <% for section in @sections %>
 <%= "Section #{section.name}: #{section.size} seats, $#{section.pricewithid}/#{section.pricewoutid} ("+link_to("Edit this section", edit_ticketsection_path(section))+")<br />" %>
 <% end %>
+<% unless @show.seatingmap.nil? %><a href='http://upload.snstheatre.org/gin/shows/seatingmaps/<%= @show.seatingmap %>' rel='seatingmap' class='cboxElement'>view seating map</a><% end %><br />
 <br />
 This show has <span class='bold'><%= @perfs.length %></span> performances.<br />
 <% i=0 %>
