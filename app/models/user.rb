@@ -14,8 +14,19 @@ class User < ActiveRecord::Base
   validate :password_not_blank
   validate :password_retyped
   
-  def hasaccess(controller, action)
-    puts "DEBUG user hasaccess: controller '#{controller}', action '#{action}'"
+  def self.authenticate(name, password)
+    user = self.find_by_name(name)
+    if user
+      expected_password = encrypted_password(password, user.salt)
+      if user.hashed_password != expected_password
+        user=nil
+      end
+    end
+    user
+  end
+  
+  def hasaccess(controller,action)
+    puts "DEBUG user_model#hasaccess: user '#{name}' controller '#{controller}', action '#{action}'"
     if action == "index" || action == "show"
       crud = "r"
     elsif action == "edit" || action == "update"
@@ -36,17 +47,6 @@ class User < ActiveRecord::Base
       return true if access
     end
     access
-  end
-  
-  def self.authenticate(name, password)
-    user = self.find_by_name(name)
-    if user
-      expected_password = encrypted_password(password, user.salt)
-      if user.hashed_password != expected_password
-        user=nil
-      end
-    end
-    user
   end
   
   def roleassocs

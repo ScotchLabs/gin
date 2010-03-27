@@ -9,6 +9,7 @@ class AdminController < ApplicationController
         if !user.nil?
           session[:user_id] = user.id
           session[:user_name] = user.name
+          
           puts "DEBUG admin_controller: user '#{session[:user_name]}' exists"
           uri = session[:original_uri]
           session[:original_uri] = nil
@@ -71,4 +72,11 @@ class AdminController < ApplicationController
       end
     end
   end
+  
+private
+
+  def hasaccess?(u,c,a)
+    # returns true/false
+  end
+
 end
