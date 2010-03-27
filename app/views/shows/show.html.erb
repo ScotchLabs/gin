@@ -88,8 +88,16 @@
     <th>Size</th>
   </tr>
 
-<% @ticketsections.each do |ticketsection| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@ticketsections.each do |ticketsection|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h ticketsection.showid %></td>
     <td><%=h ticketsection.name %></td>
     <td><%=h ticketsection.pricewithid %>/<%=h ticketsection.pricewoutid %></td>
@@ -115,8 +123,16 @@
     <th>Email</th>
   </tr>
 
-<% @ticketrezs.each do |ticketrez| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@ticketrezs.each do |ticketrez|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h ticketrez.name %></td>
     <td><%=h ticketrez.email %></td>
     <td><%= link_to 'Show', ticketrez %></td>
@@ -139,8 +155,16 @@
     <th>Email</th>
   </tr>
 
-<% @ticketalerts.each do |ticketalert| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@ticketalerts.each do |ticketalert|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h ticketalert.email %></td>
     <td><%= link_to 'Show', ticketalert %></td>
     <% if User.find(session[:user_id]).hasaccess("ticketalerts", "update") %><td><%= link_to 'Edit', edit_ticketalert_path(ticketalert) %></td><% end %>

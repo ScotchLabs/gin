@@ -10,8 +10,16 @@
     <th>Order</th>
     <th>Article</th>
   </tr>
-<% @contents.each do |content| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@contents.each do |content|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h content.title %></td>
     <td><%=h content.contentpane %></td>
     <td><%=h content.contenttype %></td>

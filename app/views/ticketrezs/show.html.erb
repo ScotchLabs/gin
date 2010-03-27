@@ -33,8 +33,16 @@
     <th>Quantity</th>
   </tr>
 
-<% @rezlineitems.each do |rezlineitem| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@rezlineitems.each do |rezlineitem|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h rezlineitem.performance %></td>
     <td><%=h rezlineitem.sectionid %></td>
     <td><%=h rezlineitem.quantity %></td>

@@ -7,8 +7,16 @@
     <th>Expiredate</th>
     <th>Article</th>
   </tr>
-<% @updates.each do |update| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@updates.each do |update|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h update.name %></td>
     <td><%=h update.anchor %></td>
     <td><%=h update.expiredate %></td>

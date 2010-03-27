@@ -5,8 +5,16 @@
     <th>Name</th>
     <th>Email</th>
   </tr>
-<% @users.each do |user| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@users.each do |user|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h user.name %></td>
     <td><%=h user.email %></td>
     <td><%= link_to 'Show', user %></td>
@@ -28,8 +36,16 @@
     <th>Abbrev</th>
   </tr>
 
-<% @roles.each do |role| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@roles.each do |role|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h role.rname %></td>
     <td><%=h role.rabbrev %></td>
     <td><%= link_to 'Show', role %></td>
@@ -51,8 +67,16 @@
     <th>Userid</th>
   </tr>
 
-<% @roleassocs.each do |roleassoc| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@roleassocs.each do |roleassoc|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h roleassoc.roleid %></td>
     <td><%=h roleassoc.userid %></td>
     <td><%= link_to 'Show', roleassoc %></td>

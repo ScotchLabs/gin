@@ -18,6 +18,7 @@ end
 <th>Amt Due</th>
 </tr>
 <%
+trclass = "class='zebra'"
 for tr in @trs
 # get all rezs
 rez = Rezlineitem.first(:conditions => ["rezid = ? and performance = ?",tr.id,perf])
@@ -25,7 +26,12 @@ section = Ticketsection.find(rez.sectionid)
 qty = rez.quantity
 cost = section.pricewithid * qty if tr.hasid
 cost = section.pricewoutid * qty unless tr.hasid
-%><tr>
+if trclass=="class='zebra'"
+  trclass = ""
+else
+  trclass = "class='zebra'"
+end
+%><tr <%= trclass %>>
 <td><%= tr.name %></td>
 <td><%= tr.email %></td>
 <td><%= tr.hasid %></td>
