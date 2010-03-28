@@ -101,9 +101,12 @@ function reserveSuccess(data) {
   // munge data
   var pattern = /<div id='response' class='article'>(.*)<\/div>/
   data = pattern.exec(data)[1]
+  pattern = /<div id='sendemail' style='display:none;'>(.*)<\/div>/
+  sendemail = pattern.exec(data)[1]=="true"
   pattern = /<div id='ticketrezid' style='display:none;'>(.*)<\/div>/
   ticketrezid = pattern.exec(data)[1]
-  jQuery.ajax({type: 'post', url: '/tickets/sendemail', data: {ticketrezid: ticketrezid}})
+  if (sendemail)
+    jQuery.ajax({type: 'post', url: '/tickets/sendemail', data: {ticketrezid: ticketrezid}})
   ajaxresp(data)
   updatecounts()
 }

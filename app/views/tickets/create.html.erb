@@ -47,4 +47,4 @@ else
   message += "<br /><br />An email will be sent to your address regarding the details of your reservation."
 end
 %>
-<div id='response' class='article'><%= message %><div id='ticketrezid' style='display:none;'><%= @ticketrez.id %></div></div>
+<div id='response' class='article'><%= message %><div id='ticketrezid' style='display:none;'><%= @ticketrez.id %></div><div id='sendemail' style='display:none;'><%= @sendemail %></div></div>

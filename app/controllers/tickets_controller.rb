@@ -54,7 +54,7 @@ class TicketsController < ApplicationController
           puts "DEBUG tickets_controller#create: saved ticketrez with ajax"
           @ticketrezdidntsave = true
           @makerez=false
-          #@sendemail=false
+          @sendemail=false
         end
       else
         #############
@@ -93,7 +93,7 @@ class TicketsController < ApplicationController
               @rezlineitems.push(@r)
             else
               @rezlineitemsdidntsave = true
-              #@sendemail=false
+              @sendemail=false
               @ticketrez.destroy
               @rezlineitems.each {|rez| rez.destroy}
               break
@@ -130,12 +130,6 @@ class TicketsController < ApplicationController
           Mailer::deliver_rez_mail(@ticketrez.id) if @sendemail
         end #non-ajax makerez
       end # makerez
-      #if @sendemail
-      #  unless @ticketrez.email.nil? or @ticketrez.email.blank?
-      #    Mailer::deliver_rez_mail(@ticketrez)
-      #    @emailsent = true
-      #  end
-      #end
     end # request.post?
   end
   
@@ -145,7 +139,9 @@ class TicketsController < ApplicationController
   
   def cancelrez
     @ticketrez = Ticketrez.find_by_hashid(params[:hashid])
-    redirect_to :action => "cancelerror" if @ticketrez.nil?
+    if @ticketrez.nil?
+      redirect_to :action => "cancelerror"
+    end
   end
   
   def destroyrez
