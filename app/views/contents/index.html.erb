@@ -29,7 +29,7 @@ trclass = "class='zebra'"
     <td><%=h !content.article.blank? %></td>
     <td><%= link_to 'Show', content %></td>
     <td><%= link_to 'Edit', edit_content_path(content) %></td>
-    <% if session[:user_permisisons]["contents"]["d"] %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if session[:user_permissions]["contents"]["d"] %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>

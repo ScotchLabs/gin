@@ -13,9 +13,6 @@ class AdminController < ApplicationController
           # loading base permissions
           
           session[:user_permissions] = Hash.new
-          session[:user_permissions]["shows"] = Hash.new
-          session[:user_permissions]["shows"]["r"] = user.hasaccess("shows","show")
-          session[:user_permissions]["shows"]["d"] = user.hasaccess("shows","destroy")
           session[:user_permissions]["boxoffice"] = Hash.new
           session[:user_permissions]["boxoffice"]["r"] = user.hasaccess("boxoffice","show")
           session[:user_permissions]["updates"] = Hash.new
@@ -27,16 +24,21 @@ class AdminController < ApplicationController
           session[:user_permissions]["users"] = Hash.new
           session[:user_permissions]["users"]["r"] = user.hasaccess("users","show")
           session[:user_permissions]["users"]["d"] = user.hasaccess("users","destroy")
-          session[:user_permissions]["rezlineitems"] = Hash.new
-          session[:user_permissions]["rezlineitems"]["d"] = user.hasaccess("rezlineitems","destroy")
           session[:user_permissions]["roles"] = Hash.new
           session[:user_permissions]["roles"]["d"] = user.hasaccess("roles","destroy")
           session[:user_permissions]["roleassocs"] = Hash.new
           session[:user_permissions]["roleassocs"]["d"] = user.hasaccess("roleassocs","destroy")
+          session[:user_permissions]["shows"] = Hash.new
+          session[:user_permissions]["shows"]["r"] = user.hasaccess("shows","show")
+          session[:user_permissions]["shows"]["d"] = user.hasaccess("shows","destroy")
+          session[:user_permissions]["ticketsections"] = Hash.new
+          session[:user_permissions]["ticketsections"]["d"] = user.hasaccess("ticketsections","destroy")
           session[:user_permissions]["ticketalerts"] = Hash.new
           session[:user_permissions]["ticketalerts"]["d"] = user.hasaccess("ticketalerts","destroy")
           session[:user_permissions]["ticketrezs"] = Hash.new
           session[:user_permissions]["ticketrezs"]["d"] = user.hasaccess("ticketrezs","destroy")
+          session[:user_permissions]["rezlineitems"] = Hash.new
+          session[:user_permissions]["rezlineitems"]["d"] = user.hasaccess("rezlineitems","destroy")
           
           puts "DEBUG admin_controller: user '#{session[:user_name]}' exists"
           uri = session[:original_uri]

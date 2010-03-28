@@ -55,7 +55,16 @@
     </div>
   </div>
   <div id='bodyfooter'>
-    latest log entry
+    <%
+    content = ""
+    unless File.exist?("log/info.log")
+      File.new("log/info.log","r")
+    end
+    File.open("log/info.log", "r") do |f|
+      content = f.sysread(File.size("log/info.log")).split("\n").last
+    end
+    %>
+    <%= content %>
   </div>
 </body>
 </html>
