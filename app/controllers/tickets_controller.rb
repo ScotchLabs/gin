@@ -20,12 +20,12 @@ class TicketsController < ApplicationController
     @ticketrez = Ticketrez.new
     # find a show with params[:abbrev], else redirect to tickets/showerror
     @show = Show.find_by_abbrev(params[:abbrev])
+    @ticketsections = @show.ticketsections
     if @show.nil?
       redirect_to "/tickets/showerror"
-    elsif @show.ticketstatus != "open" || @show.ticketsections.blank?
+    elsif @show.ticketstatus != "open" || @ticketsections.blank?
       redirect_to "/tickets/showclosed"
     end
-    @ticketsections = Ticketsection.all(:conditions => ["showid = ?",@show.abbrev])
     @ticketrez = Ticketrez.new
   end
   
@@ -37,7 +37,6 @@ class TicketsController < ApplicationController
       ###############
       ## TICKETREZ ##
       ###############
-      @ticketrez = Ticketrez.new
       @makerez=true
       @sendemail=true
       @ajax=false
@@ -45,29 +44,26 @@ class TicketsController < ApplicationController
         ##########
         ## AJAX ##
         ##########
+        @ticketrez = Ticketrez.new
         @ajax=true
         @ticketrez.showid = params[:ticketrez][0]
         @ticketrez.name = params[:ticketrez][1]
         @ticketrez.email = params[:ticketrez][2]
         @ticketrez.hasid = params[:ticketrez][3]
-        unless @ticketrez.save
-          puts "DEBUG tickets_controller#create: saved ticketrez with ajax"
-          @ticketrezdidntsave = true
-          @makerez=false
-          @sendemail=false
-        end
       else
         #############
         ## NONAJAX ##
         #############
         @ticketrez = Ticketrez.new(params[:ticketrez])
-        unless @ticketrez.save
-          puts "DEBUG tickets_controller#create: saved ticketrez with nonajax"
-          @ticketrezdidntsave = true
-          @makerez=false
-          @sendemail=false
-        end
       end # non-ajax ticketrez
+      unless @ticketrez.save
+        puts "DEBUG tickets_controller#create: saved ticketrez"
+        @ticketrezdidntsave = true
+        @makerez=false
+        @sendemail=false
+      end
+      
+      
       @show = Show.find_by_abbrev(@ticketrez.showid)
       if @makerez
         puts "DEBUG tickets_controller#create: made it to makerez"
