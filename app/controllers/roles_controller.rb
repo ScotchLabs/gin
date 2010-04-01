@@ -1,6 +1,4 @@
-class RolesController < ApplicationController
-  layout 'admin'
-
+class RolesController < AdminController
   # GET /roles/1
   # GET /roles/1.xml
   def show
@@ -67,7 +65,7 @@ class RolesController < ApplicationController
   def destroy
     @role = Role.find(params[:id])
     @role.destroy
-    Roleassoc.all(:conditionc => ["roleid = ?",@role.rabbrev]).each {|r| r.destroy}
+    Roleassoc.all(:conditions => ["roleid = ?",@role.rabbrev]).each {|r| r.destroy}
 
     respond_to do |format|
       format.html { redirect_to(users_url) }

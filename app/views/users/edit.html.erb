@@ -1,24 +1,27 @@
-<% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
 <h1>Editing user</h1>
 
 <% form_for(@user) do |f| %>
   <%= f.error_messages %>
 
-  <p style="color:red;font-variant:italics;">
-	* Required
-  </p>
-
   <p>
-    <%= f.label :name %><%= ast %><br />
+    <%= f.label :name %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :password %><%= ast %><br />
+    <%= f.label :email %><br />
+    <%= f.text_field :email %>
+  </p>
+  <p>
+    <%= f.label :emailConfirmation %><br />
+    <%= f.text_field :emailConfirmation %>
+  </p>
+  <p>
+    <%= f.label :password %><br />
     <%= f.text_field :password %>
   </p>
   <p>
-    <%= f.label "Retype password" %><%= ast %><br />
-    <%= f.text_field :retype %>
+    <%= f.label :retype, "Retype password" %><br />
+    <%= f.datetime_select :retype %>
   </p>
   <p>
     <%= f.submit 'Update' %>

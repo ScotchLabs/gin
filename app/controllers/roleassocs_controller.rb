@@ -1,6 +1,4 @@
-class RoleassocsController < ApplicationController
-  layout 'admin'
-
+class RoleassocsController < AdminController
   # GET /roleassocs/1
   # GET /roleassocs/1.xml
   def show
@@ -35,6 +33,12 @@ class RoleassocsController < ApplicationController
 
     respond_to do |format|
       if @roleassoc.save
+        puts "DEBUG roleassocs_controller#create: trying to send email to user '#{@roleassoc.userid}' about role '#{@roleassoc.roleid}'"
+        u=User.find_by_name(@roleassoc.userid)
+        r=Role.find_by_rabbrev(@roleassoc.roleid)
+        puts "DEBUG roleassocs_controller#create: sending email to user '#{u}' about role '#{r}'"
+        Mailer::deliver_approved_mail(u, r)
+        Mailer::deliver_approved_admin_mail(u, r)
         flash[:notice] = 'Roleassoc was successfully created.'
         format.html { redirect_to(@roleassoc) }
         format.xml  { render :xml => @roleassoc, :status => :created, :location => @roleassoc }

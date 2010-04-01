@@ -3,20 +3,30 @@
 <table>
   <tr>
     <th>Name</th>
+    <th>Email</th>
   </tr>
-<% @users.each do |user| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@users.each do |user|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h user.name %></td>
+    <td><%=h user.email %></td>
     <td><%= link_to 'Show', user %></td>
-    <% if User.find(session[:user_id]).hasaccess("users", "update") %><td><%= link_to 'Edit', edit_user_path(user) %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("users", "destroy") %><td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%= link_to 'Edit', edit_user_path(user) %></td>
+    <% if session[:user_permissions]["users"]["d"] %><td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if User.find(session[:user_id]).hasaccess("users", "create") %><%= link_to 'New update', new_user_path %><% end %>
+<%= link_to 'New update', new_user_path %>
 
 <h1>Listing roles</h1>
 
@@ -24,42 +34,30 @@
   <tr>
     <th>Name</th>
     <th>Abbrev</th>
-    <th>Contents</th>
-    <th>Updates</th>
-    <th>Users</th>
-    <th>Roles</th>
-    <th>Roleassocs</th>
-    <th>Shows</th>
-    <th>Ticketalerts</th>
-    <th>Ticketrezs</th>
-    <th>Ticketsections</th>
-    <th>Rezlineitems</th>
   </tr>
 
-<% @roles.each do |role| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@roles.each do |role|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h role.rname %></td>
     <td><%=h role.rabbrev %></td>
-    <td><%=h role.rcontents %></td>
-    <td><%=h role.rupdates %></td>
-    <td><%=h role.rroles %></td>
-    <td><%=h role.rroleassocs %></td>
-    <td><%=h role.rshows %></td>
-    <td><%=h role.rticketalerts %></td>
-    <td><%=h role.rticketrezs %></td>
-    <td><%=h role.rticketsections %></td>
-    <td><%=h role.rusers %></td>
-    <td><%=h role.rrezlineitems %></td>
     <td><%= link_to 'Show', role %></td>
-    <% if User.find(session[:user_id]).hasaccess("roles", "update") %><td><%= link_to 'Edit', edit_role_path(role) %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("roles", "destroy") %><td><%= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%= link_to 'Edit', edit_role_path(role) %></td>
+    <% if session[:user_permissions]["roles"]["d"] %><td><%= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if User.find(session[:user_id]).hasaccess("roles", "create") %><%= link_to 'New role', new_role_path %><% end %>
+<%= link_to 'New role', new_role_path %>
 
 <h1>Listing roleassocs</h1>
 
@@ -69,17 +67,25 @@
     <th>Userid</th>
   </tr>
 
-<% @roleassocs.each do |roleassoc| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@roleassocs.each do |roleassoc|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h roleassoc.roleid %></td>
     <td><%=h roleassoc.userid %></td>
     <td><%= link_to 'Show', roleassoc %></td>
-    <% if User.find(session[:user_id]).hasaccess("roleassocs", "update") %><td><%= link_to 'Edit', edit_roleassoc_path(roleassoc) %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("roleassocs", "destroy") %><td><%= link_to 'Destroy', roleassoc, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%= link_to 'Edit', edit_roleassoc_path(roleassoc) %></td>
+    <% if session[:user_permissions]["roleassocs"]["d"] %><td><%= link_to 'Destroy', roleassoc, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if User.find(session[:user_id]).hasaccess("roleassocs", "create") %><%= link_to 'New roleassoc', new_roleassoc_path %><% end %>
+<%= link_to 'New roleassoc', new_roleassoc_path %>

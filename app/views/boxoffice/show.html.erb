@@ -1,0 +1,49 @@
+<script type='text/javascript'>
+function Phide(i) {
+  jQuery("#hideperf"+i).hide()
+  jQuery("#perf"+i).hide("fast")
+  jQuery("#showperf"+i).show()
+}
+function Pshow(i) {
+  jQuery("#showperf"+i).hide()
+  jQuery("#perf"+i).show("fast")
+  jQuery("#hideperf"+i).show() 
+}
+jQuery(document).ready(function(){
+  jQuery("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
+})
+</script>
+<h1>Box Office for <%= @show.name %></h1>
+<h2>(<%= link_to "Edit this show",edit_show_path(@show) %>)</h2>
+<br />
+This show has <span class='bold'><%= @sections.length %></span> sections.<br />
+<% for section in @sections %>
+<%= "Section #{section.name}: #{section.size} seats, $#{section.pricewithid}/#{section.pricewoutid} ("+link_to("Edit this section", edit_ticketsection_path(section))+")<br />" %>
+<% end %>
+<% unless @show.seatingmap.nil? %><a href='http://upload.snstheatre.org/gin/shows/seatingmaps/<%= @show.seatingmap %>' rel='seatingmap' class='cboxElement'>view seating map</a><% end %><br />
+<br />
+This show has <span class='bold'><%= @perfs.length %></span> performances.<br />
+<% i=0 %>
+<% for perf in @perfs -%>
+<%= link_to perf, "/boxoffice/#{@show.abbrev}##{i}" %><br />
+<% i=i+1 -%>
+<% end %>
+<% i=0 -%>
+<% for perf in @perfs -%>
+<% h = Time.parse(perf).to_i > Time.now.to_i -%>
+<a name='<%= i %>'></a>
+</div>
+
+<div class='article'>
+  <h1 style="display:inline;"><%= perf %></h1>
+  <span style="line-height:17pt;float:right">[
+  <a id='hideperf<%= i %>' onclick="Phide('<%= i %>')"<% if !h %>style="display:none;"<% end %>>Hide</a>
+  <a id='showperf<%= i %>' onclick="Pshow('<%= i %>')"<% if h %>style="display:none;"<% end %>>Show</a>
+  ]</span><br />
+  
+  <div id='perf<%= i %>'>
+    <br />
+    <%= render :partial => "perf", :object => perf %>
+  </div>
+  <% i=i+1 %>
+<% end -%>

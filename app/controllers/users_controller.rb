@@ -1,5 +1,4 @@
-class UsersController < ApplicationController
-  layout 'admin'
+class UsersController < AdminController
   # GET /users
   # GET /users.xml
   def index
@@ -81,7 +80,7 @@ class UsersController < ApplicationController
     begin
       flash[:notice] = "User #{@user.name} deleted"
       @user.destroy
-      Roleassoc.all(:conditionc => ["userid = ?",@user.name]).each {|r| r.destroy}
+      Roleassoc.all(:conditions => ["userid = ?",@user.name]).each {|r| r.destroy}
     rescue Exception => e
       flash[:notice] = e.message
     end

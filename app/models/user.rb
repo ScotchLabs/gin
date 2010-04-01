@@ -2,17 +2,31 @@ require 'digest/sha1'
 
 class User < ActiveRecord::Base
   
-  validates_presence_of   :name
-  validates_uniqueness_of :name
+  validates_presence_of   :name, :email
+  validates_uniqueness_of :name, :email
   
   attr_accessor :password_confirmation
+  attr_accessor :emailConfirmation
+  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
+  validate :email_retyped
   validates_confirmation_of :password
   
   validate :password_not_blank
   validate :password_retyped
   
-  def hasaccess(controller, action)
-    puts "DEBUG user hasaccess: controller '#{controller}', action '#{action}'"
+  def self.authenticate(name, password)
+    user = self.find_by_name(name)
+    if user
+      expected_password = encrypted_password(password, user.salt)
+      if user.hashed_password != expected_password
+        user=nil
+      end
+    end
+    user
+  end
+  
+  def hasaccess(controller,action)
+    puts "DEBUG user_model#hasaccess: user '#{name}' controller '#{controller}', action '#{action}'"
     if action == "index" || action == "show"
       crud = "r"
     elsif action == "edit" || action == "update"
@@ -35,24 +49,13 @@ class User < ActiveRecord::Base
     access
   end
   
-  def self.authenticate(name, password)
-    user = self.find_by_name(name)
-    if user
-      expected_password = encrypted_password(password, user.salt)
-      if user.hashed_password != expected_password
-        user=nil
-      end
-    end
-    user
-  end
-  
   def roleassocs
     Roleassoc.all(:conditions => ["userid = ?",name])
   end
   
   def roles
     roles = Array.new
-    roleassocs.each {|r| roles.push Role.find_by_abbrev r.roleid}
+    roleassocs.each {|r| roles.push Role.find_by_rabbrev(r.roleid)}
     roles
   end
   
@@ -63,6 +66,10 @@ class User < ActiveRecord::Base
   
   def retype
     @retype
+  end
+  
+  def emailConfirmation
+    @emailConfirmation
   end
   
   def password=(pwd)
@@ -82,6 +89,10 @@ private
 
   def password_not_blank
     errors.add(:password, "Missing password") if hashed_password.blank?
+  end
+  
+  def email_retyped
+    errors.add(:email, "doesn't match retyped email address") if email != emailConfirmation
   end
   
   def password_retyped

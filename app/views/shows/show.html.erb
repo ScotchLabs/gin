@@ -73,8 +73,7 @@
   <%=h @show.timesvisible %>
 </p>
 
-<% if User.find(session[:user_id]).hasaccess("shows", "update") %><%= link_to 'Edit', edit_show_path(@show) %> |<% end %>
-<%= link_to 'Back', shows_path %>
+<%= link_to 'Edit', edit_show_path(@show) %> | <%= link_to 'Back', shows_path %>
 <br />
 <br />
 
@@ -88,22 +87,30 @@
     <th>Size</th>
   </tr>
 
-<% @ticketsections.each do |ticketsection| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@ticketsections.each do |ticketsection|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h ticketsection.showid %></td>
     <td><%=h ticketsection.name %></td>
     <td><%=h ticketsection.pricewithid %>/<%=h ticketsection.pricewoutid %></td>
     <td><%=h ticketsection.size %></td>
     <td><%= link_to 'Show', ticketsection %></td>
-    <% if User.find(session[:user_id]).hasaccess("ticketsections", "update") %><td><%= link_to 'Edit', edit_ticketsection_path(ticketsection) %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("ticketsections", "destroy") %><td><%= link_to 'Destroy', ticketsection, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%= link_to 'Edit', edit_ticketsection_path(ticketsection) %></td>
+    <% if session[:user_permissions]["ticketsections"]["d"] %><td><%= link_to 'Destroy', ticketsection, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if User.find(session[:user_id]).hasaccess("ticketsections", "create") %><%= link_to 'New ticketsection', new_ticketsection_path+"/"+@show.abbrev %><% end %>
+<%= link_to 'New ticketsection', new_ticketsection_path+"/"+@show.abbrev %>
 <br />
 <br />
 
@@ -115,20 +122,28 @@
     <th>Email</th>
   </tr>
 
-<% @ticketrezs.each do |ticketrez| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@ticketrezs.each do |ticketrez|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h ticketrez.name %></td>
     <td><%=h ticketrez.email %></td>
     <td><%= link_to 'Show', ticketrez %></td>
-    <% if User.find(session[:user_id]).hasaccess("ticketrezs", "update") %><td><%= link_to 'Edit', edit_ticketrez_path(ticketrez) %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("ticketrezs", "destroy") %><td><%= link_to 'Destroy', ticketrez, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%= link_to 'Edit', edit_ticketrez_path(ticketrez) %></td>
+    <% if session[:user_permissions]["ticketrezs"]["d"] %><td><%= link_to 'Destroy', ticketrez, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if User.find(session[:user_id]).hasaccess("ticketrezs", "create") %><%= link_to 'New ticketrez', new_ticketrez_path+"/"+@show.abbrev %><% end %>
+<%= link_to 'New ticketrez', new_ticketrez_path+"/"+@show.abbrev %>
 <br />
 <br />
 
@@ -139,16 +154,24 @@
     <th>Email</th>
   </tr>
 
-<% @ticketalerts.each do |ticketalert| %>
-  <tr>
+<%
+trclass = "class='zebra'"
+@ticketalerts.each do |ticketalert|
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+%>
+  <tr <%= trclass %>>
     <td><%=h ticketalert.email %></td>
     <td><%= link_to 'Show', ticketalert %></td>
-    <% if User.find(session[:user_id]).hasaccess("ticketalerts", "update") %><td><%= link_to 'Edit', edit_ticketalert_path(ticketalert) %></td><% end %>
-    <% if User.find(session[:user_id]).hasaccess("ticketalerts", "destroy") %><td><%= link_to 'Destroy', ticketalert, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <td><%= link_to 'Edit', edit_ticketalert_path(ticketalert) %></td>
+    <% if session[:user_permissions]["ticketalerts"]["d"] %><td><%= link_to 'Destroy', ticketalert, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<% if User.find(session[:user_id]).hasaccess("ticketalerts", "create") %><%= link_to 'New ticketalert', new_ticketalert_path+"/"+@show.abbrev %><% end %>
+<%= link_to 'New ticketalert', new_ticketalert_path+"/"+@show.abbrev %>
