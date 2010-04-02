@@ -35,6 +35,20 @@ table {
 }
 
 /* index layout styles */
+.curtain {
+  position: fixed;
+  top: 0;
+  width: 300px;
+  height: 300px;
+}
+#curtainleft {
+  left: 0;
+  background: url("/images/layout/Lights Left.png");
+}
+#curtainright {
+  right: 0;
+  background: url("/images/layout/Lights Right.png");
+}
 .shadow {
   -webkit-box-shadow: 0px 5px 20px #333333;
   -moz-box-shadow: 0px 5px 20px #333333;
