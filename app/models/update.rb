@@ -7,7 +7,7 @@ class Update < ActiveRecord::Base
   validate :article_ok
 
   def expired
-    DateTime.now.strftime("%Y-%m-%d %H:%M:%S %z") > expiredate.strftime("%Y-%m-%d %H:%M:%s %z")
+    DateTime.now.strftime("%Y-%m-%d %H:%M:%S") > expiredate.strftime("%Y-%m-%d %H:%M:%s")
   end
 
   def articletext
