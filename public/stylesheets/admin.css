@@ -18,6 +18,10 @@
   background: #ddd;
 }
 
+table {
+  width: 100%;
+}
+
 .fieldWithErrors {
   padding: 2px;
   background-color: red;
