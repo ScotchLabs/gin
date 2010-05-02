@@ -22,8 +22,11 @@
       navmin = (jQuery('#carousellinkscontainer > div').size()-2) * -165;
       var i;
       for (i=0; i<jQuery('#carouselitemscontainer > div').size(); i++)
-        if (jQuery('#carouselitemscontainer > div')[i].id == "carouselitem_<%= @activeshow.abbrev %>")
+        if (<%= !@activeshow.nil? %> && jQuery('#carouselitemscontainer > div')[i].id == "carouselitem_<%= ((!@activeshow.nil?)? (@activeshow.abbrev):("")) %>")
           break;
+      <% if @activeshow.nil? %>
+      i--;
+      <% end %>
       var x = (jQuery("#carouselitemscontainer > div").size()-i-1)*-511;
       var y = x+"px";
       jQuery("#carouselitemscontainer").css('right',y);
