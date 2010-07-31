@@ -16,8 +16,8 @@ body {
   font-size: 9pt;
   color: #333333;
 	overflow-y: scroll;
-	margin: 0px;
-	padding: 0px;
+	margin: 0;
+	padding: 0;
 	letter-spacing: +2px;
 }
 a {
@@ -34,8 +34,8 @@ a:hover { color: #00DDDD; }
   text-transform: uppercase;
   letter-spacing: +2px; }
 h1, h2, ul {
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 .upper {
   text-transform: uppercase;
@@ -45,8 +45,8 @@ h1, h2, ul {
 
 /* index layout styles */
 .shadow {
-  -webkit-box-shadow: 0px 5px 20px #333333;
-  -moz-box-shadow: 0px 5px 20px #333333;
+  -webkit-box-shadow: 0 5px 20px #333333;
+  -moz-box-shadow: 0 5px 20px #333333;
 }
 .topcorner {
   -webkit-border-top-left-radius: 8px;
@@ -70,7 +70,7 @@ h1, h2, ul {
 }
 #container {
   width: 900px;
-  margin: 0px auto;
+  margin: 0 auto;
 }
 #header {
   height: 80px;
@@ -102,12 +102,12 @@ h2 {
   font-weight: bold;
   text-transform: uppercase;
   color: #333333;
-  margin-top: 0px;
+  margin-top: 0;
 }
   /* nav styles */
 #nav {
   background: white;
-  margin: 0px 0px 35px 0px;
+  margin: 0 0 35px 0;
   text-transform: uppercase;
 }
 .navselected {
@@ -124,7 +124,7 @@ h2 {
   display: table-cell;
   text-align: center;
   vertical-align: middle;
-  padding: 0px;
+  padding: 0;
 }
 #menu a {
   color: inherit;
@@ -142,10 +142,10 @@ h2 {
 .article {
   padding: 20px;
   background: white;
-  margin: 0px 0px 35px 0px;
+  margin: 0 0 35px 0;
   letter-spacing: 0;
-  -webkit-box-shadow: 0px 5px 20px #333333;
-  -moz-box-shadow: 0px 5px 20px #333333;
+  -webkit-box-shadow: 0 5px 20px #333333;
+  -moz-box-shadow: 0 5px 20px #333333;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
 }
@@ -156,7 +156,7 @@ h2 {
 #footer {
   background: white;
   text-align: center;
-  padding: 12px 0px;
+  padding: 12px 0;
   font-size: 7pt;
   letter-spacing: 0;
 }
@@ -173,11 +173,11 @@ h2 {
 #bodyfooter a:hover { color: white; }
 #bodyfooter span {
   height: 16px;
-  margin: 0px 1px;
-  padding: 0px 10px;
+  margin: 0 1px;
+  padding: 0 10px;
 }
-.bl { border-width: 0px 0px 0px 1px; border-style: solid; border-color: white; }
-.br { border-width: 0px 1px 0px 0px; border-style: solid; border-color: white; }
+.bl { border-width: 0 0 0 1px; border-style: solid; border-color: white; }
+.br { border-width: 0 1px 0 0; border-style: solid; border-color: white; }
 #twitbird {
   display: none;
   background: transparent url('/images/layout/bird.png') no-repeat;
@@ -202,8 +202,8 @@ h2 {
   padding: 11px;
   font-size: 9pt;
   background: white;
-  -webkit-box-shadow: 0px 5px 20px #333333;
-  -moz-box-shadow: 0px 5px 20px #333333;
+  -webkit-box-shadow: 0 5px 20px #333333;
+  -moz-box-shadow: 0 5px 20px #333333;
   -moz-border-radius: 8px;
   -webkit-border-radius: 8px;
 }
@@ -217,11 +217,11 @@ h2 {
 }
 #twitter_update_list span {
   height: auto;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
 }
 #twitter_update_list a {
-  padding: 0px;
+  padding: 0;
   color: #ff9900;
 }
 #twitter_update_list a:hover {
@@ -250,24 +250,24 @@ h2 {
 #admin {
   position: fixed;
   top: 0;
-  bottom: 0px;
-  right: 0px;
+  bottom: 0;
+  right: 0;
 }
 #admin a { color: white }
 #admin a:hover { color: #FF9900 }
 .articleleft {
-  padding: 0px 20px 0px 0px;
-  border-width: 0px 2px 0px 0px;
+  padding: 0 20px 0 0;
+  border-width: 0 2px 0 0;
   border-style: solid;
   border-color: #efefef;
-  margin: 0px 1px 0px 0px;
+  margin: 0 1px 0 0;
 }
 .articleright {
-  padding: 0px 0px 0px 20px;
-  border-width: 0px 0px 0px 2px;
+  padding: 0 0 0 20px;
+  border-width: 0 0 0 2px;
   border-style: solid;
   border-color: #efefef;
-  margin: 0px 0px 0px 1px;
+  margin: 0 0 0 1px;
 }
 /* end index layout styles */
 
@@ -281,7 +281,7 @@ h2 {
   height: 427px;  /*TODO change to 460 when you implement search */
 }
 #newswindow {
-  margin: 10px 0px 0px 0px;
+  margin: 10px 0 0 0;
   height: 391px;
   overflow-y: auto;
 }
@@ -318,7 +318,7 @@ input[type="submit"] {
   -webkit-border-radius: 8px;
   background: #ff9900;
   color: white;
-  border: 0px;
+  border: 0;
   padding: 10px 50px;
   font-weight: bold;
 }
