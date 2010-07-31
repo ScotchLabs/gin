@@ -126,6 +126,7 @@ h2 {
   display: inline-block;
   width: 204px;
   padding: 16px 0 6px;
+  text-align: center;
   height: 32px;
   border-bottom-left-radius: 8px;
   border-bottom-right-radius: 8px;
