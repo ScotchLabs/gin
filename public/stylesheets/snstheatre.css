@@ -56,20 +56,6 @@ h1, h2, ul {
   -webkit-border-bottom-right-radius: 8px;
   -moz-border-radius-bottomright: 8px;
 }
-.lights {
-  width: 300px;
-  height: 300px;
-  position: absolute;
-  top: 0;
-}
-#lightsleft {
-  left: 0;
-  background: transparent url('/images/layout/Lights Left.png') no-repeat 0 0;
-}
-#lightsright {
-  right: 0;
-  background: transparent url('/images/layout/Lights Right.png') no-repeat 0 0;
-}
 #container {
   width: 900px;
   margin: 0px auto;
@@ -95,7 +81,7 @@ h1 a:hover {
 }
 #header h2 {
   font-size: 13pt;
-  line-height: 6px;
+  margin-top: -7px;
 }
 h2 {
   font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
