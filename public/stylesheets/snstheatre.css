@@ -124,7 +124,6 @@ h2 {
 #menu > ul > li > a {
   color: #333;
   display: inline-block;
-  *display: inline; /* star-hack targets IE7 and below! */
   width: 204px;
   padding: 16px 0 6px;
   height: 32px;
