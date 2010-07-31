@@ -1,5 +1,5 @@
 body {
-  background: #EEEEBB;
+  background: #EEEEBB url(/images/layout/bg.png) repeat-x fixed left top;
   font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
   font-size: 9pt;
   color: #333333;
@@ -32,12 +32,13 @@ h1, h2, ul {
 }
 
 /* index layout styles */
-.curtain {
+/*.curtain {
   position: fixed;
   top: 0;
   width: 300px;
   height: 300px;
 }
+
 #curtainleft {
   left: 0;
   background: url("/images/layout/Lights Left.png");
@@ -45,7 +46,7 @@ h1, h2, ul {
 #curtainright {
   right: 0;
   background: url("/images/layout/Lights Right.png");
-}
+}*/
 .shadow {
   -webkit-box-shadow: 0px 5px 20px #333333;
   -moz-box-shadow: 0px 5px 20px #333333;

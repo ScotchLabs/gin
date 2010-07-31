@@ -27,7 +27,7 @@ protected
       # user has logged in, but is doing something admin-y.
       # check if user has access to wherever it is they're trying to go.
       # also log user, controlle,r action, and time
-      if controller_name != "admin"
+      if controller_name != "admin" and controller_name != "graphviz"
         puts "DEBUG application_controller: checking if user '#{session[:user_name]}' has access to controller '#{controller_name}', action '#{action_name}'"
         okcontinue = hasaccess?(session[:user_id],controller_name, action_name)
         puts "DEBUG application_controller: okcontinue is '#{okcontinue.to_s}'"
