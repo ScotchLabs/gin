@@ -15,32 +15,16 @@
       <h2>Student theatre at Carnegie Mellon since 1938</h2>
     </div>
     <div id='nav' class='botcorner shadow'>
-      <%
-        gradient = 'style="background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(222,222,222)), color-stop(1, rgb(255,255,255))); background-image: -moz-linear-gradient(center bottom, rgb(222,222,222) 0%, rgb(255,255,255) 100%)"'
-        
-        listylewelcome = (controller_name == "admin")? gradient:""
-        listyleshows = (controller_name == "shows" || controller_name == "ticketrezs" || controller_name == "ticketalerts" || controller_name == "ticketsections")? gradient:""
-        listyleusers = (controller_name == "users" || controller_name == "roles" || controller_name == "roleassocs")? gradient:""
-        listylenews = (controller_name == "updates")? gradient:""
-        listylecontents = (controller_name == "contents")? gradient:""
-        listyleboxoffice = (controller_name == "boxoffice")? gradient:""
-        astyleboxoffice = (controller_name == "boxoffice")? "color:#FF9900;":""
-        astylewelcome = (controller_name == "admin")? "color:#FF9900;":""
-        astyleshows = (controller_name == "shows" || controller_name == "ticketrezs" || controller_name == "ticketalerts" || controller_name == "ticketsections")? "color:#FF9900;":""
-        astylenews = (controller_name == "updates")? "color:#FF9900;":""
-        astylecontents = (controller_name == "contents")? "color:#FF9900;":""
-        astyleusers = (controller_name == "users" || controller_name == "roles" || controller_name == "roleassocs")? "color:#FF9900;":""
-      %>
       <div id='menu'>
-        <ul><li class='bottomleftcorner' <%= listylewelcome %>><%= link_to "Welcome", {:controller => "admin"}, {:style => astylewelcome, :class => "menua bottomleftcorner"} %></li>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["shows"]["r"] %><li <%= listyleshows %>><%= link_to "Shows & Tickets", shows_path, {:style => astyleshows, :class => "menua"} %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["boxoffice"]["r"] %><li <%= listyleboxoffice %>><%= link_to "Box Office", {:controller => "boxoffice"}, {:style => astyleboxoffice, :class => "menua"} %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["updates"]["r"] %><li <%= listylenews %>><%= link_to "News", updates_path, {:style => astylenews, :class => "menua"} %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["contents"]["r"] %><li <%= listylecontents %>><%= link_to "Contents", contents_path, {:style => astylecontents, :class => "menua"} %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["users"]["r"] %><li <%= listyleusers %>><%= link_to "Users & Roles", users_path, {:style => astyleusers, :class => "menua"} %></li><% end %>
-      	<li class='bottomrightcorner'><%= link_to 'Log out', {:controller => "admin", :action => "logout"}, {:class => "menua bottomrightcorner"} %></li>
+        <ul><li><%= link_to "Welcome", {:controller => "admin"} %></li>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["shows"]["r"] %><li><%= link_to "Shows & Tickets", shows_path %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["boxoffice"]["r"] %><li><%= link_to "Box Office", {:controller => "boxoffice"} %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["updates"]["r"] %><li><%= link_to "News", updates_path %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["contents"]["r"] %><li><%= link_to "Contents", contents_path %></li><% end %>
+      	<% if !session[:user_permissions].nil? and session[:user_permissions]["users"]["r"] %><li><%= link_to "Users & Roles", users_path %></li><% end %>
+      	<li><%= link_to 'Log out', {:controller => "admin", :action => "logout"} %></li>
       	<script type='text/javascript'>
-          jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px");
+          //TODO jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px");
       	</script>
       </div>
     </div>

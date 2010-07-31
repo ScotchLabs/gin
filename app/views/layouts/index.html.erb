@@ -45,16 +45,12 @@
   <div id='container'>
     <div id='header'><h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1><h2>Student theatre at Carnegie Mellon since 1938</h2></div>
     <div id='nav' class='botcorner shadow'>
-      <%
-      classabout = (params[:id] == "about")? "class='navselected'":""
-      class70ai = (params[:id] == "70ai")? "class='navselected'":""
-      %>
       <div id='menu'>
         <ul>
-          <li class='bottomleftcorner'><%= link_to "Ticket<br />Reservations", "/tickets", {:class => "menua bottomleftcorner", :style => "width:225px;" } %></li>
-          <li <%= classabout %>><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"}, { :class => "menua", :style => "width:225px;" } %> </li>
-          <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"}, { :class => "menua", :style => "width:225px;" } %></li>
-          <li class='bottomrightcorner'><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank", :class => "menua bottomrightcorner", :style => "width:225px;" } %></li>
+          <li><%= link_to "Ticket<br />Reservations", "/tickets" %></li>
+          <li><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"} %> </li>
+          <li><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"} %></li>
+          <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank"} %></li>
         </ul>
       </div>
     </div>
