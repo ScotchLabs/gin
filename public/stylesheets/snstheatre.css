@@ -1,3 +1,21 @@
+/* the new clearfix method I read about over at Perishable Press
+ * use it by putting "<div class='clearfix'></div>" after a floated element
+ */
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0
+}
+* html .clearfix { /* IE6 */
+  zoom: 1
+}
+*:first-child+html .clearfix { /* IE7 */
+  zoom: 1
+}
+
 body {
   background: #EEEEBB url(/images/layout/bg.png) repeat-x fixed left top;
   font-family: "Lucida Grande", "Tahoma", "Verdana", sans-serif;
