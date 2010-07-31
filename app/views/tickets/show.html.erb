@@ -26,7 +26,7 @@
         <%= f.radio_button :hasid, "true", {:onchange => "updateprice()"} %>Yes<br />
         <%= f.radio_button :hasid, "false", {:onchange => "updateprice()"} %>No
         </div>
-        <br style="clear:both;" />
+        <div class='clearfix'></div>
       </div>
       <div id='ticketsright' class='articleright fleft'>
         <h1>Ticket Reservations</h1>
@@ -102,6 +102,6 @@
         <br />
         <div style='text-align:center;'><%= f.submit "Reserve!", :onclick=>"return reservetickets()" %></div>
       </div>
-    <br style="clear:both;" />
+    <div class='clearfix'></div>
   </div>
 <% end %>
