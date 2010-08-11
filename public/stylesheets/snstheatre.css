@@ -110,32 +110,34 @@ h2 {
   margin: 0 0 35px 0;
   text-transform: uppercase;
 }
-.navselected {
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(222,222,222)), color-stop(1, rgb(255,255,255)));
-  background-image: -moz-linear-gradient(center bottom, rgb(222,222,222) 0%, rgb(255,255,255) 100%)
-}
-#menu ul {
+#menu > ul {
   list-style-type: none;
   min-width: 900px;
-  
 }
-#menu li {
-  position: relative;
-  display: table-cell;
+#menu > ul > li {
+  display: inline-block;
+  *display: inline; /* star-hack targets IE7 and below! */
+  padding: 0 8px 8px;
   text-align: center;
-  vertical-align: middle;
-  padding: 0;
+  vertical-align: top;
 }
-#menu a {
-  color: inherit;
-  display: table-cell;
-  vertical-align: middle;
-  width: 180px;
-  height: 48px;
+#menu > ul > li > a {
+  color: #333;
+  display: inline-block;
+  width: 204px;
+  padding: 8px 0 6px;
+  text-align: center;
+  height: 32px;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-bottomright: 8px
 }
-#menu a:hover {
-  background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0, rgb(207,255,254)), color-stop(1, rgb(255,255,255)));
-  background-image: -moz-linear-gradient(center bottom, rgb(207,255,254) 0%, rgb(255,255,255) 100%);
+#menu > ul > li > a:hover {
+  background: #DDD;
+  color: #333;
 }
   /* end nav styles */
   

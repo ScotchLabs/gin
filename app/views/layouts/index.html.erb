@@ -3,13 +3,13 @@
 <head>
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
-	<%= stylesheet_link_tag "snstheatre", "carousel", :media => "all" %>
-	<%= javascript_include_tag :defaults, "jquery-1.4.1.min" %>
+	<%= stylesheet_link_tag "snstheatre", "carousel", "colorbox", :media => "all" %>
+	<%= javascript_include_tag :defaults, "jquery-1.4.1.min", "jquery.colorbox-min" %>
 	<% if action_name == "index" %>
     <%= javascript_include_tag "carousel", "twitter" %>
 	<% end %>
 	<% if controller_name == "tickets" %>
-	 <%= javascript_include_tag "tickets" %>
+    <%= javascript_include_tag "tickets" %>
 	<% end %>
 	<script type='text/javascript'>
     jQuery.noConflict();
@@ -45,27 +45,15 @@
   <div id='container'>
     <div id='header'><h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1><h2>Student theatre at Carnegie Mellon since 1938</h2></div>
     <div id='nav' class='botcorner shadow'>
-      <%
-      classabout = (params[:id] == "about")? "class='navselected'":""
-      class70ai = (params[:id] == "70ai")? "class='navselected'":""
-      classnews = (action_name == "news")? "class='navselected'":""
-      %>
       <div id='menu'>
         <ul>
-          <li><%= link_to "Ticket<br />Reservations", "http://tickets.snstheatre.org/", {:class => "menua"} %></li>
-          <li <%= classabout %>><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"}, { :class => "menua" } %> </li>
-          <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"}, { :class => "menua" } %></li>
-          <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank", :class => "menua"} %></li>
+          <li><%= link_to "Ticket<br />Reservations", "http://tickets.snstheatre.org/" %></li>
+          <li><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"} %> </li>
+          <li><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"} %></li>
+          <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank"} %></li>
         </ul>
       </div>
     </div>
-    <script type='text/javascript'>
-      jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px")
-      jQuery(".menua").first().addClass("bottomleftcorner");
-      jQuery(".menua").last().addClass("bottomrightcorner");
-      jQuery("#menu li").first().addClass("bottomleftcorner");
-      jQuery("#menu li").last().addClass("bottomrightcorner");
-    </script>
     <div id='view'>
       <!--[if IE]><div class='article' style='text-align:center;'>It looks like you're viewing this page with Internet Explorer. May I suggest you try <a href='http://www.mozilla.com/en-US/firefox/firefox.html' target='_blank'>Mozilla Firefox</a> instead?</div><![endif]-->
       <noscript><div class='article' style='text-align:center;'>It looks like your browser has Javascript turned off. If you want this page to render properly go to your browser's settings and turn Javascript on.</div></noscript>
@@ -91,13 +79,14 @@
     </div>
   <% end %>
   <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-9104858-1");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+  </script>
+  <script type="text/javascript">
+    try {
+      var pageTracker = _gat._getTracker("UA-9104858-1");
+      pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
 </body>
 </html>
