@@ -167,7 +167,7 @@ private
     if !seatingmap.blank? && !seatingmap.nil?
       Net::HTTP.start("upload.snstheatre.org") { |http|
         resp = http.get("/gin/shows/seatingmaps/#{seatingmap}")
-        errors.add(:imageurl, "points to an invalid location") if resp.body.to_s =~ /404\ Not\ Found/
+        errors.add(:seatingmap, "points to an invalid location") if resp.body.to_s =~ /404\ Not\ Found/
       }
     end
   end

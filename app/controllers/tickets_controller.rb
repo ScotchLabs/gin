@@ -1,15 +1,14 @@
 class TicketsController < ApplicationController
   layout 'index'
   def index
-    redirect_to "http://tickets.snstheatre.org/"
-    #@shows = Show.all
-    #@shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
-    #@shows.reverse.each { |show| @activeshow = show if show.upcoming && show.ticketstatus=="open" }
-    #if @activeshow.nil?
-    #  redirect_to "/tickets/noshows"
-    #else
-    #  redirect_to "/tickets/show/#{@activeshow.abbrev}"
-    #end
+    @shows = Show.all
+    @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
+    @shows.reverse.each { |show| @activeshow = show if show.upcoming && show.ticketstatus=="open" }
+    if @activeshow.nil?
+      redirect_to "/tickets/noshows"
+    else
+      redirect_to "/tickets/show/#{@activeshow.abbrev}"
+    end
   end
 
   def noshow
@@ -21,12 +20,16 @@ class TicketsController < ApplicationController
     @ticketrez = Ticketrez.new
     # find a show with params[:abbrev], else redirect to tickets/showerror
     @show = Show.find_by_abbrev(params[:abbrev])
-    @ticketsections = @show.ticketsections
     if @show.nil?
       redirect_to "/tickets/showerror"
-    elsif @show.ticketstatus != "open" || @ticketsections.blank?
+    else
+      @ticketsections = @show.ticketsections
+    end
+    
+    if @show.ticketstatus != "open" or @ticketsections.blank?
       redirect_to "/tickets/showclosed"
     end
+      
     @ticketrez = Ticketrez.new
   end
   
