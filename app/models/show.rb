@@ -122,7 +122,7 @@ class Show < ActiveRecord::Base
       out += Time.at(day[0]).strftime("%b %d").to_s
       out += "</span>&nbsp;&nbsp;&nbsp;&nbsp;@ "
       for time in day[1]
-        if day[1].size() > 2 && day[1].index(time)<day[1].size()-2
+        if day[1].size() > 2 and day[1].index(time)!=0 and day[1].index(time)<day[1].size()-1
           out += ", "
         elsif day[1].size() > 1 && day[1].index(time)==day[1].size()-1
           out += " & "
