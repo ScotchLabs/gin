@@ -7,6 +7,14 @@ class Rezlineitem < ActiveRecord::Base
   validate :sectionid_ok
   validate :performance_ok
   validate :quantity_ok
+  
+  def quantity=(foo)
+    if foo.to_s.match(/^\d*$/).nil?
+      errors.add(:quantity, "is not a number")
+    else
+      super
+    end
+  end
 private
   
   def sectionid_ok
@@ -21,7 +29,7 @@ private
   end
   
   def quantity_ok
-    errors.add(:quantity, "is too great") if Ticketsection.find(sectionid).numavailable(performance.to_s) < quantity
+    errors.add(:quantity, "is too great") if !quantity.nil? and Ticketsection.find(sectionid).numavailable(performance.to_s) < quantity
   end
   
 end

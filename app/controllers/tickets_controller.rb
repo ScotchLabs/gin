@@ -26,7 +26,7 @@ class TicketsController < ApplicationController
       @ticketsections = @show.ticketsections
     end
     
-    if @show.ticketstatus != "open" or @ticketsections.blank?
+    if @show.ticketstatus != "open" or @ticketsections.empty?
       redirect_to "/tickets/showclosed"
     end
       
@@ -61,7 +61,7 @@ class TicketsController < ApplicationController
         @ticketrez = Ticketrez.new(params[:ticketrez])
       end # non-ajax ticketrez
       unless @ticketrez.save
-        puts "DEBUG tickets_controller#create: saved ticketrez"
+        puts "DEBUG tickets_controller#create: couldn't save ticketrez"
         @ticketrezdidntsave = true
         @makerez=false
         @sendemail=false
@@ -108,12 +108,17 @@ class TicketsController < ApplicationController
           i=0
           puts "DEBUG tickets_controller#create: while i<params form section length '#{params[:form][:section].length}'"
           while i<params[:form][:section].length
-            puts "DEBUG tickets_controller#create: params form quantity #{i.to_s} blank? '#{params[:form][:quantity][i].blank?}'"
+            puts "DEBUG tickets_controller#create: params form quantity #{i.to_s} blank? '#{params[:form][:quantity][i.to_s].blank?}'"
             unless params[:form][:quantity][i.to_s].blank?
               @r = Rezlineitem.new
               @r.sectionid = params[:form][:section][i.to_s]
+              puts "DEBUG quantity #{params[:form][:quantity][i.to_s]}. #{params[:form][:quantity][i.to_s].to_s}"
               @r.quantity = params[:form][:quantity][i.to_s]
-              @qty+=@r.quantity
+              begin
+                @qty+=@r.quantity.to_i
+              rescue Exception => e
+                puts "DEBUG caught exception #{e}"
+              end
               @r.performance = params[:form][:performance][i.to_s]
               @r.rezid = @ticketrez.id
               puts "DEBUG tickets_controller#create nonajax rezlineitems: sectionid '#{@r.sectionid}', quantity '#{@r.quantity}', performance '#{@r.performance}', rezid '#{@r.rezid}'"
