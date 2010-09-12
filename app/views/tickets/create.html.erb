@@ -2,6 +2,8 @@
 message = ""
 
 if @ticketrezdidntsave
+  message += "<br />We couldn't save your ticket reservation for some reason."
+  
   message += "<br />Please enter a name." if @ticketrez.name.nil? or @ticketrez.name.blank?
   
   if @ticketrez.email.nil? or @ticketrez.email.blank?
@@ -14,6 +16,8 @@ if @ticketrezdidntsave
 end
 
 if @rezlineitemdidntsave
+  message += "<br />We couldn't save your reservation for some reason."
+  
   unless @r.quantity.nil? or @r.quantity.blank?
     message += "<br />Please enter a valid ticket quantity." if @r.quantity.to_f.nan?
     
