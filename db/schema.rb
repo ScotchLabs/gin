@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100918212205) do
+ActiveRecord::Schema.define(:version => 20101010101728) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -23,33 +23,20 @@ ActiveRecord::Schema.define(:version => 20100918212205) do
     t.datetime "updated_at"
   end
 
-  create_table "panes", :force => true do |t|
-    t.string   "title"
-    t.string   "menutitle"
-    t.string   "anchor"
-    t.boolean  "publish"
-    t.boolean  "hidden"
-    t.boolean  "hasmenu"
-    t.integer  "order"
-    t.string   "panetype"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "rezlineitems", :force => true do |t|
+    t.integer  "ticketrez_id"
     t.string   "performance"
+    t.integer  "ticketsection_id"
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "ticketsection_id"
-    t.integer  "ticketrez_id"
   end
 
   create_table "roleassocs", :force => true do |t|
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "role_id"
     t.integer  "user_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "roles", :force => true do |t|
@@ -76,8 +63,6 @@ ActiveRecord::Schema.define(:version => 20100918212205) do
     t.string   "author"
     t.string   "performancetimes"
     t.string   "ticketstatus"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.string   "director"
     t.boolean  "timesvisible"
     t.string   "shortdisplayname"
@@ -86,34 +71,37 @@ ActiveRecord::Schema.define(:version => 20100918212205) do
     t.text     "ticketnotes"
     t.string   "seatingmap"
     t.string   "slot"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "ticketalerts", :force => true do |t|
+    t.integer  "show_id"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.integer  "show_id"
   end
 
   create_table "ticketrezs", :force => true do |t|
+    t.integer  "show_id"
     t.string   "name"
     t.string   "email"
-    t.datetime "created_at"
-    t.datetime "updated_at"
+    t.string   "phone"
     t.boolean  "hasid"
     t.string   "salt"
     t.string   "hashid"
-    t.integer  "show_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "ticketsections", :force => true do |t|
+    t.integer  "show_id"
     t.string   "name"
     t.integer  "size"
-    t.datetime "created_at"
-    t.datetime "updated_at"
     t.integer  "pricewithid"
     t.integer  "pricewoutid"
-    t.integer  "show_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "updates", :force => true do |t|
@@ -129,9 +117,9 @@ ActiveRecord::Schema.define(:version => 20100918212205) do
     t.string   "name"
     t.string   "hashed_password"
     t.string   "salt"
+    t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "email"
   end
 
 end
