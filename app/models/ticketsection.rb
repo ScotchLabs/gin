@@ -1,22 +1,19 @@
 class Ticketsection < ActiveRecord::Base
   belongs_to :show
-  has_many :ticketrezs
+  has_many :rezlineitems, :dependent => :destroy
   
-  validates_presence_of :showid, :pricewithid, :pricewoutid, :size, :name
-  validates_inclusion_of :showid, :in => Show.all.map {|show| show.abbrev }
-  validate :name_ok
-  validate :seatingmap_ok
+  validates_presence_of :show, :pricewithid, :pricewoutid, :size, :name
+  validates_uniqueness_of :name, :scope => :show_id
+  #validate :seatingmap_ok
+  
+  def to_s
+    name
+  end
   
   def numreserved(performance=nil)
-    r = nil
-    if performance.nil?
-      r = Rezlineitem.all(:conditions => ["sectionid = ?",id])
-    else
-      perf = DateTime.parse(performance).to_s
-      r = Rezlineitem.all(:conditions => ["sectionid = ?",id])
-    end
+    perf = DateTime.parse(performance).to_s unless performance.nil?
     total = 0
-    for i in r
+    for i in rezlineitems
       if performance.nil? 
         total += i.quantity
       elsif DateTime.parse(i.performance)==perf
@@ -35,14 +32,10 @@ class Ticketsection < ActiveRecord::Base
   end
   
 private
-
-  def name_ok
-    errors.add(:name, "not unique for this show") if Ticketsection.all(:conditions => ["showid = ? AND name != ?",showid, name]).include?(name) 
-  end
   
   def seatingmap_ok
-    t=Ticketsection.all(:conditions => ["showid = ? AND id != ?",showid,id])
-    s=Show.find_by_abbrev(showid).seatingmap
+    t=Ticketsection.all(:conditions => ["show_id = ? AND id != ?",show_id,id])
+    s=show.seatingmap
     puts "DEBUG ticketsection_model#seatingmap_ok: numticketsections = '#{t.count}', seatingmap = '#{s}'"
     # if this is the second section for this show, make sure the show has a seatingmap
     errors.add(:show, "does not have a seating map!") if t.count == 1 and (s.blank? or s.nil?)

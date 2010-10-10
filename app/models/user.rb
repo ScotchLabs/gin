@@ -1,6 +1,8 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
+  has_many :roleassocs, :dependent => :destroy
+  has_many :roles, :through => :roleassocs
   
   validates_presence_of   :name, :email
   validates_uniqueness_of :name, :email
@@ -25,6 +27,10 @@ class User < ActiveRecord::Base
     user
   end
   
+  def to_s
+    name
+  end
+  
   def hasaccess(controller,action)
     puts "DEBUG user_model#hasaccess: user '#{name}' controller '#{controller}', action '#{action}'"
     if action == "index" || action == "show"
@@ -37,9 +43,7 @@ class User < ActiveRecord::Base
       crud = "d"
     end
     access = false
-    roleassocs = Roleassoc.all(:conditions => ["userid = ?",name])
-    for roleassoc in roleassocs
-      role = Role.find_by_rabbrev(roleassoc.roleid)
+    for role in roles
       #somehow get the controller crud out of role
       puts "DEBUG user hasaccess: role '#{role}', controller '#{controller}', crud '#{crud}'"
       access = access || (!role.send("r"+controller).nil? && role.send("r"+controller).include?(crud))
@@ -48,17 +52,7 @@ class User < ActiveRecord::Base
     end
     access
   end
-  
-  def roleassocs
-    Roleassoc.all(:conditions => ["userid = ?",name])
-  end
-  
-  def roles
-    roles = Array.new
-    roleassocs.each {|r| roles.push Role.find_by_rabbrev(r.roleid)}
-    roles
-  end
-  
+
   # 'password' is a virtual attribute
   def password
     @password

@@ -2,12 +2,11 @@ require 'digest/sha1'
 
 class Ticketrez < ActiveRecord::Base
   belongs_to :show
-  has_many :rezlineitems
+  has_many :rezlineitems, :dependent => :destroy
   
   attr_accessor :emailconfirm
   
-  validates_presence_of :showid, :name, :email
-  validates_inclusion_of :showid, :in => Show.all.map {|show| show.abbrev }
+  validates_presence_of :show, :name, :email
   validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   validate :salted
   validate :email_retyped
@@ -25,18 +24,6 @@ private
 
   def salted
     create_new_salt if self.salt.nil? and !self.name.nil?
-    others = Ticketrez.all
-    check=true
-    while check
-      check=false
-      for other in others
-        if other.hashid==self.hashid
-          create_new_salt
-          check=true
-          break
-        end
-      end
-    end
   end
   
   def create_new_salt

@@ -1,9 +1,9 @@
 require 'net/http'
 
 class Show < ActiveRecord::Base
-  has_many :ticketsections
-  has_many :ticketrezs
-  has_many :ticketalerts
+  has_many :ticketsections, :dependent => :destroy
+  has_many :ticketrezs, :dependent => :destroy
+  has_many :ticketalerts, :dependent => :destroy
   
   TICKETSTATUS = [["Closed", "closed"],["Open",  "open"],["Completed", "completed"]]
   validates_presence_of :name, :shortdisplayname, :abbrev, :imageurl, :ticketstatus, :performancetimes, :slot
@@ -18,23 +18,24 @@ class Show < ActiveRecord::Base
   validate :seatingmap_exists
   validate :performancetimes_parsable
   
+  def to_s
+    name
+  end
+  
   def ticketsavailable(performance)
-    sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     r=""
-    sections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((sections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable(performance)} left"}
+    ticketsections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((ticketsections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable(performance)} left"}
     r
   end
   
   def soldout(performance)
-    sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
-    for section in sections
+    for section in ticketsections
       return false unless section.soldout(performance)
     end
     return true
   end
   
   def sectioninfo
-    ticketsections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     if ticketsections.size == 0
       "This ticket sections for this show have not been set up yet."
     elsif ticketsections.size == 1
@@ -95,12 +96,14 @@ class Show < ActiveRecord::Base
   
   def perfcarousel
     perfarr = performancetimes.split("|")
-    out = ""
     dayarr = Array.new
     for perf in perfarr
       t = Time.parse(perf)
       d = Time.local(t.year, t.month, t.day)
-      t = t.hour
+      tstr = "#{t.hour}"
+      if t.min > 0
+        tstr = "#{tstr}:#{t.min.to_s}"
+      end
       daypresent = false
       for day in dayarr
         if day[0] == d
@@ -109,22 +112,30 @@ class Show < ActiveRecord::Base
         end
       end
       if daypresent
-        day[1].push(t)
+        day[1].push(tstr)
       else
-        dayarr.push([d,[t]])
+        dayarr.push([d,[tstr]])
       end
     end
+    out = ""
     for day in dayarr
-      out += "<span class='upper'>";
+      out += "<span class='upper'>"
       out += Time.at(day[0]).strftime("%b %d").to_s
-      out += "</span>&nbsp;&nbsp;&nbsp;&nbsp;@ ";
+      out += "</span>&nbsp;&nbsp;&nbsp;&nbsp;@ "
       for time in day[1]
-        if day[1].size() > 2 && day[1].index(time)<day[1].size()-2
+        if day[1].size() > 2 and day[1].index(time)!=0 and day[1].index(time)<day[1].size()-1
           out += ", "
         elsif day[1].size() > 1 && day[1].index(time)==day[1].size()-1
           out += " & "
         end
-        out += (time%12+((time==0)? 12:0)).to_s+((time>11)? "p.":"a.")
+        if time.index(":")
+          hour = time[0...time.index(":")].to_i
+        else
+          hour = time.to_i
+        end
+        milhour = hour
+        hour = (hour%12+((time==0)? 12:0))
+        out += "#{hour.to_s}#{(time.index ':')? (time[time.index(':')+1..time.length]):('')}#{(milhour>11)? ("p."):("a.")}"
       end
       out += "<br />"
     end
@@ -140,10 +151,6 @@ class Show < ActiveRecord::Base
     perfarr = performancetimes.split("|")
     perfarr.each { |perf| timearr.push(Time.parse(perf).strftime("%B %d - %I:%M %p")) }
     timearr
-  end
-
-  def ticketsections
-    Ticketsection.all(:conditions => ["showid = ?",abbrev])
   end
 
 private
@@ -167,7 +174,7 @@ private
     if !seatingmap.blank? && !seatingmap.nil?
       Net::HTTP.start("upload.snstheatre.org") { |http|
         resp = http.get("/gin/shows/seatingmaps/#{seatingmap}")
-        errors.add(:imageurl, "points to an invalid location") if resp.body.to_s =~ /404\ Not\ Found/
+        errors.add(:seatingmap, "points to an invalid location") if resp.body.to_s =~ /404\ Not\ Found/
       }
     end
   end

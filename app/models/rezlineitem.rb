@@ -1,27 +1,33 @@
 class Rezlineitem < ActiveRecord::Base
   belongs_to :ticketrez
+  belongs_to :ticketsection
   
-  validates_presence_of :rezid, :performance, :sectionid, :quantity
+  validates_presence_of :ticketrez, :ticketsection, :performance, :quantity
   validates_numericality_of :quantity, :greater_than => 0
-  validates_inclusion_of :rezid, :in => Ticketrez.all.map{|t| t.id }
-  validate :sectionid_ok
+  validate :ticketsection_ok
   validate :performance_ok
   validate :quantity_ok
+  
+  def quantity=(foo)
+    if foo.to_s.match(/^\d*$/).nil?
+      errors.add(:quantity, "is not a number")
+    else
+      super
+    end
+  end
 private
   
-  def sectionid_ok
-    m=Ticketsection.all(:conditions => ["showid = ?", Ticketrez.find(rezid).showid]).map{|t| t.id.to_i }
-    puts "DEBUG rezlineitem_model#sectionid_ok: available sections are "+m.join(", ")+". sectionid is '#{sectionid}'"
-    errors.add(:sectionid, "does not exist for this show") unless m.include?(sectionid.to_i)
+  def ticketsection_ok
+    errors.add(:ticketsection, "does not match ticketrez for show") unless ticketrez.show.ticketsections.include? ticketsection
   end
   
   def performance_ok
-    m=Show.first(:conditions => ["abbrev = ?",Ticketrez.find(rezid).showid]).performancetimes.split("|").map {|p| DateTime.parse(p)}
+    m=ticketrez.show.performancetimes.split("|").map {|p| DateTime.parse(p)}
     errors.add(:performance, "does not exist for this show") unless m.include?(DateTime.parse(performance))
   end
   
   def quantity_ok
-    errors.add(:quantity, "is too great") if Ticketsection.find(sectionid).numavailable(performance.to_s) < quantity
+    errors.add(:quantity, "is too great") if !quantity.nil? and ticketsection.numavailable(performance.to_s) < quantity
   end
   
 end

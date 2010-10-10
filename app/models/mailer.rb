@@ -2,8 +2,8 @@ class Mailer < ActionMailer::Base
  
   def rez_mail(rez)
     @rez = Ticketrez.find(rez)
-    @show = Show.find_by_abbrev(@rez.showid)
-    @items = Rezlineitem.all(:conditions => ["rezid = ?",@rez.id])
+    @show = @rez.show
+    @items = @rez.rezlineitems
     
     recipients    @rez.email
     subject       "Thank you for your reservation with Scotch'n'Soda Theatre!"
@@ -36,7 +36,8 @@ class Mailer < ActionMailer::Base
   end
   
   def account_created_admin_mail(u)
-    recipients    Roleassoc.all(:conditions => ["roleid = 'admin'"]).map {|role| User.find_by_name(role.userid)}.map {|u| u.email}
+    adminRole = Role.find_by_rabbrev('admin')
+    recipients    adminRole.users.map {|u| u.email}
     subject       "Account created at snstheatre.org"
     from          "webmaster@snstheatre.org"
     content_type  "multipart/alternative"
@@ -56,7 +57,8 @@ class Mailer < ActionMailer::Base
   end
   
   def approved_admin_mail(u, r)
-    recipients    Roleassoc.all(:conditions => ["roleid = 'admin'"]).map {|role| User.find_by_name(role.userid)}.map {|u| u.email}
+    adminRole = Role.find_by_rabbrev('admin')
+    recipients    adminRole.users.map {|u| u.email}
     subject       "User approved at snstheatre.org"
     from          "webmaster@snstheatre.org"
     content_type  "text/plain"

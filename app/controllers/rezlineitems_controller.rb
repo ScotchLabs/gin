@@ -3,7 +3,7 @@ class RezlineitemsController < AdminController
   # GET /rezlineitems/1.xml
   def show
     @rezlineitem = Rezlineitem.find(params[:id])
-    @ticketrez = Ticketrez.find_by_id(@rezlineitem.rezid)
+    @ticketrez = @rezlineitem.ticketrez
 
     respond_to do |format|
       format.html # show.html.erb
@@ -16,8 +16,8 @@ class RezlineitemsController < AdminController
   def new
     @ticketrez = Ticketrez.find_by_id(params[:ticketrezid])
     @rezlineitem = Rezlineitem.new
-    @show = Show.find_by_abbrev(@ticketrez.showid)
-    @ticketsections = Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
+    @show = @ticketrez.show
+    @ticketsections = @show.ticketsections
 
     respond_to do |format|
       format.html # new.html.erb
@@ -28,21 +28,21 @@ class RezlineitemsController < AdminController
   # GET /rezlineitems/1/edit
   def edit
     @rezlineitem = Rezlineitem.find(params[:id])
-    @ticketrez = Ticketrez.find(@rezlineitem.rezid)
-    @show = Show.find_by_abbrev(@ticketrez.showid)
-    puts "DEBUG rezlineitems_controller#edit: show '#{@show}', ticketrez.showid '#{@ticketrez.showid}'"
-    @ticketsections = Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
+    @ticketrez = @rezlineitem.ticketrez
+    @show = @ticketrez.show
+    puts "DEBUG rezlineitems_controller#edit: show '#{@show}', ticketrez.show '#{@ticketrez.show}'"
+    @ticketsections = @show.ticketsections
   end
 
   # POST /rezlineitems
   # POST /rezlineitems.xml
   def create
     @rezlineitem = Rezlineitem.new(params[:rezlineitem])
-    @ticketrez = Ticketrez.find(@rezlineitem.rezid)
-    @show = Show.find_by_abbrev(@ticketrez.showid)
-    @ticketsections = Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
+    @ticketrez = @rezlineitem.ticketrez
+    @show = @ticketrez.show
+    @ticketsections = @show.ticketsections
     
-    puts "DEBUG rezlineitems_controller#create: making a new lineitem for reservation '#{Ticketrez.find(@rezlineitem.rezid)}'"
+    puts "DEBUG rezlineitems_controller#create: making a new lineitem for reservation '#{@rezlineitem.ticketrez}'"
 
     respond_to do |format|
       if @rezlineitem.save
@@ -60,11 +60,11 @@ class RezlineitemsController < AdminController
   # PUT /rezlineitems/1.xml
   def update
     @rezlineitem = Rezlineitem.find(params[:id])
-    @ticketrez = Ticketrez.find(@rezlineitem.rezid)
-    @show = Show.find_by_abbrev(@ticketrez.showid)
-    puts "DEBUG rezlineitems_controller#update: show '#{@show}', ticketrez.showid '#{@ticketrez.showid}'"
+    @ticketrez = @rezlineitem.ticketrez
+    @show = @ticketrez.show
+    puts "DEBUG rezlineitems_controller#update: show '#{@show}', ticketrez.show '#{@ticketrez.show}'"
     puts "DEBUG rezlineitems_controller#update: sectionid '#{@rezlineitem.sectionid}', sections available "+Ticketsection.all.map{|t| t.id }.join(", ")
-    @ticketsections = Ticketsection.all(:conditions => ["showid = ?", @show.abbrev])
+    @ticketsections = @show.ticketsections
 
     respond_to do |format|
       if @rezlineitem.update_attributes(params[:rezlineitem])
@@ -82,11 +82,11 @@ class RezlineitemsController < AdminController
   # DELETE /rezlineitems/1.xml
   def destroy
     @rezlineitem = Rezlineitem.find(params[:id])
-    rezid = @rezlineitem.rezid
+    @ticketrez = @rezlineitem.ticketrez
     @rezlineitem.destroy
 
     respond_to do |format|
-      format.html { redirect_to(ticketrez_path(Ticketrez.find(rezid))) }
+      format.html { redirect_to(@ticketrez) }
       format.xml  { head :ok }
     end
   end

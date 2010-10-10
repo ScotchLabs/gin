@@ -86,7 +86,7 @@ function reservetickets() {
   
   // if reservation is valid, send it out! otherwise set the form
   if (validateReservation()) {
-    jQuery.ajax({type: 'post', url: '/tickets/create', data: {backto: showid, ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError()}})
+    jQuery.ajax({type: 'post', url: '/tickets/create', data: {backto: showid, ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}})
   }
   else {
     jQuery("#ticketrez_submit").attr("disabled",null)
@@ -111,11 +111,10 @@ function reserveSuccess(data) {
   updatecounts()
 }
 
-function reserveError(xhr) {
+function reserveError(xhr, status, thrown) {
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null)
-  
-  ajaxresp("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.")
+  ajaxresp("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.<!-- thrown:"+thrown+", status:"+status+", xhr:"+xhr+" -->")
 }
 
 function validateReservation() {

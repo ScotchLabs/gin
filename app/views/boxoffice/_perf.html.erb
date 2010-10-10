@@ -1,11 +1,11 @@
 <%
-trs = Ticketrez.all(:conditions => ["showid = ?",@show.abbrev], :order => "name")
+trs = @show.ticketrezs
 %>
 <%
 @trs = Array.new
 for tr in trs
-  found = Rezlineitem.first(:conditions => ["rezid = ? and performance = ?",tr.id,perf])
-  @trs.push(tr) if !found.nil?
+  found = Rezlineitem.first(:conditions => ["ticketrez_id = ? and performance = ?",tr.id,perf])
+  @trs.push(tr) unless found.nil?
 end
 %>
 <table>
@@ -21,8 +21,8 @@ end
 trclass = "class='zebra'"
 for tr in @trs
 # get all rezs
-rez = Rezlineitem.first(:conditions => ["rezid = ? and performance = ?",tr.id,perf])
-section = Ticketsection.find(rez.sectionid)
+rez = Rezlineitem.first(:conditions => ["ticketrez_id = ? and performance = ?",tr.id,perf])
+section = rez.ticketsection
 qty = rez.quantity
 cost = section.pricewithid * qty if tr.hasid
 cost = section.pricewoutid * qty unless tr.hasid

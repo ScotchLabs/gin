@@ -3,7 +3,6 @@
 <% form_for(@ticketrez) do |f| %>
   <%= f.error_messages %>
 
-  <%= f.hidden_field :showid, :value => @show.abbrev %>
   <p>
     <%= f.label :name %><br />
     <%= f.text_field :name %>

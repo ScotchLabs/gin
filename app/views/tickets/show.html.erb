@@ -10,7 +10,7 @@
       <div id='ticketsleft' class='articleleft fleft'>
         <h1>Your Information</h1>
         <%= hidden_field :form, :backto, :value => @show.abbrev %>
-        <%= f.hidden_field :showid, :value => @show.abbrev %>
+        <%= f.hidden_field :show_id, :value => @show.id %>
         <%= ast %>All fields required.<br />
         <br />
         <b><%= f.label :name %></b><br />
@@ -30,7 +30,7 @@
       </div>
       <div id='ticketsright' class='articleright fleft'>
         <h1>Ticket Reservations</h1>
-        <% unless @show.housemanname.blank? %><span style='font-size:8pt;'>Questions? Contact House Manager <%= link_to @show.housemanname, "mailto:#{@show.housemanemail}" %>.</span><br /><% end %>
+        <% unless @show.housemanname.blank? or @show.housemanemail.blank? %><span style='font-size:8pt;'>Questions? Contact House Manager <%= link_to @show.housemanname, "mailto:#{@show.housemanemail}" %>.</span><br /><% end %>
         <br />
         Use this form to reserve your tickets for Scotch'n'Soda's <%= @show.slot %> <%= Time.now.year %> production of <b><%= @show.name %></b>, showing <%= @show.datetickets %> in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
         <br />

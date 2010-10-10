@@ -3,14 +3,14 @@
 <% form_for(@rezlineitem) do |f| %>
   <%= f.error_messages %>
 
-  <%= f.hidden_field :rezid, :value => @ticketrez.id %>
+  <%= f.hidden_field :ticketrez_id, :value => @ticketrez.id %>
   <p>
     <%= f.label :performance %><br />
     <%= f.select :performance, @show.performancetimes.split("|").map{|p| [p, DateTime.parse(p)]} %>
   </p>
   <p>
-    <%= f.label :sectionid %><br />
-    <%= f.select :sectionid, @ticketsections.map{|s| [s.name,s.id]} %>
+    <%= f.label :ticketsection_id %><br />
+    <%= f.select :ticketsection_id, @ticketsections.map{|s| [s.name,s.id]} %>
   </p>
   <p>
     <%= f.label :quantity %><br />

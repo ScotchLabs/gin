@@ -3,7 +3,7 @@
 <% form_for(@ticketalert) do |f| %>
   <%= f.error_messages %>
   
-  <%= f.hidden_field :showid, :value => @show.abbrev %>
+  <%= f.hidden_field :show_id, :value => @show.id %>
   <p>
     <%= f.label :email %><br />
     <%= f.text_field :email %>

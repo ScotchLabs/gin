@@ -9,7 +9,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20100327191821) do
+ActiveRecord::Schema.define(:version => 20100918212205) do
 
   create_table "contents", :force => true do |t|
     t.string   "title"
@@ -37,19 +37,19 @@ ActiveRecord::Schema.define(:version => 20100327191821) do
   end
 
   create_table "rezlineitems", :force => true do |t|
-    t.integer  "rezid"
     t.string   "performance"
-    t.string   "sectionid"
     t.integer  "quantity"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "ticketsection_id"
+    t.integer  "ticketrez_id"
   end
 
   create_table "roleassocs", :force => true do |t|
-    t.string   "roleid"
-    t.string   "userid"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "role_id"
+    t.integer  "user_id"
   end
 
   create_table "roles", :force => true do |t|
@@ -89,14 +89,13 @@ ActiveRecord::Schema.define(:version => 20100327191821) do
   end
 
   create_table "ticketalerts", :force => true do |t|
-    t.string   "showid"
     t.string   "email"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "show_id"
   end
 
   create_table "ticketrezs", :force => true do |t|
-    t.string   "showid"
     t.string   "name"
     t.string   "email"
     t.datetime "created_at"
@@ -104,16 +103,17 @@ ActiveRecord::Schema.define(:version => 20100327191821) do
     t.boolean  "hasid"
     t.string   "salt"
     t.string   "hashid"
+    t.integer  "show_id"
   end
 
   create_table "ticketsections", :force => true do |t|
-    t.string   "showid"
     t.string   "name"
     t.integer  "size"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.integer  "pricewithid"
     t.integer  "pricewoutid"
+    t.integer  "show_id"
   end
 
   create_table "updates", :force => true do |t|

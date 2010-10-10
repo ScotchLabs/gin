@@ -1,6 +1,6 @@
 <p>
-  <b>Showid:</b>
-  <%=h @ticketrez.showid %>
+  <b>Show:</b>
+  <%=h @ticketrez.show %>
 </p>
 
 <p>
@@ -28,7 +28,7 @@
 <table>
   <tr>
     <th>Performance</th>
-    <th>Sectionid</th>
+    <th>Section</th>
     <th>Quantity</th>
   </tr>
 
@@ -43,7 +43,7 @@ trclass = "class='zebra'"
 %>
   <tr <%= trclass %>>
     <td><%=h rezlineitem.performance %></td>
-    <td><%=h rezlineitem.sectionid %></td>
+    <td><%=h rezlineitem.ticketsection %></td>
     <td><%=h rezlineitem.quantity %></td>
     <td><%= link_to 'Show', rezlineitem %></td>
     <td><%= link_to 'Edit', edit_rezlineitem_path(rezlineitem) %></td>

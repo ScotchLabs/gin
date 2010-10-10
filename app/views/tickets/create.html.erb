@@ -2,6 +2,8 @@
 message = ""
 
 if @ticketrezdidntsave
+  message += "<br />We couldn't save your ticket reservation for some reason."
+  
   message += "<br />Please enter a name." if @ticketrez.name.nil? or @ticketrez.name.blank?
   
   if @ticketrez.email.nil? or @ticketrez.email.blank?
@@ -14,16 +16,18 @@ if @ticketrezdidntsave
 end
 
 if @rezlineitemdidntsave
+  message += "<br />We couldn't save your reservation for some reason."
+  
   unless @r.quantity.nil? or @r.quantity.blank?
     message += "<br />Please enter a valid ticket quantity." if @r.quantity.to_f.nan?
     
-    section=Ticketsection.find(@r.sectionid)
+    section=@r.ticketsection
     message += "<br />There aren't that many tickets available." if !(section.nil? or @r.performance.nil? or @r.performance.blank?) and @r.quantity>section.numavailable(@r.performance)
   end
   
   message += "<br />Section ID is invalid. Please contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>." if section.nil?
   
-  s=Show.find_by_abbrev(section.showid)
+  s=section.show
   if s.nil?
     message += "<br />Show ID is invalid. Please contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>."
   else
