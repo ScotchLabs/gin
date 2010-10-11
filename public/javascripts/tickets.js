@@ -66,7 +66,7 @@ function reservetickets() {
   
   // get name, email, hasid for the ticketrez object
   var ticketrez = new Array(5)
-  var showid = jQuery("#ticketrez_showid").attr("value")
+  var showid = jQuery("#ticketrez_show_id").attr("value")
   ticketrez[0] = showid
   ticketrez[1] = jQuery("#ticketrez_name").attr("value")
   ticketrez[2] = jQuery("#ticketrez_email").attr("value")
@@ -86,15 +86,18 @@ function reservetickets() {
   
   // if reservation is valid, send it out! otherwise set the form
   if (validateReservation()) {
-    jQuery.ajax({type: 'post', url: '/tickets/create', data: {backto: showid, ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}})
+    console.log("valid form! sending ajax request. ticketrez '"+ticketrez+"' rezlineitems '"+rezlineitems+"'")
+    jQuery.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}})
   }
   else {
+    console.log("invalid form!")
     jQuery("#ticketrez_submit").attr("disabled",null)
   }
   return false
 }
 
 function reserveSuccess(data) {
+  console.log("reservation success! "+data)
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null)
   lastData = data
@@ -112,6 +115,7 @@ function reserveSuccess(data) {
 }
 
 function reserveError(xhr, status, thrown) {
+  console.log("reservation failure! xhr: "+xhr+", status: "+status+", thrown: "+thrown)
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null)
   ajaxresp("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.<!-- thrown:"+thrown+", status:"+status+", xhr:"+xhr+" -->")

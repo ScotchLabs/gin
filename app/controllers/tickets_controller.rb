@@ -55,7 +55,11 @@ class TicketsController < ApplicationController
         ##########
         @ticketrez = Ticketrez.new
         @ajax=true
-        @ticketrez.show_id = Show.find_by_abbrev(params[:ticketrez][0]).id
+        show = Show.find(params[:ticketrez][0].to_i)
+        if show.nil?
+          raise "ShowNotFoundError"
+        end
+        @ticketrez.show_id = show.id
         @ticketrez.name = params[:ticketrez][1]
         @ticketrez.email = params[:ticketrez][2]
         @ticketrez.hasid = params[:ticketrez][3]
