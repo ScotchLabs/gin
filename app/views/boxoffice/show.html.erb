@@ -16,7 +16,7 @@ jQuery(document).ready(function(){
 <h1>Box Office for <%= @show.name %></h1>
 <h2>(<%= link_to "Edit this show",edit_show_path(@show) %>)</h2>
 <br />
-This show has <span class='bold'><%= @sections.length %></span> sections.<br />
+This show has <%= pluralize @sections.length, "section" %>.<br />
 <% for section in @sections %>
 <%= "Section #{section.name}: #{section.size} seats, $#{section.pricewithid}/#{section.pricewoutid} ("+link_to("Edit this section", edit_ticketsection_path(section))+")<br />" %>
 <% end %>
