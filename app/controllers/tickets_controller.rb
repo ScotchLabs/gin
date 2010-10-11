@@ -39,9 +39,10 @@ class TicketsController < ApplicationController
   end
   
   def create
+    @rezlineitemerrors = Array.new
+    @ticketrezdidntsave = false
+    @rezlineitemdidntsave = false
     if request.post?
-      @ticketrezdidntsave = false
-      @rezlineitemdidntsave = false
       @emailsent = false
       ###############
       ## TICKETREZ ##
@@ -70,17 +71,14 @@ class TicketsController < ApplicationController
         @ticketrez = Ticketrez.new(params[:ticketrez])
       end # non-ajax ticketrez
       unless @ticketrez.save
-        puts "DEBUG tickets_controller#create: couldn't save ticketrez"
         puts @ticketrez.errors.full_messages.inspect
         @ticketrezdidntsave = true
         @makerez=false
         @sendemail=false
       end
       
-      
       @show = @ticketrez.show
       if @makerez
-        puts "DEBUG tickets_controller#create: made it to makerez"
         ##################
         ## REZLINEITEMS ##
         ##################
@@ -102,7 +100,11 @@ class TicketsController < ApplicationController
             if @r.save
               @rezlineitems.push(@r)
             else
-              @rezlineitemsdidntsave = true
+              puts "DEBUG @r's errors: #{@r.errors.full_messages.inspect}"
+              @r.errors.full_messages.each do |msg|
+                @rezlineitemerrors.push(msg)
+              end
+              @rezlineitemdidntsave = true
               @sendemail=false
               @ticketrez.destroy
               @rezlineitems.each {|rez| rez.destroy}
@@ -113,16 +115,12 @@ class TicketsController < ApplicationController
           #############
           ## NONAJAX ##
           #############
-          puts "DEBUG tickets_controller#create: makerez nonajax"
           @ajax=false
           i=0
-          puts "DEBUG tickets_controller#create: while i<params form section length '#{params[:form][:section].length}'"
           while i<params[:form][:section].length
-            puts "DEBUG tickets_controller#create: params form quantity #{i.to_s} blank? '#{params[:form][:quantity][i.to_s].blank?}'"
             unless params[:form][:quantity][i.to_s].blank?
               @r = Rezlineitem.new
               @r.ticketsection_id = params[:form][:section][i.to_s]
-              puts "DEBUG quantity #{params[:form][:quantity][i.to_s]}. #{params[:form][:quantity][i.to_s].to_s}"
               @r.quantity = params[:form][:quantity][i.to_s]
               begin
                 @qty+=@r.quantity.to_i
@@ -131,10 +129,13 @@ class TicketsController < ApplicationController
               end
               @r.performance = params[:form][:performance][i.to_s]
               @r.ticketrez_id = @ticketrez.id
-              puts "DEBUG tickets_controller#create nonajax rezlineitems: ticketsection '#{@r.ticketsection}', quantity '#{@r.quantity}', performance '#{@r.performance}', ticketrez '#{@r.ticketrez}'"
               if @r.save
                 @rezlineitems.push(@r)
               else
+                @r.errors.full_messages.each do |msg|
+                  @rezlineitemerrors.push(msg)
+                end
+                @rezlineitemdidntsave = true
                 @sendemail=false
                 @ticketrez.destroy
                 @rezlineitems.each {|rez| rez.destroy}

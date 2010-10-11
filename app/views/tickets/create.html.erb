@@ -1,45 +1,15 @@
 <%
 message = ""
-
-if @ticketrezdidntsave
-  message += "<br />We couldn't save your ticket reservation for some reason."
-  
-  message += "<br />Please enter a name." if @ticketrez.name.nil? or @ticketrez.name.blank?
-  
-  if @ticketrez.email.nil? or @ticketrez.email.blank?
-    message += "<br />Please enter a valid email address."
-  elsif (@ticketrez.email=~/[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/).nil?
-    message += "<br />Please enter a valid email address."
-  end
-  
-  message += "<br />Please indicate whether you have a CMU ID." if @ticketrez.hasid.nil? or @ticketrez.hasid.blank?
+if @ticketrezdidntsave or @rezlineitemdidntsave
+  message += "<br/>We couldn't save your ticket reservation for some reason."
 end
 
+if @ticketrezdidntsave
+  message += "<br/>#{@ticketrez.errors.full_messages.join("<br/>")}"
+end
 if @rezlineitemdidntsave
-  message += "<br />We couldn't save your reservation for some reason."
-  
-  unless @r.quantity.nil? or @r.quantity.blank?
-    message += "<br />Please enter a valid ticket quantity." if @r.quantity.to_f.nan?
-    
-    section=@r.ticketsection
-    message += "<br />There aren't that many tickets available." if !(section.nil? or @r.performance.nil? or @r.performance.blank?) and @r.quantity>section.numavailable(@r.performance)
-  end
-  
-  message += "<br />Section ID is invalid. Please contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>." if section.nil?
-  
-  s=section.show
-  if s.nil?
-    message += "<br />Show ID is invalid. Please contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>."
-  else
-    perfs=s.performancetimes.split("|")
-    foundperf=false
-    for perf in perfs
-      foundperf=true if DateTime.parse(perf)==DateTime.parse(@r.performance)
-    end
-    message += "<br />Performance selection was invalid. Please contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>." unless foundperf
-  end
-  
-  message += "<br />Please select your tickets." if @qty==0
+  puts "FROM THE VIEW: rezlineitemerrors: #{@rezlineitemerrors.inspect}"
+  message += "<br/>#{@rezlineitemerrors.join("<br/>")}"
 end
 
 if !message.blank?
@@ -47,8 +17,8 @@ if !message.blank?
   message = "<h1>Something's gone wrong!</h1>#{message}"
 else
   # no errors
-  message = "<h1>Thank you!</h1><br />Your tickets have been successfully reserved and we look forward to seeing you at the show!<br /><br />Please visit at the door of #{@show.loc} 30 minutes before the performance to pay for and pick up your tickets."
-  message += "<br /><br />An email will be sent to your address regarding the details of your reservation."
+  message = "<h1>Thank you!</h1><br />Your tickets have been successfully reserved and we look forward to seeing you at the show!<br /><br />Please visit at the door of #{@show.loc} 30 minutes before the performance to pay for and pick up your tickets.<br /><br />An email will be sent to your address regarding the details of your reservation."
 end
+
 %>
 <div id='response' class='article'><%= message %><!-- <%= params.inspect %> --><div id='ticketrezid' style='display:none;'><%= @ticketrez.id %></div><div id='sendemail' style='display:none;'><%= @sendemail %></div></div>
