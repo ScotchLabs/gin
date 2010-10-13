@@ -4,15 +4,10 @@ class TicketsController < ApplicationController
     @shows = Show.all
     @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
     @shows.reverse.each { |show| @activeshow = show if show.upcoming && show.ticketstatus=="open" }
-    # remove this hobble when it goes live
-    unless session[:user_id]
-      redirect_to "http://tickets.snstheatre.org"
+    if @activeshow.nil?
+      redirect_to "/tickets/noshows"
     else
-      if @activeshow.nil?
-        redirect_to "/tickets/noshows"
-      else
-        redirect_to "/tickets/show/#{@activeshow.abbrev}"
-      end
+      redirect_to "/tickets/show/#{@activeshow.abbrev}"
     end
   end
 
