@@ -40,6 +40,7 @@ class TicketsController < ApplicationController
   
   def create
     @rezlineitemerrors = Array.new
+    @ticketrezerrors = Array.new
     @ticketrezdidntsave = false
     @rezlineitemdidntsave = false
     if request.post?
@@ -72,6 +73,10 @@ class TicketsController < ApplicationController
       end # non-ajax ticketrez
       unless @ticketrez.save
         puts @ticketrez.errors.full_messages.inspect
+        @ticketrez.errors.full_messages.each do |msg|
+          msg = msg.split("|")[1] if msg.index("|")
+          @ticketrezerrors.push(msg)
+        end
         @ticketrezdidntsave = true
         @makerez=false
         @sendemail=false
@@ -102,6 +107,7 @@ class TicketsController < ApplicationController
             else
               puts "DEBUG @r's errors: #{@r.errors.full_messages.inspect}"
               @r.errors.full_messages.each do |msg|
+                msg = msg.split("|")[1] if msg.index("|")
                 @rezlineitemerrors.push(msg)
               end
               @rezlineitemdidntsave = true
@@ -133,6 +139,7 @@ class TicketsController < ApplicationController
                 @rezlineitems.push(@r)
               else
                 @r.errors.full_messages.each do |msg|
+                  msg = msg.split("|")[1] if msg.index("|")
                   @rezlineitemerrors.push(msg)
                 end
                 @rezlineitemdidntsave = true
@@ -146,6 +153,10 @@ class TicketsController < ApplicationController
           Mailer::deliver_rez_mail(@ticketrez.id) if @sendemail
         end #non-ajax makerez
       end # makerez
+      
+      if !@ajax and (@ticketrezdidntsave or @rezlineitemdidntsave)
+        #TODO redirect with stuff
+      end
     end # request.post?
   end
   

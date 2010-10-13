@@ -5,7 +5,7 @@ class Rezlineitem < ActiveRecord::Base
   validates_presence_of :ticketrez, :message => "does not exist. Please contact a system administrator."
   validates_presence_of :ticketsection, :message => "does not exist. Please contact a system administrator."
   validates_presence_of :performance, :message => "does not exist. Please contact a system administrator."
-  validates_presence_of :quantity, :message => "cannot be blank."
+  validates_presence_of :quantity, :message => "|Please enter a valid quantity."
   validates_numericality_of :quantity, :greater_than => 0, :message => "must be a positive number."
   validate :ticketsection_ok
   validate :performance_ok
@@ -39,7 +39,7 @@ private
   
   def quantity_ok
     begin
-      errors.add(:quantity, "is greater than the number of tickets available for that performance.") if !quantity.nil? and ticketsection.numavailable(performance.to_s) < quantity
+      errors.add(:quantity, "|There aren't that many tickets available for that section and performance.") if !quantity.nil? and ticketsection.numavailable(performance.to_s) < quantity
     rescue Exception
       # something went pretty wrong?
     end

@@ -7,10 +7,10 @@ class Ticketrez < ActiveRecord::Base
   attr_accessor :emailconfirm
   
   validates_presence_of :show, :message => "id is invalid. Please contact the system administrator."
-  validates_presence_of :hasid, :message => "Please indicate whether you ahve a CMU ID."
-  validates_presence_of :name, :message => "cannot be blank."
-  validates_presence_of :email, :message => "cannot be blank."
-  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/, :message => "Email address appears to be an invalid format."
+  validates_presence_of :hasid, :message => "|Please indicate if you have a CMU ID."
+  validates_presence_of :name, :message => "|Please enter your name."
+  validates_presence_of :email, :message => "|Please enter a valid email address."
+  validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/, :message => "address appears to be an invalid format."
   validate :salted
   validate :email_retyped
   
@@ -21,7 +21,7 @@ class Ticketrez < ActiveRecord::Base
 private
   def email_retyped
     unless email.nil? or email.blank? or emailconfirm.nil? or emailconfirm.blank?
-      errors.add(:email,"addresses do not match") if emailconfirm!=email
+      errors.add(:email,"addresses do not match.") if emailconfirm!=email
     end
   end
 

@@ -5,7 +5,7 @@ if @ticketrezdidntsave or @rezlineitemdidntsave
 end
 
 if @ticketrezdidntsave
-  message += "<br/>#{@ticketrez.errors.full_messages.join("<br/>")}"
+  message += "<br/>#{@ticketrezerrors.join("<br/>")}"
 end
 if @rezlineitemdidntsave
   puts "FROM THE VIEW: rezlineitemerrors: #{@rezlineitemerrors.inspect}"
