@@ -31,6 +31,11 @@ class TicketsController < ApplicationController
     end
       
     @ticketrez = Ticketrez.new
+    
+    @errors = Array.new
+    if params[:highlight]
+      @errors=params[:highlight].split("|") 
+    end
   end
   
   def create
@@ -38,6 +43,8 @@ class TicketsController < ApplicationController
     @ticketrezerrors = Array.new
     @ticketrezdidntsave = false
     @rezlineitemdidntsave = false
+    @rerrors = Array.new
+    @qty = 0
     if request.post?
       @emailsent = false
       ###############
@@ -133,6 +140,7 @@ class TicketsController < ApplicationController
               if @r.save
                 @rezlineitems.push(@r)
               else
+                @rerrors = @r.errors
                 @r.errors.full_messages.each do |msg|
                   msg = msg.split("|")[1] if msg.index("|")
                   @rezlineitemerrors.push(msg)
@@ -150,7 +158,14 @@ class TicketsController < ApplicationController
       end # makerez
       
       if !@ajax and (@ticketrezdidntsave or @rezlineitemdidntsave)
-        #TODO redirect with stuff
+        errors = @ticketrez.errors.map{|e| e[0]}
+        for er in @rerrors
+          errors << er[0]
+        end
+        errors << "quantity" if @qty==0
+        errors = errors.uniq!.join("|")
+        redirect_to "/tickets/show/#{@show.abbrev}?highlight=#{errors}"
+        
       end
     end # request.post?
   end

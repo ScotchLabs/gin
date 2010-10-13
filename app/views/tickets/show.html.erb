@@ -1,3 +1,5 @@
+<% puts "FROM THE VIEW, errors is #{@errors.inspect}" %>
+
 <script type='text/javascript'>
   jQuery(document).ready(function(){
     jQuery("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
@@ -5,6 +7,14 @@
 </script>
 <% ast = "<span style='color:#ff9900'>*</span>" %>
 <div style='display:none;'><div id='ajaxresp'></div><div id='ajaxloading'><h1>Just a moment...</h1></div></div>
+
+<% if @errors.length > 0 %>
+<div class='article'>
+  <h1>Oh No!</h1>
+  Some things went wrong with your reservation. We highlighted the invalid fields below.
+</div>
+<% end %>
+
 <% form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
   <div class='article'>
       <div id='ticketsleft' class='articleleft fleft'>
@@ -13,15 +23,15 @@
         <%= ast %>All fields required.<br />
         <br />
         <b><%= f.label :name %></b><br />
-        <%= f.text_field :name, :size => 20 %><br />
+        <%= f.text_field :name, :size => 20, :style => (@errors.include? "name")? ("border:1px solid #f90"):("") %><br />
         <br />
         <b><%= f.label :email, "Email Address" %></b> (for receipt of reservation)<br />
-        <%= f.text_field :email, :size => 20 %><br />
+        <%= f.text_field :email, :size => 20, :style => (@errors.include? "email")? ("border:1px solid #f90"):("") %><br />
         <b><%= f.label :emailconfirm, "Retype Email Address" %></b><br />
-        <%= f.text_field :emailconfirm, :size => 20 %><br />
+        <%= f.text_field :emailconfirm, :size => 20, :style => (@errors.include? "email")? ("border:1px solid #f90"):("") %><br />
         <br />
         Do you have a <b>Carnegie Mellon Student ID</b>?<br />
-        <div id='form_id' class='fleft'>
+        <div id='form_id' class='fleft'<%= (@errors.include? "hasid")? (" style='border:1px solid #f90'"):("") %>>
         <%= f.radio_button :hasid, "true", {:onchange => "updateprice()"} %>Yes<br />
         <%= f.radio_button :hasid, "false", {:onchange => "updateprice()"} %>No
         </div>
@@ -72,7 +82,7 @@
         for perf in @show.performancetimes.split("|")
           soldout = @show.soldout(perf)
           performance = hidden_field(:form, "performance[#{perfNum}]", :value => perf)
-          quantity = text_field(:form, "quantity[#{perfNum}]", {:onchange => "updateprice()", :size => "3"}) unless soldout
+          quantity = text_field(:form, "quantity[#{perfNum}]", {:onchange => "updateprice()", :size => "3", :style => (@errors.include? "quantity")? ("border: 1px solid #f90;"):("")}) unless soldout
           quantity = text_field(:form, "quantity[#{perfNum}]", {:onchange => "updateprice()", :size => "3", :disabled => true}) if soldout
           if @ticketsections.count > 1
             #only put sections that are available
@@ -97,7 +107,7 @@
           perfNum=perfNum+1
         end %>
         </div>
-        <div id='dynamicInfo'>
+        <div id='dynamicInfo' style='display:none'>
           <br />
           You've selected <b><span id='numtickets'>0</span></b> tickets, for a total of <b>$<span id='pricetickets'>0</span></b>, to be paid for at the door. If this is correct, click the button below to confirm your reservation.<br />
         </div>
