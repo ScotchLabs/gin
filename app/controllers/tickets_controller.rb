@@ -3,7 +3,7 @@ class TicketsController < ApplicationController
   def index
     @shows = Show.all
     @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
-    @shows.reverse.each { |show| @activeshow = show if show.upcoming && show.ticketstatus=="open" }
+    @shows.reverse.each { |show| @activeshow = show if show.upcoming and show.ticketstatus=="open" and !show.ticketsections.empty? }
     if @activeshow.nil?
       redirect_to "/tickets/noshows"
     else
