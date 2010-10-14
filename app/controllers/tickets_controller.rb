@@ -74,7 +74,6 @@ class TicketsController < ApplicationController
         @ticketrez = Ticketrez.new(params[:ticketrez])
       end # non-ajax ticketrez
       unless @ticketrez.save
-        puts @ticketrez.errors.full_messages.inspect
         @ticketrez.errors.full_messages.each do |msg|
           msg = msg.split("|")[1] if msg.index("|")
           @ticketrezerrors.push(msg)
@@ -107,7 +106,6 @@ class TicketsController < ApplicationController
             if @r.save
               @rezlineitems.push(@r)
             else
-              puts "DEBUG @r's errors: #{@r.errors.full_messages.inspect}"
               @r.errors.full_messages.each do |msg|
                 msg = msg.split("|")[1] if msg.index("|")
                 @rezlineitemerrors.push(msg)
@@ -157,15 +155,15 @@ class TicketsController < ApplicationController
         end #non-ajax makerez
       end # makerez
       
+      @errors = @ticketrez.errors.map{|e| e[0]}
+      for er in @rezlineitemerrors
+        @errors << er[0]
+      end
+      @errors << "quantity" if @qty==0 and !@ticketrezdidntsave
+      @errors = @errors.uniq.join("|")
+      
       if !@ajax and (@ticketrezdidntsave or @rezlineitemdidntsave)
-        errors = @ticketrez.errors.map{|e| e[0]}
-        for er in @rerrors
-          errors << er[0]
-        end
-        errors << "quantity" if @qty==0
-        errors = errors.uniq!.join("|")
-        redirect_to "/tickets/show/#{@show.abbrev}?highlight=#{errors}"
-        
+        redirect_to "/tickets/show/#{@show.abbrev}?highlight=#{@errors}"
       end
     end # request.post?
   end
