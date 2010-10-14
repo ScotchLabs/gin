@@ -26,7 +26,7 @@ class TicketsController < ApplicationController
       @ticketsections = @show.ticketsections
     end
     
-    if (@show.ticketstatus != "open" and !session[:user_id]) or @ticketsections.empty?
+    if (@show.ticketstatus != "open" and !session[:user_id]) or @ticketsections.empty? or !@show.upcoming
       redirect_to "/tickets/showclosed"
     end
       
