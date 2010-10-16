@@ -12,6 +12,6 @@ class BoxofficeController < AdminController
     shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
     shows.reverse.each { |s| @show = s unless !s.upcoming }
     @perfs = @show.performancetimes.split("|")
-    @sections = Ticketsection.all(:conditions => ["showid = ?",@show.abbrev])
+    @sections = @show.ticketsections
   end
 end

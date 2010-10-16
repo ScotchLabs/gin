@@ -4,12 +4,12 @@
   <%= f.error_messages %>
 
   <p>
-    <%= f.label :roleid %><br />
-    <%= f.select(:roleid, Role.all.map{|r| [r.rname, r.rabbrev]}) %>
+    <%= f.label :role_id %><br />
+    <%= f.select(:role_id, Role.all.map{|r| [r.rname, r.id]}) %>
   </p>
   <p>
-    <%= f.label :userid %><br />
-    <%= f.select(:userid, User.all.map{|u| [u.name, u.name]}) %>
+    <%= f.label :user_id %><br />
+    <%= f.select(:user_id, User.all.map{|u| [u.name, u.id]}) %>
   </p>
   <p>
     <%= f.submit 'Update' %>

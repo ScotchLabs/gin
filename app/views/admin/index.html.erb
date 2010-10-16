@@ -1,30 +1,7 @@
 <h1>Welcome to the Admin CMS, <%= session[:user_name] %>!</h1>
 This is where all the magic happens. By which I mean content management. Here you can manage all the content of snstheatre.org! Just click on one of the tabs above to get started.<br /><br />
-<h2>Features Coming Soon</h2>
-(if you want to suggest new features, please <a href='mailto:webmaster@snstheatre.org'>email the webmaster</a>)
-<ul>
-  <li>nothing here. i must have just finished something</li>
-</ul>
-<br />
-<h2>Backburner</h2>
-(Features that have been suggested and have yet to be started)
-<ul>
-  <li>pacecar/named scopes</li>
-  <li>show past info</li>
-  <li>search</li>
-  <li>admin menu</li>
-  <li>better password reset function</li>
-  <li>admin nav/copy</li>
-  <li>flavors</li>
-  <li>svn rev info</li>
-  <li>admin styling</li>
-</ul>
-<br />
-<h2>Bugs Reported</h2>
-<ul>
-  <li>none here! yay!</li>
-</ul>
-<br />
+<h2>Need Help?</h2>
+Maybe there's a bug. Maybe you want some feature implemented that isn't. Maybe you want to know about how to use this complicated "Internet" thing. In any case, email the <%= mail_to 'webmaster@snstheatre.org', 'the webmaster' %>.<br/><br/>
 <h2>HowTo</h2>
 <ul>
 	<li>Stylesheets are located in (app root)/public/stylesheets/</li>

@@ -46,7 +46,7 @@ trclass = "class='zebra'"
   end
 %>
   <tr <%= trclass %>>
-    <td><%=h role.rname %></td>
+    <td><%=h role %></td>
     <td><%=h role.rabbrev %></td>
     <td><%= link_to 'Show', role %></td>
     <td><%= link_to 'Edit', edit_role_path(role) %></td>
@@ -63,8 +63,8 @@ trclass = "class='zebra'"
 
 <table>
   <tr>
-    <th>Roleid</th>
-    <th>Userid</th>
+    <th>Role</th>
+    <th>User</th>
   </tr>
 
 <%
@@ -77,8 +77,8 @@ trclass = "class='zebra'"
   end
 %>
   <tr <%= trclass %>>
-    <td><%=h roleassoc.roleid %></td>
-    <td><%=h roleassoc.userid %></td>
+    <td><%=h roleassoc.role %></td>
+    <td><%=h roleassoc.user %></td>
     <td><%= link_to 'Show', roleassoc %></td>
     <td><%= link_to 'Edit', edit_roleassoc_path(roleassoc) %></td>
     <% if session[:user_permissions]["roleassocs"]["d"] %><td><%= link_to 'Destroy', roleassoc, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

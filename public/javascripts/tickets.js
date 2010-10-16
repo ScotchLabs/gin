@@ -66,7 +66,7 @@ function reservetickets() {
   
   // get name, email, hasid for the ticketrez object
   var ticketrez = new Array(5)
-  var showid = jQuery("#ticketrez_showid").attr("value")
+  var showid = jQuery("#ticketrez_show_id").attr("value")
   ticketrez[0] = showid
   ticketrez[1] = jQuery("#ticketrez_name").attr("value")
   ticketrez[2] = jQuery("#ticketrez_email").attr("value")
@@ -84,13 +84,7 @@ function reservetickets() {
     }
   }
   
-  // if reservation is valid, send it out! otherwise set the form
-  if (validateReservation()) {
-    jQuery.ajax({type: 'post', url: '/tickets/create', data: {backto: showid, ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError()}})
-  }
-  else {
-    jQuery("#ticketrez_submit").attr("disabled",null)
-  }
+  jQuery.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}})
   return false
 }
 
@@ -105,92 +99,36 @@ function reserveSuccess(data) {
   sendemail = pattern.exec(data)[1]=="true"
   pattern = /<div id='ticketrezid' style='display:none;'>(.*)<\/div>/
   ticketrezid = pattern.exec(data)[1]
+  pattern = /<div id='highlight' style='display:none;'>(.*)<\/div>/
+  highlight = pattern.exec(data)[1]
+  // highlight errors
+  highlight = highlight.split("|")
+  for (i=0; i<highlight.length; i++) {
+    error = highlight[i]
+    // weird for quantity
+    if (error == "quantity")
+      for (var j=0; j<numperformances; j++)
+        document.getElementById("form_quantity["+j+"]").style.border = "1px solid #f90"
+    else if (error == "email") {
+      jQuery("#ticketrez_email").css("border","1px solid #f90")
+      jQuery("#ticketrez_emailconfirm").css("border","1px solid #f90")
+    }
+    else if (error == "hasid")
+      jQuery("#form_id").css("border","1px solid #f90")
+    else
+      jQuery("#ticketrez_"+error).css("border","1px solid #f90")
+  }
+  // send email
   if (sendemail)
     jQuery.ajax({type: 'post', url: '/tickets/sendemail', data: {ticketrezid: ticketrezid}})
   ajaxresp(data)
   updatecounts()
 }
 
-function reserveError(xhr) {
+function reserveError(xhr, status, thrown) {
   // set the form
   jQuery("#ticketrez_submit").attr("disabled",null)
-  
-  ajaxresp("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.")
-}
-
-function validateReservation() {
-  var errorborder = "1px solid #f90"
-  r = true
-  message = "<h1>Something's gone wrong!</h1>"
-  
-  // check name
-  if (!jQuery("#ticketrez_name")[0].value) {
-    message += "<br />Please enter a name."
-    jQuery("#ticketrez_name").css("border",errorborder)
-    r = false
-  }
-  
-  // if email, check format and confirm
-  if (jQuery("#ticketrez_email")[0].value) {
-    var emailformat = /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
-    if (emailformat.exec(jQuery("#ticketrez_email")[0].value) == null) {
-      message += "<br />Please enter a valid email address."
-      jQuery("#ticketrez_email").css("border",errorborder)
-      r = false
-    }
-    if (jQuery("#ticketrez_email")[0].value!=jQuery("#ticketrez_emailconfirm")[0].value) {
-      message += "<br />The retyped email does not match the email address."
-      jQuery("#ticketrez_email").css("border",errorborder)
-      jQuery("#ticketrez_emailconfirm").css("border",errorborder)
-      r = false
-    }
-  }
-  else {
-    message += "<br />Please enter a valid email address."
-    jQuery("#ticketrez_email").css("border",errorborder)
-    r = false
-  }
-  
-  // check hasid
-  if (!jQuery("#ticketrez_hasid_true")[0].checked && !jQuery("#ticketrez_hasid_false")[0].checked) {
-    message += "<br />Please indicate whether you have a CMU ID."
-    jQuery("#form_id").css("border",errorborder)
-    r = false
-  }
-  
-  qty=0
-  for (var i=0; i<numperformances; i++) {
-    var val = document.getElementById("form_quantity["+i+"]").value
-    if (val != "" && isNaN(parseInt(val))) {
-      message += "<br />Please enter a valid ticket quantity."
-      document.getElementById("form_quantity["+i+"]").style.border = errorborder
-      r = false
-    }
-    else if (val != "") {
-      if (val < 0) {
-        message += "<br />Please enter a positive number of tickets."
-        document.getElementById("form_quantity["+i+"]").style.border = errorborder
-        r=false
-      }
-      qty += parseInt(val)
-      sectionid = document.getElementById("form_section["+i+"]").value
-      for (var j=0; j<sections.length; j++)
-        if (sections[j]["id"] == sectionid && val > tickets[j][i]) {
-          message += "<br />There aren't that many tickets available."
-          document.getElementById("form_quantity["+i+"]").style.border = errorborder
-          r=false
-        }
-    }
-  }
-  if (qty == 0) {
-    message += "<br />Please select your tickets."
-    jQuery("#form_quantities").css("border",errorborder)
-    r = false
-  }
-  if (!r) {
-    ajaxresp(message)
-  }
-  return r
+  ajaxresp("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.<!-- thrown:"+thrown+", status:"+status+", xhr:"+xhr+" -->")
 }
 
 function showLoading() {

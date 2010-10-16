@@ -1,9 +1,9 @@
 require 'net/http'
 
 class Show < ActiveRecord::Base
-  has_many :ticketsections
-  has_many :ticketrezs
-  has_many :ticketalerts
+  has_many :ticketsections, :dependent => :destroy
+  has_many :ticketrezs, :dependent => :destroy
+  has_many :ticketalerts, :dependent => :destroy
   
   TICKETSTATUS = [["Closed", "closed"],["Open",  "open"],["Completed", "completed"]]
   validates_presence_of :name, :shortdisplayname, :abbrev, :imageurl, :ticketstatus, :performancetimes, :slot
@@ -18,23 +18,24 @@ class Show < ActiveRecord::Base
   validate :seatingmap_exists
   validate :performancetimes_parsable
   
+  def to_s
+    name
+  end
+  
   def ticketsavailable(performance)
-    sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     r=""
-    sections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((sections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable(performance)} left"}
+    ticketsections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((ticketsections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable(performance)} left"}
     r
   end
   
   def soldout(performance)
-    sections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
-    for section in sections
+    for section in ticketsections
       return false unless section.soldout(performance)
     end
     return true
   end
   
   def sectioninfo
-    ticketsections = Ticketsection.all(:conditions => ["showid = ?",abbrev])
     if ticketsections.size == 0
       "This ticket sections for this show have not been set up yet."
     elsif ticketsections.size == 1
@@ -150,10 +151,6 @@ class Show < ActiveRecord::Base
     perfarr = performancetimes.split("|")
     perfarr.each { |perf| timearr.push(Time.parse(perf).strftime("%B %d - %I:%M %p")) }
     timearr
-  end
-
-  def ticketsections
-    Ticketsection.all(:conditions => ["showid = ?",abbrev])
   end
 
 private
