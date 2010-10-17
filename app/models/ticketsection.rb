@@ -36,7 +36,6 @@ private
   def seatingmap_ok
     t=Ticketsection.all(:conditions => ["show_id = ? AND id != ?",show_id,id])
     s=show.seatingmap
-    puts "DEBUG ticketsection_model#seatingmap_ok: numticketsections = '#{t.count}', seatingmap = '#{s}'"
     # if this is the second section for this show, make sure the show has a seatingmap
     errors.add(:show, "does not have a seating map!") if t.count == 1 and (s.blank? or s.nil?)
   end

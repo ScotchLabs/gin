@@ -1,46 +1,22 @@
 #USERS
-ar = [
-  ['sewillia','s@spencerenglish.com'],
-  ['jrfriedr','jasmine.friedrich@gmail.com'],
-  ['dfreeman','dfreeman@andrew.cmu.edu'],
-  ['achivett','achivett@andrew.cmu.edu'],
-  ['amgross','amgross@andrew.cmu.edu'],
-  ['mdickoff','mdickoff@andrew.cmu.edu']
-]
-for u in ar
-  u=User.new(:name => u[0], :email => u[1], :emailConfirmation => u[1])
-  u.password = 'iamsosecure'
-  u.save!
-end
-sewillia = User.find_by_name('sewillia')
-jrfriedr = User.find_by_name('jrfriedr')
-dfreeman = User.find_by_name('dfreeman')
-achivett = User.find_by_name('achivett')
-amgross = User.find_by_name('amgross')
-mdickoff = User.find_by_name('mdickoff')
-
-#ROLES
-Role.create(:rname => "Administrator", :rabbrev => "admin", :rcontents => "crud", :rshows => "crud", :rusers => "crud", :rupdates => "crud", :rroles => "crud", :rroleassocs => "crud", :rticketalerts => "crud", :rticketrezs => "crud", :rticketsections => "crud", :rrezlineitems => "crud", :rboxoffice => 'crud')
-Role.create(:rname => "Developer", :rabbrev => "dev", :rshows => "crud", :rusers => 'r', :rupdates => "crud", :rroles => "crud", :rroleassocs => "crud", :rticketalerts => "crud", :rticketrezs => "crud", :rticketsections => "crud", :rrezlineitems => "crud", :rboxoffice => '')
-Role.create(:rname => "Content writer", :rabbrev => "writer", :rcontents => "crud", :rshows => "crud", :rusers => 'r', :rupdates => "crud", :rticketsections => "crud", :rboxoffice => '')
-Role.create(:rname => "Ticketmaster", :rabbrev => "tixer", :rshows => "crud", :rusers => 'r', :rticketalerts => "crud", :rticketrezs => "crud", :rticketsections => "crud", :rrezlineitems => "crud", :rboxoffice => 'r')
-admin = Role.find_by_rabbrev('admin')
-dev = Role.find_by_rabbrev('dev')
-writer = Role.find_by_rabbrev('writer')
-tixer = Role.find_by_rabbrev('tixer')
-
-#ROLEASSOCS
-Roleassoc.create(:role_id => admin.id, :user_id => sewillia.id)
-Roleassoc.create(:role_id => dev.id, :user_id => sewillia.id)
-Roleassoc.create(:role_id => dev.id, :user_id => amgross.id)
-Roleassoc.create(:role_id => dev.id, :user_id => dfreeman.id)
-Roleassoc.create(:role_id => dev.id, :user_id => achivett.id)
-Roleassoc.create(:role_id => dev.id, :user_id => mdickoff.id)
-Roleassoc.create(:role_id => writer.id, :user_id => jrfriedr.id)
-Roleassoc.create(:role_id => writer.id, :user_id => amgross.id)
-Roleassoc.create(:role_id => tixer.id, :user_id => jrfriedr.id)
-Roleassoc.create(:role_id => tixer.id, :user_id => amgross.id)
-
+u=User.new(:name => 'sewillia', :roles => 'admin', :email => 's@spencerenglish.com', :emailConfirmation => 's@spencerenglish.com')
+u.password = 'iamsosecure'
+u.save!
+u=User.new(:name => 'jrfriedr', :roles => 'writer|tixer', :email => 'jasmine.friedrich@gmail.com', :emailConfirmation => 'jasmine.friedrich@gmail.com')
+u.password = 'iamsosecure'
+u.save!
+u=User.new(:name => 'dfreeman', :roles => 'dev', :email => 'dfreeman@andrew.cmu.edu', :emailConfirmation => 'dfreeman@andrew.cmu.edu')
+u.password = 'iamsosecure'
+u.save!
+u=User.new(:name => 'achivett', :roles => 'dev', :email => 'achivett@andrew.cmu.edu', :emailConfirmation => 'achivett@andrew.cmu.edu')
+u.password = 'iamsosecure'
+u.save!
+u=User.new(:name => 'amgross', :roles => 'dev', :email => 'amgross@andrew.cmu.edu', :emailConfirmation => 'amgross@andrew.cmu.edu')
+u.password = 'iamsosecure'
+u.save!
+u=User.new(:name => 'mdickoff', :roles => 'dev', :email => 'mdickoff@andrew.cmu.edu', :emailConfirmation => 'mdickoff@andrew.cmu.edu')
+u.password = 'iamsosecure'
+u.save!
 
 #SHOWS
 # taken from PMA on 2010-10-10 at 6:29 pm EST

@@ -1,6 +1,7 @@
 class TicketsController < ApplicationController
   layout 'index'
   def index
+    authorize! if can? :create, [Ticketrez, Rezlineitem]
     @shows = Show.all
     @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
     @shows.reverse.each { |show| @activeshow = show if show.upcoming and show.ticketstatus=="open" and !show.ticketsections.empty? }
@@ -17,6 +18,7 @@ class TicketsController < ApplicationController
   end
 
   def show
+    authorize! if can? :create, [Ticketrez, Rezlineitem]
     @ticketrez = Ticketrez.new
     # find a show with params[:abbrev], else redirect to tickets/showerror
     @show = Show.find_by_abbrev(params[:abbrev])
@@ -26,7 +28,7 @@ class TicketsController < ApplicationController
       @ticketsections = @show.ticketsections
     end
     
-    if (@show.ticketstatus != "open" and !session[:user_id]) or @ticketsections.empty? or !@show.upcoming
+    if @ticketsections.empty? or !@show.upcoming
       redirect_to "/tickets/showclosed"
     end
       
@@ -39,6 +41,7 @@ class TicketsController < ApplicationController
   end
   
   def create
+    authorize! if can? :create, [Ticketrez, Rezlineitem]
     @rezlineitemerrors = Array.new
     @ticketrezerrors = Array.new
     @ticketrezdidntsave = false
@@ -131,7 +134,7 @@ class TicketsController < ApplicationController
               begin
                 @qty+=@r.quantity.to_i
               rescue Exception => e
-                puts "DEBUG caught exception #{e}"
+                # caught exception
               end
               @r.performance = params[:form][:performance][i.to_s]
               @r.ticketrez_id = @ticketrez.id
@@ -174,7 +177,6 @@ class TicketsController < ApplicationController
   
   def cancelrez
     @ticketrez = Ticketrez.find_by_hashid(params[:hashid])
-    puts "DEBUG could we find a ticketrez? #{!@ticketrez.nil?}"
     if @ticketrez.nil?
       redirect_to :action => "cancelerror"
     end
@@ -184,8 +186,5 @@ class TicketsController < ApplicationController
     @ticketrez = Ticketrez.find(params[:ticketrez][:id])
     @show = @ticketrez.show
     @ticketrez.destroy
-  end
-protected
-  def authorize
   end
 end

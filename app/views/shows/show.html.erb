@@ -1,79 +1,21 @@
-<p>
-  <b>Name:</b>
-  <%=h @show.name %>
-</p>
+<p><b>Name:</b><%=h @show.name %></p>
+<p><b>Short Display Name:</b><%=h @show.shortdisplayname %></p>
+<p><b>Abbrev:</b><%=h @show.abbrev %></p>
+<p><b>Slot:</b><%=h @show.slot %></p>
+<p><b>Loc:</b><%=h @show.loc %></p>
+<p><b>Imageurl:</b><%=h @show.imageurl %></p>
+<p><b>Seatingmap:</b><%=h @show.seatingmap %></p>
+<p><b>Author:</b><%=h @show.author %></p>
+<p><b>Director:</b><%=h @show.director %></p>
+<p><b>House Manager Name:</b><%=h @show.housemanname %></p>
+<p><b>House Manager Email:</b><%=h @show.housemanemail %></p>
+<p><b>Ticket Notes:</b><%=h @show.ticketnotes %></p>
+<p><b>Performancetimes:</b><%=h @show.performancetimes %></p>
+<p><b>Ticketstatus:</b><%=h @show.ticketstatus %></p>
+<p><b>Timesvisible:</b><%=h @show.timesvisible %></p>
 
-<p>
-  <b>Short Display Name:</b>
-  <%=h @show.shortdisplayname %>
-</p>
-
-<p>
-  <b>Abbrev:</b>
-  <%=h @show.abbrev %>
-</p>
-
-<p>
-  <b>Slot:</b>
-  <%=h @show.slot %>
-</p>
-
-<p>
-  <b>Loc:</b>
-  <%=h @show.loc %>
-</p>
-
-<p>
-  <b>Imageurl:</b>
-  <%=h @show.imageurl %>
-</p>
-
-<p>
-  <b>Seatingmap:</b>
-  <%=h @show.seatingmap %>
-</p>
-
-<p>
-  <b>Author:</b>
-  <%=h @show.author %>
-</p>
-
-<p>
-  <b>Director:</b>
-  <%=h @show.director %>
-</p>
-
-<p>
-  <b>House Manager Name:</b>
-  <%=h @show.housemanname %>
-</p>
-
-<p>
-  <b>House Manager Email:</b>
-  <%=h @show.housemanemail %>
-</p>
-
-<p>
-  <b>Ticket Notes:</b>
-  <%=h @show.ticketnotes %>
-</p>
-
-<p>
-  <b>Performancetimes:</b>
-  <%=h @show.performancetimes %>
-</p>
-
-<p>
-  <b>Ticketstatus:</b>
-  <%=h @show.ticketstatus %>
-</p>
-
-<p>
-  <b>Timesvisible:</b>
-  <%=h @show.timesvisible %>
-</p>
-
-<%= link_to 'Edit', edit_show_path(@show) %> | <%= link_to 'Back', shows_path %>
+<% if can? :update, Show %><%= link_to 'Edit', edit_show_path(@show) %> | <% end %>
+<%= link_to 'Back', shows_path %>
 <br />
 <br />
 
@@ -100,15 +42,15 @@ trclass = "class='zebra'"
     <td><%=h ticketsection.pricewithid %>/<%=h ticketsection.pricewoutid %></td>
     <td><%=h ticketsection.size %></td>
     <td><%= link_to 'Show', ticketsection %></td>
-    <td><%= link_to 'Edit', edit_ticketsection_path(ticketsection) %></td>
-    <% if session[:user_permissions]["ticketsections"]["d"] %><td><%= link_to 'Destroy', ticketsection, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if can? :update, Ticketsection %><td><%= link_to 'Edit', edit_ticketsection_path(ticketsection) %></td><% end %>
+    <% if can? :destroy, Ticketsection %><td><%= link_to 'Destroy', ticketsection, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New ticketsection', new_ticketsection_path+"/"+@show.abbrev %>
+<% if can? :create, Ticketsection %><%= link_to 'New ticketsection', new_ticketsection_path+"/"+@show.abbrev %><% end %>
 <br />
 <br />
 
@@ -133,15 +75,15 @@ trclass = "class='zebra'"
     <td><%=h ticketrez.name %></td>
     <td><%=h ticketrez.email %></td>
     <td><%= link_to 'Show', ticketrez %></td>
-    <td><%= link_to 'Edit', edit_ticketrez_path(ticketrez) %></td>
-    <% if session[:user_permissions]["ticketrezs"]["d"] %><td><%= link_to 'Destroy', ticketrez, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if can? :update, Ticketrez %><td><%= link_to 'Edit', edit_ticketrez_path(ticketrez) %></td><% end %>
+    <% if can? :destroy, Ticketrez %><td><%= link_to 'Destroy', ticketrez, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New ticketrez', new_ticketrez_path+"/"+@show.abbrev %>
+<% if can? :create, Ticketerez %><%= link_to 'New ticketrez', new_ticketrez_path+"/"+@show.abbrev %><% end %>
 <br />
 <br />
 
@@ -164,12 +106,12 @@ trclass = "class='zebra'"
   <tr <%= trclass %>>
     <td><%=h ticketalert.email %></td>
     <td><%= link_to 'Show', ticketalert %></td>
-    <td><%= link_to 'Edit', edit_ticketalert_path(ticketalert) %></td>
-    <% if session[:user_permissions]["ticketalerts"]["d"] %><td><%= link_to 'Destroy', ticketalert, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if can? :update, Ticketalert %><td><%= link_to 'Edit', edit_ticketalert_path(ticketalert) %></td><% end %>
+    <% if can? :destroy, Ticketalert %><td><%= link_to 'Destroy', ticketalert, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New ticketalert', new_ticketalert_path+"/"+@show.abbrev %>
+<% if can? :create, Ticketalert %><%= link_to 'New ticketalert', new_ticketalert_path+"/"+@show.abbrev %><% end %>

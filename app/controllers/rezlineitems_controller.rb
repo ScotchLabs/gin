@@ -1,8 +1,9 @@
 class RezlineitemsController < AdminController
+  load_and_authorize_resource
+
   # GET /rezlineitems/1
   # GET /rezlineitems/1.xml
   def show
-    @rezlineitem = Rezlineitem.find(params[:id])
     @ticketrez = @rezlineitem.ticketrez
 
     respond_to do |format|
@@ -15,7 +16,6 @@ class RezlineitemsController < AdminController
   # GET /rezlineitems/new.xml
   def new
     @ticketrez = Ticketrez.find_by_id(params[:ticketrezid])
-    @rezlineitem = Rezlineitem.new
     @show = @ticketrez.show
     @ticketsections = @show.ticketsections
 
@@ -27,22 +27,17 @@ class RezlineitemsController < AdminController
 
   # GET /rezlineitems/1/edit
   def edit
-    @rezlineitem = Rezlineitem.find(params[:id])
     @ticketrez = @rezlineitem.ticketrez
     @show = @ticketrez.show
-    puts "DEBUG rezlineitems_controller#edit: show '#{@show}', ticketrez.show '#{@ticketrez.show}'"
     @ticketsections = @show.ticketsections
   end
 
   # POST /rezlineitems
   # POST /rezlineitems.xml
   def create
-    @rezlineitem = Rezlineitem.new(params[:rezlineitem])
     @ticketrez = @rezlineitem.ticketrez
     @show = @ticketrez.show
     @ticketsections = @show.ticketsections
-    
-    puts "DEBUG rezlineitems_controller#create: making a new lineitem for reservation '#{@rezlineitem.ticketrez}'"
 
     respond_to do |format|
       if @rezlineitem.save
@@ -59,11 +54,8 @@ class RezlineitemsController < AdminController
   # PUT /rezlineitems/1
   # PUT /rezlineitems/1.xml
   def update
-    @rezlineitem = Rezlineitem.find(params[:id])
     @ticketrez = @rezlineitem.ticketrez
     @show = @ticketrez.show
-    puts "DEBUG rezlineitems_controller#update: show '#{@show}', ticketrez.show '#{@ticketrez.show}'"
-    puts "DEBUG rezlineitems_controller#update: sectionid '#{@rezlineitem.sectionid}', sections available "+Ticketsection.all.map{|t| t.id }.join(", ")
     @ticketsections = @show.ticketsections
 
     respond_to do |format|
@@ -81,7 +73,6 @@ class RezlineitemsController < AdminController
   # DELETE /rezlineitems/1
   # DELETE /rezlineitems/1.xml
   def destroy
-    @rezlineitem = Rezlineitem.find(params[:id])
     @ticketrez = @rezlineitem.ticketrez
     @rezlineitem.destroy
 

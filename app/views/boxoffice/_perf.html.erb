@@ -1,7 +1,5 @@
 <%
 trs = @show.ticketrezs
-%>
-<%
 @trs = Array.new
 for tr in trs
   found = Rezlineitem.first(:conditions => ["ticketrez_id = ? and performance = ?",tr.id,perf])
@@ -20,25 +18,23 @@ end
 <%
 trclass = "class='zebra'"
 for tr in @trs
-# get all rezs
-rez = Rezlineitem.first(:conditions => ["ticketrez_id = ? and performance = ?",tr.id,perf])
-section = rez.ticketsection
-qty = rez.quantity
-cost = section.pricewithid * qty if tr.hasid
-cost = section.pricewoutid * qty unless tr.hasid
-if trclass=="class='zebra'"
-  trclass = ""
-else
-  trclass = "class='zebra'"
-end
-%><tr <%= trclass %>>
-<td><%= tr.name %></td>
-<td><%= tr.email %></td>
-<td><%= tr.hasid %></td>
-<td><%= section.name %></td>
-<td><%= qty %></td>
-<td>$<%= cost %></td>
-</tr>
-<% 
-end
-%></table><br />
+  # get all rezs
+  rez = Rezlineitem.first(:conditions => ["ticketrez_id = ? and performance = ?",tr.id,perf])
+  section = rez.ticketsection
+  qty = rez.quantity
+  cost = section.pricewithid * qty if tr.hasid
+  cost = section.pricewoutid * qty unless tr.hasid
+  if trclass=="class='zebra'"
+    trclass = ""
+  else
+    trclass = "class='zebra'"
+  end
+  %><tr <%= trclass %>>
+    <td><%= tr.name %></td>
+    <td><%= tr.email %></td>
+    <td><%= tr.hasid %></td>
+    <td><%= section.name %></td>
+    <td><%= qty %></td>
+    <td>$<%= cost %></td>
+  </tr>
+<% end %></table><br />

@@ -1,20 +1,29 @@
 require 'digest/sha1'
 
 class User < ActiveRecord::Base
-  has_many :roleassocs, :dependent => :destroy
-  has_many :roles, :through => :roleassocs
-  
-  validates_presence_of   :name, :email
-  validates_uniqueness_of :name, :email
+  ROLES = 
+  [
+    ['admin',"Administrator"],
+    ['dev',"Developer"],
+    ['writer',"Content Writer"],
+    ['tixer',"Ticketmaster"]
+  ]
   
   attr_accessor :password_confirmation
   attr_accessor :emailConfirmation
+  
+  validates_presence_of   :name, :email
+  validates_uniqueness_of :name, :email
   validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
   validate :email_retyped
   validates_confirmation_of :password
-  
+  validates_format_of :roles, :with => /^((admin|dev|tixer|writer)(\|(admin|dev|tixer|writer))*)?$/
   validate :password_not_blank
   validate :password_retyped
+  
+  def guest?
+    name.nil?
+  end
   
   def self.authenticate(name, password)
     user = self.find_by_name(name)
@@ -31,26 +40,24 @@ class User < ActiveRecord::Base
     name
   end
   
-  def hasaccess(controller,action)
-    puts "DEBUG user_model#hasaccess: user '#{name}' controller '#{controller}', action '#{action}'"
-    if action == "index" || action == "show"
-      crud = "r"
-    elsif action == "edit" || action == "update"
-      crud = "u"
-    elsif action == "new" || action == "create"
-      crud = "c"
-    elsif action == "destroy"
-      crud = "d"
+  def self.roles
+    ROLES.clone
+  end
+
+  def self.with_role(r)
+    User.all.select{|u| u.role? r}
+  end
+  
+  def self.role(r)
+    User.roles.select{|role| role[0] == r}.first
+  end
+  
+  def role?(r)
+    if roles
+      roles.split('|').map{|role| role.to_sym}.include? r
+    else
+      false
     end
-    access = false
-    for role in roles
-      #somehow get the controller crud out of role
-      puts "DEBUG user hasaccess: role '#{role}', controller '#{controller}', crud '#{crud}'"
-      access = access || (!role.send("r"+controller).nil? && role.send("r"+controller).include?(crud))
-      puts "DEBUG user hasaccess: access after role #{access}"
-      return true if access
-    end
-    access
   end
 
   # 'password' is a virtual attribute
@@ -73,7 +80,7 @@ class User < ActiveRecord::Base
     self.hashed_password = User.encrypted_password(self.password, self.salt)
   end
   
-  def after_destroy
+  def before_destroy
     if User.count.zero?
       raise "Can't delete last user"
     end

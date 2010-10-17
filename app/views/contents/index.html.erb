@@ -28,12 +28,12 @@ trclass = "class='zebra'"
     <td><%=h content.order %></td>
     <td><%=h !content.article.blank? %></td>
     <td><%= link_to 'Show', content %></td>
-    <td><%= link_to 'Edit', edit_content_path(content) %></td>
-    <% if session[:user_permissions]["contents"]["d"] %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if can? :update, Content %><td><%= link_to 'Edit', edit_content_path(content) %></td><% end %>
+    <% if can? :destroy, Content %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New content', new_content_path %>
+<% if can? :create, Content %><%= link_to 'New content', new_content_path %><% end %>

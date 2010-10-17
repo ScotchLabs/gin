@@ -1,9 +1,9 @@
 class TicketrezsController < AdminController
+  load_and_authorize_resource
+
   # GET /ticketrezs
   # GET /ticketrezs.xml
   def index
-    @ticketrezs = Ticketrez.all
-
     respond_to do |format|
       format.html # index.html.erb
       format.xml  { render :xml => @ticketrezs }
@@ -13,7 +13,7 @@ class TicketrezsController < AdminController
   # GET /ticketrezs/1
   # GET /ticketrezs/1.xml
   def show
-    @ticketrez = Ticketrez.find(params[:id])
+    authorize! if can? :read, Rezlineitem
     @rezlineitems = @ticketrez.rezlineitems
     @show = @ticketrez.show
 
@@ -26,7 +26,6 @@ class TicketrezsController < AdminController
   # GET /ticketrezs/new
   # GET /ticketrezs/new.xml
   def new
-    @ticketrez = Ticketrez.new
     @show = Show.find_by_abbrev(params[:abbrev])
 
     respond_to do |format|
@@ -37,15 +36,12 @@ class TicketrezsController < AdminController
 
   # GET /ticketrezs/1/edit
   def edit
-    @ticketrez = Ticketrez.find(params[:id])
     @show = @ticketrez.show
   end
 
   # POST /ticketrezs
   # POST /ticketrezs.xml
   def create
-    @ticketrez = Ticketrez.new(params[:ticketrez])
-
     respond_to do |format|
       if @ticketrez.save
         flash[:notice] = 'Ticketrez was successfully created.'
@@ -61,8 +57,6 @@ class TicketrezsController < AdminController
   # PUT /ticketrezs/1
   # PUT /ticketrezs/1.xml
   def update
-    @ticketrez = Ticketrez.find(params[:id])
-
     respond_to do |format|
       if @ticketrez.update_attributes(params[:ticketrez])
         flash[:notice] = 'Ticketrez was successfully updated.'
@@ -78,7 +72,7 @@ class TicketrezsController < AdminController
   # DELETE /ticketrezs/1
   # DELETE /ticketrezs/1.xml
   def destroy
-    @ticketrez = Ticketrez.find(params[:id])
+    authorize! if can? :destroy, Rezlineitem
     @show = @ticketrez.show
     @ticketrez.destroy
 

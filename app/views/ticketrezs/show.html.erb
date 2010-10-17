@@ -1,25 +1,10 @@
-<p>
-  <b>Show:</b>
-  <%=h @ticketrez.show %>
-</p>
+<p><b>Show:</b><%=h @ticketrez.show %></p>
+<p><b>Name:</b><%=h @ticketrez.name %></p>
+<p><b>Email:</b><%=h @ticketrez.email %></p>
+<p><b>Hasid:</b><%=h @ticketrez.hasid %></p>
 
-<p>
-  <b>Name:</b>
-  <%=h @ticketrez.name %>
-</p>
-
-<p>
-  <b>Email:</b>
-  <%=h @ticketrez.email %>
-</p>
-
-<p>
-  <b>Hasid:</b>
-  <%=h @ticketrez.hasid %>
-</p>
-
-
-<%= link_to 'Edit', edit_ticketrez_path(@ticketrez) %> | <%= link_to 'Back', show_path(@show) %>
+<% if can? :update, Ticketrez %><%= link_to 'Edit', edit_ticketrez_path(@ticketrez) %> | <% end %>
+<%= link_to 'Back', show_path(@show) %>
 <br />
 <br />
 
@@ -46,12 +31,12 @@ trclass = "class='zebra'"
     <td><%=h rezlineitem.ticketsection %></td>
     <td><%=h rezlineitem.quantity %></td>
     <td><%= link_to 'Show', rezlineitem %></td>
-    <td><%= link_to 'Edit', edit_rezlineitem_path(rezlineitem) %></td>
-    <% if session[:user_permissions]["rezlineitems"]["d"] %><td><%= link_to 'Destroy', rezlineitem, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if can? :update, Rezlineitem %><td><%= link_to 'Edit', edit_rezlineitem_path(rezlineitem) %></td><% end %>
+    <% if can? :destroy, Rezlineitem %><td><%= link_to 'Destroy', rezlineitem, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New rezlineitem', new_rezlineitem_path+"/"+@ticketrez.id.to_s %>
+<% if can? :create, Rezlineitem %><%= link_to 'New rezlineitem', new_rezlineitem_path+"/"+@ticketrez.id.to_s %><% end %>

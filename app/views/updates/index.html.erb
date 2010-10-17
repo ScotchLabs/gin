@@ -22,12 +22,12 @@ trclass = "class='zebra'"
     <td><%=h update.expiredate %></td>
     <td><%=h !update.article.blank? %></td>
     <td><%= link_to 'Show', update %></td>
-    <td><%= link_to 'Edit', edit_update_path(update) %></td>
-    <% if session[:user_permissions]["updates"]["d"] %><td><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if can? :update, Update %><td><%= link_to 'Edit', edit_update_path(update) %></td><% end %>
+    <% if can? :destroy, Update %><td><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New update', new_update_path %>
+<% if can? :update, Update %><%= link_to 'New update', new_update_path %><% end %>
