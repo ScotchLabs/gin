@@ -18,7 +18,7 @@
       <div id='menu'>
         <ul><li><%= link_to "Welcome", {:controller => "admin"} %></li>
       	<% if can? :read, Show %><li><%= link_to "Shows & Tickets", shows_path %></li><% end %>
-      	<% if can? :read, [Show, Ticketsection, Ticketrez, Rezlineitem] %><li><%= link_to "Box Office", {:controller => "boxoffice"} %></li><% end %>
+      	<% if can? :read, Show, Ticketsection, Ticketrez, Rezlineitem %><li><%= link_to "Box Office", {:controller => "boxoffice"} %></li><% end %>
       	<% if can? :read, Update %><li><%= link_to "News", updates_path %></li><% end %>
       	<% if can? :read, Content %><li><%= link_to "Contents", contents_path %></li><% end %>
       	<% if can? :read, User %><li><%= link_to "Users & Roles", users_path %></li><% end %>
