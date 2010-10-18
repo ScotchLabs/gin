@@ -36,6 +36,14 @@ class User < ActiveRecord::Base
     user
   end
   
+  def roles
+    begin
+      roles
+    rescue Exception
+      ""
+    end
+  end
+  
   def to_s
     name
   end
