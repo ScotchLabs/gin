@@ -36,10 +36,6 @@ class User < ActiveRecord::Base
     user
   end
   
-  def roles
-    ""
-  end
-  
   def to_s
     name
   end
