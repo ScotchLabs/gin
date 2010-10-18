@@ -1,4 +1,6 @@
 class TicketsectionsController < AdminController
+  load_and_authorize_resource
+
   # GET /ticketsections
   # GET /ticketsections.xml
   def index
@@ -13,7 +15,6 @@ class TicketsectionsController < AdminController
   # GET /ticketsections/1
   # GET /ticketsections/1.xml
   def show
-    @ticketsection = Ticketsection.find(params[:id])
     @show = @ticketsection.show
 
     respond_to do |format|
@@ -25,7 +26,6 @@ class TicketsectionsController < AdminController
   # GET /ticketsections/new
   # GET /ticketsections/new.xml
   def new
-    @ticketsection = Ticketsection.new
     @show = Show.find_by_abbrev(params[:abbrev])
 
     respond_to do |format|
@@ -36,16 +36,12 @@ class TicketsectionsController < AdminController
 
   # GET /ticketsections/1/edit
   def edit
-    @ticketsection = Ticketsection.find(params[:id])
-    puts "DEBUG ticketsections_controller#edit: looking for show '#{@ticketsection.show}'"
     @show = @ticketsection.show
-    puts "DEBUG ticketsections_controller#edit: show '#{@show}'"
   end
 
   # POST /ticketsections
   # POST /ticketsections.xml
   def create
-    @ticketsection = Ticketsection.new(params[:ticketsection])
     @show = @ticketsection.show
 
     respond_to do |format|
@@ -63,7 +59,6 @@ class TicketsectionsController < AdminController
   # PUT /ticketsections/1
   # PUT /ticketsections/1.xml
   def update
-    @ticketsection = Ticketsection.find(params[:id])
     @show = @ticketsection.show
 
     respond_to do |format|
@@ -81,7 +76,7 @@ class TicketsectionsController < AdminController
   # DELETE /ticketsections/1
   # DELETE /ticketsections/1.xml
   def destroy
-    @ticketsection = Ticketsection.find(params[:id])
+    authorize! if can? :destroy, Rezlineitem
     @show = @ticketsection.show
     @ticketsection.destroy
     

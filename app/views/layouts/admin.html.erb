@@ -17,11 +17,11 @@
     <div id='nav' class='botcorner shadow'>
       <div id='menu'>
         <ul><li><%= link_to "Welcome", {:controller => "admin"} %></li>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["shows"]["r"] %><li><%= link_to "Shows & Tickets", shows_path %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["boxoffice"]["r"] %><li><%= link_to "Box Office", {:controller => "boxoffice"} %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["updates"]["r"] %><li><%= link_to "News", updates_path %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["contents"]["r"] %><li><%= link_to "Contents", contents_path %></li><% end %>
-      	<% if !session[:user_permissions].nil? and session[:user_permissions]["users"]["r"] %><li><%= link_to "Users & Roles", users_path %></li><% end %>
+      	<% if can? :read, Show %><li><%= link_to "Shows & Tickets", shows_path %></li><% end %>
+      	<% if can? :read, [Show, Ticketsection, Ticketalert, Ticketrez, Rezlineitem] %><li><%= link_to "Box Office", {:controller => "boxoffice"} %></li><% end %>
+      	<% if can? :read, Update %><li><%= link_to "News", updates_path %></li><% end %>
+      	<% if can? :read, Content %><li><%= link_to "Contents", contents_path %></li><% end %>
+      	<% if can? :read, User %><li><%= link_to "Users & Roles", users_path %></li><% end %>
       	<li><%= link_to 'Log out', {:controller => "admin", :action => "logout"} %></li>
       	<script type='text/javascript'>
           //TODO jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px");

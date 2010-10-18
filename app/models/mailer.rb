@@ -36,8 +36,7 @@ class Mailer < ActionMailer::Base
   end
   
   def account_created_admin_mail(u)
-    adminRole = Role.find_by_rabbrev('admin')
-    recipients    adminRole.users.map {|u| u.email}
+    recipients    Users.with_role(:admin).map {|u| u.email}
     subject       "Account created at snstheatre.org"
     from          "webmaster@snstheatre.org"
     content_type  "multipart/alternative"
@@ -57,11 +56,11 @@ class Mailer < ActionMailer::Base
   end
   
   def approved_admin_mail(u, r)
-    adminRole = Role.find_by_rabbrev('admin')
-    recipients    adminRole.users.map {|u| u.email}
+    recipients    Users.with_role(:admin).map {|u| u.email}
     subject       "User approved at snstheatre.org"
     from          "webmaster@snstheatre.org"
     content_type  "text/plain"
+    
     body          render_message("approved_admin.text.plain", :u => u, :r => r)
   end
   

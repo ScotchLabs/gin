@@ -18,74 +18,12 @@ trclass = "class='zebra'"
     <td><%=h user.name %></td>
     <td><%=h user.email %></td>
     <td><%= link_to 'Show', user %></td>
-    <td><%= link_to 'Edit', edit_user_path(user) %></td>
-    <% if session[:user_permissions]["users"]["d"] %><td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
+    <% if can? :update, User %><td><%= link_to 'Edit', edit_user_path(user) %></td><% end %>
+    <% if can? :destroy, User %><td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
   </tr>
 <% end %>
 </table>
 
 <br />
 
-<%= link_to 'New update', new_user_path %>
-
-<h1>Listing roles</h1>
-
-<table>
-  <tr>
-    <th>Name</th>
-    <th>Abbrev</th>
-  </tr>
-
-<%
-trclass = "class='zebra'"
-@roles.each do |role|
-  if trclass=="class='zebra'"
-    trclass = ""
-  else
-    trclass = "class='zebra'"
-  end
-%>
-  <tr <%= trclass %>>
-    <td><%=h role %></td>
-    <td><%=h role.rabbrev %></td>
-    <td><%= link_to 'Show', role %></td>
-    <td><%= link_to 'Edit', edit_role_path(role) %></td>
-    <% if session[:user_permissions]["roles"]["d"] %><td><%= link_to 'Destroy', role, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New role', new_role_path %>
-
-<h1>Listing roleassocs</h1>
-
-<table>
-  <tr>
-    <th>Role</th>
-    <th>User</th>
-  </tr>
-
-<%
-trclass = "class='zebra'"
-@roleassocs.each do |roleassoc|
-  if trclass=="class='zebra'"
-    trclass = ""
-  else
-    trclass = "class='zebra'"
-  end
-%>
-  <tr <%= trclass %>>
-    <td><%=h roleassoc.role %></td>
-    <td><%=h roleassoc.user %></td>
-    <td><%= link_to 'Show', roleassoc %></td>
-    <td><%= link_to 'Edit', edit_roleassoc_path(roleassoc) %></td>
-    <% if session[:user_permissions]["roleassocs"]["d"] %><td><%= link_to 'Destroy', roleassoc, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<%= link_to 'New roleassoc', new_roleassoc_path %>
+<% if can? :update, Update %><%= link_to 'New update', new_user_path %><% end %>

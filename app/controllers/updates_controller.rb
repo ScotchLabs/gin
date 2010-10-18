@@ -1,4 +1,6 @@
 class UpdatesController < AdminController
+  load_and_authorize_resource
+
   # GET /updates
   # GET /updates.xml
   def index
@@ -13,8 +15,6 @@ class UpdatesController < AdminController
   # GET /updates/1
   # GET /updates/1.xml
   def show
-    @update = Update.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @update }
@@ -24,8 +24,6 @@ class UpdatesController < AdminController
   # GET /updates/new
   # GET /updates/new.xml
   def new
-    @update = Update.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @update }
@@ -34,14 +32,11 @@ class UpdatesController < AdminController
 
   # GET /updates/1/edit
   def edit
-    @update = Update.find(params[:id])
   end
 
   # POST /updates
   # POST /updates.xml
   def create
-    @update = Update.new(params[:update])
-
     respond_to do |format|
       if @update.save
         flash[:notice] = 'Update was successfully created.'
@@ -57,8 +52,6 @@ class UpdatesController < AdminController
   # PUT /updates/1
   # PUT /updates/1.xml
   def update
-    @update = Update.find(params[:id])
-
     respond_to do |format|
       if @update.update_attributes(params[:update])
         flash[:notice] = 'Update was successfully updated.'
@@ -74,7 +67,6 @@ class UpdatesController < AdminController
   # DELETE /updates/1
   # DELETE /updates/1.xml
   def destroy
-    @update = Update.find(params[:id])
     @update.destroy
 
     respond_to do |format|

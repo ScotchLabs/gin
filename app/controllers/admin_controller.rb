@@ -1,46 +1,15 @@
 class AdminController < ApplicationController
-
+  before_filter :authenticate, :except => :login
+  
   def login
     session[:user_id] = nil
     if request.post?
       if params[:type] == "login"
-        puts "DEBUG admin_controller: user '#{params[:lname]}' logging in..."
         user = User.authenticate(params[:lname], params[:lpassword])
         if !user.nil?
           session[:user_id] = user.id
           session[:user_name] = user.name
-          # I know this is a terrible place to put this, but I'm tired of thinking about user permissions and I want it to just work
-          # loading base permissions
           
-          session[:user_permissions] = Hash.new
-          session[:user_permissions]["boxoffice"] = Hash.new
-          session[:user_permissions]["boxoffice"]["r"] = user.hasaccess("boxoffice","show")
-          session[:user_permissions]["updates"] = Hash.new
-          session[:user_permissions]["updates"]["r"] = user.hasaccess("updates","show")
-          session[:user_permissions]["updates"]["d"] = user.hasaccess("updates","destroy")
-          session[:user_permissions]["contents"] = Hash.new
-          session[:user_permissions]["contents"]["r"] = user.hasaccess("contents","show")
-          session[:user_permissions]["contents"]["d"] = user.hasaccess("contents","destroy")
-          session[:user_permissions]["users"] = Hash.new
-          session[:user_permissions]["users"]["r"] = user.hasaccess("users","show")
-          session[:user_permissions]["users"]["d"] = user.hasaccess("users","destroy")
-          session[:user_permissions]["roles"] = Hash.new
-          session[:user_permissions]["roles"]["d"] = user.hasaccess("roles","destroy")
-          session[:user_permissions]["roleassocs"] = Hash.new
-          session[:user_permissions]["roleassocs"]["d"] = user.hasaccess("roleassocs","destroy")
-          session[:user_permissions]["shows"] = Hash.new
-          session[:user_permissions]["shows"]["r"] = user.hasaccess("shows","show")
-          session[:user_permissions]["shows"]["d"] = user.hasaccess("shows","destroy")
-          session[:user_permissions]["ticketsections"] = Hash.new
-          session[:user_permissions]["ticketsections"]["d"] = user.hasaccess("ticketsections","destroy")
-          session[:user_permissions]["ticketalerts"] = Hash.new
-          session[:user_permissions]["ticketalerts"]["d"] = user.hasaccess("ticketalerts","destroy")
-          session[:user_permissions]["ticketrezs"] = Hash.new
-          session[:user_permissions]["ticketrezs"]["d"] = user.hasaccess("ticketrezs","destroy")
-          session[:user_permissions]["rezlineitems"] = Hash.new
-          session[:user_permissions]["rezlineitems"]["d"] = user.hasaccess("rezlineitems","destroy")
-          
-          puts "DEBUG admin_controller: user '#{session[:user_name]}' exists"
           uri = session[:original_uri]
           session[:original_uri] = nil
           redirect_to(uri || { :action => "index" })
@@ -54,7 +23,6 @@ class AdminController < ApplicationController
         u.emailConfirmation = params[:cemailConfirmation]
         u.password = params[:cpassword]
         if u.save
-          puts "DEBUG admin_controller#login: saved new user '#{u}'"
           Mailer::deliver_account_created_mail(u)
           Mailer::deliver_account_created_admin_mail(u)
           redirect_to({:action => "createaccount"})
@@ -66,7 +34,6 @@ class AdminController < ApplicationController
       elsif params[:type] == "forgot"
         email = params[:femail]
         flash.now[:notice] = "Please enter a valid email address!" if email.nil? or email.blank? or !email.match(/[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/) 
-        puts "DEBUG admin_controller#login: forgot, email is '#{email}'"
         u=User.find_by_email(email)
         if u.nil?
           flash.now[:notice] = "We couldn't find a user with that email address"
@@ -81,7 +48,6 @@ class AdminController < ApplicationController
   def logout
     session[:user_id] = nil
     session[:user_name] = nil
-    session[:user_permissions] = nil
     flash[:notice] = "Logged out"
     redirect_to(:action => "login")
   end
@@ -101,6 +67,16 @@ class AdminController < ApplicationController
       else
         redirect_to :action => "forgoterror"
       end
+    end
+  end
+
+protected
+  def authenticate
+    if current_user.guest?
+      # user has not logged in and needs to. redirect them to the right login page
+      session[:original_uri] = request.request_uri
+      flash[:notice] = "Please log in."
+      redirect_to :controller => "admin", :action => "login"
     end
   end
 end

@@ -1,4 +1,6 @@
 class UsersController < AdminController
+  load_and_authorize_resource
+
   # GET /users
   # GET /users.xml
   def index
@@ -15,8 +17,6 @@ class UsersController < AdminController
   # GET /users/1
   # GET /users/1.xml
   def show
-    @user = User.find(params[:id])
-
     respond_to do |format|
       format.html # show.html.erb
       format.xml  { render :xml => @user }
@@ -26,8 +26,6 @@ class UsersController < AdminController
   # GET /users/new
   # GET /users/new.xml
   def new
-    @user = User.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @user }
@@ -36,14 +34,11 @@ class UsersController < AdminController
 
   # GET /users/1/edit
   def edit
-    @user = User.find(params[:id])
   end
 
   # POST /users
   # POST /users.xml
   def create
-    @user = User.new(params[:user])
-
     respond_to do |format|
       if @user.save
         flash[:notice] = "User #{@user.name} was successfully created."
@@ -59,8 +54,6 @@ class UsersController < AdminController
   # PUT /users/1
   # PUT /users/1.xml
   def update
-    @user = User.find(params[:id])
-
     respond_to do |format|
       if @user.update_attributes(params[:user])
         flash[:notice] = "User #{@user.name} was successfully updated."
@@ -76,7 +69,6 @@ class UsersController < AdminController
   # DELETE /users/1
   # DELETE /users/1.xml
   def destroy
-    @user = User.find(params[:id])
     begin
       flash[:notice] = "User #{@user.name} deleted"
       @user.destroy

@@ -7,10 +7,6 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :ticketalerts
 
-  map.resources :roleassocs
-
-  map.resources :roles
-
   map.resources :users
   
   map.resources :updates

@@ -1,4 +1,6 @@
 class ShowsController < AdminController
+  load_and_authorize_resource
+
   # GET /shows
   # GET /shows.xml
   def index
@@ -14,7 +16,7 @@ class ShowsController < AdminController
   # GET /shows/1
   # GET /shows/1.xml
   def show
-    @show = Show.find(params[:id])
+    authorize! if can? :read, [Show, Ticketalert, Ticketrez, Ticketsection]
     @ticketalerts = @show.ticketalerts
     @ticketrezs = @show.ticketrezs
     @ticketsections = @show.ticketsections
@@ -28,8 +30,6 @@ class ShowsController < AdminController
   # GET /shows/new
   # GET /shows/new.xml
   def new
-    @show = Show.new
-
     respond_to do |format|
       format.html # new.html.erb
       format.xml  { render :xml => @show }
@@ -38,14 +38,11 @@ class ShowsController < AdminController
 
   # GET /shows/1/edit
   def edit
-    @show = Show.find(params[:id])
   end
 
   # POST /shows
   # POST /shows.xml
   def create
-    @show = Show.new(params[:show])
-
     respond_to do |format|
       if @show.save
         flash[:notice] = 'Show was successfully created.'
@@ -61,8 +58,6 @@ class ShowsController < AdminController
   # PUT /shows/1
   # PUT /shows/1.xml
   def update
-    @show = Show.find(params[:id])
-
     respond_to do |format|
       if @show.update_attributes(params[:show])
         flash[:notice] = 'Show was successfully updated.'
@@ -78,7 +73,7 @@ class ShowsController < AdminController
   # DELETE /shows/1
   # DELETE /shows/1.xml
   def destroy
-    @show = Show.find(params[:id])
+    authorize! if can? :destroy, [Show, Ticketsection, Ticketrez, Rezlineitem, Ticketalert]
     @show.destroy
 
     respond_to do |format|

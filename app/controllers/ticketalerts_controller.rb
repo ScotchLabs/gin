@@ -1,4 +1,6 @@
 class TicketalertsController < AdminController
+  load_and_authorize_resource
+
   # GET /ticketalerts
   # GET /ticketalerts.xml
   def index
@@ -13,7 +15,6 @@ class TicketalertsController < AdminController
   # GET /ticketalerts/1
   # GET /ticketalerts/1.xml
   def show
-    @ticketalert = Ticketalert.find(params[:id])
     @show = @ticketalert.show
 
     respond_to do |format|
@@ -25,7 +26,6 @@ class TicketalertsController < AdminController
   # GET /ticketalerts/new
   # GET /ticketalerts/new.xml
   def new
-    @ticketalert = Ticketalert.new
     @show = @ticketalert.show
 
     respond_to do |format|
@@ -36,14 +36,12 @@ class TicketalertsController < AdminController
 
   # GET /ticketalerts/1/edit
   def edit
-    @ticketalert = Ticketalert.find(params[:id])
     @show = @ticketalert.show
   end
 
   # POST /ticketalerts
   # POST /ticketalerts.xml
   def create
-    @ticketalert = Ticketalert.new(params[:ticketalert])
     @show = @ticketalert.show
 
     respond_to do |format|
@@ -61,8 +59,6 @@ class TicketalertsController < AdminController
   # PUT /ticketalerts/1
   # PUT /ticketalerts/1.xml
   def update
-    @ticketalert = Ticketalert.find(params[:id])
-
     respond_to do |format|
       if @ticketalert.update_attributes(params[:ticketalert])
         flash[:notice] = 'Ticketalert was successfully updated.'
@@ -78,7 +74,6 @@ class TicketalertsController < AdminController
   # DELETE /ticketalerts/1
   # DELETE /ticketalerts/1.xml
   def destroy
-    @ticketalert = Ticketalert.find(params[:id])
     @show = @ticketalert.show
     @ticketalert.destroy
 
