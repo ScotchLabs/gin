@@ -83,35 +83,6 @@ trclass = "class='zebra'"
 
 <br />
 
-<% if can? :create, Ticketerez %><%= link_to 'New ticketrez', new_ticketrez_path+"/"+@show.abbrev %><% end %>
+<% if can? :create, Ticketrez %><%= link_to 'New ticketrez', new_ticketrez_path+"/"+@show.abbrev %><% end %>
 <br />
 <br />
-
-<h1>Listing ticketalerts</h1>
-
-<table>
-  <tr>
-    <th>Email</th>
-  </tr>
-
-<%
-trclass = "class='zebra'"
-@ticketalerts.each do |ticketalert|
-  if trclass=="class='zebra'"
-    trclass = ""
-  else
-    trclass = "class='zebra'"
-  end
-%>
-  <tr <%= trclass %>>
-    <td><%=h ticketalert.email %></td>
-    <td><%= link_to 'Show', ticketalert %></td>
-    <% if can? :update, Ticketalert %><td><%= link_to 'Edit', edit_ticketalert_path(ticketalert) %></td><% end %>
-    <% if can? :destroy, Ticketalert %><td><%= link_to 'Destroy', ticketalert, :confirm => 'Are you sure?', :method => :delete %></td><% end %>
-  </tr>
-<% end %>
-</table>
-
-<br />
-
-<% if can? :create, Ticketalert %><%= link_to 'New ticketalert', new_ticketalert_path+"/"+@show.abbrev %><% end %>

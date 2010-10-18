@@ -12,7 +12,7 @@ class Ability
         can :manage, [Show, Ticketsection, Ticketrez, Rezlineitem]
       end
       if user.role? :dev
-        can :manage, [Content, Rezlineitem, Show, Ticketalert, Ticketrez, Ticketsection, Update]
+        can :manage, [Content, Rezlineitem, Show, Ticketrez, Ticketsection, Update]
       end
       if user.role? :writer
         can :manage, [Show, Update, Content]
