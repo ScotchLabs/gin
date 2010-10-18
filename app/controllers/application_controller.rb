@@ -31,11 +31,7 @@ protected
         puts "DEBUG application_controller: checking if user '#{session[:user_name]}' has access to controller '#{controller_name}', action '#{action_name}'"
         okcontinue = hasaccess?(session[:user_id],controller_name, action_name)
         puts "DEBUG application_controller: okcontinue is '#{okcontinue.to_s}'"
-        if okcontinue
-          if action_name=="create" or action_name=="update" or action_name=="destroy"
-            Logger.new("log/info.log").info {"#{session[:user_name]} rendered #{controller_name}##{action_name}, related id: #{params[:id].to_s}, time: #{Time.now}"}
-          end
-        else
+        unless okcontinue
           flash[:notice] = "You don't have access to that."
           puts "DEBUG application_controller: user #{session[:user_name]} doesn't have access to controller #{controller_name}. Redirecting to admin"
           redirect_to :controller => "admin"
