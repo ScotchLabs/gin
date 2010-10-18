@@ -16,7 +16,7 @@ class ShowsController < AdminController
   # GET /shows/1
   # GET /shows/1.xml
   def show
-    authorize! :read, [Show, Ticketrez, Ticketsection]
+    authorize! :read, Show, Ticketrez, Ticketsection
     @ticketrezs = @show.ticketrezs
     @ticketsections = @show.ticketsections
 
@@ -72,7 +72,7 @@ class ShowsController < AdminController
   # DELETE /shows/1
   # DELETE /shows/1.xml
   def destroy
-    authorize! :destroy, [Show, Ticketsection, Ticketrez, Rezlineitem]
+    authorize! :destroy, Show, Ticketsection, Ticketrez, Rezlineitem
     @show.destroy
 
     respond_to do |format|
