@@ -1,6 +1,6 @@
 class IndexController < ApplicationController
   def index
-    authorize! :read, [Show, Update]
+    authorize! :read, Show, Update
     @updates = Array.new
     updates = Update.all(:order => "created_at DESC")
     updates.each {|update| @updates.push(update) unless update.expired }
@@ -11,7 +11,7 @@ class IndexController < ApplicationController
   end
   
   def showpane
-    authorize! :read, [Content]
+    authorize! :read, Content
     @pane = params[:id]
     @contents = Content.all(:conditions => ["contentpane = ?", params[:id]], :order => "contents.order ASC")
   end
