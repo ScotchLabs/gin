@@ -5,7 +5,7 @@ ActionController::Routing::Routes.draw do |map|
 
   map.resources :ticketrezs
 
-  map.resources :ticketalerts
+  #map.resources :ticketalerts
 
   map.resources :users
   
@@ -34,7 +34,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'tickets/cancel/:hashid',:controller => "tickets", :action => "cancelrez"
   
   map.connect 'ticketsections/new/:abbrev', :controller => "ticketsections", :action => "new"
-  map.connect 'ticketalerts/new/:abbrev', :controller => "ticketalerts", :action => "new"
+  #map.connect 'ticketalerts/new/:abbrev', :controller => "ticketalerts", :action => "new"
   map.connect 'ticketrezs/new/:abbrev', :controller => "ticketrezs", :action => "new"
   
   map.connect 'rezlineitems/new/:ticketrezid', :controller => "rezlineitems", :action => "new"

@@ -76,7 +76,7 @@ class TicketsectionsController < AdminController
   # DELETE /ticketsections/1
   # DELETE /ticketsections/1.xml
   def destroy
-    authorize! if can? :destroy, Rezlineitem
+    authorize! :destroy, Rezlineitem
     @show = @ticketsection.show
     @ticketsection.destroy
     

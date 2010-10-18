@@ -1,7 +1,7 @@
 class TicketsController < ApplicationController
   layout 'index'
   def index
-    authorize! if can? :create, [Ticketrez, Rezlineitem]
+    authorize! :create, [Ticketrez, Rezlineitem]
     @shows = Show.all
     @shows.sort! { |x, y| Time.parse(x.performancetimes.split("|")[0])<=>Time.parse(y.performancetimes.split("|")[0]) }
     @shows.reverse.each { |show| @activeshow = show if show.upcoming and show.ticketstatus=="open" and !show.ticketsections.empty? }
@@ -18,7 +18,7 @@ class TicketsController < ApplicationController
   end
 
   def show
-    authorize! if can? :create, [Ticketrez, Rezlineitem]
+    authorize! :create, [Ticketrez, Rezlineitem]
     @ticketrez = Ticketrez.new
     # find a show with params[:abbrev], else redirect to tickets/showerror
     @show = Show.find_by_abbrev(params[:abbrev])
@@ -41,7 +41,7 @@ class TicketsController < ApplicationController
   end
   
   def create
-    authorize! if can? :create, [Ticketrez, Rezlineitem]
+    authorize! :create, [Ticketrez, Rezlineitem]
     @rezlineitemerrors = Array.new
     @ticketrezerrors = Array.new
     @ticketrezdidntsave = false
