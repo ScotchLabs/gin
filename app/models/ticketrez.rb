@@ -7,7 +7,7 @@ class Ticketrez < ActiveRecord::Base
   attr_accessor :emailconfirm
   
   validates_presence_of :show, :message => "id is invalid. Please contact the system administrator."
-  validates_presence_of :hasid, :message => "|Please indicate if you have a CMU ID."
+  #validates_presence_of :hasid, :message => "|Please indicate if you have a CMU ID."
   validates_presence_of :name, :message => "|Please enter your name."
   validates_presence_of :email, :message => "|Please enter a valid email address."
   validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/, :message => "address appears to be an invalid format."
