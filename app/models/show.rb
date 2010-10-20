@@ -22,7 +22,7 @@ class Show < ActiveRecord::Base
     name
   end
   
-  def ticketsavailable(performance)
+  def ticketsavailable(performance=nil)
     r=""
     ticketsections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((ticketsections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable(performance)} left"}
     r

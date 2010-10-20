@@ -204,6 +204,7 @@ class TicketsController < ApplicationController
   def destroyrez
     @ticketrez = Ticketrez.find(params[:ticketrez][:id])
     @show = @ticketrez.show
-    @ticketrez.destroy
+    @ticketrez.canceled = true
+    @ticketrez.save
   end
 end

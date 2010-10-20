@@ -61,6 +61,7 @@ trclass = "class='zebra'"
     <th>Name</th>
     <th>Email</th>
     <th>Email Sent</th>
+    <th>Canceled</th>
   </tr>
 
 <%
@@ -75,7 +76,8 @@ trclass = "class='zebra'"
   <tr <%= trclass %>>
     <td><%=h ticketrez.name %></td>
     <td><%=h ticketrez.email %></td>
-    <td><% if ticketrez.email_sent %>true<% else %>false. <%= link_to "Send one", "/ticketrezs/#{ticketrez.id}/sendemail" %><% end %></td>
+    <td><% if ticketrez.email_sent %>true. <%= link_to "Resend", "/ticketrezs/#{ticketrez.id}/sendemail" %><% else %>false. <%= link_to "Send one", "/ticketrezs/#{ticketrez.id}/sendemail" %><% end %></td>
+    <td><%=h ticketrez.canceled %></td>
     <td><%= link_to 'Show', ticketrez %></td>
     <% if can? :update, Ticketrez %><td><%= link_to 'Edit', edit_ticketrez_path(ticketrez) %></td><% end %>
     <% if can? :destroy, Ticketrez %><td><%= link_to 'Destroy', ticketrez, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

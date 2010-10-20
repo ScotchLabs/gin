@@ -1,5 +1,5 @@
 <%
-trs = @show.ticketrezs
+trs = @show.ticketrezs.select {|s| s.canceled != true}
 @trs = Array.new
 for tr in trs
   found = Rezlineitem.first(:conditions => ["ticketrez_id = ? and performance = ?",tr.id,perf])

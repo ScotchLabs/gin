@@ -13,10 +13,9 @@ class Ticketsection < ActiveRecord::Base
   def numreserved(performance=nil)
     perf = DateTime.parse(performance).to_s unless performance.nil?
     total = 0
-    for i in rezlineitems
-      if performance.nil? 
-        total += i.quantity
-      elsif DateTime.parse(i.performance)==perf
+    reserved = rezlineitems.select{|r| r.ticketrez.canceled != true}
+    for i in reserved
+      if performance.nil? or DateTime.parse(i.performance)==perf
         total += i.quantity
       end
     end
