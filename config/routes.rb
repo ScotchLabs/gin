@@ -36,6 +36,7 @@ ActionController::Routing::Routes.draw do |map|
   map.connect 'ticketsections/new/:abbrev', :controller => "ticketsections", :action => "new"
   #map.connect 'ticketalerts/new/:abbrev', :controller => "ticketalerts", :action => "new"
   map.connect 'ticketrezs/new/:abbrev', :controller => "ticketrezs", :action => "new"
+  map.connect 'ticketrezs/:id/sendemail', :controller => "tickets", :action => "sendemail"
   
   map.connect 'rezlineitems/new/:ticketrezid', :controller => "rezlineitems", :action => "new"
 

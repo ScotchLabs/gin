@@ -154,8 +154,12 @@ class TicketsController < ApplicationController
             end
             i=i+1
           end
-          Mailer::deliver_rez_mail(@ticketrez.id) if @sendemail
         end #non-ajax makerez
+        if @sendemail
+          Mailer::deliver_rez_mail(@ticketrez.id)
+          @ticketrez.email_sent = true
+          @ticketrez.save
+        end
       end # makerez
       
       @errors = @ticketrez.errors.map{|e| e[0]}
@@ -172,7 +176,22 @@ class TicketsController < ApplicationController
   end
   
   def sendemail
-    Mailer::deliver_rez_mail(params[:ticketrezid])
+    begin
+      @ticketrez = Ticketrez.find_by_id(params[:id])
+    rescue RecordNotFound
+      flash[:notice] = "We couldn't find a reservation with that id."
+      redirect_to "/admin"
+    end
+    if @ticketrez
+      Mailer::deliver_rez_mail(@ticketrez.id)
+      @ticketrez.email_sent = true
+      @ticketrez.save
+      flash[:notice] = "An email was sent to #{@ticketrez.email} with his or her reservation details."
+      redirect_to @ticketrez.show
+    else
+      flash[:notice] = "We couldn't find a reservation with that id."
+      redirect_to "/admin"
+    end
   end
   
   def cancelrez
