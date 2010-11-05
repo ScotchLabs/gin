@@ -93,7 +93,7 @@
           time += DateTime.parse(perf).strftime("%I").to_i.to_s
           time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
           num = @show.ticketsavailable(perf)
-          num = "Sold out" if soldout
+          num = "Sold out online" if soldout
           time = "<b>#{time}</b> (<span id='form_availableinfo[#{perfNum}]'>#{num}</span>)"
           time = "<span style='color:#999999;'>#{time}</span>" if soldout
           %>
