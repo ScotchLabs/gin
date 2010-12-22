@@ -20,13 +20,13 @@ trclass = "class='zebra'"
   end
 %>
   <tr <%= trclass %>>
-    <td><%=h content.title %></td>
-    <td><%=h content.contentpane %></td>
-    <td><%=h content.contenttype %></td>
-    <td><%=h content.anchor %></td>
-    <td><%=h content.publish %></td>
-    <td><%=h content.order %></td>
-    <td><%=h !content.article.blank? %></td>
+    <td><%= content.title %></td>
+    <td><%= content.contentpane %></td>
+    <td><%= content.contenttype %></td>
+    <td><%= content.anchor %></td>
+    <td><%= content.publish %></td>
+    <td><%= content.order %></td>
+    <td><%= !content.article.blank? %></td>
     <td><%= link_to 'Show', content %></td>
     <% if can? :update, Content %><td><%= link_to 'Edit', edit_content_path(content) %></td><% end %>
     <% if can? :destroy, Content %><td><%= link_to 'Destroy', content, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

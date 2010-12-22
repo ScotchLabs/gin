@@ -15,8 +15,8 @@ trclass = "class='zebra'"
   end
 %>
   <tr <%= trclass %>>
-    <td><%=h user.name %></td>
-    <td><%=h user.email %></td>
+    <td><%= user.name %></td>
+    <td><%= user.email %></td>
     <td><%= link_to 'Show', user %></td>
     <% if can? :update, User %><td><%= link_to 'Edit', edit_user_path(user) %></td><% end %>
     <% if can? :destroy, User %><td><%= link_to 'Destroy', user, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

@@ -20,4 +20,4 @@ else
 end
 
 %>
-<div id='response' class='article'><%= message %><div id='ticketrezid' style='display:none;'><%= @ticketrez.id %></div><div id='highlight' style='display:none;'><%= @errors %></div></div>
+<div id='response' class='article'><%= message.html_safe %><div id='ticketrezid' style='display:none;'><%= @ticketrez.id %></div><div id='highlight' style='display:none;'><%= @errors %></div></div>
