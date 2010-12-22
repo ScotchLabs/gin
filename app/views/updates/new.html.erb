@@ -18,15 +18,15 @@
   </p>
 
 <p>
-    <%= f.label :name %><%= ast %><br />
+    <%= f.label :name %><%= ast.html_safe %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :anchor %><%= ast %><br />
+    <%= f.label :anchor %><%= ast.html_safe %><br />
     <%= f.text_field :anchor %> (you will not be able to change this later)
   </p>
   <p>
-    <%= f.label :expiredate, "Expiration date" %><%= ast %><br />
+    <%= f.label :expiredate, "Expiration date" %><%= ast.html_safe %><br />
     <%= f.datetime_select :expiredate %>
   </p>
   <p>

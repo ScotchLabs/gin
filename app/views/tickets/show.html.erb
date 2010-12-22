@@ -18,7 +18,7 @@
       <div id='ticketsleft' class='articleleft fleft'>
         <h1>Your Information</h1>
         <%= f.hidden_field :show_id, :value => @show.id %>
-        <%= ast %>All fields required.<br />
+        <%= ast.html_safe %>All fields required.<br />
         <br />
         <b><%= f.label :name %></b><br />
         <%= f.text_field :name, :size => 20, :style => (@errors.include? "name")? ("border:1px solid #f90"):("") %><br />

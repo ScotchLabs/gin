@@ -5,7 +5,7 @@
     <span class='carouselinfo_datecarousel upper'><%= carousel_item.datecarousel %></span><br />
     <% if !carousel_item.author.blank? %><span class='carouselinfo_author'>By <%= carousel_item.author %>.</span><br /><% end %>
     <% if !carousel_item.director.blank? %><span class='carouselinfo_director'>Directed by <%= carousel_item.director %>.</span><br /><% end %>
-    <% if carousel_item.timesvisible %><br /><span class='carouselinfo_perfcarousel'><%= carousel_item.perfcarousel %></span><br /><% end %>
+    <% if carousel_item.timesvisible %><br /><span class='carouselinfo_perfcarousel'><%= carousel_item.perfcarousel.html_safe %></span><br /><% end %>
     <% if !carousel_item.loc.blank? %><span class='carouselinfo_loc'><%= carousel_item.loc %>.</span><br /><% end %>
     <br /><span class='carouselinfo_ticketstatus'>
       <%=

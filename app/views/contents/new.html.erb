@@ -18,19 +18,19 @@
   </p>
 
   <p>
-    <%= f.label :title %><%= ast %><br />
+    <%= f.label :title %><%= ast.html_safe %><br />
     <%= f.text_field :title %>
   </p>
   <p>
-	<%= f.label :contentpane %><%= ast %><br />
+	<%= f.label :contentpane %><%= ast.html_safe %><br />
 	<%= f.select :contentpane, {"About Us","about","70th AI", "ai70"} %>
   </p>
   <p>
-	<%= f.label :contenttype, "Content type" %><%= ast %><br />
+	<%= f.label :contenttype, "Content type" %><%= ast.html_safe %><br />
 	<%= f.select :contenttype, {"Content","content","Link","link"} %>
   </p>
   <p>
-    <%= f.label :anchor %><%= ast %><br />
+    <%= f.label :anchor %><%= ast.html_safe %><br />
     <%= f.text_field :anchor %> (you will not be able to change this later)
   </p>
   <p>
@@ -38,7 +38,7 @@
     <%= f.check_box :publish %>
   </p>
   <p>
-    <%= f.label :order, "Order in menu/page" %><%= ast %><br />
+    <%= f.label :order, "Order in menu/page" %><%= ast.html_safe %><br />
     <%= f.text_field :order %>
   </p>
   <p>
