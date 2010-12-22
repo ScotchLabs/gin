@@ -2,7 +2,16 @@
 <h1>New content</h1>
 
 <% form_for(@content) do |f| %>
-  <%= f.error_messages %>
+  <% if @content.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
+    <ul>
+    <% @content.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p style="color:red;font-variant:italics;">
 	* Required
@@ -14,7 +23,7 @@
   </p>
   <p>
 	<%= f.label :contentpane %><%= ast %><br />
-	<%= f.select :contentpane, {"About Us","about","70th AI", "70ai"} %>
+	<%= f.select :contentpane, {"About Us","about","70th AI", "ai70"} %>
   </p>
   <p>
 	<%= f.label :contenttype, "Content type" %><%= ast %><br />

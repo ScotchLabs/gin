@@ -156,7 +156,7 @@ class TicketsController < ApplicationController
           end
         end #non-ajax makerez
         if @sendemail
-          Mailer::deliver_rez_mail(@ticketrez.id)
+          #FIXME Mailer::deliver_rez_mail(@ticketrez.id)
           @ticketrez.email_sent = true
           @ticketrez.save
         end
@@ -183,7 +183,7 @@ class TicketsController < ApplicationController
       redirect_to "/admin"
     end
     if @ticketrez
-      Mailer::deliver_rez_mail(@ticketrez.id)
+      #FIXME Mailer::deliver_rez_mail(@ticketrez.id)
       @ticketrez.email_sent = true
       @ticketrez.save
       flash[:notice] = "An email was sent to #{@ticketrez.email} with his or her reservation details."

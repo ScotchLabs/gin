@@ -1,7 +1,16 @@
 <h1>Editing ticketalert</h1>
 
 <% form_for(@ticketalert) do |f| %>
-  <%= f.error_messages %>
+  <% if @ticketalert.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@ticketalert.errors.count, "error") %> prohibited this ticketalert from being saved:</h2>
+    <ul>
+    <% @ticketalert.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p>
     <%= f.label :email %><br />

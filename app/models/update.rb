@@ -10,10 +10,6 @@ class Update < ActiveRecord::Base
   def expired
     DateTime.now.strftime("%Y-%m-%d %H:%M:%S") > expiredate.strftime("%Y-%m-%d %H:%M:%s")
   end
-
-  def articletext
-    RedCloth.new(article).to_html
-  end
   
   def postdate
     day = created_at.strftime("%d").to_i

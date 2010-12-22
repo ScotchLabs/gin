@@ -12,6 +12,8 @@ class User < ActiveRecord::Base
   attr_accessor :password_confirmation
   attr_accessor :emailConfirmation
   
+  before_destroy :cantdeletelast
+  
   validates_presence_of   :name, :email
   validates_uniqueness_of :name, :email
   validates_format_of :email, :with => /[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+(?:\.[a-z0-9\!\#\$\%\&\'\*\+\/\=\?\^\_\`\{\|\}\~\-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/
@@ -80,7 +82,7 @@ class User < ActiveRecord::Base
     self.hashed_password = User.encrypted_password(self.password, self.salt)
   end
   
-  def before_destroy
+  def cantdeletelast
     if User.count.zero?
       raise "Can't delete last user"
     end

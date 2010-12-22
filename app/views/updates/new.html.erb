@@ -2,7 +2,16 @@
 <h1>New update</h1>
 
 <% form_for(@update) do |f| %>
-  <%= f.error_messages %>
+  <% if @update.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@update.errors.count, "error") %> prohibited this update from being saved:</h2>
+    <ul>
+    <% @update.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p style="color:red;font-variant:italics;">
 	* Required

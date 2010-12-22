@@ -1,7 +1,16 @@
 <h1>Editing ticketrez</h1>
 
 <% form_for(@ticketrez) do |f| %>
-  <%= f.error_messages %>
+  <% if @ticketrez.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@ticketrez.errors.count, "error") %> prohibited this ticketrez from being saved:</h2>
+    <ul>
+    <% @ticketrez.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p>
     <%= f.label :name %><br />

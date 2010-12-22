@@ -7,7 +7,7 @@ class Content < ActiveRecord::Base
   PANES = [
     #displayed  #db
     ["About Us", "about"],
-    ["70th Ann. Init.", "70ai"]
+    ["70th Ann. Init.", "ai70"]
   ]
   validates_presence_of :title, :anchor, :contenttype, :contentpane
   validates_numericality_of :order
@@ -15,10 +15,6 @@ class Content < ActiveRecord::Base
   validates_inclusion_of :contentpane, :in => PANES.map {|disp, val| val}
   validate :anchor_ok
   validate :article_ok
-
-  def articletext
-    RedCloth.new(article).to_html
-  end
   
 protected
   def article_ok
