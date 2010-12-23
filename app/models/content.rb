@@ -7,7 +7,7 @@ class Content < ActiveRecord::Base
   PANES = [
     #displayed  #db
     ["About Us", "about"],
-    ["70th Ann. Init.", "ai70"]
+    ["70th Ann. Init.", "70ai"]
   ]
   validates_presence_of :title, :anchor, :contenttype, :contentpane
   validates_numericality_of :order

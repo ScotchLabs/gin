@@ -6,8 +6,8 @@ Gin::Application.routes.draw do
   resources :updates
   resources :shows
   resources :contents
-  match '/about/' => 'index#showpane', :as => 'about'
-  match '/ai70/' => 'index#showpane', :as => 'ai70'
+  match '/about/' => 'index#showpane', :id => 'about'
+  match '/initiative/' => 'index#showpane', :id => '70ai'
   match '/news/' => 'index#news'
   match '/boxoffice/' => 'boxoffice#index'
   match '/boxoffice/:abbrev' => 'boxoffice#show'
