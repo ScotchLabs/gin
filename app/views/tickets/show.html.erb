@@ -1,6 +1,6 @@
 <script type='text/javascript'>
-  jQuery(document).ready(function(){
-    jQuery("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
+  $(document).ready(function(){
+    $("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
   })
 </script>
 <% ast = "<span style='color:#ff9900'>*</span>" %>
@@ -67,13 +67,13 @@
             sections[<%= sectionNum %>]["pricewoutid"] = <%= section.pricewoutid %>
             <% sectionNum=sectionNum+1
           end %>
-          jQuery(document).ready(function(){
-            if (jQuery("#ticketsleft").height() > jQuery("#ticketsright").height())
-              jQuery("#ticketsright").height(jQuery("#ticketsleft").height())
+          $(document).ready(function(){
+            if ($("#ticketsleft").height() > $("#ticketsright").height())
+              $("#ticketsright").height($("#ticketsleft").height())
             else
-              jQuery("#ticketsleft").height(jQuery("#ticketsright").height())
-            jQuery("#staticInfo").hide()
-            jQuery("#dynamicInfo").show()
+              $("#ticketsleft").height($("#ticketsright").height())
+            $("#staticInfo").hide()
+            $("#dynamicInfo").show()
           })
         </script>
         <% perfNum=0

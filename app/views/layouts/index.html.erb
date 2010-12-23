@@ -4,32 +4,30 @@
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
 	<%= stylesheet_link_tag "snstheatre", "carousel", "colorbox", :media => "all" %>
-	<%= javascript_include_tag :defaults, "jquery-1.4.1.min", "jquery.colorbox-min" %>
-	<% if action_name == "index" %>
-    <%= javascript_include_tag "carousel", "twitter" %>
-	<% end %>
+	<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" %>
+	<%= javascript_include_tag :defaults %>
+	<%= csrf_meta_tag %>
 	<script type='text/javascript'>
-    jQuery.noConflict();
     <% if action_name == "index" %>
-    jQuery(document).ready(function(){
+    $(document).ready(function(){
       // carousel
-      jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 511) + "px";
-      jQuery('#carousellinkscontainer')[0].style.width = (jQuery('#carousellinkscontainer > div').size() * 165) + "px";
+      $('#carouselitemscontainer')[0].style.width = ($('#carouselitemscontainer > div').size() * 511) + "px";
+      $('#carousellinkscontainer')[0].style.width = ($('#carousellinkscontainer > div').size() * 165) + "px";
       navright = 0;
-      navmin = (jQuery('#carousellinkscontainer > div').size()-2) * -165;
+      navmin = ($('#carousellinkscontainer > div').size()-2) * -165;
       var i;
-      for (i=0; i<jQuery('#carouselitemscontainer > div').size(); i++)
-        if (<%= !@activeshow.nil? %> && jQuery('#carouselitemscontainer > div')[i].id == "carouselitem_<%= ((!@activeshow.nil?)? (@activeshow.abbrev):("")) %>")
+      for (i=0; i<$('#carouselitemscontainer > div').size(); i++)
+        if (<%= !@activeshow.nil? %> && $('#carouselitemscontainer > div')[i].id == "carouselitem_<%= ((!@activeshow.nil?)? (@activeshow.abbrev):("")) %>")
           break;
       <% if @activeshow.nil? %>
       i--;
       <% end %>
-      var x = (jQuery("#carouselitemscontainer > div").size()-i-1)*-511;
+      var x = ($("#carouselitemscontainer > div").size()-i-1)*-511;
       var y = x+"px";
-      jQuery("#carouselitemscontainer").css('right',y);
+      $("#carouselitemscontainer").css('right',y);
       
       // noscript
-      jQuery("#twitbird").show();
+      $("#twitbird").show();
       
       // twitter UI
       window.onresize = checkWidth;

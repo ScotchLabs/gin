@@ -27,6 +27,9 @@ module Gin
     # :all can be used as a placeholder for all plugins not explicitly named
     # config.plugins = [ :exception_notification, :ssl_requirement, :all ]
   
+    # JavaScript files you want as :defaults (application.js is always included).
+    config.action_view.javascript_expansions[:defaults] = %w(rails jquery.colorbox-min tickets twitter carousel)
+    
     # Skip frameworks you're not going to use. To use Rails without a database,
     # you must remove the Active Record framework.
     # config.frameworks -= [ :active_record, :active_resource, :action_mailer ]

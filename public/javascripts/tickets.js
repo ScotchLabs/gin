@@ -19,8 +19,8 @@ function updateprice() {
     }
     pricesum=pricesum+tix*sectionprice
   }
-  jQuery("#numtickets").html(""+qtysum)
-  jQuery("#pricetickets").html(""+pricesum)
+  $("#numtickets").html(""+qtysum)
+  $("#pricetickets").html(""+pricesum)
 }
 
 function updatecounts() {
@@ -55,22 +55,22 @@ function updatecounts() {
 function reservetickets() {
   showLoading()
   // set the form
-  jQuery("#ticketrez_submit").attr("disabled","true")
-  jQuery("#ticketrez_name").css("border","1px solid black")
-  jQuery("#ticketrez_email").css("border","1px solid black")
-  jQuery("#ticketrez_emailconfirm").css("border","1px solid black")
+  $("#ticketrez_submit").attr("disabled","true")
+  $("#ticketrez_name").css("border","1px solid black")
+  $("#ticketrez_email").css("border","1px solid black")
+  $("#ticketrez_emailconfirm").css("border","1px solid black")
   for (var i=0; i<numperformances; i++)
     document.getElementById("form_quantity["+i+"]").style.border = "1px solid black"
-  jQuery("#form_id").css("border",null)
-  jQuery("#form_quantities").css("border",null)
+  $("#form_id").css("border",null)
+  $("#form_quantities").css("border",null)
   
   // get name, email, hasid for the ticketrez object
   var ticketrez = new Array(5)
-  var showid = jQuery("#ticketrez_show_id").attr("value")
+  var showid = $("#ticketrez_show_id").attr("value")
   ticketrez[0] = showid
-  ticketrez[1] = jQuery("#ticketrez_name").attr("value")
-  ticketrez[2] = jQuery("#ticketrez_email").attr("value")
-  ticketrez[3] = jQuery("#ticketrez_hasid_true").attr("checked")
+  ticketrez[1] = $("#ticketrez_name").attr("value")
+  ticketrez[2] = $("#ticketrez_email").attr("value")
+  ticketrez[3] = $("#ticketrez_hasid_true").attr("checked")
   var rezlineitems = new Array()
   var j=0
   for (var i=0; i<numperformances; i++) {
@@ -84,13 +84,13 @@ function reservetickets() {
     }
   }
   
-  jQuery.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}})
+  $.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}})
   return false
 }
 
 function reserveSuccess(data) {
   // set the form
-  jQuery("#ticketrez_submit").attr("disabled",null)
+  $("#ticketrez_submit").attr("disabled",null)
   lastData = data
   // munge data
   var pattern = /<div id='response' class='article'>(.*)<\/div>/
@@ -108,13 +108,13 @@ function reserveSuccess(data) {
       for (var j=0; j<numperformances; j++)
         document.getElementById("form_quantity["+j+"]").style.border = "1px solid #f90"
     else if (error == "email") {
-      jQuery("#ticketrez_email").css("border","1px solid #f90")
-      jQuery("#ticketrez_emailconfirm").css("border","1px solid #f90")
+      $("#ticketrez_email").css("border","1px solid #f90")
+      $("#ticketrez_emailconfirm").css("border","1px solid #f90")
     }
     else if (error == "hasid")
-      jQuery("#form_id").css("border","1px solid #f90")
+      $("#form_id").css("border","1px solid #f90")
     else
-      jQuery("#ticketrez_"+error).css("border","1px solid #f90")
+      $("#ticketrez_"+error).css("border","1px solid #f90")
   }
   ajaxresp(data)
   updatecounts()
@@ -122,17 +122,17 @@ function reserveSuccess(data) {
 
 function reserveError(xhr, status, thrown) {
   // set the form
-  jQuery("#ticketrez_submit").attr("disabled",null)
+  $("#ticketrez_submit").attr("disabled",null)
   ajaxresp("<h1>There was an error contacting the server.</h1>Try again later or contact the <a href='mailto:webmaster@snstheatre.org'>system administrator</a>.<!-- thrown:"+thrown+", status:"+status+", xhr:"+xhr+" -->")
 }
 
 function showLoading() {
-  jQuery.fn.colorbox({inline:true,href:"#ajaxloading",width:"650px",transition:"none",opacity:"0.3"})
+  $.fn.colorbox({inline:true,href:"#ajaxloading",width:"650px",transition:"none",opacity:"0.3"})
 }
 function ajaxresp(t) {
-  jQuery("#ajaxresp")[0].innerHTML=t
+  $("#ajaxresp")[0].innerHTML=t
   colorbox("ajaxresp")
 }
 function colorbox(t) {
-  jQuery.fn.colorbox({inline:true,href:"#"+t,width:"650px",transition:"none",opacity:"0.3"})
+  $.fn.colorbox({inline:true,href:"#"+t,width:"650px",transition:"none",opacity:"0.3"})
 }
