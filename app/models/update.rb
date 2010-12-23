@@ -1,5 +1,5 @@
 class Update < ActiveRecord::Base
-  named_scope :not_expired, :conditions => ['expiredate > ?', DateTime.now], :order => "created_at DESC"
+  scope :not_expired, :conditions => ['expiredate > ?', DateTime.now], :order => "created_at DESC"
 
   validates_presence_of :name, :anchor, :expiredate
   validates_uniqueness_of :anchor

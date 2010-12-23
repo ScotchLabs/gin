@@ -1,7 +1,7 @@
 <% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
 <h1>Editing show</h1>
 
-<% form_for(@show) do |f| %>
+<%= form_for(@show) do |f| %>
   <% if @show.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@show.errors.count, "error") %> prohibited this show from being saved:</h2>

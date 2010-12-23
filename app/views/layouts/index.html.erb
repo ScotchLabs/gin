@@ -54,7 +54,7 @@
     <div id='view'>
       <noscript><div class='article' style='text-align:center;'>It looks like your browser has Javascript turned off. If you want this page to render properly go to your browser's settings and turn Javascript on.</div></noscript>
       <% if flash[:notice] %>
-      <div class='article'><%= flash[:notice] %></div>
+      <div class='article'><%= flash[:notice].html_safe %></div>
       <% end %>
       <%= yield %>
     </div>

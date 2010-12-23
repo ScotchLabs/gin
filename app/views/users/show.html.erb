@@ -10,8 +10,10 @@
 
 <p>
   <b>Roles:</b>
-  <% @user.roles.split("|").map {|r|
-    User.role(r)[1]
+  <% r = @user.roles || Array.new
+  r.split("|").map {|r|
+    u=User.role(r)
+    u[1] unless u.nil?
   }.join(", ") %>
 </p>
 

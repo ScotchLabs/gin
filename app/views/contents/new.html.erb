@@ -1,7 +1,7 @@
 <% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
 <h1>New content</h1>
 
-<% form_for(@content) do |f| %>
+<%= form_for(@content) do |f| %>
   <% if @content.errors.any? %>
   <div id="errorExplanation">
     <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
