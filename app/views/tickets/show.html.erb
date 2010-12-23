@@ -4,7 +4,6 @@
   })
 </script>
 <% ast = "<span style='color:#ff9900'>*</span>" %>
-<div style='display:none;'><div id='ajaxresp'></div><div id='ajaxloading'><h1>Just a moment...</h1></div></div>
 
 <% if @errors.length > 0 %>
 <div class='article'>
@@ -110,7 +109,7 @@
           <br />Once everything looks correct, click the button below to confirm your reservation.<br />
         </div>
         <br />
-        <div style='text-align:center;'><%= f.submit "Reserve!", :onclick=>"return reservetickets()" %></div>
+        <div style='text-align:center;'><%= f.submit "Reserve!" %></div>
       </div>
       <div class='clearfix'></div>
     </div>
