@@ -18,7 +18,7 @@ jQuery(document).ready(function(){
 <br />
 This show has <%= pluralize @sections.length, "section" %>.<br />
 <% for section in @sections %>
-  Section <%=h section.name %>: <%=h section.size %> seats, $<%=h section.pricewithid %>/<%=h section.pricewoutid %><% if can? :update, Ticketsection %> (<%= link_to("Edit this section", edit_ticketsection_path(section))%>)<% end %><br/>
+  Section <%= section.name %>: <%= section.size %> seats, $<%= section.pricewithid %>/<%= section.pricewoutid %><% if can? :update, Ticketsection %> (<%= link_to("Edit this section", edit_ticketsection_path(section))%>)<% end %><br/>
 <% end %>
 <% unless @show.seatingmap.nil? %><a href='http://upload.snstheatre.org/gin/shows/seatingmaps/<%= @show.seatingmap %>' rel='seatingmap' class='cboxElement'>view seating map</a><% end %><br />
 <br />

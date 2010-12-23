@@ -1,5 +1,5 @@
 class Update < ActiveRecord::Base
-  named_scope :not_expired, :conditions => ['expiredate > ?', DateTime.now], :order => "created_at DESC"
+  scope :not_expired, :conditions => ['expiredate > ?', DateTime.now], :order => "created_at DESC"
 
   validates_presence_of :name, :anchor, :expiredate
   validates_uniqueness_of :anchor
@@ -9,10 +9,6 @@ class Update < ActiveRecord::Base
 
   def expired
     DateTime.now.strftime("%Y-%m-%d %H:%M:%S") > expiredate.strftime("%Y-%m-%d %H:%M:%s")
-  end
-
-  def articletext
-    RedCloth.new(article).to_html
   end
   
   def postdate

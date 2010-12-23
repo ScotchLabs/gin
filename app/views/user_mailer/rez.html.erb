@@ -1,0 +1,17 @@
+<h1>Thank you for your reservation with Scotch'n'Soda Theatre!</h1><br>
+<br>
+Here are the details of your ticket reservation:<br>
+<%
+totalcost = 0
+for item in @items
+  section = item.ticketsection
+  totalcost += item.quantity * section.pricewithid if @rez.hasid
+  totalcost += item.quantity * section.pricewoutid unless @rez.hasid
+  dt = DateTime.parse(item.performance)
+  %><%= "#{item.quantity} for #{dt.strftime("%A")}, #{dt.strftime("%d").split("0")==1? dt.strftime("%d").split("0")[1]:dt.strftime("%d").split("0")} #{dt.strftime("%B %Y @ %I:%M %p")} in section #{section.name}<br>".html_safe %>
+  <% end -%>
+To pick up your tickets, pay a total of $<%= totalcost %> at the door to <%= @show.loc %> 30 minutes before showtime. Please arrive early; any unclaimed tickets will be released to other patrons starting 10 minutes before showtime.<br>
+<br>
+If for any reason you need to cancel your reservation, please visit: <a href='http://snstheatre.org/tickets/cancel/<%= @rez.hashid %>'>http://snstheatre.org/tickets/cancel/<%= @rez.hashid %></a>.<br>
+<br>
+Again, thank you! We look forward to seeing you at the show!

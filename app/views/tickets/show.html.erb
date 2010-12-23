@@ -13,12 +13,12 @@
 </div>
 <% end %>
 
-<% form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
+<%= form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
   <div class='article'>
       <div id='ticketsleft' class='articleleft fleft'>
         <h1>Your Information</h1>
         <%= f.hidden_field :show_id, :value => @show.id %>
-        <%= ast %>All fields required.<br />
+        <%= ast.html_safe %>All fields required.<br />
         <br />
         <b><%= f.label :name %></b><br />
         <%= f.text_field :name, :size => 20, :style => (@errors.include? "name")? ("border:1px solid #f90"):("") %><br />
@@ -100,7 +100,7 @@
           <%= performance %>
           <%= quantity %>
           <%= sections %>
-          <%= time %><br />
+          <%= time.html_safe %><br />
           <%
           perfNum=perfNum+1
         end %>

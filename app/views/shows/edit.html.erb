@@ -1,23 +1,32 @@
 <% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
 <h1>Editing show</h1>
 
-<% form_for(@show) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@show) do |f| %>
+  <% if @show.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@show.errors.count, "error") %> prohibited this show from being saved:</h2>
+    <ul>
+    <% @show.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p style="color:red;font-variant:italics;">
 	* Required
   </p>
 
   <p>
-    <%= f.label :name, "Show name" %><%= ast %><br />
+    <%= f.label :name, "Show name" %><%= ast.html_safe %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :shortdisplayname, "Short Display Name" %><%= ast %><br />
+    <%= f.label :shortdisplayname, "Short Display Name" %><%= ast.html_safe %><br />
     <%= f.text_field :shortdisplayname %>
   </p>
   <p>
-    <%= f.label :abbrev, "Abbreviation" %><%= ast %><br />
+    <%= f.label :abbrev, "Abbreviation" %><%= ast.html_safe %><br />
     <%= f.text_field :abbrev, {:disabled => true} %>
   </p>
   <p>
@@ -29,7 +38,7 @@
     <%= f.text_field :loc %>
   </p>
   <p>
-    <%= f.label :imageurl, "Image name" %><%= ast %> (use temp.png if you don't have one now. make sure the image is in /data/uploads/gin/shows/)<br />
+    <%= f.label :imageurl, "Image name" %><%= ast.html_safe %> (use temp.png if you don't have one now. make sure the image is in /data/uploads/gin/shows/)<br />
     <%= f.text_field :imageurl %>
   </p>
   <p>
@@ -57,7 +66,7 @@
     <%= f.text_area :ticketnotes, :rows => 2 %>
   </p>
   <p>
-    <%= f.label :performancetimes, "Performance times" %><%= ast %> (please use pipe-separated timestamps)<br />
+    <%= f.label :performancetimes, "Performance times" %><%= ast.html_safe %> (please use pipe-separated timestamps)<br />
     <%= f.text_field :performancetimes %>
   </p>
   <p>

@@ -15,10 +15,6 @@ class Content < ActiveRecord::Base
   validates_inclusion_of :contentpane, :in => PANES.map {|disp, val| val}
   validate :anchor_ok
   validate :article_ok
-
-  def articletext
-    RedCloth.new(article).to_html
-  end
   
 protected
   def article_ok

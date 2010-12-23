@@ -1,5 +1,5 @@
 class AdminController < ApplicationController
-  before_filter :authenticate, :except => :login
+  before_filter :authenticate, :except => [:login, :forgot]
   
   def login
     session[:user_id] = nil
@@ -23,8 +23,8 @@ class AdminController < ApplicationController
         u.emailConfirmation = params[:cemailConfirmation]
         u.password = params[:cpassword]
         if u.save
-          Mailer::deliver_account_created_mail(u)
-          Mailer::deliver_account_created_admin_mail(u)
+          UserMailer.account_created(u).deliver
+          AdminMailer.account_created(u).deliver
           redirect_to({:action => "createaccount"})
         else
           message = "There was a problem with your input:<br />"
@@ -39,7 +39,7 @@ class AdminController < ApplicationController
           flash.now[:notice] = "We couldn't find a user with that email address"
         else
           flash.now[:notice] = "An email has been sent to #{email} with directions on how to reset your password."
-          Mailer::deliver_forgot_mail(u)
+          UserMailer.forgot(u).deliver
         end
       end
     end
@@ -63,7 +63,7 @@ class AdminController < ApplicationController
       u.password_confirmation = u.password
       u.emailConfirmation = u.email
       if u.save
-        Mailer::deliver_password_reset_mail(u, newpwd)
+        UserMailer.password_reset(u, newpwd).deliver
       else
         redirect_to :action => "forgoterror"
       end
@@ -74,7 +74,7 @@ protected
   def authenticate
     if current_user.guest?
       # user has not logged in and needs to. redirect them to the right login page
-      session[:original_uri] = request.request_uri
+      session[:original_uri] = request.fullpath
       flash[:notice] = "Please log in."
       redirect_to :controller => "admin", :action => "login"
     end

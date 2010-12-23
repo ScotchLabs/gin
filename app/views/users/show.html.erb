@@ -1,17 +1,19 @@
 <p>
   <b>Name:</b>
-  <%=h @user.name %>
+  <%= @user.name %>
 </p>
 
 <p>
   <b>Email:</b>
-  <%=h @user.email %>
+  <%= @user.email %>
 </p>
 
 <p>
   <b>Roles:</b>
-  <% @user.roles.split("|").map {|r|
-    User.role(r)[1]
+  <% r = @user.roles || Array.new
+  r.split("|").map {|r|
+    u=User.role(r)
+    u[1] unless u.nil?
   }.join(", ") %>
 </p>
 

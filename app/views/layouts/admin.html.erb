@@ -30,7 +30,7 @@
     </div>
     <div id='view'>
       <% if flash[:notice] %>
-      <div class='article'><%= flash[:notice] %></div>
+      <div class='article'><%= flash[:notice].html_safe %></div>
       <% end %>
       <div class='article'><%= yield %></div>
     </div>

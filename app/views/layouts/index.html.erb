@@ -44,17 +44,17 @@
     <div id='nav' class='botcorner shadow'>
       <div id='menu'>
         <ul>
-          <li><%= link_to "Ticket<br />Reservations", "/tickets" %></li>
-          <li><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"} %> </li>
-          <li><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"} %></li>
-          <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank"} %></li>
+          <li><%= link_to "Ticket<br>Reservations".html_safe, "/tickets" %></li>
+          <li><%= link_to "About Us", '/about' %> </li>
+          <li><%= link_to "70th Anniversary<br>Initiative".html_safe, '/initiative' %></li>
+          <li><%= link_to "The No Parking<br>Players".html_safe, "http://npp.snstheatre.org", {:target => "_blank"} %></li>
         </ul>
       </div>
     </div>
     <div id='view'>
       <noscript><div class='article' style='text-align:center;'>It looks like your browser has Javascript turned off. If you want this page to render properly go to your browser's settings and turn Javascript on.</div></noscript>
       <% if flash[:notice] %>
-      <div class='article'><%= flash[:notice] %></div>
+      <div class='article'><%= flash[:notice].html_safe %></div>
       <% end %>
       <%= yield %>
     </div>

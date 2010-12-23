@@ -1,23 +1,32 @@
 <% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
 <h1>Editing update</h1>
 
-<% form_for(@update) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@update) do |f| %>
+  <% if @update.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@update.errors.count, "error") %> prohibited this update from being saved:</h2>
+    <ul>
+    <% @update.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p style="color:red;font-variant:italics;">
 	* Required
   </p>
 
   <p>
-    <%= f.label :name %><%= ast %><br />
+    <%= f.label :name %><%= ast.html_safe %><br />
     <%= f.text_field :name %>
   </p>
   <p>
-    <%= f.label :anchor %><%= ast %><br />
+    <%= f.label :anchor %><%= ast.html_safe %><br />
     <%= f.text_field :anchor, {:disabled => true} %>
   </p>
   <p>
-    <%= f.label :expiredate, "Expiration date" %><%= ast %><br />
+    <%= f.label :expiredate, "Expiration date" %><%= ast.html_safe %><br />
     <%= f.datetime_select :expiredate %>
   </p>
   <p>

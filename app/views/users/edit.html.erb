@@ -1,7 +1,16 @@
 <h1>Editing user</h1>
 
-<% form_for(@user) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@user) do |f| %>
+  <% if @user.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@user.errors.count, "error") %> prohibited this user from being saved:</h2>
+    <ul>
+    <% @user.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p>
     <%= f.label :name %><br />
@@ -21,7 +30,7 @@
   </p>
   <p>
     <%= f.label :retype, "Retype password" %><br />
-    <%= f.datetime_select :retype %>
+    <%= f.text_field :retype %>
   </p>
   <p>
     <%= f.submit 'Update' %>
