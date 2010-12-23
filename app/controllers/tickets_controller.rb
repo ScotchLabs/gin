@@ -36,7 +36,7 @@ class TicketsController < ApplicationController
     
     @errors = Array.new
     if params[:highlight]
-      @errors=params[:highlight].split("|") 
+      @errors=params[:highlight].split("/")
     end
   end
   
@@ -55,27 +55,7 @@ class TicketsController < ApplicationController
       ###############
       @makerez=true
       @sendemail=true
-      @ajax=false
-      if !params[:ticketrez][0].nil?
-        ##########
-        ## AJAX ##
-        ##########
-        @ticketrez = Ticketrez.new
-        @ajax=true
-        show = Show.find(params[:ticketrez][0].to_i)
-        if show.nil?
-          raise "ShowNotFoundError"
-        end
-        @ticketrez.show_id = show.id
-        @ticketrez.name = params[:ticketrez][1]
-        @ticketrez.email = params[:ticketrez][2]
-        @ticketrez.hasid = params[:ticketrez][3]
-      else
-        #############
-        ## NONAJAX ##
-        #############
-        @ticketrez = Ticketrez.new(params[:ticketrez])
-      end # non-ajax ticketrez
+      @ticketrez = Ticketrez.new(params[:ticketrez])
       unless @ticketrez.save
         @ticketrez.errors.full_messages.each do |msg|
           msg = msg.split("|")[1] if msg.index("|")
@@ -93,22 +73,23 @@ class TicketsController < ApplicationController
         ##################
         @rezlineitems = Array.new
         @qty=0
-        if !params[:rezlineitems].nil?
-          ##########
-          ## AJAX ##
-          ##########
-          @ajax=true
-          for rli in params[:rezlineitems]
-            rli = rli.split("|")
+        i=0
+        while i<params[:form][:section].length
+          unless params[:form][:quantity][i.to_s].blank?
             @r = Rezlineitem.new
+            @r.ticketsection_id = params[:form][:section][i.to_s]
+            @r.quantity = params[:form][:quantity][i.to_s]
+            begin
+              @qty+=@r.quantity.to_i
+            rescue Exception => e
+              # caught exception
+            end
+            @r.performance = params[:form][:performance][i.to_s]
             @r.ticketrez_id = @ticketrez.id
-            @r.performance = rli[0]
-            @r.ticketsection_id = rli[1]
-            @r.quantity = rli[2]
-            @qty+=@r.quantity
             if @r.save
               @rezlineitems.push(@r)
             else
+              @rerrors = @r.errors
               @r.errors.full_messages.each do |msg|
                 msg = msg.split("|")[1] if msg.index("|")
                 @rezlineitemerrors.push(msg)
@@ -117,44 +98,10 @@ class TicketsController < ApplicationController
               @sendemail=false
               @ticketrez.destroy
               @rezlineitems.each {|rez| rez.destroy}
-              break
             end
           end
-        else
-          #############
-          ## NONAJAX ##
-          #############
-          @ajax=false
-          i=0
-          while i<params[:form][:section].length
-            unless params[:form][:quantity][i.to_s].blank?
-              @r = Rezlineitem.new
-              @r.ticketsection_id = params[:form][:section][i.to_s]
-              @r.quantity = params[:form][:quantity][i.to_s]
-              begin
-                @qty+=@r.quantity.to_i
-              rescue Exception => e
-                # caught exception
-              end
-              @r.performance = params[:form][:performance][i.to_s]
-              @r.ticketrez_id = @ticketrez.id
-              if @r.save
-                @rezlineitems.push(@r)
-              else
-                @rerrors = @r.errors
-                @r.errors.full_messages.each do |msg|
-                  msg = msg.split("|")[1] if msg.index("|")
-                  @rezlineitemerrors.push(msg)
-                end
-                @rezlineitemdidntsave = true
-                @sendemail=false
-                @ticketrez.destroy
-                @rezlineitems.each {|rez| rez.destroy}
-              end
-            end
-            i=i+1
-          end
-        end #non-ajax makerez
+          i=i+1
+        end
         if @sendemail
           UserMailer.rez(@ticketrez).deliver
           @ticketrez.email_sent = true
@@ -169,8 +116,8 @@ class TicketsController < ApplicationController
       @errors << "quantity" if @qty==0 and !@ticketrezdidntsave
       @errors = @errors.uniq.join("|")
       
-      if !@ajax and (@ticketrezdidntsave or @rezlineitemdidntsave)
-        redirect_to "/tickets/show/#{@show.abbrev}?highlight=#{@errors}"
+      if @ticketrezdidntsave or @rezlineitemdidntsave
+        redirect_to "/tickets/show/#{@show.abbrev}/?highlight=name/email"
       end
     end # request.post?
   end

@@ -65,26 +65,43 @@ function reservetickets() {
   $("#form_quantities").css("border",null)
   
   // get name, email, hasid for the ticketrez object
-  var ticketrez = new Array(5)
-  var showid = $("#ticketrez_show_id").attr("value")
-  ticketrez[0] = showid
-  ticketrez[1] = $("#ticketrez_name").attr("value")
-  ticketrez[2] = $("#ticketrez_email").attr("value")
-  ticketrez[3] = $("#ticketrez_hasid_true").attr("checked")
-  var rezlineitems = new Array()
-  var j=0
+  var ticketrez = {
+    showid: $("#ticketrez_show_id").attr("value"),
+    name: $("#ticketrez_name").attr("value"),
+    email: $("#ticketrez_email").attr("value"),
+    emailconfirm: $("#ticketrez_emailconfirm").attr("value"),
+    hasid: $("#ticketrez_hasid_true").attr("checked")
+  }
+  var section = {}
+  var quantity = {}
+  var performance = {}
   for (var i=0; i<numperformances; i++) {
-    // get qty and sectionid for rezlineitem
-    if (document.getElementById("form_quantity["+i+"]").value) {
-      // rezlineitem = performance|sectionid|quantity
-      rezlineitems[j] = document.getElementById("form_performance["+i+"]").value+"|"+
-        document.getElementById("form_section["+i+"]").value+"|"+
-        document.getElementById("form_quantity["+i+"]").value
-      j++
-    }
+    section[i] = $("#form_section["+i+"]").attr('value')
+    quantity[i] = $("#form_quantity["+i+"]").attr('value')
+    performance[i] = $("#form_performance["+i+"]").attr('value')
+  }
+  var form = {
+    section: section,
+    quantity: quantity,
+    performance: performance
   }
   
-  $.ajax({type: 'post', url: '/tickets/create', data: {ticketrez: ticketrez, rezlineitems: rezlineitems}, success: function(data, status, xhr){reserveSuccess(data)}, error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}})
+  var data = {
+    commit: $("#ticketrez_submit").attr('value'),
+    authenticity_token: $("#new_ticketrez [name='authenticity_token']").attr('value'),
+    utf8: $("#new_ticketrez [name='utf8']").attr('value'),
+    form: form,
+    ticketrez: ticketrez
+  }
+  
+  $.ajax({
+    type: 'post',
+    url: '/tickets/create',
+    data: data,
+    success: function(data, status, xhr){reserveSuccess(data)}, 
+    error: function(xhr, status, thrown){reserveError(xhr, status, thrown)}
+  })
+  
   return false
 }
 
