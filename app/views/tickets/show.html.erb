@@ -15,7 +15,8 @@
 
 <%= form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
   <div class='article'>
-      <div id='ticketsleft' class='articleleft fleft'>
+    <div class='tickets-split'>
+      <div id='ticketsleft' class='tickets-left'>
         <h1>Your Information</h1>
         <%= f.hidden_field :show_id, :value => @show.id %>
         <%= ast.html_safe %>All fields required.<br />
@@ -35,7 +36,7 @@
         </div>
         <div class='clearfix'></div>
       </div>
-      <div id='ticketsright' class='articleright fleft'>
+      <div id='ticketsright' class='tickets-right'>
         <h1>Ticket Reservations</h1>
         <% unless @show.housemanname.blank? or @show.housemanemail.blank? %><span style='font-size:8pt;'>Questions? Contact House Manager <%= link_to @show.housemanname, "mailto:#{@show.housemanemail}" %>.</span><br /><% end %>
         <br />
@@ -115,6 +116,7 @@
         <br />
         <div style='text-align:center;'><%= f.submit "Reserve!" %></div>
       </div>
-    <div class='clearfix'></div>
+      <div class='clearfix'></div>
+    </div>
   </div>
 <% end %>

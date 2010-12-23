@@ -3,7 +3,7 @@
 <head>
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
-	<%= stylesheet_link_tag "snstheatre", "carousel", "colorbox", :media => "all" %>
+	<%= stylesheet_link_tag "snstheatre", "newui", "carousel", "colorbox", :media => "all" %>
 	<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" %>
 	<%= javascript_include_tag :defaults %>
 	<%= csrf_meta_tag %>
@@ -39,7 +39,7 @@
 <body>
   <div id='container'>
     <div id='header'><h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1><h2>Student theatre at Carnegie Mellon since 1938</h2></div>
-    <div id='nav' class='botcorner shadow'>
+    <div id='nav' class='bottomcorner shadow'>
       <div id='menu'>
         <ul>
           <li><%= link_to "Ticket<br>Reservations".html_safe, "/tickets" %></li>
@@ -56,8 +56,10 @@
       <% end %>
       <%= yield %>
     </div>
-    <div id='footer' class='topcorner shadow'>&copy; 2010 Scotch'n'Soda Theatre at <b>Carnegie Mellon University</b><br />5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br /><a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a></div>
+    <div id='push'></div>
+    <div class='clearfix'></div>
   </div>
+  <div id='footer'>&copy; 2010 Scotch'n'Soda Theatre at <b>Carnegie Mellon University</b><br />5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br /><a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a></div>
   <div id='bodyfooter'>
     <% if action_name == "index" %>
     <div id='twitter_update_list' class='twittercallout'><div id='twittertext'></div><div class='twitterstem'></div></div>

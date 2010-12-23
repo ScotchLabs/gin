@@ -1,0 +1,104 @@
+body { overflow-y: scroll }
+h1, h2, h3, h4, h5, h6, ul, body, li { padding: 0 }
+a { text-decoration: none }
+ul { list-style: none }
+img { border-width: 0px }
+small { font-size: 8pt }
+
+/* Sticky Footer by Ryan Fait http://ryanfait.com/sticky-footer */
+* { margin: 0 }
+html, body { height: 100% }
+#container {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%; /* IE */
+  margin: 0 auto -83px; /* negative height of the push height */
+}
+#push {
+  height: 83px; /* same height as the footer stuff */
+}
+
+.hidden { display: none }
+.inline { display: inline }
+.dkteal { color: #0dd }
+.fleft { float: left }
+.fright { float: right }
+/* the new clearfix method I read about over at Perishable Press
+ * use it by putting "<div class='clearfix'></div>" after a floated element
+ */
+.clearfix:after {
+  visibility: hidden;
+  display: block;
+  font-size: 0;
+  content: " ";
+  clear: both;
+  height: 0
+}
+* html .clearfix { /* IE6 */
+  zoom: 1
+}
+*:first-child+html .clearfix { /* IE7 */
+  zoom: 1
+}
+/* box-shadow and rounded borders */
+.shadow {
+  -webkit-box-shadow: 0 5px 20px #333;  /* black */
+  -moz-box-shadow: 0 5px 20px #333;     /* black */
+  box-shadow: 0 5px 20px #333;          /* black */
+}
+.topcorner {
+  -webkit-border-top-left-radius: 8px;
+  -webkit-border-top-right-radius: 8px;
+  -moz-border-radius-topleft: 8px;
+  -moz-border-radius-topright: 8px;
+  border-top-right-radius: 8px;
+  border-top-left-radius: 8px;
+}
+.bottomcorner {
+  -webkit-border-bottom-left-radius: 8px;
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  -moz-border-radius-bottomright: 8px;
+  border-bottom-right-radius: 8px;
+  border-bottom-left-radius: 8px;
+}
+.bottomleftcorner {
+  -webkit-border-bottom-left-radius: 8px;
+  -moz-border-radius-bottomleft: 8px;
+  border-bottom-left-radius: 8px;
+}
+.bottomrightcorner {
+  -webkit-border-bottom-right-radius: 8px;
+  -moz-border-radius-bottomright: 8px;
+  border-bottom-right-radius: 8px;
+}
+
+/* use these classes on divs inside an article */
+.carousel-split {
+  /* wrap this around div.carousel-left and div.carousel-right and put a clearfix before the close */
+  background: transparent url('/images/layout/thirds-border.png') repeat-y 556px top;
+}
+.carousel-left {
+  float: left;
+  display: inline-block;
+  width: 536px;
+}
+.carousel-right {
+  float: right;
+  display: inline-block;
+  width: 281px;
+}
+.tickets-split {
+  /* wrap this around div.tickets-left and div.tickets-right and put a clearfix before the close */
+  background: transparent url('/images/layout/thirds-border.png') repeat-y 301px top;
+}
+.tickets-left {
+  float: left;
+  display: inline-block;
+  width: 281px;
+}
+.tickets-right {
+  float: right;
+  display: inline-block;
+  width: 536px;
+}
