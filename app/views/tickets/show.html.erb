@@ -39,12 +39,32 @@
         <h1>Ticket Reservations</h1>
         <% unless @show.housemanname.blank? or @show.housemanemail.blank? %><span style='font-size:8pt;'>Questions? Contact House Manager <%= link_to @show.housemanname, "mailto:#{@show.housemanemail}" %>.</span><br /><% end %>
         <br />
-        Use this form to reserve your tickets for Scotch'n'Soda's <%= @show.slot %> <%= Time.now.year %> production of <b><%= @show.name %></b>, showing <%= @show.datetickets %> in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
+        Use this form to reserve your tickets for Scotch'n'Soda's <%= @show.slot %> <%= Time.now.year %> production of <b><%= @show.name %></b>, showing in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
         <br />
         If tickets to your preferred show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there.<br />
         <br />
         <h2>Notes</h2>
-        <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %><br /><% end %><%= @show.sectioninfo %><br />
+        <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %><br /><% end %>
+        <% if @show.ticketsections.size == 0 %>
+          The ticket sections for this show have not been set up yet.
+        <% elsif @show.ticketsections.size == 1 %>
+          This show has one general admission section: $<%= @show.ticketsections[0].pricewithid %> with a Carnegie Mellon student ID, $<%= @show.ticketsections[0].pricewoutid %> without.
+        <% else %>
+          This show has multiple seating sections:
+          <% if !@show.seatingmap.nil? and !@show.seatingmap.blank? %>
+             (<a href='http://upload.snstheatre.org/gin/shows/seatingmaps/<%= @show.seatingmap %>' rel='seatingmap' class='cboxElement'>view seating map</a>)
+          <% end %>
+          <br />
+          <% full = true
+          for section in @show.ticketsections %>
+            Section <%= section.name %> &#8212; $<%= section.pricewithid %> with
+            <% if full %>
+              a Carnegie Mellon student
+              <% full = false %>
+            <% end %>
+            ID and $<%= section.pricewoutid %> without<br />
+          <% end %>
+        <% end %>
         <br />
         <h2>Select Dates, Sections and Quantities</h2><br />
         <div id='form_quantities'>
@@ -88,7 +108,12 @@
           time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
           time += DateTime.parse(perf).strftime("%I").to_i.to_s
           time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
-          num = @show.ticketsavailable(perf)
+          num = ''
+          @show.ticketsections.each do |section|
+            num = ((num.blank?)? "":("#{num} | "))
+            num += ((@show.ticketsections.count > 1)? "#{section.name}: ":(""))
+            num += "#{section.numavailable(perf)} left"
+          end
           num = "Sold out" if soldout
           time = "<b>#{time}</b> (<span id='form_availableinfo[#{perfNum}]'>#{num}</span>)"
           time = "<span style='color:#999999;'>#{time}</span>" if soldout

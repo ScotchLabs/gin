@@ -21,39 +21,12 @@ class Show < ActiveRecord::Base
   def to_s
     name
   end
-  
-  def ticketsavailable(performance=nil)
-    r=""
-    ticketsections.each {|section| r = ((r.blank?)? "":"#{r} | ")+((ticketsections.count > 1)? "#{section.name}: ":"")+"#{section.numavailable(performance)} left"}
-    r
-  end
-  
+    
   def soldout(performance)
     for section in ticketsections
       return false unless section.soldout(performance)
     end
     return true
-  end
-  
-  def sectioninfo
-    if ticketsections.size == 0
-      "This ticket sections for this show have not been set up yet."
-    elsif ticketsections.size == 1
-      "This show has one general admission section: $#{ticketsections[0].pricewithid} with a Carnegie Mellon student ID, $#{ticketsections[0].pricewoutid} without."
-    else
-      r="This show has multiple seating sections:"
-      r+=" (<a href='http://upload.snstheatre.org/gin/shows/seatingmaps/#{seatingmap}' rel='seatingmap' class='cboxElement'>view seating map</a>)" if !seatingmap.nil? and !seatingmap.blank?
-      r+="<br />"
-      full=true
-      for section in ticketsections
-        r+="Section "+section.name+" &#8212; $#{section.pricewithid} with "
-        r+="a Carnegie Mellon student " and full=false if full
-        r+="ID, $#{section.pricewoutid} without"
-        r+="<br />"
-      end
-      
-      r[0..r.length-7]
-    end
   end
   
   def displayname
@@ -81,19 +54,7 @@ class Show < ActiveRecord::Base
     t = Time.parse(t)
     t.strftime("%B %Y")
   end
-  
-  def datecarousel
-    t = performancetimes.split("|")[0]
-    t = Time.parse(t)
-    t.strftime("%B %Y")
-  end
-  
-  def datetickets
-    first = DateTime.parse(performancetimes.split("|").first)
-    last = DateTime.parse(performancetimes.split("|").last)
-    r = first.strftime("")
-  end
-  
+ 
   def perfcarousel
     perfarr = performancetimes.split("|")
     dayarr = Array.new
