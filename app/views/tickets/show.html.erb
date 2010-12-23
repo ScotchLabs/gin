@@ -69,10 +69,6 @@
             <% sectionNum=sectionNum+1
           end %>
           $(document).ready(function(){
-            if ($("#ticketsleft").height() > $("#ticketsright").height())
-              $("#ticketsright").height($("#ticketsleft").height())
-            else
-              $("#ticketsleft").height($("#ticketsright").height())
             $("#staticInfo").hide()
             $("#dynamicInfo").show()
           })
@@ -114,7 +110,7 @@
           <br />Once everything looks correct, click the button below to confirm your reservation.<br />
         </div>
         <br />
-        <div style='text-align:center;'><%= f.submit "Reserve!" %></div>
+        <div style='text-align:center;'><%= f.submit "Reserve!", :onclick=>"return reservetickets()" %></div>
       </div>
       <div class='clearfix'></div>
     </div>

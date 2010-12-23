@@ -1,5 +1,5 @@
 function updateprice() {
-  var hasid = document.getElementById("ticketrez_hasid_true").checked
+  var hasid = $("#ticketrez_hasid_true").attr('checked')
   var pricesum = 0
   var qtysum = 0
   for (var i=0; i<numperformances; i++) {
@@ -66,7 +66,7 @@ function reservetickets() {
   
   // get name, email, hasid for the ticketrez object
   var ticketrez = {
-    showid: $("#ticketrez_show_id").attr("value"),
+    show_id: $("#ticketrez_show_id").attr("value"),
     name: $("#ticketrez_name").attr("value"),
     email: $("#ticketrez_email").attr("value"),
     emailconfirm: $("#ticketrez_emailconfirm").attr("value"),
@@ -76,9 +76,9 @@ function reservetickets() {
   var quantity = {}
   var performance = {}
   for (var i=0; i<numperformances; i++) {
-    section[i] = $("#form_section["+i+"]").attr('value')
-    quantity[i] = $("#form_quantity["+i+"]").attr('value')
-    performance[i] = $("#form_performance["+i+"]").attr('value')
+    section[i] = document.getElementById("form_section["+i+"]").value
+    quantity[i] = document.getElementById("form_quantity["+i+"]").value
+    performance[i] = document.getElementById("form_performance["+i+"]").value
   }
   var form = {
     section: section,
@@ -91,7 +91,8 @@ function reservetickets() {
     authenticity_token: $("#new_ticketrez [name='authenticity_token']").attr('value'),
     utf8: $("#new_ticketrez [name='utf8']").attr('value'),
     form: form,
-    ticketrez: ticketrez
+    ticketrez: ticketrez,
+    ajax: true
   }
   
   $.ajax({
@@ -151,5 +152,11 @@ function ajaxresp(t) {
   colorbox("ajaxresp")
 }
 function colorbox(t) {
-  $.fn.colorbox({inline:true,href:"#"+t,width:"650px",transition:"none",opacity:"0.3"})
+  $.fn.colorbox({
+    inline: true,
+    href: "#"+t,
+    width: "650px",
+    transition: "none",
+    opacity: "0.3"
+  })
 }

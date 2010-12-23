@@ -116,7 +116,7 @@ class TicketsController < ApplicationController
       @errors << "quantity" if @qty==0 and !@ticketrezdidntsave
       @errors = @errors.uniq.join("|")
       
-      if @ticketrezdidntsave or @rezlineitemdidntsave
+      if !params[:ajax] and (@ticketrezdidntsave or @rezlineitemdidntsave)
         redirect_to "/tickets/show/#{@show.abbrev}/?highlight=name/email"
       end
     end # request.post?
