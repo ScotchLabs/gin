@@ -3,33 +3,31 @@
 <head>
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
-	<%= stylesheet_link_tag "snstheatre", "carousel", "colorbox", :media => "all" %>
-	<%= javascript_include_tag :defaults, "jquery-1.4.1.min", "jquery.colorbox-min" %>
-	<% if action_name == "index" %>
-    <%= javascript_include_tag "carousel", "twitter" %>
-	<% end %>
+	<%= stylesheet_link_tag "snstheatre", "newui", "carousel", "colorbox", :media => "all" %>
+	<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" %>
+	<%= javascript_include_tag :defaults %>
+	<%= csrf_meta_tag %>
 	<script type='text/javascript'>
-    jQuery.noConflict();
     <% if action_name == "index" %>
-    jQuery(document).ready(function(){
+    $(document).ready(function(){
       // carousel
-      jQuery('#carouselitemscontainer')[0].style.width = (jQuery('#carouselitemscontainer > div').size() * 511) + "px";
-      jQuery('#carousellinkscontainer')[0].style.width = (jQuery('#carousellinkscontainer > div').size() * 165) + "px";
+      $('#carouselitemscontainer')[0].style.width = ($('#carouselitemscontainer > div').size() * 511) + "px";
+      $('#carousellinkscontainer')[0].style.width = ($('#carousellinkscontainer > div').size() * 165) + "px";
       navright = 0;
-      navmin = (jQuery('#carousellinkscontainer > div').size()-2) * -165;
+      navmin = ($('#carousellinkscontainer > div').size()-2) * -165;
       var i;
-      for (i=0; i<jQuery('#carouselitemscontainer > div').size(); i++)
-        if (<%= !@activeshow.nil? %> && jQuery('#carouselitemscontainer > div')[i].id == "carouselitem_<%= ((!@activeshow.nil?)? (@activeshow.abbrev):("")) %>")
+      for (i=0; i<$('#carouselitemscontainer > div').size(); i++)
+        if (<%= !@activeshow.nil? %> && $('#carouselitemscontainer > div')[i].id == "carouselitem_<%= ((!@activeshow.nil?)? (@activeshow.abbrev):("")) %>")
           break;
       <% if @activeshow.nil? %>
       i--;
       <% end %>
-      var x = (jQuery("#carouselitemscontainer > div").size()-i-1)*-511;
+      var x = ($("#carouselitemscontainer > div").size()-i-1)*-511;
       var y = x+"px";
-      jQuery("#carouselitemscontainer").css('right',y);
+      $("#carouselitemscontainer").css('right',y);
       
       // noscript
-      jQuery("#twitbird").show();
+      $("#twitbird").show();
       
       // twitter UI
       window.onresize = checkWidth;
@@ -41,25 +39,27 @@
 <body>
   <div id='container'>
     <div id='header'><h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1><h2>Student theatre at Carnegie Mellon since 1938</h2></div>
-    <div id='nav' class='botcorner shadow'>
+    <div id='nav' class='bottomcorner shadow'>
       <div id='menu'>
         <ul>
-          <li><%= link_to "Ticket<br />Reservations", "/tickets" %></li>
-          <li><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"} %> </li>
-          <li><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"} %></li>
-          <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank"} %></li>
+          <li><%= link_to "Ticket<br />Reservations".html_safe, "/tickets" %></li>
+          <li><%= link_to "About Us", '/about' %> </li>
+          <li><%= link_to "70th Anniversary<br />Initiative".html_safe, '/initiative' %></li>
+          <li><%= link_to "The No Parking<br />Players".html_safe, "http://npp.snstheatre.org", {:target => "_blank"} %></li>
         </ul>
       </div>
     </div>
     <div id='view'>
       <noscript><div class='article' style='text-align:center;'>It looks like your browser has Javascript turned off. If you want this page to render properly go to your browser's settings and turn Javascript on.</div></noscript>
       <% if flash[:notice] %>
-      <div class='article'><%= flash[:notice] %></div>
+      <div class='article'><%= flash[:notice].html_safe %></div>
       <% end %>
       <%= yield %>
     </div>
-    <div id='footer' class='topcorner shadow'>&copy; 2010 Scotch'n'Soda Theatre at <b>Carnegie Mellon University</b><br />5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br /><a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a></div>
+    <div id='push'></div>
+    <div class='clearfix'></div>
   </div>
+  <div id='footer'>&copy; 2010 Scotch'n'Soda Theatre at <b>Carnegie Mellon University</b><br />5000 Forbes Avenue, UC Suite 103 Box 57, Pittsburgh, PA 15213<br /><a href='mailto:board@snstheatre.org'>board@snstheatre.org</a> | <a href='mailto:webmaster@snstheatre.org'>webmaster@snstheatre.org</a></div>
   <div id='bodyfooter'>
     <% if action_name == "index" %>
     <div id='twitter_update_list' class='twittercallout'><div id='twittertext'></div><div class='twitterstem'></div></div>

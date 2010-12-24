@@ -17,10 +17,10 @@ trclass = "class='zebra'"
   end
 %>
   <tr <%= trclass %>>
-    <td><%=h update.name %></td>
-    <td><%=h update.anchor %></td>
-    <td><%=h update.expiredate %></td>
-    <td><%=h !update.article.blank? %></td>
+    <td><%= update.name %></td>
+    <td><%= update.anchor %></td>
+    <td><%= update.expiredate %></td>
+    <td><%= !update.article.blank? %></td>
     <td><%= link_to 'Show', update %></td>
     <% if can? :update, Update %><td><%= link_to 'Edit', edit_update_path(update) %></td><% end %>
     <% if can? :destroy, Update %><td><%= link_to 'Destroy', update, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

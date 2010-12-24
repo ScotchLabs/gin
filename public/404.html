@@ -12,9 +12,6 @@
       width: 900px;
     }
 	</style>
-	<script type='text/javascript'>
-    jQuery.noConflict();
-	</script>
 </head>
 <body>
   <div id='bannernocss3'></div>
@@ -25,27 +22,15 @@
       <h2>Student theatre at Carnegie Mellon since 1938</h2>
     </div>
     <div id='nav' class='botcorner shadow'>
-      <%
-      classabout = (params[:id] == "about")? "class='navselected'":""
-      class70ai = (params[:id] == "70ai")? "class='navselected'":""
-      classnews = (action_name == "news")? "class='navselected'":""
-      %>
       <div id='menu'>
         <ul>
-          <li><%= link_to "Ticket<br />Reservations", "/tickets", {:class => "menua"} %></li>
-          <li <%= classabout %>><%= link_to "About Us", {:controller => "index", :action => "showpane", :id => "about"}, { :class => "menua" } %> </li>
-          <li <%= class70ai %>><%= link_to "70th Anniversary<br />Initiative", {:controller => "index", :action => "showpane", :id => "70ai"}, { :class => "menua" } %></li>
-          <li><%= link_to "The No Parking<br />Players", "http://npp.snstheatre.org", {:target => "_blank", :class => "menua"} %></li>
+          <li><a class='menua' href='/tickets'>Ticket<br />Reservations</a></li>
+          <li><a class='menua' href='/about'>About Us</a></li>
+          <li><a class='menua' href='/initiative'>70th Anniversary<br />Initiative</a></li>
+          <li><a class='menua' href='http://npp.snstheatre.org' target='_blank'>The No Parking<br />Players</a></li>
         </ul>
       </div>
     </div>
-    <script type='text/javascript'>
-      jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px")
-      jQuery(".menua").first().addClass("bottomleftcorner");
-      jQuery(".menua").last().addClass("bottomrightcorner");
-      jQuery("#menu li").first().addClass("bottomleftcorner");
-      jQuery("#menu li").last().addClass("bottomrightcorner");
-    </script>
     <div id='view'>
       <!-- This file lives in public/404.html -->
       <div class="article">

@@ -1,10 +1,9 @@
 <script type='text/javascript'>
-  jQuery(document).ready(function(){
-    jQuery("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
+  $(document).ready(function(){
+    $("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
   })
 </script>
 <% ast = "<span style='color:#ff9900'>*</span>" %>
-<div style='display:none;'><div id='ajaxresp'></div><div id='ajaxloading'><h1>Just a moment...</h1></div></div>
 
 <% if @errors.length > 0 %>
 <div class='article'>
@@ -13,12 +12,13 @@
 </div>
 <% end %>
 
-<% form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
+<%= form_for(@ticketrez, :url => {:action => "create"}) do |f| %>
   <div class='article'>
-      <div id='ticketsleft' class='articleleft fleft'>
+    <div class='tickets-split'>
+      <div id='ticketsleft' class='tickets-left'>
         <h1>Your Information</h1>
         <%= f.hidden_field :show_id, :value => @show.id %>
-        <%= ast %>All fields required.<br />
+        <%= ast.html_safe %>All fields required.<br />
         <br />
         <b><%= f.label :name %></b><br />
         <%= f.text_field :name, :size => 20, :style => (@errors.include? "name")? ("border:1px solid #f90"):("") %><br />
@@ -35,16 +35,36 @@
         </div>
         <div class='clearfix'></div>
       </div>
-      <div id='ticketsright' class='articleright fleft'>
+      <div id='ticketsright' class='tickets-right'>
         <h1>Ticket Reservations</h1>
         <% unless @show.housemanname.blank? or @show.housemanemail.blank? %><span style='font-size:8pt;'>Questions? Contact House Manager <%= link_to @show.housemanname, "mailto:#{@show.housemanemail}" %>.</span><br /><% end %>
         <br />
-        Use this form to reserve your tickets for Scotch'n'Soda's <%= @show.slot %> <%= Time.now.year %> production of <b><%= @show.name %></b>, showing <%= @show.datetickets %> in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
+        Use this form to reserve your tickets for Scotch'n'Soda's <%= @show.slot %> <%= Time.now.year %> production of <b><%= @show.name %></b>, showing in <%= @show.loc %>. You will be able to pay and pick them up 30 minutes before showtime outside of the performance space.<br />
         <br />
         If tickets to your preferred show or section are sold out online, please try at the door 45 minutes before showtime; additional tickets will be available there.<br />
         <br />
         <h2>Notes</h2>
-        <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %><br /><% end %><%= @show.sectioninfo %><br />
+        <% unless @show.ticketnotes.blank? %><%= @show.ticketnotes %><br /><% end %>
+        <% if @show.ticketsections.size == 0 %>
+          The ticket sections for this show have not been set up yet.
+        <% elsif @show.ticketsections.size == 1 %>
+          This show has one general admission section: $<%= @show.ticketsections[0].pricewithid %> with a Carnegie Mellon student ID, $<%= @show.ticketsections[0].pricewoutid %> without.
+        <% else %>
+          This show has multiple seating sections:
+          <% if !@show.seatingmap.nil? and !@show.seatingmap.blank? %>
+             (<a href='http://upload.snstheatre.org/gin/shows/seatingmaps/<%= @show.seatingmap %>' rel='seatingmap' class='cboxElement'>view seating map</a>)
+          <% end %>
+          <br />
+          <% full = true
+          for section in @show.ticketsections %>
+            Section <%= section.name %> &#8212; $<%= section.pricewithid %> with
+            <% if full %>
+              a Carnegie Mellon student
+              <% full = false %>
+            <% end %>
+            ID and $<%= section.pricewoutid %> without<br />
+          <% end %>
+        <% end %>
         <br />
         <h2>Select Dates, Sections and Quantities</h2><br />
         <div id='form_quantities'>
@@ -67,13 +87,9 @@
             sections[<%= sectionNum %>]["pricewoutid"] = <%= section.pricewoutid %>
             <% sectionNum=sectionNum+1
           end %>
-          jQuery(document).ready(function(){
-            if (jQuery("#ticketsleft").height() > jQuery("#ticketsright").height())
-              jQuery("#ticketsright").height(jQuery("#ticketsleft").height())
-            else
-              jQuery("#ticketsleft").height(jQuery("#ticketsright").height())
-            jQuery("#staticInfo").hide()
-            jQuery("#dynamicInfo").show()
+          $(document).ready(function(){
+            $("#staticInfo").hide()
+            $("#dynamicInfo").show()
           })
         </script>
         <% perfNum=0
@@ -92,7 +108,12 @@
           time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
           time += DateTime.parse(perf).strftime("%I").to_i.to_s
           time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
-          num = @show.ticketsavailable(perf)
+          num = ''
+          @show.ticketsections.each do |section|
+            num = ((num.blank?)? "":("#{num} | "))
+            num += ((@show.ticketsections.count > 1)? "#{section.name}: ":(""))
+            num += "#{section.numavailable(perf)} left"
+          end
           num = "Sold out online" if soldout
           time = "<b>#{time}</b> (<span id='form_availableinfo[#{perfNum}]'>#{num}</span>)"
           time = "<span style='color:#999999;'>#{time}</span>" if soldout
@@ -100,7 +121,7 @@
           <%= performance %>
           <%= quantity %>
           <%= sections %>
-          <%= time %><br />
+          <%= time.html_safe %><br />
           <%
           perfNum=perfNum+1
         end %>
@@ -115,6 +136,7 @@
         <br />
         <div style='text-align:center;'><%= f.submit "Reserve!" %></div>
       </div>
-    <div class='clearfix'></div>
+      <div class='clearfix'></div>
+    </div>
   </div>
 <% end %>

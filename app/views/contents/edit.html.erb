@@ -1,27 +1,36 @@
 <% ast = "<span style=\"color:red;font-variant:italics;\">*</span>" %>
 <h1>Editing content</h1>
 
-<% form_for(@content) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@content) do |f| %>
+  <% if @content.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@content.errors.count, "error") %> prohibited this content from being saved:</h2>
+    <ul>
+    <% @content.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p style="color:red;font-variant:italics;">
 	* Required
   </p>
 
   <p>
-    <%= f.label :title %><%= ast %><br />
+    <%= f.label :title %><%= ast.html_safe %><br />
     <%= f.text_field :title %>
   </p>
   <p>
-	<%= f.label :contentpane %><%= ast %><br />
+	<%= f.label :contentpane %><%= ast.html_safe %><br />
 	<%= f.select :contentpane, {"About Us","about","70th AI", "70ai"} %>
   </p>
   <p>
-	<%= f.label :contenttype, "Content type" %><%= ast %><br />
+	<%= f.label :contenttype, "Content type" %><%= ast.html_safe %><br />
 	<%= f.select :contenttype, {"Content","content","Link","link"} %>
   </p>
   <p>
-    <%= f.label :anchor %><%= ast %><br />
+    <%= f.label :anchor %><%= ast.html_safe %><br />
     <%= f.text_field :anchor, {:disabled => true} %>
   </p>
   <p>
@@ -29,7 +38,7 @@
     <%= f.check_box :publish %>
   </p>
   <p>
-    <%= f.label :order, "Order in menu/page" %><%= ast %><br />
+    <%= f.label :order, "Order in menu/page" %><%= ast.html_safe %><br />
     <%= f.text_field :order %>
   </p>
   <p>

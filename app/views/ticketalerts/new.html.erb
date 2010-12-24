@@ -1,7 +1,16 @@
 <h1>New ticketalert</h1>
 
-<% form_for(@ticketalert) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@ticketalert) do |f| %>
+  <% if @ticketalert.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@ticketalert.errors.count, "error") %> prohibited this ticketalert from being saved:</h2>
+    <ul>
+    <% @ticketalert.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
   
   <%= f.hidden_field :show_id, :value => @show.id %>
   <p>

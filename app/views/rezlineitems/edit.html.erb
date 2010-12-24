@@ -1,7 +1,16 @@
 <h1>Editing rezlineitem</h1>
 
-<% form_for(@rezlineitem) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@rezlineitem) do |f| %>
+  <% if @rezlineitem.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@rezlineitem.errors.count, "error") %> prohibited this rezlineitem from being saved:</h2>
+    <ul>
+    <% @rezlineitem.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
 
   <p>
     <%= f.label :performance %><br />

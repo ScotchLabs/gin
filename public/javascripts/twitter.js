@@ -1,7 +1,7 @@
 function loadTweets() {
   var url = "http://twitter.com/statuses/user_timeline/snstheatre.json?callback=twitterCallback&count=1";
   var script = document.createElement('script');
-  script.setAttribute('src',url);
+  script.setAttribute('src',url)
   document.getElementsByTagName('head')[0].appendChild(script);
 }
 
@@ -47,25 +47,25 @@ function relative_time(time_value) {
 
 function checkWidth() {
   if (document.body.offsetWidth < 1260)
-    jQuery("#twitter_update_list").hide('slow');
+    $("#twitter_update_list").hide('slow');
   else if (document.body.offsetWidth >= 1260)
-    jQuery("#twitter_update_list").show('fast');
+    $("#twitter_update_list").show('fast');
 }
 
 function showClickme() {
-  if (jQuery("#twitter_update_list")[0].style.display == "none")
-    jQuery("#twitter_heyclickme").show("fast");
+  if ($("#twitter_update_list")[0].style.display == "none")
+    $("#twitter_heyclickme").show("fast");
 }
 
 function hideClickme() {
-  jQuery("#twitter_heyclickme").hide("fast");
-  if (jQuery("#twitter_update_list")[0].style.display != "none")
+  $("#twitter_heyclickme").hide("fast");
+  if ($("#twitter_update_list")[0].style.display != "none")
     window.onclick=hideTwitter
 }
 
 function showTwitter() {
-  jQuery("#twitter_heyclickme").hide("fast");
-  jQuery("#twitter_update_list").show('fast');
+  $("#twitter_heyclickme").hide("fast");
+  $("#twitter_update_list").show('fast');
 }
 
 function hideTwitter() {

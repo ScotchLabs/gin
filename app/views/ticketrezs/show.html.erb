@@ -1,10 +1,10 @@
-<p><b>Show:</b> <%=h @ticketrez.show %></p>
-<p><b>Name:</b> <%=h @ticketrez.name %></p>
-<p><b>Email:</b> <%=h @ticketrez.email %></p>
-<p><b>Hasid:</b> <%=h @ticketrez.hasid %></p>
+<p><b>Show:</b> <%= @ticketrez.show %></p>
+<p><b>Name:</b> <%= @ticketrez.name %></p>
+<p><b>Email:</b> <%= @ticketrez.email %></p>
+<p><b>Hasid:</b> <%= @ticketrez.hasid %></p>
 <p><b>Email sent:</b> <% if @ticketrez.email_sent %>true. <%= link_to "Resend", "/ticketrezs/#{@ticketrez.id}/sendemail" %><% else %>false. <%= link_to "Send one", "/ticketrezs/#{@ticketrez.id}/sendemail" %><% end %></p>
-<p><b>Canceled:</b> <%=h @ticketrez.canceled %></p>
-<p><b>Hashid (for canceling):</b> <%=h @ticketrez.hashid %></p>
+<p><b>Canceled:</b> <%= @ticketrez.canceled %></p>
+<p><b>Hashid (for canceling):</> <%= @ticketrez.hashid %></p>
 
 <% if can? :update, Ticketrez %><%= link_to 'Edit', edit_ticketrez_path(@ticketrez) %> | <% end %>
 <%= link_to 'Back', show_path(@show) %>
@@ -30,9 +30,9 @@ trclass = "class='zebra'"
   end
 %>
   <tr <%= trclass %>>
-    <td><%=h rezlineitem.performance %></td>
-    <td><%=h rezlineitem.ticketsection %></td>
-    <td><%=h rezlineitem.quantity %></td>
+    <td><%= rezlineitem.performance %></td>
+    <td><%= rezlineitem.ticketsection %></td>
+    <td><%= rezlineitem.quantity %></td>
     <td><%= link_to 'Show', rezlineitem %></td>
     <% if can? :update, Rezlineitem %><td><%= link_to 'Edit', edit_rezlineitem_path(rezlineitem) %></td><% end %>
     <% if can? :destroy, Rezlineitem %><td><%= link_to 'Destroy', rezlineitem, :confirm => 'Are you sure?', :method => :delete %></td><% end %>

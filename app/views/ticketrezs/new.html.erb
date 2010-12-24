@@ -1,7 +1,16 @@
 <h1>New ticketrez</h1>
 
-<% form_for(@ticketrez) do |f| %>
-  <%= f.error_messages %>
+<%= form_for(@ticketrez) do |f| %>
+  <% if @ticketrez.errors.any? %>
+  <div id="errorExplanation">
+    <h2><%= pluralize(@ticketrez.errors.count, "error") %> prohibited this ticketrez from being saved:</h2>
+    <ul>
+    <% @ticketrez.errors.full_messages.each do |msg| %>
+      <li><%= msg %></li>
+    <% end %>
+    </ul>
+  </div>
+  <% end %>
   
   <%= f.hidden_field :show_id, :value => @show.id %>
   <p>

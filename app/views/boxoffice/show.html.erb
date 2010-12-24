@@ -1,16 +1,16 @@
 <script type='text/javascript'>
 function Phide(i) {
-  jQuery("#hideperf"+i).hide()
-  jQuery("#perf"+i).hide("fast")
-  jQuery("#showperf"+i).show()
+  $("#hideperf"+i).hide()
+  $("#perf"+i).hide("fast")
+  $("#showperf"+i).show()
 }
 function Pshow(i) {
-  jQuery("#showperf"+i).hide()
-  jQuery("#perf"+i).show("fast")
-  jQuery("#hideperf"+i).show() 
+  $("#showperf"+i).hide()
+  $("#perf"+i).show("fast")
+  $("#hideperf"+i).show() 
 }
-jQuery(document).ready(function(){
-  jQuery("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
+$(document).ready(function(){
+  $("a[rel='seatingmap']").colorbox({transition:"none",opacity:"0.3",initialWidth:300,initialHeight:300,maxWidth:300,maxHeight:300})
 })
 </script>
 <h1>Box Office for <%= @show.name %></h1>
@@ -18,7 +18,7 @@ jQuery(document).ready(function(){
 <br />
 This show has <%= pluralize @sections.length, "section" %>.<br />
 <% for section in @sections %>
-  Section <%=h section.name %>: <%=h section.size %> seats, $<%=h section.pricewithid %>/<%=h section.pricewoutid %><% if can? :update, Ticketsection %> (<%= link_to("Edit this section", edit_ticketsection_path(section))%>)<% end %><br/>
+  Section <%= section.name %>: <%= section.size %> seats, $<%= section.pricewithid %>/<%= section.pricewoutid %><% if can? :update, Ticketsection %> (<%= link_to("Edit this section", edit_ticketsection_path(section))%>)<% end %><br/>
 <% end %>
 <% unless @show.seatingmap.nil? %><a href='http://upload.snstheatre.org/gin/shows/seatingmaps/<%= @show.seatingmap %>' rel='seatingmap' class='cboxElement'>view seating map</a><% end %><br />
 <br />

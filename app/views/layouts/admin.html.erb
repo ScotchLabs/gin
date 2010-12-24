@@ -3,9 +3,14 @@
 <head>
 	<title>Scotch'n'Soda Theatre</title>
 	<meta charset='utf-8' />
-	<%= stylesheet_link_tag "snstheatre", "admin", "colorbox", :media => "all" %>
-	<%= javascript_include_tag :defaults, "jquery-1.4.1.min.js", "jquery.colorbox-min" %>
-	<script type='text/javascript'>jQuery.noConflict();</script>
+	<%= stylesheet_link_tag "snstheatre", "newui", "admin", "colorbox", :media => "all" %>
+	<%= javascript_include_tag "http://ajax.googleapis.com/ajax/libs/jquery/1.4.1/jquery.min.js" %>
+	<%= javascript_include_tag :defaults %>
+	<%= csrf_meta_tag %>
+	<style type='text/css'>
+	  #container { margin: 0 auto -26px; }
+	  #push { height: 26px; }
+	</style>
 </head>
 <body>
   <div id='banner'></div>
@@ -14,7 +19,7 @@
       <h1><a href='/'>Scotch&#146;n&#146;Soda Theatre</a></h1>
       <h2>Student theatre at Carnegie Mellon since 1938</h2>
     </div>
-    <div id='nav' class='botcorner shadow'>
+    <div id='nav' class='bottomcorner shadow'>
       <div id='menu'>
         <ul><li><%= link_to "Welcome", {:controller => "admin"} %></li>
       	<% if can? :read, Show %><li><%= link_to "Shows & Tickets", shows_path %></li><% end %>
@@ -23,20 +28,15 @@
       	<% if can? :read, Content %><li><%= link_to "Contents", contents_path %></li><% end %>
       	<% if can? :read, User %><li><%= link_to "Users & Roles", users_path %></li><% end %>
       	<li><%= link_to 'Log out', {:controller => "admin", :action => "logout"} %></li>
-      	<script type='text/javascript'>
-          //TODO jQuery(".menua").css("width",(900/jQuery(".menua").size())+"px");
-      	</script>
       </div>
     </div>
     <div id='view'>
       <% if flash[:notice] %>
-      <div class='article'><%= flash[:notice] %></div>
+      <div class='article'><%= flash[:notice].html_safe %></div>
       <% end %>
       <div class='article'><%= yield %></div>
     </div>
-    <div id='footer' class='topcorner shadow'>
-      flavortext
-    </div>
+    <div id='push'></div>
   </div>
   <div id='bodyfooter'>
   </div>
