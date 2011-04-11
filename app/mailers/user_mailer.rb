@@ -6,7 +6,7 @@ class UserMailer < ActionMailer::Base
     @show = @rez.show
     @items = @rez.rezlineitems
     
-    mail(:from => "tickets@snstheatre.org", :to => "#{@rez.name} <#{@rez.email}>", :subject => "Thank you for your reservation with Scotch'n'Soda Theatre!")
+    mail(:from => "webmaster@snstheatre.org", :to => "#{@rez.name} <#{@rez.email}>", :subject => "Thank you for your reservation with Scotch'n'Soda Theatre!")
   end
   
   def forgot(u)
