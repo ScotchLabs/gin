@@ -6,4 +6,4 @@ gem 'rails', '3.0.0'
 
 gem 'RedCloth', '4.2.3'
 gem 'cancan'
-gem 'mysql', '2.7'
+gem 'mysql'
