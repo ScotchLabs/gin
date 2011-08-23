@@ -1,5 +1,5 @@
 class AdminMailer < ActionMailer::Base
-  default :to => User.with_role(:admin).map {|u| "#{u.name} <#{u.email}u>"}.join(", "), :from => "webmaster@snstheatre.org"
+  default :to => User.with_role(:admin).map {|u| "#{u.name} <#{u.email}>"}.join(", "), :from => "webmaster@snstheatre.org"
   
   def account_created(u)
     @user = u
