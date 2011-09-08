@@ -71,7 +71,7 @@
   </p>
   <p>
     <%= f.label :ticketstatus, "Ticket status" %><br />
-	<%= f.select("ticketstatus", {"Open","open","Closed","closed","Completed","completed"}) %>
+	<%= f.select("ticketstatus", [["Open","open"],["Closed","closed"],["Completed","completed"]]) %>
   </p>
   <p>
     <%= f.label :timesvisible, "Performance times visible?" %><br />
