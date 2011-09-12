@@ -106,7 +106,7 @@
             sections = hidden_field(:form, "section[#{perfNum}]", :value => @ticketsections[0].id)
           end
           time = DateTime.parse(perf).strftime("%A, %B %d @ ").to_s
-          time += DateTime.parse(perf).strftime("%I:%M").to_i.to_s
+          time += DateTime.parse(perf).strftime("%I%M").to_i.to_s
           time += (DateTime.parse(perf).strftime("%p")=="PM")? ("p."):("a.")
           num = ''
           @show.ticketsections.each do |section|
