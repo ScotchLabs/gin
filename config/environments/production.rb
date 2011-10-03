@@ -27,5 +27,10 @@ Gin::Application.configure do
   # Enable threaded mode
   # config.threadsafe!
   
+  config.middleware.use "::ExceptionNotifier", 
+      :email_prefix => "[Gin] ",
+      :sender_address => %{"Exception Notifier" <webmaster@snstheatre.org>},
+      :exception_recipients => %w{web@snstheatre.org}
+  
   config.action_mailer.default_url_options = { :host => 'snstheatre.org' }
 end
