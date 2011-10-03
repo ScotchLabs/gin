@@ -23,11 +23,11 @@
   </p>
   <p>
 	<%= f.label :contentpane %><%= ast.html_safe %><br />
-	<%= f.select :contentpane, {"About Us","about","70th AI", "70ai"} %>
+	<%= f.select :contentpane, [["About Us","about"],["70th AI", "70ai"]] %>
   </p>
   <p>
 	<%= f.label :contenttype, "Content type" %><%= ast.html_safe %><br />
-	<%= f.select :contenttype, {"Content","content","Link","link"} %>
+	<%= f.select :contenttype, [["Content","content"],["Link","link"]] %>
   </p>
   <p>
     <%= f.label :anchor %><%= ast.html_safe %><br />
