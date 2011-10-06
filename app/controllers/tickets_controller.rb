@@ -28,6 +28,8 @@ class TicketsController < ApplicationController
       @ticketsections = @show.ticketsections
     end
     
+    redirect_to "/tickets/showerror" if @ticketsections.nil?
+    
     if @ticketsections.empty? or !@show.upcoming
       redirect_to "/tickets/showclosed"
     end
