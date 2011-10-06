@@ -22,23 +22,21 @@ class TicketsController < ApplicationController
     @ticketrez = Ticketrez.new
     # find a show with params[:abbrev], else redirect to tickets/showerror
     @show = Show.find_by_abbrev(params[:abbrev])
-    if @show.nil?
+    unless @show
       redirect_to "/tickets/showerror"
     else
       @ticketsections = @show.ticketsections
-    end
-    
-    redirect_to "/tickets/showerror" if @ticketsections.nil?
-    
-    if @ticketsections.empty? or !@show.upcoming
-      redirect_to "/tickets/showclosed"
-    end
       
-    @ticketrez = Ticketrez.new
-    
-    @errors = Array.new
-    if params[:highlight]
-      @errors=params[:highlight].split("/")
+      if @ticketsections.empty? or !@show.upcoming
+        redirect_to "/tickets/showclosed"
+      end
+
+      @ticketrez = Ticketrez.new
+
+      @errors = Array.new
+      if params[:highlight]
+        @errors=params[:highlight].split("/")
+      end
     end
   end
   
