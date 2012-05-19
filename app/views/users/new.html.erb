@@ -30,7 +30,11 @@
   </p>
   <p>
     <%= f.label :retype, "Retype password" %><br />
-    <%= f.datetime_select :retype %>
+    <%= f.text_field :retype %>
+  </p>
+  <p>
+    <%= f.label :roles %><br />
+    <%= f.text_field :roles %>
   </p>
   <p>
     <%= f.submit 'Create' %>

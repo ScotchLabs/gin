@@ -33,9 +33,13 @@
     <%= f.text_field :retype %>
   </p>
   <p>
+    <%= f.label :roles %><br />
+    <%= f.text_field :roles %>
+  </p>
+  <p>
     <%= f.submit 'Update' %>
   </p>
 <% end %>
 
-<%= link_to 'Show', @update %> |
-<%= link_to 'Back', updates_path %>
+<%= link_to 'Show', @users %> |
+<%= link_to 'Back', users_path %>
