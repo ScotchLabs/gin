@@ -21,16 +21,16 @@
     <%= f.text_field :email %>
   </p>
   <p>
-    <%= f.label :emailConfirmation %><br />
+    <%= f.label :emailConfirmation, "Confirm email" %><br />
     <%= f.text_field :emailConfirmation %>
   </p>
   <p>
     <%= f.label :password %><br />
-    <%= f.text_field :password %>
+    <%= f.password_field :password %>
   </p>
   <p>
     <%= f.label :retype, "Retype password" %><br />
-    <%= f.text_field :retype %>
+    <%= f.password_field :retype %>
   </p>
   <p>
     <%= f.label :roles %><br />
