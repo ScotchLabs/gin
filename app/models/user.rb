@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   
   attr_accessor :password_confirmation
   attr_accessor :emailConfirmation
+  attr_accessor :retype
   
   before_destroy :cantdeletelast
   
