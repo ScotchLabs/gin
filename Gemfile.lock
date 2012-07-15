@@ -32,8 +32,15 @@ GEM
     arel (2.0.10)
     builder (2.1.2)
     cancan (1.4.1)
+    capistrano (2.12.0)
+      highline
+      net-scp (>= 1.0.0)
+      net-sftp (>= 2.0.0)
+      net-ssh (>= 2.0.14)
+      net-ssh-gateway (>= 1.1.0)
     erubis (2.6.6)
       abstract (>= 1.0.0)
+    highline (1.6.13)
     i18n (0.5.0)
     mail (2.2.19)
       activesupport (>= 2.3.6)
@@ -42,6 +49,13 @@ GEM
       treetop (~> 1.4.8)
     mime-types (1.16)
     mysql (2.8.1)
+    net-scp (1.0.4)
+      net-ssh (>= 1.99.1)
+    net-sftp (2.0.5)
+      net-ssh (>= 2.0.9)
+    net-ssh (2.5.2)
+    net-ssh-gateway (1.1.0)
+      net-ssh (>= 1.99.1)
     polyglot (0.3.2)
     rack (1.2.4)
     rack-mount (0.6.14)
@@ -74,5 +88,6 @@ PLATFORMS
 DEPENDENCIES
   RedCloth (= 4.2.8)
   cancan
+  capistrano
   mysql (= 2.8.1)
   rails (= 3.0.7)
