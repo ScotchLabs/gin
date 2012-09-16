@@ -13,3 +13,5 @@ ActionController::Base.session = {
 # which shouldn't be used to store highly confidential information
 # (create the session table with "rake db:sessions:create")
 # ActionController::Base.session_store = :active_record_store
+#
+ActionMailer::Base.smtp_settings = {:enable_starttls_auto => false}
