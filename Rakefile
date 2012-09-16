@@ -5,6 +5,7 @@ require File.expand_path('../config/application', __FILE__)
 
 require 'rake'
 require 'rake/testtask'
-require 'rake/rdoctask'
-
+require 'rdoc/task'
+RDoc::Task.new do |rdoc|
+end
 Gin::Application.load_tasks
