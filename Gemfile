@@ -3,8 +3,10 @@
 source 'http://rubygems.org'
 
 gem 'rails', '3.0.7'
+gem 'rake', '0.8.7'
 
-gem 'RedCloth', '4.2.8'
+gem 'RedCloth', '4.2.9'
 gem 'cancan'
 gem 'mysql', '2.8.1'
 gem 'capistrano'
+gem 'rdoc', '3.12'

@@ -5,6 +5,7 @@ log/*.log
 log/*.pid
 tmp
 config/database.yml
+rdoc/
 
 /vendor/bundle
 /db/sphinx
